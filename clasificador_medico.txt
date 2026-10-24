@@ -1,0 +1,388 @@
+TÍTULO: Desarrollo de sistema independiente de clasificación automática de equipos médicos con validación contra nomenclatura EMDN oficial 2026
+
+CONTEXTO:
+Este es un proyecto independiente (NO es parte de un CMMS aún) que se desarrollará como un módulo autónomo en Python. Su objetivo es clasificar automáticamente equipos médicos basándose en su nombre, marca y ubicación, y devolver:
+1. Categoría propia (sistema interno de 25 categorías)
+2. Código EMDN verificado (cruzado con Excel oficial de la Comisión Europea 2026)
+3. Clase de riesgo MDR (I, IIa, IIb, III)
+4. Índice de criticidad CMMS (fórmula ponderada de 5 criterios, escala 0-5)
+5. Código interno único (generado automáticamente)
+
+Este módulo se probará de forma independiente y, una vez validado, se integrará a un CMMS más grande mediante API REST.
+
+FUENTES DE DATOS:
+1. Excel oficial EMDN 2026: Descargado de https://webgate.ec.europa.eu/udi-helpdesk/en/other-relevant-information/emdn-codes.html
+   - Archivo: emdn_codes_2026.xlsx
+   - Contiene todos los códigos EMDN oficiales con sus descripciones y jerarquía
+2. Archivo JSON de entrenamiento: equipos_ejemplo.json (224 ejemplos precargados)
+   - Contiene ejemplos de equipos con nombre, marca, ubicación, categoría, EMDN, MDR y valores de criticidad
+   - Estos datos serán VALIDADOS contra el Excel EMDN antes de usarlos para entrenamiento
+
+ARQUITECTURA DEL PROYECTO:
+
+clasificador_medico/
+├── data/
+│   ├── raw/
+│   │   ├── emdn_codes_2026.xlsx        # Excel oficial EMDN (descargado manualmente)
+│   │   └── equipos_ejemplo.json        # 224 ejemplos de entrenamiento
+│   ├── processed/
+│   │   ├── emdn_database.json          # EMDN procesado y estructurado
+│   │   ├── equipos_validados.json      # JSON validado contra EMDN oficial
+│   │   └── discrepancias_report.json   # Reporte de discrepancias encontradas
+│   └── models/
+│       ├── classifier_v1.pkl           # Modelo NLP entrenado
+│       └── vectorizer_v1.pkl           # Vectorizador TF-IDF
+│
+├── src/
+│   ├── __init__.py
+│   ├── emdn_importer.py               # Módulo 1: Importa y procesa Excel EMDN
+│   ├── validator.py                    # Módulo 2: Valida JSON contra EMDN oficial
+│   ├── trainer.py                      # Módulo 3: Entrena modelo NLP
+│   ├── classifier.py                   # Módulo 4: Clasifica equipos nuevos
+│   ├── code_generator.py              # Módulo 5: Genera códigos internos
+│   ├── criticality.py                 # Módulo 6: Calcula criticidad
+│   └── utils.py                       # Utilidades compartidas
+│
+├── api/
+│   ├── __init__.py
+│   ├── main.py                        # FastAPI app
+│   ├── routes.py                      # Endpoints
+│   └── schemas.py                     # Modelos Pydantic
+│
+├── tests/
+│   ├── test_emdn_importer.py
+│   ├── test_validator.py
+│   ├── test_classifier.py
+│   └── test_api.py
+│
+├── scripts/
+│   ├── run_pipeline.py                # Ejecuta todo el pipeline completo
+│   └── interactive_classify.py        # CLI para probar clasificaciones
+│
+├── requirements.txt
+├── README.md
+└── .env
+
+REQUISITOS DETALLADOS POR MÓDULO:
+
+═══════════════════════════════════════════════════════════
+MÓDULO 1: emdn_importer.py - Importador de EMDN Oficial
+═══════════════════════════════════════════════════════════
+
+Función: Leer el Excel oficial EMDN 2026 y crear una base de datos estructurada.
+
+Requisitos:
+- Leer emdn_codes_2026.xlsx usando pandas
+- Detectar automáticamente las columnas (el formato puede variar ligeramente entre versiones)
+- Buscar columnas que contengan: código EMDN, nombre/descripción, código padre, nivel jerárquico
+- Crear una estructura jerárquica:
+  {
+    "S01": {
+      "name": "Diagnostic ultrasound equipment",
+      "level": 1,
+      "children": {
+        "S0101": {
+          "name": "Ultrasound diagnostic equipment",
+          "level": 2,
+          "children": {
+            "S010101": {
+              "name": "General purpose ultrasound diagnostic equipment",
+              "level": 3,
+              "children": {}
+            }
+          }
+        }
+      }
+    }
+  }
+- Crear también un diccionario plano para búsqueda rápida:
+  {
+    "S010101": {
+      "name": "General purpose ultrasound diagnostic equipment",
+      "parent": "S0101",
+      "level": 3,
+      "full_path": "S01 > S0101 > S010101"
+    }
+  }
+- Guardar resultado en data/processed/emdn_database.json
+- Generar estadísticas: total de códigos, distribución por nivel, categorías principales
+- Manejar errores: si el Excel no tiene el formato esperado, generar error descriptivo
+
+Función adicional: buscar_emdn(keyword)
+- Búsqueda fuzzy en la base EMDN por palabra clave
+- Retorna los 5 códigos más relevantes con score de similitud
+- Ejemplo: buscar_emdn("ultrasound") → ["S010101", "S010102", ...]
+
+═══════════════════════════════════════════════════════════
+MÓDULO 2: validator.py - Validador Cruzado
+═══════════════════════════════════════════════════════════
+
+Función: Cruzar el JSON de entrenamiento (224 ejemplos) contra la base EMDN oficial y detectar discrepancias.
+
+Requisitos:
+- Cargar equipos_ejemplo.json
+- Cargar emdn_database.json
+- Para cada equipo del JSON:
+  1. Verificar que el código EMDN existe en la base oficial
+  2. Verificar que la descripción del EMDN coincide con el tipo de equipo
+  3. Si el código EMDN no existe, buscar el más probable usando buscar_emdn()
+  4. Registrar el resultado: VALIDO, CORREGIDO, NO_ENCONTRADO
+- Generar data/processed/discrepancias_report.json con:
+  {
+    "resumen": {
+      "total_equipos": 224,
+      "validos": 180,
+      "corregidos": 30,
+      "no_encontrados": 14
+    },
+    "detalles": [
+      {
+        "equipo": "Ecógrafo Samsung WS80A",
+        "emdn_original": "S010101",
+        "estado": "VALIDO",
+        "emdn_corregido": null,
+        "observacion": "Código verificado correctamente"
+      },
+      {
+        "equipo": "Monitor fetal Edan F6",
+        "emdn_original": "J060301",
+        "estado": "CORREGIDO",
+        "emdn_corregido": "J060302",
+        "observacion": "Código original no existe en EMDN 2026. Sugerido J060302 (Fetal monitor)"
+      }
+    ]
+  }
+- Generar data/processed/equipos_validados.json con los 224 ejemplos corregidos
+- Imprimir reporte en consola con colores (verde=válido, amarillo=corregido, rojo=no encontrado)
+
+═══════════════════════════════════════════════════════════
+MÓDULO 3: trainer.py - Entrenador del Modelo NLP
+═══════════════════════════════════════════════════════════
+
+Función: Entrenar un modelo de clasificación basado en NLP usando los datos validados.
+
+Requisitos:
+- Cargar equipos_validados.json (datos ya validados por Módulo 2)
+- Preprocesamiento de texto:
+  1. Combinar nombre + marca + ubicación en un solo string
+  2. Convertir a minúsculas
+  3. Lematizar con spaCy (modelo es_core_news_sm)
+  4. Eliminar stopwords en español
+  5. Eliminar números de serie y códigos alfanuméricos
+- Vectorización con TfidfVectorizer (max_features=5000, ngram_range=(1,2))
+- Entrenar clasificador con LogisticRegression (C=1.0, max_iter=1000, class_weight='balanced')
+- Validación cruzada (5-fold) y reportar:
+  - Accuracy
+  - Precision (macro y weighted)
+  - Recall (macro y weighted)
+  - F1-Score (macro y weighted)
+  - Matriz de confusión (guardar como imagen)
+- Guardar modelo y vectorizador con joblib en data/models/
+- Guardar métricas en data/models/metrics_v1.json
+
+Función adicional: re_entrenar(nuevos_ejemplos)
+- Agregar nuevos ejemplos al dataset
+- Re-entrenar el modelo completo
+- Guardar nueva versión (classifier_v2.pkl, etc.)
+
+═══════════════════════════════════════════════════════════
+MÓDULO 4: classifier.py - Clasificador de Equipos Nuevos
+═══════════════════════════════════════════════════════════
+
+Función: Clasificar un equipo nuevo basándose en su nombre, marca y ubicación.
+
+Requisitos:
+- Cargar modelo entrenado y vectorizador
+- Cargar base EMDN oficial
+- Cargar tabla de mapeo categoría → MDR → valores de criticidad por defecto
+- Función clasificar_equipo(nombre, marca=None, ubicacion=None):
+  1. Preprocesar texto (mismo pipeline que entrenamiento)
+  2. Predecir categoría con el modelo NLP
+  3. Obtener probabilidad (confidence)
+  4. Buscar en base EMDN el código más probable para esa categoría
+  5. Obtener clase MDR del mapeo
+  6. Obtener valores de criticidad por defecto
+  7. Calcular Índice de Criticidad (IC = Σ(Pi × Si))
+  8. Determinar nivel (ALTA ≥4.0, MEDIA 2.5-3.9, BAJA <2.5)
+  9. Retornar:
+     {
+       "categoria": "IMG-03",
+       "categoria_nombre": "Ultrasonido",
+       "emdn_code": "S010101",
+       "emdn_name": "General purpose ultrasound diagnostic equipment",
+       "emdn_verified": true,
+       "mdr_class": "IIa",
+       "confidence": 0.87,
+       "criticidad": {
+         "impacto_clinico": 3,
+         "redundancia": 2,
+         "frecuencia_uso": 5,
+         "historial_fallas": 3,
+         "costo_tiempo": 3,
+         "indice": 3.2,
+         "nivel": "MEDIA"
+       }
+     }
+- Si confidence < 0.5, retornar advertencia: "Clasificación de baja confianza. Se recomienda revisión manual."
+- Si no puede clasificar, retornar: "No se pudo clasificar. Ingrese manualmente."
+
+═══════════════════════════════════════════════════════════
+MÓDULO 5: code_generator.py - Generador de Código Interno
+═══════════════════════════════════════════════════════════
+
+Función: Generar un código interno único para cada equipo clasificado.
+
+Requisitos:
+- Formato del código interno: {CATEGORÍA}-{SECUENCIAL}
+  Ejemplo: IMG03-001, RES01-042, INF01-123
+- La categoría usa el código propio sin guion (IMG03 en vez de IMG-03)
+- El secuencial es de 3 dígitos con ceros a la izquierda
+- Función generar_codigo_interno(categoria, equipos_existentes):
+  1. Filtrar equipos existentes por categoría
+  2. Encontrar el último secuencial usado
+  3. Incrementar en 1
+  4. Retornar nuevo código
+- Si no hay equipos existentes en esa categoría, empezar en 001
+- Validar que el código generado no exista ya (evitar duplicados)
+- Ejemplo:
+  - Categoría: IMG-03, existentes: [IMG03-001, IMG03-002, IMG03-003]
+  - Resultado: IMG03-004
+
+═══════════════════════════════════════════════════════════
+MÓDULO 6: criticality.py - Calculador de Criticidad
+═══════════════════════════════════════════════════════════
+
+Función: Calcular el Índice de Criticidad usando la fórmula ponderada.
+
+Requisitos:
+- Tabla de pesos (configurable):
+  * IMPACTO_CLINICO: 0.40
+  * REDUNDANCIA: 0.20
+  * FRECUENCIA_USO: 0.15
+  * HISTORIAL_FALLAS: 0.15
+  * COSTO_TIEMPO: 0.10
+- Tabla de valores por defecto por categoría (las 25 categorías)
+- Función calcular_criticidad(impacto, redundancia, frecuencia, historial, costo):
+  * IC = (impacto × 0.40) + (redundancia × 0.20) + (frecuencia × 0.15) + (historial × 0.15) + (costo × 0.10)
+  * Nivel: ALTA (≥4.0), MEDIA (2.5-3.9), BAJA (<2.5)
+  * Retornar: {"indice": 3.2, "nivel": "MEDIA", "desglose": {...}}
+- Función obtener_valores_por_defecto(categoria):
+  * Retornar los 5 valores por defecto para esa categoría
+- Función ajustar_por_mdr(valores, mdr_class):
+  * Si MDR = III → forzar impacto_clinico = 5
+  * Si MDR = IIb → forzar impacto_clinico = mínimo 4
+  * Si MDR = IIa → forzar impacto_clinico = mínimo 3
+  * Retornar valores ajustados
+
+═══════════════════════════════════════════════════════════
+API REST: api/main.py (FastAPI)
+═══════════════════════════════════════════════════════════
+
+Endpoints:
+
+1. POST /api/v1/clasificar
+   - Request: {"nombre": "Ecógrafo Samsung WS80A", "marca": "Samsung", "ubicacion": "Imagenología"}
+   - Response: Resultado completo del Módulo 4 + código interno del Módulo 5
+   
+2. POST /api/v1/validar
+   - Request: {"emdn_code": "S010101"}
+   - Response: {"exists": true, "name": "...", "parent": "S0101", "level": 3}
+
+3. POST /api/v1/buscar-emdn
+   - Request: {"keyword": "ultrasound"}
+   - Response: Lista de los 5 códigos EMDN más relevantes
+
+4. GET /api/v1/categorias
+   - Response: Lista de las 25 categorías propias con sus valores por defecto
+
+5. GET /api/v1/metricas
+   - Response: Métricas del modelo entrenado (accuracy, precision, recall, f1)
+
+6. POST /api/v1/reentrenar
+   - Request: {"nuevos_ejemplos": [...]}
+   - Response: {"status": "ok", "nuevos_totales": 230, "accuracy": 0.88}
+
+7. GET /api/v1/health
+   - Response: {"status": "ok", "model_version": "v1", "emdn_version": "2026", "ejemplos_entrenamiento": 224}
+
+═══════════════════════════════════════════════════════════
+SCRIPT PRINCIPAL: scripts/run_pipeline.py
+═══════════════════════════════════════════════════════════
+
+Función: Ejecutar todo el pipeline de principio a fin.
+
+Pasos:
+1. Importar EMDN desde Excel (Módulo 1)
+2. Validar JSON contra EMDN (Módulo 2)
+3. Mostrar reporte de discrepancias en consola
+4. Preguntar al usuario si desea continuar con los datos validados
+5. Entrenar modelo NLP (Módulo 3)
+6. Mostrar métricas del modelo
+7. Probar con 5 equipos de ejemplo y mostrar resultados
+8. Indicar que el sistema está listo para usar vía API
+
+═══════════════════════════════════════════════════════════
+TABLA DE MAPEO CATEGORÍA → MDR → CRITICIDAD POR DEFECTO
+═══════════════════════════════════════════════════════════
+
+Precargar esta tabla como constante en el código:
+
+CATEGORÍAS = {
+    "ANE-01": {"nombre": "Anestesia", "emdn_prefix": "A01", "mdr_default": "IIb", "defaults": {"impacto_clinico": 5, "redundancia": 4, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 4}},
+    "CAR-01": {"nombre": "Cardiología Diagnóstica", "emdn_prefix": "C01", "mdr_default": "IIa", "defaults": {"impacto_clinico": 3, "redundancia": 2, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 2}},
+    "CAR-02": {"nombre": "Cardiología Terapéutica", "emdn_prefix": "C02", "mdr_default": "III", "defaults": {"impacto_clinico": 5, "redundancia": 5, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 5}},
+    "CIR-01": {"nombre": "Quirófano General", "emdn_prefix": "K07", "mdr_default": "IIa", "defaults": {"impacto_clinico": 4, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 4}},
+    "CIR-02": {"nombre": "Electrocirugía", "emdn_prefix": "K08", "mdr_default": "IIb", "defaults": {"impacto_clinico": 5, "redundancia": 4, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 3}},
+    "DEN-01": {"nombre": "Odontología", "emdn_prefix": "O01", "mdr_default": "IIa", "defaults": {"impacto_clinico": 2, "redundancia": 2, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 3}},
+    "DIA-01": {"nombre": "Diálisis", "emdn_prefix": "D01", "mdr_default": "IIb", "defaults": {"impacto_clinico": 5, "redundancia": 4, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 4}},
+    "END-01": {"nombre": "Endoscopía", "emdn_prefix": "E01", "mdr_default": "IIa", "defaults": {"impacto_clinico": 4, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 4}},
+    "EST-01": {"nombre": "Esterilización", "emdn_prefix": "S09", "mdr_default": "IIa", "defaults": {"impacto_clinico": 2, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 3}},
+    "GAS-01": {"nombre": "Gases Medicinales", "emdn_prefix": "G01", "mdr_default": "IIa", "defaults": {"impacto_clinico": 5, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 2}},
+    "IMG-01": {"nombre": "Imagenología Rayos X", "emdn_prefix": "I01", "mdr_default": "IIb", "defaults": {"impacto_clinico": 4, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 4}},
+    "IMG-02": {"nombre": "Tomografía/Resonancia", "emdn_prefix": "I02", "mdr_default": "IIb", "defaults": {"impacto_clinico": 4, "redundancia": 5, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 5}},
+    "IMG-03": {"nombre": "Ultrasonido", "emdn_prefix": "S01", "mdr_default": "IIa", "defaults": {"impacto_clinico": 3, "redundancia": 2, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 3}},
+    "LAB-01": {"nombre": "Laboratorio Análisis", "emdn_prefix": "L01", "mdr_default": "IIa", "defaults": {"impacto_clinico": 4, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 4}},
+    "LAB-02": {"nombre": "Banco de Sangre", "emdn_prefix": "L02", "mdr_default": "IIa", "defaults": {"impacto_clinico": 5, "redundancia": 4, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 3}},
+    "MON-01": {"nombre": "Monitoreo Vital", "emdn_prefix": "J06", "mdr_default": "IIa", "defaults": {"impacto_clinico": 4, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 3}},
+    "NEO-01": {"nombre": "Neonatología", "emdn_prefix": "N01", "mdr_default": "IIb", "defaults": {"impacto_clinico": 5, "redundancia": 4, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 4}},
+    "OFI-01": {"nombre": "Oficina/General", "emdn_prefix": "O02", "mdr_default": "I", "defaults": {"impacto_clinico": 1, "redundancia": 2, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 1}},
+    "RES-01": {"nombre": "Respiratorio", "emdn_prefix": "R02", "mdr_default": "IIb", "defaults": {"impacto_clinico": 5, "redundancia": 4, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 4}},
+    "TER-01": {"nombre": "Terapia Física", "emdn_prefix": "T01", "mdr_default": "IIa", "defaults": {"impacto_clinico": 2, "redundancia": 2, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 2}},
+    "URG-01": {"nombre": "Emergencia", "emdn_prefix": "P03", "mdr_default": "IIb", "defaults": {"impacto_clinico": 5, "redundancia": 4, "frecuencia_uso": 4, "historial_fallas": 2, "costo_tiempo": 4}},
+    "INF-01": {"nombre": "Infusión", "emdn_prefix": "T04", "mdr_default": "IIb", "defaults": {"impacto_clinico": 5, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 3}},
+    "FRM-01": {"nombre": "Farmacia", "emdn_prefix": "F01", "mdr_default": "I", "defaults": {"impacto_clinico": 3, "redundancia": 3, "frecuencia_uso": 5, "historial_fallas": 2, "costo_tiempo": 2}},
+    "MOB-01": {"nombre": "Mobiliario Clínico", "emdn_prefix": "M01", "mdr_default": "I", "defaults": {"impacto_clinico": 2, "redundancia": 2, "frecuencia_uso": 5, "historial_fallas": 3, "costo_tiempo": 2}},
+    "OTR-01": {"nombre": "Otros Equipos", "emdn_prefix": "X01", "mdr_default": "I", "defaults": {"impacto_clinico": 2, "redundancia": 2, "frecuencia_uso": 4, "historial_fallas": 3, "costo_tiempo": 2}}
+}
+
+DEPENDENCIAS (requirements.txt):
+- pandas>=2.0.0
+- openpyxl>=3.1.0
+- spacy>=3.5.0
+- scikit-learn>=1.2.0
+- joblib>=1.2.0
+- fastapi>=0.100.0
+- uvicorn>=0.23.0
+- pydantic>=2.0.0
+- numpy>=1.24.0
+- matplotlib>=3.7.0 (para matriz de confusión)
+- python-Levenshtein>=0.21.0 (para búsqueda fuzzy)
+- rich>=13.0.0 (para consola con colores)
+
+CRITERIOS DE ACEPTACIÓN:
+1. El Módulo 1 importa correctamente el Excel EMDN y crea la base de datos JSON.
+2. El Módulo 2 detecta discrepancias entre el JSON y el EMDN oficial, y genera un reporte claro.
+3. El Módulo 3 entrena un modelo con accuracy ≥ 0.80 en validación cruzada.
+4. El Módulo 4 clasifica correctamente equipos nuevos con confidence ≥ 0.70 para equipos comunes.
+5. El Módulo 5 genera códigos internos únicos y secuenciales.
+6. El Módulo 6 calcula el IC correctamente según la fórmula ponderada.
+7. La API REST responde correctamente a todos los endpoints.
+8. El pipeline completo (run_pipeline.py) se ejecuta de principio a fin sin errores.
+9. Todo funciona 100% offline (sin APIs externas).
+
+CONSIDERACIONES:
+- El código debe estar comentado en español.
+- Manejar errores gracefully: si el Excel EMDN no está presente, mostrar mensaje claro indicando dónde descargarlo.
+- El modelo de spaCy (es_core_news_sm) debe descargarse como parte del setup: python -m spacy download es_core_news_sm
+- Incluir un README.md con instrucciones de instalación, uso y ejemplos.
+- Los prefijos EMDN en la tabla de mapeo son aproximados. El Módulo 2 (validador) se encargará de verificar los códigos específicos contra el Excel oficial.

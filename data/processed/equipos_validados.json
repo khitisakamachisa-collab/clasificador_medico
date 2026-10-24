@@ -1,0 +1,3660 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ecógrafo Samsung WS80A 1",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 2,
+    "nombre": "Monitor fetal Edan F6 2",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 3,
+    "nombre": "Equipo de rayos X GE Optima 3",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 4,
+    "nombre": "Ventilador respiratorio Dräger V500 4",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 5,
+    "nombre": "Bomba de infusión Alaris GP 5",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 6,
+    "nombre": "Anestesia máquina Aisys 6",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 7,
+    "nombre": "Ecógrafo Samsung WS80A 7",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 8,
+    "nombre": "Monitor fetal Edan F6 8",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 9,
+    "nombre": "Equipo de rayos X GE Optima 9",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 10,
+    "nombre": "Ventilador respiratorio Dräger V500 10",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 11,
+    "nombre": "Bomba de infusión Alaris GP 11",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 12,
+    "nombre": "Anestesia máquina Aisys 12",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 13,
+    "nombre": "Ecógrafo Samsung WS80A 13",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 14,
+    "nombre": "Monitor fetal Edan F6 14",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 15,
+    "nombre": "Equipo de rayos X GE Optima 15",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 16,
+    "nombre": "Ventilador respiratorio Dräger V500 16",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 17,
+    "nombre": "Bomba de infusión Alaris GP 17",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 18,
+    "nombre": "Anestesia máquina Aisys 18",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 19,
+    "nombre": "Ecógrafo Samsung WS80A 19",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 20,
+    "nombre": "Monitor fetal Edan F6 20",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 21,
+    "nombre": "Equipo de rayos X GE Optima 21",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 22,
+    "nombre": "Ventilador respiratorio Dräger V500 22",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 23,
+    "nombre": "Bomba de infusión Alaris GP 23",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 24,
+    "nombre": "Anestesia máquina Aisys 24",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 25,
+    "nombre": "Ecógrafo Samsung WS80A 25",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 26,
+    "nombre": "Monitor fetal Edan F6 26",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 27,
+    "nombre": "Equipo de rayos X GE Optima 27",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 28,
+    "nombre": "Ventilador respiratorio Dräger V500 28",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 29,
+    "nombre": "Bomba de infusión Alaris GP 29",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 30,
+    "nombre": "Anestesia máquina Aisys 30",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 31,
+    "nombre": "Ecógrafo Samsung WS80A 31",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 32,
+    "nombre": "Monitor fetal Edan F6 32",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 33,
+    "nombre": "Equipo de rayos X GE Optima 33",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 34,
+    "nombre": "Ventilador respiratorio Dräger V500 34",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 35,
+    "nombre": "Bomba de infusión Alaris GP 35",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 36,
+    "nombre": "Anestesia máquina Aisys 36",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 37,
+    "nombre": "Ecógrafo Samsung WS80A 37",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 38,
+    "nombre": "Monitor fetal Edan F6 38",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 39,
+    "nombre": "Equipo de rayos X GE Optima 39",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 40,
+    "nombre": "Ventilador respiratorio Dräger V500 40",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 41,
+    "nombre": "Bomba de infusión Alaris GP 41",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 42,
+    "nombre": "Anestesia máquina Aisys 42",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 43,
+    "nombre": "Ecógrafo Samsung WS80A 43",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 44,
+    "nombre": "Monitor fetal Edan F6 44",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 45,
+    "nombre": "Equipo de rayos X GE Optima 45",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 46,
+    "nombre": "Ventilador respiratorio Dräger V500 46",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 47,
+    "nombre": "Bomba de infusión Alaris GP 47",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 48,
+    "nombre": "Anestesia máquina Aisys 48",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 49,
+    "nombre": "Ecógrafo Samsung WS80A 49",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 50,
+    "nombre": "Monitor fetal Edan F6 50",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 51,
+    "nombre": "Equipo de rayos X GE Optima 51",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 52,
+    "nombre": "Ventilador respiratorio Dräger V500 52",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 53,
+    "nombre": "Bomba de infusión Alaris GP 53",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 54,
+    "nombre": "Anestesia máquina Aisys 54",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 55,
+    "nombre": "Ecógrafo Samsung WS80A 55",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 56,
+    "nombre": "Monitor fetal Edan F6 56",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 57,
+    "nombre": "Equipo de rayos X GE Optima 57",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 58,
+    "nombre": "Ventilador respiratorio Dräger V500 58",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 59,
+    "nombre": "Bomba de infusión Alaris GP 59",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 60,
+    "nombre": "Anestesia máquina Aisys 60",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 61,
+    "nombre": "Ecógrafo Samsung WS80A 61",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 62,
+    "nombre": "Monitor fetal Edan F6 62",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 63,
+    "nombre": "Equipo de rayos X GE Optima 63",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 64,
+    "nombre": "Ventilador respiratorio Dräger V500 64",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 65,
+    "nombre": "Bomba de infusión Alaris GP 65",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 66,
+    "nombre": "Anestesia máquina Aisys 66",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 67,
+    "nombre": "Ecógrafo Samsung WS80A 67",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 68,
+    "nombre": "Monitor fetal Edan F6 68",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 69,
+    "nombre": "Equipo de rayos X GE Optima 69",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 70,
+    "nombre": "Ventilador respiratorio Dräger V500 70",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 71,
+    "nombre": "Bomba de infusión Alaris GP 71",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 72,
+    "nombre": "Anestesia máquina Aisys 72",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 73,
+    "nombre": "Ecógrafo Samsung WS80A 73",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 74,
+    "nombre": "Monitor fetal Edan F6 74",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 75,
+    "nombre": "Equipo de rayos X GE Optima 75",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 76,
+    "nombre": "Ventilador respiratorio Dräger V500 76",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 77,
+    "nombre": "Bomba de infusión Alaris GP 77",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 78,
+    "nombre": "Anestesia máquina Aisys 78",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 79,
+    "nombre": "Ecógrafo Samsung WS80A 79",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 80,
+    "nombre": "Monitor fetal Edan F6 80",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 81,
+    "nombre": "Equipo de rayos X GE Optima 81",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 82,
+    "nombre": "Ventilador respiratorio Dräger V500 82",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 83,
+    "nombre": "Bomba de infusión Alaris GP 83",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 84,
+    "nombre": "Anestesia máquina Aisys 84",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 85,
+    "nombre": "Ecógrafo Samsung WS80A 85",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 86,
+    "nombre": "Monitor fetal Edan F6 86",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 87,
+    "nombre": "Equipo de rayos X GE Optima 87",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 88,
+    "nombre": "Ventilador respiratorio Dräger V500 88",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 89,
+    "nombre": "Bomba de infusión Alaris GP 89",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 90,
+    "nombre": "Anestesia máquina Aisys 90",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 91,
+    "nombre": "Ecógrafo Samsung WS80A 91",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 92,
+    "nombre": "Monitor fetal Edan F6 92",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 93,
+    "nombre": "Equipo de rayos X GE Optima 93",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 94,
+    "nombre": "Ventilador respiratorio Dräger V500 94",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 95,
+    "nombre": "Bomba de infusión Alaris GP 95",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 96,
+    "nombre": "Anestesia máquina Aisys 96",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 97,
+    "nombre": "Ecógrafo Samsung WS80A 97",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 98,
+    "nombre": "Monitor fetal Edan F6 98",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 99,
+    "nombre": "Equipo de rayos X GE Optima 99",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 100,
+    "nombre": "Ventilador respiratorio Dräger V500 100",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 101,
+    "nombre": "Bomba de infusión Alaris GP 101",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 102,
+    "nombre": "Anestesia máquina Aisys 102",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 103,
+    "nombre": "Ecógrafo Samsung WS80A 103",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 104,
+    "nombre": "Monitor fetal Edan F6 104",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 105,
+    "nombre": "Equipo de rayos X GE Optima 105",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 106,
+    "nombre": "Ventilador respiratorio Dräger V500 106",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 107,
+    "nombre": "Bomba de infusión Alaris GP 107",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 108,
+    "nombre": "Anestesia máquina Aisys 108",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 109,
+    "nombre": "Ecógrafo Samsung WS80A 109",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 110,
+    "nombre": "Monitor fetal Edan F6 110",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 111,
+    "nombre": "Equipo de rayos X GE Optima 111",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 112,
+    "nombre": "Ventilador respiratorio Dräger V500 112",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 113,
+    "nombre": "Bomba de infusión Alaris GP 113",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 114,
+    "nombre": "Anestesia máquina Aisys 114",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 115,
+    "nombre": "Ecógrafo Samsung WS80A 115",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 116,
+    "nombre": "Monitor fetal Edan F6 116",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 117,
+    "nombre": "Equipo de rayos X GE Optima 117",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 118,
+    "nombre": "Ventilador respiratorio Dräger V500 118",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 119,
+    "nombre": "Bomba de infusión Alaris GP 119",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 120,
+    "nombre": "Anestesia máquina Aisys 120",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 121,
+    "nombre": "Ecógrafo Samsung WS80A 121",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 122,
+    "nombre": "Monitor fetal Edan F6 122",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 123,
+    "nombre": "Equipo de rayos X GE Optima 123",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 124,
+    "nombre": "Ventilador respiratorio Dräger V500 124",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 125,
+    "nombre": "Bomba de infusión Alaris GP 125",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 126,
+    "nombre": "Anestesia máquina Aisys 126",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 127,
+    "nombre": "Ecógrafo Samsung WS80A 127",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 128,
+    "nombre": "Monitor fetal Edan F6 128",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 129,
+    "nombre": "Equipo de rayos X GE Optima 129",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 130,
+    "nombre": "Ventilador respiratorio Dräger V500 130",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 131,
+    "nombre": "Bomba de infusión Alaris GP 131",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 132,
+    "nombre": "Anestesia máquina Aisys 132",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 133,
+    "nombre": "Ecógrafo Samsung WS80A 133",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 134,
+    "nombre": "Monitor fetal Edan F6 134",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 135,
+    "nombre": "Equipo de rayos X GE Optima 135",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 136,
+    "nombre": "Ventilador respiratorio Dräger V500 136",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 137,
+    "nombre": "Bomba de infusión Alaris GP 137",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 138,
+    "nombre": "Anestesia máquina Aisys 138",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 139,
+    "nombre": "Ecógrafo Samsung WS80A 139",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 140,
+    "nombre": "Monitor fetal Edan F6 140",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 141,
+    "nombre": "Equipo de rayos X GE Optima 141",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 142,
+    "nombre": "Ventilador respiratorio Dräger V500 142",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 143,
+    "nombre": "Bomba de infusión Alaris GP 143",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 144,
+    "nombre": "Anestesia máquina Aisys 144",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 145,
+    "nombre": "Ecógrafo Samsung WS80A 145",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 146,
+    "nombre": "Monitor fetal Edan F6 146",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 147,
+    "nombre": "Equipo de rayos X GE Optima 147",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 148,
+    "nombre": "Ventilador respiratorio Dräger V500 148",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 149,
+    "nombre": "Bomba de infusión Alaris GP 149",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 150,
+    "nombre": "Anestesia máquina Aisys 150",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 151,
+    "nombre": "Ecógrafo Samsung WS80A 151",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 152,
+    "nombre": "Monitor fetal Edan F6 152",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 153,
+    "nombre": "Equipo de rayos X GE Optima 153",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 154,
+    "nombre": "Ventilador respiratorio Dräger V500 154",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 155,
+    "nombre": "Bomba de infusión Alaris GP 155",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 156,
+    "nombre": "Anestesia máquina Aisys 156",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 157,
+    "nombre": "Ecógrafo Samsung WS80A 157",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 158,
+    "nombre": "Monitor fetal Edan F6 158",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 159,
+    "nombre": "Equipo de rayos X GE Optima 159",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 160,
+    "nombre": "Ventilador respiratorio Dräger V500 160",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 161,
+    "nombre": "Bomba de infusión Alaris GP 161",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 162,
+    "nombre": "Anestesia máquina Aisys 162",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 163,
+    "nombre": "Ecógrafo Samsung WS80A 163",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 164,
+    "nombre": "Monitor fetal Edan F6 164",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 165,
+    "nombre": "Equipo de rayos X GE Optima 165",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 166,
+    "nombre": "Ventilador respiratorio Dräger V500 166",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 167,
+    "nombre": "Bomba de infusión Alaris GP 167",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 168,
+    "nombre": "Anestesia máquina Aisys 168",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 169,
+    "nombre": "Ecógrafo Samsung WS80A 169",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 170,
+    "nombre": "Monitor fetal Edan F6 170",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 171,
+    "nombre": "Equipo de rayos X GE Optima 171",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 172,
+    "nombre": "Ventilador respiratorio Dräger V500 172",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 173,
+    "nombre": "Bomba de infusión Alaris GP 173",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 174,
+    "nombre": "Anestesia máquina Aisys 174",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 175,
+    "nombre": "Ecógrafo Samsung WS80A 175",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 176,
+    "nombre": "Monitor fetal Edan F6 176",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 177,
+    "nombre": "Equipo de rayos X GE Optima 177",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 178,
+    "nombre": "Ventilador respiratorio Dräger V500 178",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 179,
+    "nombre": "Bomba de infusión Alaris GP 179",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 180,
+    "nombre": "Anestesia máquina Aisys 180",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 181,
+    "nombre": "Ecógrafo Samsung WS80A 181",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 182,
+    "nombre": "Monitor fetal Edan F6 182",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 183,
+    "nombre": "Equipo de rayos X GE Optima 183",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 184,
+    "nombre": "Ventilador respiratorio Dräger V500 184",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 185,
+    "nombre": "Bomba de infusión Alaris GP 185",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 186,
+    "nombre": "Anestesia máquina Aisys 186",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 187,
+    "nombre": "Ecógrafo Samsung WS80A 187",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 188,
+    "nombre": "Monitor fetal Edan F6 188",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 189,
+    "nombre": "Equipo de rayos X GE Optima 189",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 190,
+    "nombre": "Ventilador respiratorio Dräger V500 190",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 191,
+    "nombre": "Bomba de infusión Alaris GP 191",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 192,
+    "nombre": "Anestesia máquina Aisys 192",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 193,
+    "nombre": "Ecógrafo Samsung WS80A 193",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 194,
+    "nombre": "Monitor fetal Edan F6 194",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 195,
+    "nombre": "Equipo de rayos X GE Optima 195",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 196,
+    "nombre": "Ventilador respiratorio Dräger V500 196",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 197,
+    "nombre": "Bomba de infusión Alaris GP 197",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 198,
+    "nombre": "Anestesia máquina Aisys 198",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 199,
+    "nombre": "Ecógrafo Samsung WS80A 199",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 200,
+    "nombre": "Monitor fetal Edan F6 200",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 201,
+    "nombre": "Equipo de rayos X GE Optima 201",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 202,
+    "nombre": "Ventilador respiratorio Dräger V500 202",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 203,
+    "nombre": "Bomba de infusión Alaris GP 203",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 204,
+    "nombre": "Anestesia máquina Aisys 204",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 205,
+    "nombre": "Ecógrafo Samsung WS80A 205",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 206,
+    "nombre": "Monitor fetal Edan F6 206",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 207,
+    "nombre": "Equipo de rayos X GE Optima 207",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 208,
+    "nombre": "Ventilador respiratorio Dräger V500 208",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 209,
+    "nombre": "Bomba de infusión Alaris GP 209",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 210,
+    "nombre": "Anestesia máquina Aisys 210",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 211,
+    "nombre": "Ecógrafo Samsung WS80A 211",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 212,
+    "nombre": "Monitor fetal Edan F6 212",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 213,
+    "nombre": "Equipo de rayos X GE Optima 213",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 214,
+    "nombre": "Ventilador respiratorio Dräger V500 214",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 215,
+    "nombre": "Bomba de infusión Alaris GP 215",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 216,
+    "nombre": "Anestesia máquina Aisys 216",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 217,
+    "nombre": "Ecógrafo Samsung WS80A 217",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 218,
+    "nombre": "Monitor fetal Edan F6 218",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  },
+  {
+    "id": 219,
+    "nombre": "Equipo de rayos X GE Optima 219",
+    "marca": "GE",
+    "ubicacion": "Radiología",
+    "categoria": "IMG-01",
+    "emdn_code": "M0201010101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE"
+  },
+  {
+    "id": 220,
+    "nombre": "Ventilador respiratorio Dräger V500 220",
+    "marca": "Dräger",
+    "ubicacion": "UTI",
+    "categoria": "RES-01",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 221,
+    "nombre": "Bomba de infusión Alaris GP 221",
+    "marca": "BD",
+    "ubicacion": "Infusión",
+    "categoria": "INF-01",
+    "emdn_code": "A01018099",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES"
+  },
+  {
+    "id": 222,
+    "nombre": "Anestesia máquina Aisys 222",
+    "marca": "GE",
+    "ubicacion": "Quirófano",
+    "categoria": "ANE-01",
+    "emdn_code": "R03020101",
+    "mdr": "IIb",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "ANAESTHESIA BALLOONS"
+  },
+  {
+    "id": 223,
+    "nombre": "Ecógrafo Samsung WS80A 223",
+    "marca": "Samsung",
+    "ubicacion": "Imagenología",
+    "categoria": "IMG-03",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    }
+  },
+  {
+    "id": 224,
+    "nombre": "Monitor fetal Edan F6 224",
+    "marca": "Edan",
+    "ubicacion": "Neonatología",
+    "categoria": "MON-01",
+    "emdn_code": "C03900102",
+    "mdr": "IIa",
+    "criticidad": {
+      "impacto_clinico": 3,
+      "redundancia": 2,
+      "frecuencia_uso": 5,
+      "historial_fallas": 3,
+      "costo_tiempo": 3
+    },
+    "observacion": "MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR)"
+  }
+]

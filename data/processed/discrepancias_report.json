@@ -1,0 +1,1578 @@
+{
+  "resumen": {
+    "total_equipos": 224,
+    "validos": 0,
+    "corregidos": 149,
+    "no_encontrados": 75
+  },
+  "detalles": [
+    {
+      "equipo": "Ecógrafo Samsung WS80A 1",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 2",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 3",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 4",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 5",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 6",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 7",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 8",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 9",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 10",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 11",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 12",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 13",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 14",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 15",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 16",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 17",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 18",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 19",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 20",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 21",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 22",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 23",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 24",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 25",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 26",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 27",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 28",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 29",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 30",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 31",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 32",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 33",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 34",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 35",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 36",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 37",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 38",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 39",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 40",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 41",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 42",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 43",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 44",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 45",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 46",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 47",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 48",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 49",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 50",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 51",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 52",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 53",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 54",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 55",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 56",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 57",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 58",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 59",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 60",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 61",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 62",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 63",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 64",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 65",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 66",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 67",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 68",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 69",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 70",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 71",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 72",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 73",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 74",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 75",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 76",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 77",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 78",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 79",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 80",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 81",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 82",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 83",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 84",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 85",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 86",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 87",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 88",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 89",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 90",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 91",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 92",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 93",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 94",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 95",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 96",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 97",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 98",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 99",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 100",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 101",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 102",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 103",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 104",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 105",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 106",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 107",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 108",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 109",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 110",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 111",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 112",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 113",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 114",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 115",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 116",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 117",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 118",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 119",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 120",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 121",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 122",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 123",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 124",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 125",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 126",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 127",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 128",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 129",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 130",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 131",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 132",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 133",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 134",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 135",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 136",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 137",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 138",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 139",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 140",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 141",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 142",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 143",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 144",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 145",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 146",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 147",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 148",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 149",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 150",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 151",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 152",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 153",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 154",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 155",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 156",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 157",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 158",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 159",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 160",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 161",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 162",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 163",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 164",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 165",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 166",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 167",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 168",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 169",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 170",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 171",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 172",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 173",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 174",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 175",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 176",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 177",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 178",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 179",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 180",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 181",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 182",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 183",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 184",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 185",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 186",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 187",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 188",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 189",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 190",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 191",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 192",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 193",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 194",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 195",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 196",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 197",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 198",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 199",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 200",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 201",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 202",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 203",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 204",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 205",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 206",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 207",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 208",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 209",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 210",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 211",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 212",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 213",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 214",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 215",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 216",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 217",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 218",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    },
+    {
+      "equipo": "Equipo de rayos X GE Optima 219",
+      "emdn_original": "I010101",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "M0201010101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido M0201010101 (COTTON GAUZE, CUT, WITHOUT X-RAY DETECTABLE THREAD, STERILE)"
+    },
+    {
+      "equipo": "Ventilador respiratorio Dräger V500 220",
+      "emdn_original": "R02",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Bomba de infusión Alaris GP 221",
+      "emdn_original": "T04",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "A01018099",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido A01018099 (NEEDLES FOR INFUSION AND COLLECTION - OTHER ACCESSORIES)"
+    },
+    {
+      "equipo": "Anestesia máquina Aisys 222",
+      "emdn_original": "A01",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "R03020101",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido R03020101 (ANAESTHESIA BALLOONS)"
+    },
+    {
+      "equipo": "Ecógrafo Samsung WS80A 223",
+      "emdn_original": "S010101",
+      "estado": "NO_ENCONTRADO",
+      "emdn_corregido": null,
+      "observacion": "No se encontró un código EMDN compatible. Requiere revisión manual."
+    },
+    {
+      "equipo": "Monitor fetal Edan F6 224",
+      "emdn_original": "J060301",
+      "estado": "CORREGIDO",
+      "emdn_corregido": "C03900102",
+      "observacion": "Código original no existe en EMDN 2026. Sugerido C03900102 (MINI-INVASIVE VIDEO-ASSISTED CARDIO-SURGICAL ACCESS KITS (WITH EXTERNAL MONITOR))"
+    }
+  ]
+}
