@@ -2,6 +2,7 @@ import pytest
 
 from src import classifier
 from src import code_generator
+from src import correction_validation
 from src.classifier import clasificar_equipo, classify_equipment
 from src.criticality import ajustar_por_mdr, calcular_criticidad
 from src.rules_dictionary import EMDN_PREFIXES, EMDN_SUBCATEGORY_PREFIXES, agregar_regla
@@ -22,6 +23,7 @@ def test_classify_equipment_returns_expected_keys():
     assert result["emdn_term"] == "PORTABLE ULTRASOUND SCANNERS"
     assert result["emdn_verified"] is True
     assert result["confidence"] >= 0.90
+    assert result["semaforo"]["color"] == "verde"
     assert result["codigo_interno"].startswith("IMG03-")
     assert "mdr_class" in result
     assert "criticidad" in result
@@ -74,6 +76,265 @@ def test_unmatched_name_uses_nlp_category(monkeypatch):
     assert result["categoria_propia"] == "RES-01"
     assert result["metodo"] == "NLP"
     assert result["confidence"] == 0.82
+    assert result["semaforo"]["color"] == "amarillo"
+
+
+def test_tens_for_physiotherapy_has_high_confidence_green_light():
+    result = classify_equipment(
+        "TENS para fisioterapia Enraf Nonius Fisioterapia",
+        "Enraf Nonius",
+        "Fisioterapia",
+    )
+    assert result["categoria_propia"] == "TER-01"
+    assert result["confidence"] == 0.96
+    assert result["emdn_code"] == "Z120616"
+    assert result["semaforo"]["color"] == "verde"
+    assert result["semaforo"]["requiere_revision"] is False
+
+
+def test_typo_context_preserves_fisioterapia_rule():
+    result = classify_equipment(
+        "ENS para fisioterapia Enraf Nonius Fisioterapia",
+        "Enraf Nonius",
+        "Fisioterapia",
+    )
+    assert result["categoria_propia"] == "TER-01"
+    assert result["confidence"] == 0.96
+    assert result["semaforo"]["color"] == "verde"
+
+
+def test_low_confidence_nlp_result_can_be_corrected_to_green(monkeypatch):
+    class LowConfidenceClassifier:
+        classes_ = ["ANE-01"]
+
+        def predict(self, _features):
+            return ["ANE-01"]
+
+        def predict_proba(self, _features):
+            return [[0.20]]
+
+    class HighConfidenceCorrectionClassifier:
+        classes_ = ["ANE-01", "TER-01", "IMG-01"]
+
+        def predict(self, _features):
+            return ["ANE-01"]
+
+        def predict_proba(self, _features):
+            return [[0.02, 0.95, 0.03]]
+
+    class FakeVectorizer:
+        def transform(self, _texts):
+            return [[1]]
+
+    monkeypatch.setattr(classifier, "_category_from_rules", lambda _name: None)
+    monkeypatch.setattr(
+        classifier,
+        "load_model_assets",
+        lambda: (LowConfidenceClassifier(), FakeVectorizer()),
+    )
+    original = classify_equipment("TENS para fisioterapia")
+    monkeypatch.setattr(
+        classifier,
+        "load_model_assets",
+        lambda: (HighConfidenceCorrectionClassifier(), FakeVectorizer()),
+    )
+    corrected = classify_equipment(
+        "TENS para fisioterapia",
+        categoria_forzada="TER-01",
+    )
+    assert original["categoria_propia"] == "ANE-01"
+    assert original["confidence"] == 0.2
+    assert original["semaforo"]["color"] == "rojo"
+    assert corrected["categoria_propia"] == "TER-01"
+    assert corrected["confidence"] == 0.95
+    assert corrected["metodo"] == "CORRECCION_MANUAL"
+    assert corrected["semaforo"]["color"] == "verde"
+
+
+def test_forced_category_uses_expert_confidence_without_nlp(monkeypatch):
+    def unexpected_model_load():
+        raise AssertionError("Una categoría validada manualmente no debe consultar el modelo NLP")
+
+    monkeypatch.setattr(classifier, "_category_from_rules", lambda _name: None)
+    monkeypatch.setattr(classifier, "load_model_assets", unexpected_model_load)
+    result = classify_equipment(
+        "Ecógrafo portátil",
+        categoria_forzada="IMG-03",
+    )
+    assert result["categoria_propia"] == "IMG-03"
+    assert result["confidence"] == 0.95
+    assert result["metodo"] == "CORRECCION_MANUAL"
+    assert result["semaforo"]["color"] == "verde"
+    assert result["validacion_correccion"]["estado"] == "VALIDADA_AUTOMATICAMENTE"
+
+
+def test_correction_validation_passes_all_three_checks():
+    result = classify_equipment("Electroestimulador", categoria_forzada="TER-01")
+
+    assert result["confidence"] == 0.95
+    assert result["validacion_correccion"] == {
+        "confidence": 0.95,
+        "estado": "VALIDADA_AUTOMATICAMENTE",
+        "validaciones": {
+            "emdn_valido": True,
+            "mdr_coherente": True,
+            "criticidad_razonable": True,
+            "semantica_valida": True,
+        },
+        "mensaje": (
+            "✅ Corrección validada automáticamente. EMDN, MDR, criticidad y "
+            "coherencia semántica verificadas."
+        ),
+    }
+
+
+def test_correction_validation_functions_check_emdn_and_criticality_details():
+    result = classify_equipment("Electroestimulador", categoria_forzada="TER-01")
+
+    assert correction_validation.verificar_emdn_en_excel("TER-01", "Z120616")
+    assert not correction_validation.verificar_emdn_en_excel("IMG-03", "Z120616")
+    assert correction_validation.verificar_criticidad_categoria("TER-01", result["criticidad"])
+
+    inconsistent = {**result["criticidad"], "indice": 1.0}
+    assert not correction_validation.verificar_criticidad_categoria("TER-01", inconsistent)
+
+
+def test_correction_validation_requires_review_when_two_checks_pass():
+    result = classify_equipment("Electroestimulador", categoria_forzada="TER-01")
+    result["mdr_class"] = "III"
+
+    validation = correction_validation.validar_correccion_automaticamente(
+        result, nombre_equipo="Electroestimulador"
+    )
+
+    assert validation["confidence"] == 0.75
+    assert validation["estado"] == "PENDIENTE_REVISION"
+    assert validation["validaciones"] == {
+        "emdn_valido": True,
+        "mdr_coherente": False,
+        "criticidad_razonable": True,
+        "semantica_valida": True,
+    }
+
+
+def test_correction_validation_rejects_when_fewer_than_two_checks_pass():
+    result = classify_equipment("Electroestimulador", categoria_forzada="TER-01")
+    result["emdn_code"] = "CODIGO-INEXISTENTE"
+    result["mdr_class"] = "III"
+
+    validation = correction_validation.validar_correccion_automaticamente(
+        result, nombre_equipo="Electroestimulador"
+    )
+
+    assert validation["confidence"] == 0.30
+    assert validation["estado"] == "RECHAZADA"
+    assert validation["validaciones"] == {
+        "emdn_valido": False,
+        "mdr_coherente": False,
+        "criticidad_razonable": True,
+        "semantica_valida": True,
+    }
+
+
+def test_semantic_check_rejects_unrelated_emdn_term_even_if_structure_matches():
+    result = classify_equipment("Cama UCI", categoria_forzada="MOB-01")
+    result["emdn_code"] = "V08060102"
+    assert correction_validation.verificar_emdn_en_excel("MOB-01", result["emdn_code"])
+    result["emdn_code"] = "Z12062892"
+
+    validation = correction_validation.validar_correccion_automaticamente(
+        result, nombre_equipo="Cama UCI"
+    )
+
+    assert validation["confidence"] == 0.0
+    assert validation["estado"] == "RECHAZADA"
+    assert validation["validaciones"]["semantica_valida"] is False
+
+
+@pytest.mark.parametrize(
+    ("name", "category", "emdn_code"),
+    [
+        ("Mesa de cirugias", "CIR-01", "Z12011202"),
+        ("Bisturi quirurgico reutilizable", "CIR-01", "L010101"),
+        ("Cama electrica UCI", "MOB-01", "V08060102"),
+        ("Monitor de signos vitales", "MON-01", "Z1203020201"),
+    ],
+)
+def test_targeted_device_rules_use_verified_emdn_term(name, category, emdn_code):
+    result = classify_equipment(name)
+
+    assert result["categoria_propia"] == category
+    assert result["emdn_code"] == emdn_code
+    assert result["emdn_verified"] is True
+
+
+@pytest.mark.parametrize(
+    ("name", "category", "emdn_code"),
+    [
+        ("Mesa de cirugia", "CIR-01", "Z12011202"),
+        ("Bisturi quirurgico reutilizable", "CIR-01", "L010101"),
+        ("Cama electrica UCI", "MOB-01", "V08060102"),
+    ],
+)
+def test_manual_correction_reuses_matching_emdn_rule_without_nlp(
+    name, category, emdn_code
+):
+    result = classify_equipment(name, categoria_forzada=category)
+
+    assert result["metodo"] == "CORRECCION_MANUAL"
+    assert result["categoria_propia"] == category
+    assert result["emdn_code"] == emdn_code
+    assert result["confidence"] == 0.95
+    assert result["semaforo"]["color"] == "verde"
+
+
+def test_mdr_validation_accepts_classes_within_one_level():
+    assert correction_validation.verificar_mdr_categoria("TER-01", "I")
+    assert correction_validation.verificar_mdr_categoria("TER-01", "IIb")
+    assert not correction_validation.verificar_mdr_categoria("TER-01", "III")
+    assert not correction_validation.verificar_mdr_categoria("INVALIDA", "IIa")
+
+
+def test_unknown_equipment_with_low_nlp_confidence_requires_red_review(monkeypatch):
+    class FakeClassifier:
+        def predict(self, _features):
+            return ["OTR-01"]
+
+        def predict_proba(self, _features):
+            return [[0.65]]
+
+    class FakeVectorizer:
+        def transform(self, _texts):
+            return [[1]]
+
+    monkeypatch.setattr(classifier, "_category_from_rules", lambda _name: None)
+    monkeypatch.setattr(
+        classifier, "load_model_assets", lambda: (FakeClassifier(), FakeVectorizer())
+    )
+    result = classify_equipment("Equipo raro desconocido")
+    assert result["metodo"] == "NLP"
+    assert result["confidence"] < 0.70
+    assert result["semaforo"]["color"] == "rojo"
+
+
+@pytest.mark.parametrize(
+    ("confidence", "color", "hex_color", "level", "message", "icon", "revision"),
+    [
+        (0.90, "verde", "#10B981", "ALTA", "Clasificación de alta confianza", "✅", False),
+        (0.70, "amarillo", "#F59E0B", "MEDIA", "Confianza media. Verificar si es correcto.", "⚠️", True),
+        (0.69, "rojo", "#EF4444", "BAJA", "Baja confianza. Requiere revisión manual.", "❌", True),
+    ],
+)
+def test_semaforo_confidence_thresholds(
+    confidence, color, hex_color, level, message, icon, revision
+):
+    result = classifier.obtener_semaforo(confidence)
+    assert result["color"] == color
+    assert result["hex"] == hex_color
+    assert result["nivel"] == level
+    assert result["mensaje"] == message
+    assert result["icono"] == icon
+    assert result["requiere_revision"] is revision
 
 
 def test_nlp_failure_returns_manual_review_result(monkeypatch):

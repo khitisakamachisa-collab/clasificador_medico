@@ -90,6 +90,89 @@ REGLAS_CLASIFICACION = {
     for keyword in dict.fromkeys(CATEGORY_KEYWORDS[category] + REGLAS_ADICIONALES[category])
 }
 
+# Reglas específicas con términos terminales confirmados en el catálogo EMDN.
+REGLAS_CLASIFICACION.update(
+    {
+        "mesa de cirugias": {
+            "categoria": "CIR-01",
+            "emdn_code": "Z12011202",
+            "emdn_prefix": EMDN_PREFIXES["CIR-01"],
+            "mdr_class": "IIa",
+            "confidence": 0.96,
+        },
+        "mesa de cirugia": {
+            "categoria": "CIR-01",
+            "emdn_code": "Z12011202",
+            "emdn_prefix": EMDN_PREFIXES["CIR-01"],
+            "mdr_class": "IIa",
+            "confidence": 0.96,
+        },
+        "bisturi quirurgico reutilizable": {
+            "categoria": "CIR-01",
+            "emdn_code": "L010101",
+            "emdn_prefix": "L0101",
+            "mdr_class": "I",
+            "confidence": 0.96,
+        },
+        "bisturi": {
+            "categoria": "CIR-01",
+            "emdn_code": "L010101",
+            "emdn_prefix": "L0101",
+            "mdr_class": "I",
+            "confidence": 0.96,
+        },
+        "cama uci": {
+            "categoria": "MOB-01",
+            "emdn_code": "V08060102",
+            "emdn_prefix": EMDN_PREFIXES["MOB-01"],
+            "mdr_class": "I",
+            "confidence": 0.96,
+        },
+        "cama electrica uci": {
+            "categoria": "MOB-01",
+            "emdn_code": "V08060102",
+            "emdn_prefix": EMDN_PREFIXES["MOB-01"],
+            "mdr_class": "I",
+            "confidence": 0.96,
+        },
+        "cama de cuidados intensivos": {
+            "categoria": "MOB-01",
+            "emdn_code": "V08060102",
+            "emdn_prefix": EMDN_PREFIXES["MOB-01"],
+            "mdr_class": "I",
+            "confidence": 0.96,
+        },
+        "cama para uci": {
+            "categoria": "MOB-01",
+            "emdn_code": "V08060102",
+            "emdn_prefix": EMDN_PREFIXES["MOB-01"],
+            "mdr_class": "I",
+            "confidence": 0.96,
+        },
+        "cama hospitalaria": {
+            "categoria": "MOB-01",
+            "emdn_code": "V08060101",
+            "emdn_prefix": EMDN_PREFIXES["MOB-01"],
+            "mdr_class": "I",
+            "confidence": 0.96,
+        },
+        "cama": {
+            "categoria": "MOB-01",
+            "emdn_code": "V08060101",
+            "emdn_prefix": EMDN_PREFIXES["MOB-01"],
+            "mdr_class": "I",
+            "confidence": 0.90,
+        },
+        "monitor de signos vitales": {
+            "categoria": "MON-01",
+            "emdn_code": "Z1203020201",
+            "emdn_prefix": EMDN_PREFIXES["MON-01"],
+            "mdr_class": "IIa",
+            "confidence": 0.96,
+        },
+    }
+)
+
 
 def agregar_regla(
     keyword: str,

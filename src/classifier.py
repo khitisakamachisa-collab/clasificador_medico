@@ -11,6 +11,7 @@ import joblib
 
 from .config import Config
 from .criticality import ajustar_por_mdr, calcular_criticidad, obtener_valores_por_defecto
+from .correction_validation import validar_correccion_automaticamente
 from .emdn_importer import buscar_emdn, load_emdn_database, validar_codigo_emdn
 from .code_generator import generar_codigo_interno
 from .trainer import preprocess_text, train_model
@@ -21,8 +22,8 @@ logger = logging.getLogger(__name__)
 
 @lru_cache(maxsize=1)
 def load_model_assets():
-    classifier_path = MODELS_DIR / "classifier_v1.pkl"
-    vectorizer_path = MODELS_DIR / "vectorizer_v1.pkl"
+    classifier_path = MODELS_DIR / f"classifier_{Config.MODEL_VERSION}.pkl"
+    vectorizer_path = MODELS_DIR / f"vectorizer_{Config.MODEL_VERSION}.pkl"
     if not classifier_path.exists() or not vectorizer_path.exists():
         train_model()
     clf = joblib.load(classifier_path)
@@ -61,6 +62,52 @@ def _category_from_rules(name: str) -> tuple[str, str, float] | None:
         return None
     _, category, keyword, confidence = max(matches)
     return category, keyword, confidence
+
+
+def _rule_keyword_for_category(name: str, category: str) -> str | None:
+    normalized_name = f" {_normalize_text(name)} "
+    matching_keywords = [
+        keyword
+        for keyword, rule in REGLAS_CLASIFICACION.items()
+        if rule["categoria"] == category
+        and (normalized_keyword := _normalize_text(keyword))
+        and f" {normalized_keyword} " in normalized_name
+    ]
+    return max(
+        matching_keywords,
+        key=lambda keyword: len(_normalize_text(keyword)),
+        default=None,
+    )
+
+
+def obtener_semaforo(confidence: float) -> dict:
+    """Traduce la confianza del clasificador a un nivel visual de revisión."""
+    if confidence >= 0.90:
+        return {
+            "color": "verde",
+            "hex": "#10B981",
+            "nivel": "ALTA",
+            "mensaje": "Clasificación de alta confianza",
+            "icono": "✅",
+            "requiere_revision": False,
+        }
+    if confidence >= 0.70:
+        return {
+            "color": "amarillo",
+            "hex": "#F59E0B",
+            "nivel": "MEDIA",
+            "mensaje": "Confianza media. Verificar si es correcto.",
+            "icono": "⚠️",
+            "requiere_revision": True,
+        }
+    return {
+        "color": "rojo",
+        "hex": "#EF4444",
+        "nivel": "BAJA",
+        "mensaje": "Baja confianza. Requiere revisión manual.",
+        "icono": "❌",
+        "requiere_revision": True,
+    }
 
 
 def _emdn_prefix(category: str, nombre: str, ubicacion: str | None) -> tuple[str, list[str]]:
@@ -268,39 +315,52 @@ def buscar_emdn_por_categoria(
     return [preferred] + [candidate for candidate in candidates if candidate != preferred]
 
 
-def classify_equipment(nombre: str, marca: str | None = None, ubicacion: str | None = None):
+def classify_equipment(
+    nombre: str,
+    marca: str | None = None,
+    ubicacion: str | None = None,
+    categoria_forzada: str | None = None,
+):
     """Clasifica un equipo nuevo a partir de nombre, marca y ubicación."""
-    rule_match = _category_from_rules(nombre or "")
-    if rule_match:
-        category_key, matched_keyword, confidence = rule_match
-        method = "REGLAS"
+    if categoria_forzada is not None:
+        if categoria_forzada not in CATEGORÍAS:
+            raise ValueError(f"Categoría desconocida: {categoria_forzada}")
+        category_key = categoria_forzada
+        matched_keyword = _rule_keyword_for_category(nombre or "", category_key)
+        method = "CORRECCION_MANUAL"
+        confidence = 0.0
     else:
-        try:
-            text = preprocess_text(f"{nombre or ''} {marca or ''} {ubicacion or ''}")
-            if not text.strip():
-                raise ValueError("No hay texto útil para clasificar.")
-            clf, vectorizer = load_model_assets()
-            X = vectorizer.transform([text])
-            category_key = clf.predict(X)[0]
-            proba = clf.predict_proba(X)[0]
-            confidence = float(max(proba)) if len(proba) > 0 else 0.0
-            matched_keyword = None
-            method = "NLP"
-        except (
-            EOFError,
-            ImportError,
-            OSError,
-            pickle.PickleError,
-            RuntimeError,
-            TypeError,
-            ValueError,
-        ) as exc:
-            logger.exception("No se pudo usar el clasificador NLP; se requiere revisión manual.")
-            category_key = "OTR-01"
-            confidence = 0.0
-            matched_keyword = None
-            method = "MANUAL"
-            nlp_error = str(exc)
+        rule_match = _category_from_rules(nombre or "")
+        if rule_match:
+            category_key, matched_keyword, confidence = rule_match
+            method = "REGLAS"
+        else:
+            try:
+                text = preprocess_text(f"{nombre or ''} {marca or ''} {ubicacion or ''}")
+                if not text.strip():
+                    raise ValueError("No hay texto útil para clasificar.")
+                clf, vectorizer = load_model_assets()
+                X = vectorizer.transform([text])
+                category_key = clf.predict(X)[0]
+                proba = clf.predict_proba(X)[0]
+                confidence = float(max(proba)) if len(proba) > 0 else 0.0
+                matched_keyword = None
+                method = "NLP"
+            except (
+                EOFError,
+                ImportError,
+                OSError,
+                pickle.PickleError,
+                RuntimeError,
+                TypeError,
+                ValueError,
+            ) as exc:
+                logger.exception("No se pudo usar el clasificador NLP; se requiere revisión manual.")
+                category_key = "OTR-01"
+                confidence = 0.0
+                matched_keyword = None
+                method = "MANUAL"
+                nlp_error = str(exc)
 
     category_data = CATEGORÍAS.get(category_key, CATEGORÍAS["OTR-01"])
     category_name = category_data["nombre"]
@@ -338,11 +398,9 @@ def classify_equipment(nombre: str, marca: str | None = None, ubicacion: str | N
         for code, score, term in valid_candidates
     ]
 
-    mdr_class = (
-        matched_rule.get("mdr_class", category_data["mdr_default"])
-        if matched_rule
-        else category_data["mdr_default"]
-    )
+    mdr_class = category_data["mdr_default"]
+    if method != "CORRECCION_MANUAL" and matched_rule:
+        mdr_class = matched_rule.get("mdr_class", mdr_class)
     defaults = obtener_valores_por_defecto(category_key)
     adjusted = ajustar_por_mdr(defaults, mdr_class)
     criticidad = calcular_criticidad(
@@ -364,6 +422,7 @@ def classify_equipment(nombre: str, marca: str | None = None, ubicacion: str | N
         "emdn_candidates": emdn_candidates,
         "mdr_class": mdr_class,
         "confidence": round(confidence, 4),
+        "semaforo": obtener_semaforo(confidence),
         "metodo": method,
         "codigo_interno": generar_codigo_interno(category_key),
         "criticidad": {
@@ -377,7 +436,13 @@ def classify_equipment(nombre: str, marca: str | None = None, ubicacion: str | N
         },
     }
 
-    if method == "MANUAL":
+    if method == "CORRECCION_MANUAL":
+        validation = validar_correccion_automaticamente(result, nombre_equipo=nombre)
+        result["validacion_correccion"] = validation
+        result["confidence"] = validation["confidence"]
+        result["semaforo"] = obtener_semaforo(validation["confidence"])
+        result["semaforo"]["mensaje"] = validation["mensaje"]
+    elif method == "MANUAL":
         result["advertencia"] = (
             "No fue posible usar el modelo NLP; se requiere revisión manual. "
             f"Detalle: {nlp_error}"

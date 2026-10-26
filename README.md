@@ -29,7 +29,7 @@ La opción `Bypass` se aplica únicamente a ese proceso de PowerShell, no cambia
 
 También se puede activar el entorno con `.\.venv\Scripts\Activate.ps1` y usar `python -m ...`. En Linux/macOS, activar con `source .venv/bin/activate`.
 
-La configuración opcional está documentada en [.env.example](./.env.example). Copia ese archivo a `.env` y ajusta las variables antes de iniciar la aplicación. No incluyas secretos en el archivo de ejemplo.
+La configuración está documentada en [.env.example](./.env.example). Copia ese archivo a `.env` antes de iniciar la aplicación. Para habilitar el panel administrativo, configura `ADMIN_API_KEY` con una clave aleatoria fuerte en `.env`; sin ella, las rutas de administración quedan deshabilitadas. No compartas ni publiques `.env`.
 
 Comprueba que el Excel esté en esta ruta:
 
@@ -115,6 +115,18 @@ Ejemplo real de respuesta. El valor de `codigo_interno` variará según la secue
 
 Los candidatos EMDN contienen hasta tres sugerencias de la familia filtrada. La respuesta real puede incluir más campos dentro de `criticidad` y candidatos según el equipo. Si falta el Excel o no hay coincidencia terminal válida, `emdn_code` vale `PENDIENTE_DE_VALIDACION` y `emdn_verified` es `false`.
 
+### Interfaz web interactiva
+
+La interfaz está en [index.html](./index.html) y se comunica con `http://localhost:8000/api/v1/clasificar`. Con la API iniciada en una terminal, sirve el proyecto desde otra terminal en la raíz para usar el origen CORS predeterminado (`http://localhost:3000`):
+
+```powershell
+.\.venv\Scripts\python.exe -m http.server 3000
+```
+
+Abre `http://localhost:3000/` en el navegador. Puedes activar **Modo Demo** en el formulario para mostrar datos simulados sin llamar a la API; si no logra conectarse, la interfaz también activa ese modo y lo indica claramente. Chart.js se carga desde CDN, por lo que el gráfico requiere conexión a Internet.
+
+El panel de administración usa la clave `ADMIN_API_KEY` por solicitud y no la guarda en el navegador. Inicia sesión en **Herramientas de administración** para revisar las correcciones pendientes y habilitar el reentrenamiento. Solo las correcciones aprobadas explícitamente se consideran para entrenar; se requieren al menos diez.
+
 ### Python
 
 ```python
@@ -161,7 +173,10 @@ El pipeline importa el Excel, valida el dataset de ejemplo, entrena el modelo NL
 
 | Método | Ruta | Uso |
 | --- | --- | --- |
-| `POST` | `/api/v1/clasificar` | Clasifica nombre, marca y ubicación. |
+| `POST` | `/api/v1/clasificar` | Clasifica nombre, marca y ubicación; devuelve semáforo y acepta `cmms_equipment_id`. |
+| `POST` | `/api/v1/recalcular` | Recalcula clasificación, EMDN, MDR y criticidad con `categoria_forzada`. |
+| `POST` | `/api/v1/registrar-correccion` | Persiste auditoría y ejemplo `USER_CORRECTION` en SQLite. |
+| `GET` | `/api/v1/correcciones/{correction_id}` | Consulta una corrección registrada para polling desde un CMMS. |
 | `POST` | `/api/v1/batch-clasificar` | Clasifica un lote de hasta 100 equipos por defecto. |
 | `POST` | `/api/v1/validar-emdn` | Comprueba si un `emdn_code` existe en el índice terminal. |
 | `POST` | `/api/v1/validar` | Alias histórico de `/validar-emdn`. |
@@ -171,7 +186,11 @@ El pipeline importa el Excel, valida el dataset de ejemplo, entrena el modelo NL
 | `POST` | `/api/v1/reentrenar` | Añade ejemplos y crea una nueva versión del modelo. |
 | `GET` | `/api/v1/health` | Comprueba el estado de la API. |
 
+La confianza incluye un semáforo: verde (≥ 0.90), amarillo (≥ 0.70) y rojo (< 0.70). Las correcciones quedan almacenadas en `data/corrections.db`; `/api/v1/reentrenar` las incorpora al conjunto de ejemplos para producir una nueva versión local del modelo. Valida la nueva versión y configura `MODEL_VERSION` con su identificador antes de reiniciar la API para activarla.
+
 La API devuelve `400` para solicitudes no válidas, `429` cuando se supera el límite configurado y `503` si las métricas aún no existen. CORS y el límite de solicitudes se configuran con las variables de [.env.example](./.env.example); el limitador incluido es local a cada proceso.
+
+La preparación de integración con un CMMS, incluida la consulta de correcciones por identificador, está en [docs/CMMS_INTEGRATION.md](./docs/CMMS_INTEGRATION.md).
 
 Ejemplo para validar un código:
 

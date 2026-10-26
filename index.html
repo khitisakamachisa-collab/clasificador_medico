@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb">
+  <meta name="description" content="Interfaz de demostración para clasificar equipos médicos y consultar su criticidad.">
+  <title>Clasificador médico | Equipos y criticidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #2563eb;
+      --blue-dark: #1746ad;
+      --blue-soft: #eaf1ff;
+      --ink: #17233b;
+      --muted: #718096;
+      --line: #e7ecf3;
+      --surface: #fff;
+      --canvas: #f4f7fb;
+      --green: #16845b;
+      --amber: #a96305;
+      --shadow: 0 14px 40px rgba(30, 55, 90, .07);
+      font-family: "DM Sans", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--canvas); color: var(--ink); }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .page-shell { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+    .topbar {
+      height: 76px;
+      background: rgba(255, 255, 255, .92);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      display: grid; width: 40px; height: 40px; place-items: center;
+      color: white; background: var(--blue); border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(37, 99, 235, .23);
+    }
+    .brand-name { font: 800 15px "Manrope", sans-serif; letter-spacing: -.35px; }
+    .brand-caption { margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .topbar-meta { display: flex; align-items: center; gap: 9px; color: #59677b; font-size: 12px; }
+    .api-indicator { width: 8px; height: 8px; border-radius: 50%; background: #b7c0ce; }
+    .api-indicator.online { background: #16a36a; box-shadow: 0 0 0 3px #e1f5eb; }
+    .api-indicator.demo { background: #e59a27; box-shadow: 0 0 0 3px #fff1d9; }
+
+    main { padding: 44px 0 64px; }
+    .hero { margin-bottom: 28px; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 8px; margin: 0 0 11px;
+      color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: 1.25px; text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 9px; font: 800 clamp(26px, 4vw, 34px)/1.2 "Manrope", sans-serif; letter-spacing: -1.1px; }
+    .hero-copy { max-width: 630px; margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: start; }
+    .main-column, .side-column { display: grid; gap: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid #e9edf4; border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+    .form-card { padding: 25px 27px 27px; }
+    .section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+    .section-heading h2 { margin: 0 0 5px; font: 700 17px "Manrope", sans-serif; letter-spacing: -.3px; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .step-label { color: #94a0b2; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: grid; gap: 7px; }
+    .field-name { color: #344158; font-size: 12px; font-weight: 600; }
+    .required { color: #e25353; }
+    .input-wrap { position: relative; }
+    .input-icon { position: absolute; top: 13px; left: 13px; color: #96a2b3; pointer-events: none; }
+    .field input {
+      width: 100%; height: 44px; padding: 0 12px 0 39px; color: var(--ink);
+      background: #fff; border: 1px solid #dfe5ee; border-radius: 9px; outline: none;
+      font-size: 13px; transition: border-color .15s, box-shadow .15s;
+    }
+    .field select {
+      width: 100%; height: 44px; padding: 0 12px 0 39px; color: var(--ink);
+      background: #fff; border: 1px solid #dfe5ee; border-radius: 9px; outline: none;
+      font-size: 13px;
+    }
+    .field select:focus, .field input:focus { border-color: #6c95f2; box-shadow: 0 0 0 3px rgba(37, 99, 235, .1); }
+    .field [hidden] { display: none; }
+    .field input::placeholder { color: #a7b0be; }
+    .field input:focus { border-color: #6c95f2; box-shadow: 0 0 0 3px rgba(37, 99, 235, .1); }
+    .field-name-row { display: flex; justify-content: space-between; gap: 12px; }
+    .optional { color: #a1aaba; font-size: 10px; font-weight: 500; }
+    .actions-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; }
+    .privacy-note { display: flex; align-items: center; gap: 7px; margin: 0; color: #8995a7; font-size: 11px; }
+    .primary-button {
+      min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 0 18px; color: white; background: var(--blue); border: 0; border-radius: 9px;
+      box-shadow: 0 5px 12px rgba(37, 99, 235, .18); cursor: pointer; font-size: 12px; font-weight: 700;
+      transition: background .15s, transform .15s, box-shadow .15s;
+    }
+    .primary-button:hover { background: var(--blue-dark); box-shadow: 0 7px 16px rgba(37, 99, 235, .24); transform: translateY(-1px); }
+    .primary-button:disabled { opacity: .7; cursor: wait; transform: none; }
+    .spinner { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,.45); border-top-color: white; border-radius: 50%; animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .demo-control {
+      display: flex; align-items: center; gap: 8px; margin-top: 18px; padding-top: 15px;
+      border-top: 1px solid #f0f2f6; color: #69768a; font-size: 11px;
+    }
+    .demo-control input { width: 14px; height: 14px; margin: 0; accent-color: var(--blue); }
+    .demo-control label { cursor: pointer; }
+    .demo-hint { margin-left: auto; color: #a1aaba; font-size: 10px; }
+
+    .notice { display: flex; gap: 10px; padding: 12px 14px; border-radius: 10px; font-size: 12px; line-height: 1.5; }
+    .notice[hidden] { display: none; }
+    .notice-warning { color: #85510c; background: #fff7e6; border: 1px solid #f5dfb2; }
+    .notice-error { color: #a23737; background: #fff0f0; border: 1px solid #f2d1d1; }
+    .notice-demo { color: #805418; background: #fff8e9; border: 1px solid #f1dfb9; }
+    .notice-success { color: #176d4d; background: #eaf7ef; border: 1px solid #cbead8; }
+
+    .result-card { padding: 24px 26px; }
+    .result-card[hidden], .results-grid[hidden] { display: none; }
+    .result-topline { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; }
+    .result-title { margin: 0 0 5px; font: 700 17px "Manrope", sans-serif; }
+    .result-subtitle { margin: 0; color: var(--muted); font-size: 12px; }
+    .source-badge, .category-badge, .mdr-badge, .level-badge {
+      display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-size: 10px; font-weight: 700;
+    }
+    .source-badge { padding: 6px 9px; color: #2563a9; background: #edf5ff; letter-spacing: .35px; }
+    .source-badge.demo-source { color: #8a5b0b; background: #fff3d9; }
+    .result-details { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 20px; }
+    .detail-box { min-height: 74px; padding: 13px 14px; background: #f8fafd; border: 1px solid #eef1f6; border-radius: 10px; }
+    .detail-label { display: block; margin-bottom: 8px; color: #8a96a8; font-size: 10px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase; }
+    .detail-value { color: #25334a; font-size: 13px; font-weight: 700; }
+    .category-badge { padding: 6px 9px; color: #2458bf; background: #eaf1ff; }
+    .mdr-badge { min-width: 40px; padding: 6px 9px; }
+    .mdr-I { color: #18784f; background: #e6f6ee; }
+    .mdr-IIa { color: #8c6700; background: #fff5d5; }
+    .mdr-IIb { color: #b45d14; background: #fff0df; }
+    .mdr-III { color: #b63838; background: #ffebeb; }
+    .emdn-line { display: flex; align-items: center; gap: 8px; }
+    .emdn-link { color: var(--blue); text-decoration: none; }
+    .emdn-link:hover { text-decoration: underline; }
+    .verified { color: var(--green); font-size: 10px; font-weight: 600; }
+    .unverified { color: #9b6a1b; font-size: 10px; font-weight: 600; }
+    .term-text { font-size: 11px; font-weight: 500; line-height: 1.45; }
+    .confidence-row { display: flex; align-items: center; gap: 9px; }
+    .confidence-track { width: 100%; height: 20px; flex: 1; overflow: hidden; background: #e7edf6; border-radius: 10px; }
+    .confidence-bar { width: 0%; height: 100%; border-radius: 10px; transition: width .3s ease, background-color .3s ease; }
+    .confidence-bar.high { background-color: #10B981; }
+    .confidence-bar.medium { background-color: #F59E0B; }
+    .confidence-bar.low { background-color: #EF4444; }
+    .confidence-value { min-width: 44px; color: #344158; font-size: 2em; font-weight: 700; text-align: right; }
+    .confidence-text { display: block; margin-top: 6px; font-size: 10px; font-weight: 600; }
+    .confidence-text.high { color: #10B981; }
+    .confidence-text.medium { color: #F59E0B; }
+    .confidence-text.low { color: #EF4444; }
+    .confidence-context { margin-top: 11px; color: #17774f; font-size: 11px; font-weight: 600; }
+    .confidence-context.semaforo-amarillo { color: #946500; }
+    .confidence-context.semaforo-rojo { color: #ad3737; }
+    .validation-checks { display: grid; gap: 7px; margin: 12px 0 0; padding: 12px; list-style: none; background: #f8fafd; border: 1px solid #eef1f6; border-radius: 9px; }
+    .validation-checks[hidden] { display: none; }
+    .validation-checks li { display: flex; align-items: flex-start; gap: 7px; color: #526075; font-size: 11px; line-height: 1.45; }
+    .validation-checks .check-icon { flex: 0 0 auto; font-size: 13px; }
+    .correction-button {
+      display: inline-flex; align-items: center; gap: 7px; margin-top: 13px; padding: 9px 12px;
+      color: #41546f; background: #f5f8fc; border: 1px solid #e1e8f1; border-radius: 8px;
+      cursor: pointer; font-size: 11px; font-weight: 700;
+    }
+    .correction-button[hidden] { display: none; }
+    .correction-button:hover { color: var(--blue); border-color: #aec4f8; background: #f0f5ff; }
+    .correction-dialog {
+      width: min(480px, calc(100% - 30px)); padding: 0; color: var(--ink);
+      border: 1px solid #e5eaf2; border-radius: 16px; box-shadow: 0 24px 80px rgba(20, 35, 60, .22);
+    }
+    .correction-dialog::backdrop { background: rgba(20, 32, 52, .48); backdrop-filter: blur(3px); }
+    .dialog-content { padding: 25px; }
+    .dialog-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+    .dialog-heading h2 { margin: 0 0 5px; font: 700 18px "Manrope", sans-serif; }
+    .dialog-heading p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .dialog-close { width: 32px; height: 32px; color: #6e7b8f; background: #f4f6fa; border: 0; border-radius: 8px; cursor: pointer; font-size: 18px; }
+    .dialog-field { display: grid; gap: 8px; margin-bottom: 16px; }
+    .dialog-field label { color: #344158; font-size: 12px; font-weight: 600; }
+    .dialog-field select, .dialog-field input { width: 100%; min-height: 44px; padding: 0 12px; color: var(--ink); background: white; border: 1px solid #dfe5ee; border-radius: 9px; }
+    .save-correction { display: flex; align-items: flex-start; gap: 9px; padding: 12px; color: #59677b; background: #f7f9fc; border-radius: 9px; font-size: 11px; line-height: 1.5; }
+    .save-correction input { flex-shrink: 0; margin: 2px 0 0; accent-color: var(--blue); }
+    .dialog-error { margin: 0 0 13px; color: #a23737; font-size: 11px; line-height: 1.5; }
+    .dialog-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 20px; }
+    .secondary-button { min-height: 40px; padding: 0 15px; color: #526075; background: white; border: 1px solid #dfe5ee; border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: 700; }
+    .dialog-actions .primary-button { min-height: 40px; }
+    .admin-card { padding: 20px; }
+    .admin-card h2 { margin: 0 0 6px; font: 700 14px "Manrope", sans-serif; }
+    .admin-card p { margin: 0 0 14px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .admin-button { width: 100%; }
+    .admin-status { margin: 12px 0 0 !important; padding: 10px; border-radius: 8px; color: #176d4d !important; background: #eaf7ef; overflow-wrap: anywhere; }
+    .admin-status.error { color: #a23737 !important; background: #fff0f0; }
+    .admin-status[hidden] { display: none; }
+    .admin-spinner { display: inline-flex; align-items: center; gap: 9px; margin-top: 12px; color: #59677b; font-size: 11px; }
+    .admin-spinner[hidden] { display: none; }
+    .spinner-dark { width: 15px; height: 15px; border: 2px solid #d5e0f5; border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
+    .admin-dialog-copy { color: #59677b; font-size: 12px; line-height: 1.6; }
+    .admin-dialog-copy p { margin-bottom: 9px; }
+    .admin-login { display: grid; gap: 9px; margin: 12px 0; }
+    .admin-login input { min-width: 0; height: 39px; padding: 0 10px; border: 1px solid #dfe5ee; border-radius: 8px; font-size: 11px; }
+    .admin-panel { margin-top: 14px; }
+    .admin-panel[hidden] { display: none; }
+    .admin-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 15px 0 8px; }
+    .admin-panel-heading strong { font: 700 12px "Manrope", sans-serif; }
+    .admin-counts { color: #718096; font-size: 10px; line-height: 1.5; }
+    .review-table-wrap { overflow-x: auto; }
+    .review-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    .review-table th, .review-table td { padding: 8px 6px; border-bottom: 1px solid #eef1f6; text-align: left; vertical-align: top; }
+    .review-table th { color: #718096; font-weight: 700; white-space: nowrap; }
+    .review-actions { display: flex; flex-wrap: wrap; gap: 5px; min-width: 200px; }
+    .review-action { min-height: 28px; padding: 0 7px; border: 1px solid #dfe5ee; border-radius: 6px; background: white; color: #344158; cursor: pointer; font-size: 9px; font-weight: 700; }
+    .review-action.approve { color: #176d4d; border-color: #cbead8; background: #eaf7ef; }
+    .review-action.reject { color: #a23737; border-color: #f2d1d1; background: #fff0f0; }
+    .review-history { margin: 10px 0; }
+    .results-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(240px, .9fr); gap: 20px; }
+    .chart-card, .criticality-card { padding: 22px 24px; }
+    .chart-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+    .chart-heading h3, .history-heading h2 { margin: 0; font: 700 14px "Manrope", sans-serif; }
+    .chart-caption { margin: 5px 0 0; color: #95a0b0; font-size: 10px; }
+    .chart-wrap { position: relative; height: 245px; margin-top: 12px; }
+    .criticality-card { display: flex; flex-direction: column; justify-content: space-between; }
+    .criticality-card h3 { margin: 0 0 4px; font: 700 14px "Manrope", sans-serif; }
+    .criticality-card .chart-caption { margin: 0; }
+    .criticality-score {
+      display: flex; align-items: baseline; gap: 7px; margin: 22px 0 6px;
+      font: 800 40px "Manrope", sans-serif; letter-spacing: -1.7px;
+    }
+    .criticality-score small { color: #9aa5b5; font: 600 13px "DM Sans", sans-serif; letter-spacing: 0; }
+    .level-badge { padding: 7px 11px; }
+    .level-BAJA { color: #17774f; background: #e7f6ed; }
+    .level-MEDIA { color: #946500; background: #fff3d2; }
+    .level-ALTA { color: #ad3737; background: #ffebeb; }
+    .criticality-divider { height: 1px; margin: 18px 0 13px; background: var(--line); }
+    .criticality-footnote { margin: 0; color: #8a96a8; font-size: 10px; line-height: 1.6; }
+    .history-card { padding: 21px 21px 13px; }
+    .history-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px; }
+    .history-heading-main { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; }
+    .history-count { display: inline-grid; width: 23px; height: 23px; place-items: center; color: var(--blue); background: var(--blue-soft); border-radius: 7px; font-size: 10px; font-weight: 700; }
+    .export-button { min-height: 34px; padding: 0 10px; color: #2458bf; background: #f3f6fc; border: 1px solid #e5ebf6; border-radius: 8px; cursor: pointer; font-size: 10px; font-weight: 700; }
+    .export-button:hover { color: #1746ad; background: #eaf1ff; }
+    .export-button:focus-visible { outline: 3px solid rgba(37, 99, 235, .25); outline-offset: 2px; }
+    .history-empty { padding: 22px 8px 26px; color: #97a2b2; font-size: 11px; line-height: 1.6; text-align: center; }
+    .history-list { margin: 0; padding: 0; list-style: none; }
+    .history-item { border-top: 1px solid #f0f2f6; }
+    .history-button {
+      display: flex; width: 100%; align-items: flex-start; justify-content: space-between; gap: 10px;
+      padding: 13px 1px; color: inherit; background: transparent; border: 0; cursor: pointer; text-align: left;
+    }
+    .history-button:hover .history-name { color: var(--blue); }
+    .history-name { display: block; max-width: 185px; overflow: hidden; color: #37445a; font-size: 11px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+    .history-code { display: block; margin-top: 4px; color: #9aa5b5; font-size: 9px; }
+    .history-category { flex-shrink: 0; padding: 4px 6px; color: #526b9f; background: #f0f4fb; border-radius: 5px; font-size: 9px; font-weight: 600; }
+    .history-footnote { margin: 10px 0 0; color: #a0aaba; font-size: 10px; }
+    footer { padding: 18px 0 26px; color: #9aa4b3; font-size: 10px; text-align: center; }
+
+    @media (max-width: 900px) {
+      .workspace { grid-template-columns: minmax(0, 1fr) 275px; gap: 16px; }
+      .results-grid { grid-template-columns: 1fr; }
+      .criticality-card { min-height: 205px; }
+    }
+    @media (max-width: 700px) {
+      .page-shell { width: min(100% - 30px, 560px); }
+      .topbar { height: 66px; }
+      .topbar-meta { font-size: 0; }
+      main { padding-top: 32px; }
+      .workspace { grid-template-columns: 1fr; }
+      .side-column { order: 2; }
+      .form-card, .result-card { padding: 21px 19px; }
+      .history-card { padding: 19px; }
+      .history-name { max-width: 75vw; }
+    }
+    @media (max-width: 480px) {
+      .form-grid, .result-details { grid-template-columns: 1fr; }
+      .actions-row { align-items: stretch; flex-direction: column; }
+      .primary-button { width: 100%; }
+      .demo-hint { display: none; }
+      .step-label { font-size: 9px; }
+      .chart-card, .criticality-card { padding: 19px; }
+      .chart-wrap { height: 220px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page-shell topbar-inner">
+      <a class="brand" href="#" aria-label="Clasificador médico, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" opacity=".65"/>
+          </svg>
+        </span>
+        <span><span class="brand-name">Clasificador médico</span><span class="brand-caption">Gestión inteligente de activos clínicos</span></span>
+      </a>
+      <div class="topbar-meta" aria-live="polite">
+        <span id="apiIndicator" class="api-indicator" aria-hidden="true"></span>
+        <span id="apiStatus">API lista para conectar</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="pageTitle">
+      <p class="eyebrow">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Plataforma de clasificación
+      </p>
+      <h1 id="pageTitle">Conoce mejor tus equipos médicos</h1>
+      <p class="hero-copy">Obtén una categoría, una referencia EMDN y una evaluación de criticidad en segundos. Ingresa los datos del equipo para comenzar.</p>
+    </section>
+
+    <div class="workspace">
+      <div class="main-column">
+        <section class="card form-card" aria-labelledby="formTitle">
+          <div class="section-heading">
+            <div><h2 id="formTitle">Datos del equipo</h2><p>Completa la información para generar la clasificación.</p></div>
+            <span class="step-label">PASO 01 / 01</span>
+          </div>
+          <form id="classificationForm">
+            <div class="form-grid">
+              <label class="field" for="equipmentName" style="grid-column: 1 / -1">
+                <span class="field-name">Nombre del equipo <span class="required" aria-hidden="true">*</span></span>
+                <span class="input-wrap">
+                  <svg class="input-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5h14v14H5zM9 9h6m-6 3h6m-6 3h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <input id="equipmentName" name="nombre" type="text" maxlength="500" placeholder="Ej. Ecógrafo portátil" autocomplete="off" required>
+                </span>
+              </label>
+              <label class="field" for="brand">
+                <span class="field-name-row"><span class="field-name">Marca</span><span class="optional">OPCIONAL</span></span>
+                <span class="input-wrap">
+                  <svg class="input-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7h14l-1.4 13H6.4L5 7Zm4 0a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <input id="brand" name="marca" type="text" maxlength="200" placeholder="Ej. Samsung" autocomplete="organization">
+                </span>
+              </label>
+              <label class="field" for="location">
+                <span class="field-name-row"><span class="field-name">Ubicación</span><span class="optional">OPCIONAL</span></span>
+                <span class="input-wrap">
+                  <svg class="input-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+                  <select id="location" name="ubicacion">
+                    <option value="">Seleccionar ubicación…</option>
+                    <option value="UCI">UCI</option>
+                    <option value="Quirófano General">Quirófano General</option>
+                    <option value="Emergencia">Emergencia</option>
+                    <option value="Imagenología">Imagenología</option>
+                    <option value="Cardiología">Cardiología</option>
+                    <option value="Neonatología">Neonatología</option>
+                    <option value="Nefrología">Nefrología</option>
+                    <option value="Fisioterapia">Fisioterapia</option>
+                    <option value="Central de Esterilización">Central de Esterilización</option>
+                    <option value="Endoscopía">Endoscopía</option>
+                    <option value="Laboratorio">Laboratorio</option>
+                    <option value="Farmacia">Farmacia</option>
+                    <option value="Consulta Externa">Consulta Externa</option>
+                    <option value="Hospitalización">Hospitalización</option>
+                    <option value="Otro">Otro (especificar)</option>
+                  </select>
+                </span>
+                <span id="otherLocationWrap" class="input-wrap" hidden>
+                  <input id="otherLocation" type="text" maxlength="200" placeholder="Especificar ubicación…" autocomplete="off">
+                </span>
+              </label>
+              <label class="field" for="cmmsEquipmentId">
+                <span class="field-name-row"><span class="field-name">ID de equipo CMMS</span><span class="optional">OPCIONAL</span></span>
+                <span class="input-wrap">
+                  <svg class="input-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4zM8 10h3m-3 4h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <input id="cmmsEquipmentId" name="cmms_equipment_id" type="text" maxlength="200" placeholder="Ej. ACT-1042" autocomplete="off">
+                </span>
+              </label>
+            </div>
+            <div class="actions-row">
+              <p class="privacy-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Los datos se procesan en tu instancia local.
+              </p>
+              <button id="submitButton" class="primary-button" type="submit">
+                <span id="buttonIcon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span id="buttonText">Clasificar equipo</span>
+              </button>
+            </div>
+          </form>
+          <div class="demo-control">
+            <input id="demoMode" type="checkbox">
+            <label for="demoMode">Usar Modo Demo con datos simulados</label>
+            <span class="demo-hint">No requiere conexión con la API</span>
+          </div>
+        </section>
+
+        <div id="messageArea" class="notice" role="status" aria-live="polite" hidden></div>
+
+        <section id="resultCard" class="card result-card" aria-labelledby="resultTitle" hidden>
+          <div class="result-topline">
+            <div><h2 id="resultTitle" class="result-title">Resultado de clasificación</h2><p id="resultName" class="result-subtitle"></p></div>
+            <span id="methodBadge" class="source-badge"></span>
+          </div>
+          <div class="result-details">
+            <div class="detail-box"><span class="detail-label">Categoría propia</span><span id="categoryValue" class="category-badge"></span></div>
+            <div class="detail-box"><span class="detail-label">Clase MDR</span><span id="mdrValue" class="mdr-badge"></span></div>
+            <div class="detail-box">
+              <span class="detail-label">Código EMDN</span>
+              <div class="emdn-line"><span id="emdnValue" class="detail-value"></span><span id="emdnVerified"></span></div>
+            </div>
+            <div class="detail-box">
+              <span class="detail-label">Nivel de confianza</span>
+              <div class="confidence-row"><span class="confidence-track"><span id="confidence-bar" class="confidence-bar"></span></span><span id="confidence-percentage" class="confidence-value"></span></div>
+              <span id="confidence-text" class="confidence-text" aria-live="polite"></span>
+            </div>
+            <div class="detail-box" style="grid-column: 1 / -1"><span class="detail-label">Término EMDN</span><span id="termValue" class="detail-value term-text"></span></div>
+          </div>
+          <p id="confidenceContext" class="confidence-context" role="status" aria-live="polite"></p>
+          <ul id="correctionValidationChecks" class="validation-checks" aria-label="Validaciones de coherencia" hidden></ul>
+          <button id="correctClassification" class="correction-button" type="button" hidden>
+            <span aria-hidden="true">🔧</span> Corregir clasificación
+          </button>
+        </section>
+
+        <section id="resultsGrid" class="results-grid" aria-label="Análisis de criticidad" hidden>
+          <article class="card chart-card">
+            <div class="chart-heading"><h3>Perfil de criticidad</h3><span class="step-label">ESCALA 1–5</span></div>
+            <p class="chart-caption">Distribución de factores que componen la evaluación del equipo.</p>
+            <div class="chart-wrap">
+              <canvas id="criticalityChart" role="img" aria-label="Gráfico de radar con los cinco factores de criticidad"></canvas>
+              <p id="chartFallback" class="history-empty" hidden>No se pudo cargar el gráfico. Comprueba tu conexión a Internet.</p>
+            </div>
+          </article>
+          <article class="card criticality-card">
+            <div><h3>Índice de criticidad</h3><p class="chart-caption">Puntuación ponderada del equipo</p></div>
+            <div><div class="criticality-score"><span id="criticalityScore">—</span><small>/ 5.00</small></div><span id="criticalityLevel" class="level-badge"></span></div>
+            <div><div class="criticality-divider"></div><p class="criticality-footnote">Estimación de apoyo para priorización. Valida los resultados con el personal biomédico responsable.</p></div>
+          </article>
+        </section>
+      </div>
+
+      <aside class="side-column" aria-labelledby="historyTitle">
+        <section class="card history-card">
+          <div class="history-heading">
+            <div class="history-heading-main"><h2 id="historyTitle">Actividad reciente</h2><span id="historyCount" class="history-count">0</span></div>
+            <button id="exportHistory" class="export-button" type="button">📥 Exportar historial</button>
+          </div>
+          <p id="historyEmpty" class="history-empty">Tus clasificaciones recientes aparecerán aquí para consultarlas rápidamente.</p>
+          <ol id="historyList" class="history-list"></ol>
+          <p class="history-footnote">Se conserva solo durante esta sesión.</p>
+        </section>
+        <section class="card admin-card" aria-labelledby="adminTitle">
+          <h2 id="adminTitle">Herramientas de administración</h2>
+          <p>Las correcciones requieren aprobación administrativa antes de incorporarse al entrenamiento.</p>
+          <div class="admin-login" aria-label="Acceso administrativo">
+            <input id="adminUser" type="text" maxlength="200" autocomplete="username" placeholder="Usuario administrador" aria-label="Usuario administrador">
+            <input id="adminKey" type="password" autocomplete="current-password" placeholder="Clave de administrador" aria-label="Clave de administrador">
+            <button id="adminLogin" class="secondary-button" type="button">Ingresar al panel</button>
+          </div>
+          <button id="refreshReview" class="secondary-button admin-button" type="button" disabled>Actualizar revisiones</button>
+          <button id="btn-reentrenar" class="primary-button admin-button" type="button" disabled>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5m-4.1-3A8 8 0 0 1 18.3 6L20 12M4 12l1.7 6A8 8 0 0 0 19.1 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Reentrenar modelo
+          </button>
+          <div id="retrainSpinner" class="admin-spinner" role="status" aria-live="polite" hidden><span class="spinner-dark" aria-hidden="true"></span><span>Validando correcciones y entrenando el modelo…</span></div>
+          <p id="retrainStatus" class="admin-status" role="status" aria-live="polite" hidden></p>
+          <div id="reviewPanel" class="admin-panel" hidden>
+            <p id="reviewSummary" class="admin-counts" aria-live="polite"></p>
+            <div class="admin-panel-heading"><strong>Correcciones pendientes</strong></div>
+            <div id="pendingReviews" class="review-table-wrap"></div>
+            <details class="review-history">
+              <summary>Historial de aprobadas y rechazadas</summary>
+              <div id="reviewedCorrections" class="review-table-wrap"></div>
+            </details>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <dialog id="correctionDialog" class="correction-dialog" aria-labelledby="correctionTitle">
+    <form id="correctionForm" class="dialog-content">
+      <div class="dialog-heading">
+        <div><h2 id="correctionTitle">Corregir clasificación</h2><p>Selecciona la categoría validada por el personal biomédico.</p></div>
+        <button id="closeCorrection" class="dialog-close" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <div class="dialog-field">
+        <label for="correctedCategory">Categoría correcta</label>
+        <select id="correctedCategory" name="categoria_forzada" required>
+          <option value="">Cargando categorías…</option>
+        </select>
+      </div>
+      <div class="dialog-field">
+        <label for="correctionUser">Nombre de quien corrige (opcional)</label>
+        <input id="correctionUser" type="text" maxlength="200" placeholder="Usuario biomédico">
+      </div>
+      <p id="correctionError" class="dialog-error" role="alert" hidden></p>
+      <div class="dialog-actions">
+        <button id="cancelCorrection" class="secondary-button" type="button">Cancelar</button>
+        <button id="recalculateButton" class="primary-button" type="submit">Recalcular</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="modal-reentrenar" class="correction-dialog" aria-labelledby="retrainTitle">
+    <div class="dialog-content">
+      <div class="dialog-heading">
+        <div><h2 id="retrainTitle">Confirmar reentrenamiento</h2></div>
+        <button id="closeRetrain" class="dialog-close" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <div class="admin-dialog-copy">
+        <p>¿Desea reentrenar el modelo con las correcciones guardadas?</p>
+        <p>Esto puede tardar varios minutos. Solo se incorporan correcciones validadas con confianza alta.</p>
+      </div>
+      <div class="dialog-actions">
+        <button id="btn-cancelar-reentrenar" class="secondary-button" type="button">Cancelar</button>
+        <button id="btn-confirmar-reentrenar" class="primary-button" type="button">Confirmar</button>
+      </div>
+    </div>
+  </dialog>
+  <footer class="page-shell">Herramienta de apoyo a la gestión de tecnología médica · Verifica toda recomendación antes de tomar decisiones clínicas.</footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // URL predeterminada de la API local; puede cambiarse desde la consola del navegador.
+      const API_URL = window.CLASSIFIER_API_URL || "http://localhost:8000/api/v1/clasificar";
+      const form = document.getElementById("classificationForm");
+      const submitButton = document.getElementById("submitButton");
+      const buttonText = document.getElementById("buttonText");
+      const buttonIcon = document.getElementById("buttonIcon");
+      const messageArea = document.getElementById("messageArea");
+      const demoToggle = document.getElementById("demoMode");
+      const apiStatus = document.getElementById("apiStatus");
+      const apiIndicator = document.getElementById("apiIndicator");
+      const byId = (id) => document.getElementById(id);
+      const correctionDialog = byId("correctionDialog");
+      const correctionForm = byId("correctionForm");
+      const correctionError = byId("correctionError");
+      const recalculateButton = byId("recalculateButton");
+      const locationSelect = byId("location");
+      const otherLocation = byId("otherLocation");
+      let adminCredentials = null;
+      const history = [];
+      let chart;
+      let isLoading = false;
+      let currentClassification;
+
+      const demoResult = {
+        categoria_propia: "IMG-03",
+        categoria_nombre: "Ultrasonido",
+        emdn_code: "Z11040103",
+        emdn_term: "PORTABLE ULTRASOUND SCANNERS",
+        emdn_verified: true,
+        mdr_class: "IIa",
+        confidence: 0.96,
+        metodo: "REGLAS",
+        criticidad: {
+          impacto_clinico: 3,
+          redundancia: 2,
+          frecuencia_uso: 5,
+          historial_fallas: 3,
+          costo_tiempo: 3,
+          indice: 3.25,
+          nivel: "MEDIA"
+        }
+      };
+
+      function setLoading(loading) {
+        isLoading = loading;
+        submitButton.disabled = loading;
+        submitButton.setAttribute("aria-busy", String(loading));
+        buttonText.textContent = loading ? "Clasificando..." : "Clasificar equipo";
+        buttonIcon.innerHTML = loading
+          ? '<span class="spinner"></span>'
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      }
+
+      function showMessage(text, type) {
+        messageArea.className = `notice notice-${type}`;
+        messageArea.replaceChildren(document.createTextNode(text));
+        messageArea.hidden = false;
+      }
+
+      function hideMessage() {
+        messageArea.hidden = true;
+        messageArea.textContent = "";
+        messageArea.className = "notice";
+      }
+
+      function setApiState(state, label) {
+        apiIndicator.className = `api-indicator${state ? ` ${state}` : ""}`;
+        apiStatus.textContent = label;
+      }
+
+      function getErrorMessage(payload, status) {
+        const detail = payload && typeof payload.detail === "string" ? payload.detail : "";
+        return detail || `La API respondió con un error (${status}). Revisa la solicitud e inténtalo de nuevo.`;
+      }
+
+      function getApiBaseUrl() {
+        return API_URL.replace(/\/clasificar\/?$/, "");
+      }
+
+      async function requestJson(url, payload, extraHeaders = {}) {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", ...extraHeaders },
+          body: JSON.stringify(payload)
+        });
+        let data;
+        try {
+          data = await response.json();
+        } catch (error) {
+          throw new Error("La API devolvió una respuesta que no se pudo interpretar.");
+        }
+        if (!response.ok) throw new Error(getErrorMessage(data, response.status));
+        return data;
+      }
+
+      function updateOtherLocationVisibility() {
+        const isOther = locationSelect.value === "Otro";
+        byId("otherLocationWrap").hidden = !isOther;
+        otherLocation.required = isOther;
+        if (!isOther) otherLocation.value = "";
+      }
+
+      locationSelect.addEventListener("change", updateOtherLocationVisibility);
+      updateOtherLocationVisibility();
+
+      function getSemaforo(confidence) {
+        if (confidence >= 0.90) {
+          return { color: "verde", mensaje: "✅ Clasificación confiable", requiere_revision: false };
+        }
+        if (confidence >= 0.70) {
+          return { color: "amarillo", mensaje: "⚠️ Verificar si es correcto", requiere_revision: true };
+        }
+        return { color: "rojo", mensaje: "❌ Requiere revisión manual", requiere_revision: true };
+      }
+
+      // Actualiza el color, el ancho y la etiqueta de la barra según la confianza recibida.
+      function actualizarBarraConfianza(confidence) {
+        const porcentajeValor = Math.round(Math.max(0, Math.min(1, confidence)) * 100);
+        const barra = byId("confidence-bar");
+        const porcentaje = byId("confidence-percentage");
+        const texto = byId("confidence-text");
+        porcentaje.textContent = `${porcentajeValor}%`;
+        barra.style.width = `${porcentajeValor}%`;
+
+        if (confidence >= 0.90) {
+          barra.className = "confidence-bar high";
+          texto.className = "confidence-text high";
+          texto.textContent = "Alta confianza";
+        } else if (confidence >= 0.70) {
+          barra.className = "confidence-bar medium";
+          texto.className = "confidence-text medium";
+          texto.textContent = "Confianza media";
+        } else {
+          barra.className = "confidence-bar low";
+          texto.className = "confidence-text low";
+          texto.textContent = "Baja confianza";
+        }
+      }
+
+      // Solicita la clasificación real; solo los errores de conexión habilitan el resultado simulado.
+      async function classify(payload) {
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), 20000);
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+            signal: controller.signal
+          });
+          let data;
+          try { data = await response.json(); }
+          catch (error) { throw new Error("La API devolvió una respuesta que no se pudo interpretar."); }
+          if (!response.ok) throw new Error(getErrorMessage(data, response.status));
+          return { data, demo: false };
+        } catch (error) {
+          if (error instanceof TypeError || error.name === "AbortError") {
+            demoToggle.checked = true;
+            setApiState("demo", "API no disponible · Modo Demo");
+            return { data: demoResult, demo: true, connectionError: true };
+          }
+          throw error;
+        } finally {
+          window.clearTimeout(timeoutId);
+        }
+      }
+
+      // Inserta texto con textContent para mantener seguros los datos proporcionados por el usuario y la API.
+      function renderResult(data, equipmentName, demo, recordInHistory = true, inputDetails = {}) {
+        const confidence = Number.isFinite(Number(data.confidence)) ? Number(data.confidence) : 0;
+        const semaforo = data.validacion_correccion
+          ? { ...getSemaforo(confidence), ...data.semaforo }
+          : getSemaforo(confidence);
+        const categoryCode = data.categoria_propia || data.categoria || "Sin categoría";
+        const categoryName = data.categoria_nombre ? ` · ${data.categoria_nombre}` : "";
+        const mdrClass = data.mdr_class || "No disponible";
+        const criticality = data.criticidad || {};
+        const code = data.emdn_code || "PENDIENTE_DE_VALIDACION";
+        const term = data.emdn_term || data.emdn_name || "Término no disponible";
+        const isVerified = data.emdn_verified === true;
+        const method = data.metodo || "No especificado";
+
+        byId("resultName").textContent = equipmentName;
+        byId("methodBadge").textContent = demo ? "MODO DEMO" : method;
+        byId("methodBadge").className = `source-badge${demo ? " demo-source" : ""}`;
+        byId("categoryValue").textContent = `${categoryCode}${categoryName}`;
+        byId("mdrValue").textContent = mdrClass;
+        byId("mdrValue").className = `mdr-badge mdr-${String(mdrClass).replace(/[^a-zA-Z0-9]/g, "")}`;
+
+        const emdnValue = byId("emdnValue");
+        emdnValue.replaceChildren();
+        if (code && code !== "PENDIENTE_DE_VALIDACION") {
+          const link = document.createElement("a");
+          link.className = "emdn-link";
+          link.href = `https://www.google.com/search?q=${encodeURIComponent(`EMDN ${code}`)}`;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = code;
+          link.setAttribute("aria-label", `Buscar código EMDN ${code} en Google, abre en una pestaña nueva`);
+          emdnValue.append(link);
+        } else {
+          emdnValue.textContent = code || "No disponible";
+        }
+        byId("emdnVerified").textContent = isVerified ? "Verificado" : "Pendiente de validación";
+        byId("emdnVerified").className = isVerified ? "verified" : "unverified";
+        byId("termValue").textContent = term;
+
+        actualizarBarraConfianza(confidence);
+        byId("confidence-bar").setAttribute("aria-label", `${Math.round(confidence * 100)} por ciento de confianza`);
+        byId("confidenceContext").textContent = semaforo.mensaje;
+        byId("confidenceContext").className = `confidence-context semaforo-${semaforo.color}`;
+        renderCorrectionValidation(data.validacion_correccion);
+        byId("correctClassification").hidden = !semaforo.requiere_revision || demo;
+        renderCriticality(criticality);
+        byId("resultCard").hidden = false;
+        byId("resultsGrid").hidden = false;
+        currentClassification = {
+          name: equipmentName,
+          category: categoryCode,
+          code,
+          data,
+          originalData: inputDetails.originalData || data,
+          inputDetails: {
+            nombre: equipmentName,
+            marca: inputDetails.marca || null,
+            ubicacion: inputDetails.ubicacion || null,
+            cmms_equipment_id: inputDetails.cmms_equipment_id || null
+          },
+          demo
+        };
+        if (recordInHistory) addHistory(currentClassification);
+      }
+
+      function renderCorrectionValidation(validation) {
+        const list = byId("correctionValidationChecks");
+        list.replaceChildren();
+        if (!validation || !validation.validaciones) {
+          list.hidden = true;
+          return;
+        }
+
+        const labels = [
+          ["emdn_valido", "Código EMDN terminal y coherente con la categoría"],
+          ["mdr_coherente", "Clase MDR coherente con la categoría"],
+          ["criticidad_razonable", "Criticidad dentro de rangos razonables"],
+          ["semantica_valida", "Nombre del equipo coherente con el término EMDN"]
+        ];
+        labels.forEach(([key, label]) => {
+          const passed = validation.validaciones[key] === true;
+          const item = document.createElement("li");
+          const icon = document.createElement("span");
+          icon.className = "check-icon";
+          icon.textContent = passed ? "✅" : "❌";
+          icon.setAttribute("aria-hidden", "true");
+          const text = document.createElement("span");
+          text.textContent = label;
+          item.append(icon, text);
+          list.append(item);
+        });
+        list.hidden = false;
+      }
+
+      function renderCriticality(criticality) {
+        const axes = [
+          { key: "impacto_clinico", label: "Impacto clínico" },
+          { key: "redundancia", label: "Redundancia" },
+          { key: "frecuencia_uso", label: "Frecuencia de uso" },
+          { key: "historial_fallas", label: "Historial de fallas" },
+          { key: "costo_tiempo", label: "Costo / tiempo" }
+        ];
+        const values = axes.map(({ key }) => Number(criticality[key]));
+        const index = Number(criticality.indice);
+        const level = criticality.nivel;
+        if (values.some((value) => !Number.isFinite(value) || value < 1 || value > 5)
+          || !Number.isFinite(index)
+          || !["BAJA", "MEDIA", "ALTA"].includes(level)) {
+          throw new Error("La API devolvió datos de criticidad incompletos o inválidos.");
+        }
+        byId("criticalityScore").textContent = index.toFixed(2);
+        byId("criticalityLevel").textContent = level;
+        byId("criticalityLevel").className = `level-badge level-${level}`;
+
+        if (typeof Chart === "undefined") {
+          byId("criticalityChart").hidden = true;
+          byId("chartFallback").hidden = false;
+          return;
+        }
+        byId("criticalityChart").hidden = false;
+        byId("chartFallback").hidden = true;
+        if (chart) chart.destroy();
+        chart = new Chart(byId("criticalityChart"), {
+          type: "radar",
+          data: {
+            labels: axes.map(({ label }) => label),
+            datasets: [{
+              data: values,
+              fill: true,
+              backgroundColor: "rgba(37, 99, 235, .13)",
+              borderColor: "#2563eb",
+              borderWidth: 2,
+              pointBackgroundColor: "#2563eb",
+              pointBorderColor: "#ffffff",
+              pointBorderWidth: 2,
+              pointRadius: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => ` ${context.formattedValue} / 5` } } },
+            scales: {
+              r: {
+                min: 0, max: 5, beginAtZero: true,
+                ticks: { stepSize: 1, display: false },
+                grid: { color: "#e9eef5" },
+                angleLines: { color: "#e9eef5" },
+                pointLabels: { color: "#758196", font: { family: "DM Sans", size: 10 } }
+              }
+            }
+          }
+        });
+      }
+
+      function addHistory(item) {
+        history.unshift({ ...item, timestamp: new Date().toISOString() });
+        history.splice(20);
+        renderHistory();
+      }
+
+      // Descarga el historial de esta sesión con el resultado completo y un resumen estadístico.
+      function exportHistory() {
+        if (history.length === 0) {
+          window.alert("No hay clasificaciones en el historial");
+          return;
+        }
+
+        let content = "=== HISTORIAL DE CLASIFICACIONES ===\n";
+        content += `Fecha de exportación: ${new Date().toLocaleString()}\n`;
+        content += `Total de clasificaciones: ${history.length}\n`;
+        content += `${"=".repeat(50)}\n\n`;
+
+        history.forEach((item, index) => {
+          const data = item.data || {};
+          const criticality = data.criticidad || {};
+          const semaforo = data.semaforo || getSemaforo(Number(data.confidence) || 0);
+          const confidence = Number(data.confidence);
+          content += `--- Clasificación #${index + 1} ---\n`;
+          content += `Nombre: ${item.name || "N/A"}\n`;
+          content += `Marca: ${item.inputDetails?.marca || "N/A"}\n`;
+          content += `Ubicación: ${item.inputDetails?.ubicacion || "N/A"}\n`;
+          content += `Categoría: ${data.categoria_propia || item.category || "N/A"} - ${data.categoria_nombre || "N/A"}\n`;
+          content += `EMDN: ${data.emdn_code || item.code || "N/A"} (${data.emdn_term || data.emdn_name || "N/A"})\n`;
+          content += `EMDN verificado: ${data.emdn_verified ? "Sí" : "No"}\n`;
+          content += `MDR: ${data.mdr_class || "N/A"}\n`;
+          content += `Confianza: ${Number.isFinite(confidence) ? `${Math.round(confidence * 100)}%` : "N/A"}\n`;
+          content += `Método: ${data.metodo || "N/A"}\n`;
+          content += `Criticidad: ${criticality.indice ?? "N/A"} (${criticality.nivel || "N/A"})\n`;
+          content += `Semáforo: ${String(semaforo.color || "N/A").toUpperCase()}\n`;
+          content += `Código interno: ${data.codigo_interno || "N/A"}\n`;
+          content += `Timestamp: ${item.timestamp || "N/A"}\n\n`;
+        });
+
+        const countBy = (getKey) => history.reduce((counts, item) => {
+          const key = getKey(item) || "No especificado";
+          counts[key] = (counts[key] || 0) + 1;
+          return counts;
+        }, {});
+        const summaries = [
+          ["método", countBy((item) => item.data?.metodo)],
+          ["semáforo", countBy((item) => item.data?.semaforo?.color || getSemaforo(Number(item.data?.confidence) || 0).color)],
+          ["categoría", countBy((item) => item.data?.categoria_propia || item.category)]
+        ];
+        content += `${"=".repeat(50)}\n=== RESUMEN ESTADÍSTICO ===\n`;
+        summaries.forEach(([label, values]) => {
+          content += `\nPor ${label}:\n`;
+          Object.entries(values).forEach(([key, count]) => {
+            content += `  ${key}: ${count}\n`;
+          });
+        });
+
+        const blob = new Blob(["\uFEFF", content], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `historial_clasificador_${new Date().toISOString().split("T")[0]}.txt`;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(url), 0);
+      }
+
+      byId("exportHistory").addEventListener("click", exportHistory);
+
+      function renderHistory() {
+        const list = byId("historyList");
+        list.replaceChildren();
+        byId("historyCount").textContent = String(history.length);
+        byId("historyEmpty").hidden = history.length > 0;
+        history.forEach((item, index) => {
+          const row = document.createElement("li");
+          row.className = "history-item";
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "history-button";
+          button.setAttribute("aria-label", `Mostrar resultado de ${item.name}`);
+          const details = document.createElement("span");
+          const name = document.createElement("span");
+          name.className = "history-name";
+          name.textContent = item.name;
+          const code = document.createElement("span");
+          code.className = "history-code";
+          code.textContent = item.code;
+          details.append(name, code);
+          const category = document.createElement("span");
+          category.className = "history-category";
+          category.textContent = item.category;
+          button.append(details, category);
+          button.addEventListener("click", () => {
+            renderResult(item.data, item.name, item.demo, false, {
+              ...item.inputDetails,
+              originalData: item.originalData
+            });
+            history.splice(index, 1);
+            history.unshift(item);
+            history.splice(20);
+            renderHistory();
+            byId("resultCard").scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+          row.append(button);
+          list.append(row);
+        });
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (isLoading) return;
+        hideMessage();
+        const payload = {
+          nombre: byId("equipmentName").value.trim(),
+          marca: byId("brand").value.trim() || null,
+          ubicacion: (locationSelect.value === "Otro"
+            ? otherLocation.value
+            : locationSelect.value).trim() || null,
+          cmms_equipment_id: byId("cmmsEquipmentId").value.trim() || null
+        };
+        if (!payload.nombre) {
+          byId("equipmentName").focus();
+          showMessage("Escribe el nombre del equipo para continuar.", "error");
+          return;
+        }
+
+        setLoading(true);
+        try {
+          let result;
+          if (demoToggle.checked) {
+            result = { data: demoResult, demo: true };
+          } else {
+            result = await classify(payload);
+          }
+          renderResult(result.data, payload.nombre, result.demo, true, payload);
+          if (result.connectionError) {
+            showMessage("No se pudo conectar con el servidor. Se activó el Modo Demo y se muestra un resultado simulado.", "demo");
+          } else if (result.demo) {
+            setApiState("demo", "Modo Demo activo");
+            showMessage("Modo Demo activo: el resultado es simulado y no proviene de la API.", "demo");
+          } else {
+            setApiState("online", "Clasificación conectada a la API");
+          }
+          form.reset();
+          updateOtherLocationVisibility();
+        } catch (error) {
+          showMessage(error.message || "No se pudo completar la clasificación. Inténtalo nuevamente.", "error");
+        } finally {
+          setLoading(false);
+        }
+      });
+
+      demoToggle.addEventListener("change", () => {
+        if (demoToggle.checked) {
+          setApiState("demo", "Modo Demo activo");
+        } else {
+          setApiState("", "API lista para conectar");
+        }
+      });
+
+      async function loadCategories() {
+        const response = await fetch(`${getApiBaseUrl()}/categorias`);
+        let categories;
+        try { categories = await response.json(); }
+        catch (error) { throw new Error("No se pudo leer la lista de categorías."); }
+        if (!response.ok || !Array.isArray(categories)) {
+          throw new Error("La API no devolvió una lista válida de categorías.");
+        }
+        const select = byId("correctedCategory");
+        select.replaceChildren(new Option("Selecciona una categoría…", ""));
+        categories.forEach((item) => {
+          const option = new Option(`${item.categoria} · ${item.nombre}`, item.categoria);
+          select.add(option);
+        });
+      }
+
+      byId("correctClassification").addEventListener("click", async () => {
+        correctionError.hidden = true;
+        byId("correctedCategory").value = "";
+        try {
+          if (demoToggle.checked || currentClassification?.demo) {
+            throw new Error("La corrección manual requiere la API activa; el Modo Demo no guarda cambios.");
+          }
+          await loadCategories();
+          correctionDialog.showModal();
+        } catch (error) {
+          showMessage(error.message || "No se pudo cargar el formulario de corrección.", "error");
+        }
+      });
+
+      function closeCorrectionDialog() {
+        if (correctionDialog.open) correctionDialog.close();
+      }
+
+      byId("cancelCorrection").addEventListener("click", closeCorrectionDialog);
+      byId("closeCorrection").addEventListener("click", closeCorrectionDialog);
+
+      correctionForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!currentClassification || !byId("correctedCategory").value) return;
+        correctionError.hidden = true;
+        recalculateButton.disabled = true;
+        recalculateButton.setAttribute("aria-busy", "true");
+        const original = currentClassification;
+        try {
+          const corrected = await requestJson(`${getApiBaseUrl()}/recalcular`, {
+            ...original.inputDetails,
+            categoria_forzada: byId("correctedCategory").value,
+            usuario: byId("correctionUser").value.trim() || null
+          });
+          closeCorrectionDialog();
+          renderResult(
+            corrected,
+            original.name,
+            false,
+            true,
+            { ...original.inputDetails, originalData: original.originalData }
+          );
+          const confidence = Number(corrected.confidence);
+          const validation = corrected.validacion_correccion;
+          if (!Number.isFinite(confidence) || confidence < 0.75) {
+            showMessage("Corrección rechazada. Los datos no son coherentes.", "error");
+            return;
+          }
+
+          const confirmation = confidence >= 0.90
+            ? "✅ Corrección validada automáticamente. ¿Desea guardarla para mejorar futuras clasificaciones?"
+            : "Corrección pendiente de revisión (2 de 3 validaciones pasaron). ¿Desea guardarla para revisión?";
+          const shouldSave = window.confirm(
+            confirmation
+          );
+          if (shouldSave) {
+            const saved = await requestJson(`${getApiBaseUrl()}/registrar-correccion`, {
+              entrada_original: {
+                ...original.inputDetails,
+                categoria_original: original.originalData.categoria_propia,
+                confidence_original: original.originalData.confidence,
+                emdn_original: original.originalData.emdn_code,
+                mdr_original: original.originalData.mdr_class,
+                metodo_original: original.originalData.metodo
+              },
+              categoria_correcta: corrected.categoria_propia,
+              resultado_corregido: corrected,
+              usuario: byId("correctionUser").value.trim() || null
+            });
+            const status = validation?.estado === "PENDIENTE_REVISION"
+              ? "Corrección guardada y pendiente de revisión"
+              : "Corrección guardada; requiere aprobación administrativa antes de entrenar";
+            showMessage(`${status} (corrección ${saved.correction_id}).`, "success");
+            if (adminCredentials) await refreshCorrectionReviews();
+          } else {
+            showMessage("Clasificación recalculada; no se guardó la corrección.", "success");
+          }
+        } catch (error) {
+          correctionError.textContent = error.message || "No se pudo recalcular o guardar la corrección.";
+          correctionError.hidden = false;
+          if (!correctionDialog.open) correctionDialog.showModal();
+        } finally {
+          recalculateButton.disabled = false;
+          recalculateButton.removeAttribute("aria-busy");
+        }
+      });
+
+      const retrainDialog = byId("modal-reentrenar");
+      const retrainButton = byId("btn-reentrenar");
+      const confirmRetrainButton = byId("btn-confirmar-reentrenar");
+      const retrainSpinner = byId("retrainSpinner");
+      const retrainStatus = byId("retrainStatus");
+      const adminLoginButton = byId("adminLogin");
+      const refreshReviewButton = byId("refreshReview");
+      const reviewPanel = byId("reviewPanel");
+
+      function adminHeaders() {
+        if (!adminCredentials) throw new Error("Inicia sesión como administrador para continuar.");
+        return {
+          "X-Admin-Key": adminCredentials.key,
+          "X-Admin-User": adminCredentials.user
+        };
+      }
+
+      async function adminGet(path) {
+        const response = await fetch(`${getApiBaseUrl()}${path}`, {
+          headers: adminHeaders()
+        });
+        let data;
+        try { data = await response.json(); }
+        catch (error) { throw new Error("La API devolvió una respuesta que no se pudo interpretar."); }
+        if (!response.ok) throw new Error(getErrorMessage(data, response.status));
+        return data;
+      }
+
+      function renderReviewTable(container, items, isPending) {
+        container.replaceChildren();
+        if (!items.length) {
+          const empty = document.createElement("p");
+          empty.className = "admin-counts";
+          empty.textContent = isPending ? "No hay correcciones pendientes." : "Aún no hay correcciones revisadas.";
+          container.append(empty);
+          return;
+        }
+        const table = document.createElement("table");
+        table.className = "review-table";
+        const head = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        ["Fecha", "Equipo / EMDN", "Categoría", "Usuario", "Semántica", "Estado", "Notas"].forEach((label) => {
+          const cell = document.createElement("th");
+          cell.textContent = label;
+          headerRow.append(cell);
+        });
+        if (isPending) {
+          const cell = document.createElement("th");
+          cell.textContent = "Acciones";
+          headerRow.append(cell);
+        }
+        head.append(headerRow);
+        const body = document.createElement("tbody");
+        items.forEach((item) => {
+          const row = document.createElement("tr");
+          const values = [
+            new Date(item.timestamp).toLocaleString(),
+            `${item.nombre_equipo}\n${item.emdn_original || "—"} → ${item.emdn_corregido || "—"} · ${item.emdn_term || "Término no disponible"}`,
+            `${item.categoria_original || "—"} → ${item.categoria_corregida}`,
+            item.corregida_por || "No especificado",
+            item.validacion_semantica ? "✅ Coherente" : "❌ No coherente",
+            item.estado,
+            item.notas || item.motivo_rechazo || "—"
+          ];
+          values.forEach((value) => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.append(cell);
+          });
+          if (isPending) {
+            const actionCell = document.createElement("td");
+            const actions = document.createElement("div");
+            actions.className = "review-actions";
+            const approve = document.createElement("button");
+            approve.type = "button";
+            approve.className = "review-action approve";
+            approve.textContent = "Aprobar";
+            approve.addEventListener("click", () => reviewCorrection(item.id, "aprobar"));
+            const reject = document.createElement("button");
+            reject.type = "button";
+            reject.className = "review-action reject";
+            reject.textContent = "Rechazar";
+            reject.addEventListener("click", () => reviewCorrection(item.id, "rechazar"));
+            const requestInfo = document.createElement("button");
+            requestInfo.type = "button";
+            requestInfo.className = "review-action";
+            requestInfo.textContent = "Pedir información";
+            requestInfo.addEventListener("click", () => reviewCorrection(item.id, "solicitar-informacion"));
+            actions.append(approve, reject, requestInfo);
+            actionCell.append(actions);
+            row.append(actionCell);
+          }
+          body.append(row);
+        });
+        table.append(head, body);
+        container.append(table);
+      }
+
+      async function refreshCorrectionReviews() {
+        if (!adminCredentials) throw new Error("Inicia sesión como administrador para continuar.");
+        const [pending, reviewed] = await Promise.all([
+          adminGet("/correcciones/pendientes-revision"),
+          adminGet("/correcciones/revisadas")
+        ]);
+        const approvedCount = reviewed.filter((item) => item.estado === "APROBADA").length;
+        const rejectedCount = reviewed.filter((item) => item.estado === "RECHAZADA").length;
+        const total = pending.length + reviewed.length;
+        const rate = total ? Math.round((approvedCount / total) * 100) : 0;
+        byId("reviewSummary").textContent =
+          `Pendientes: ${pending.length} · Aprobadas: ${approvedCount} · Rechazadas: ${rejectedCount} · Tasa de aprobación: ${rate}%`;
+        renderReviewTable(byId("pendingReviews"), pending, true);
+        renderReviewTable(byId("reviewedCorrections"), reviewed, false);
+        reviewPanel.hidden = false;
+        byId("btn-reentrenar").disabled = false;
+        refreshReviewButton.disabled = false;
+      }
+
+      async function reviewCorrection(correctionId, action) {
+        const headers = adminHeaders();
+        const endpoint = `/correcciones/${correctionId}/${action}`;
+        let payload = {};
+        if (action === "rechazar") {
+          const reason = window.prompt("Indique el motivo del rechazo:");
+          if (reason === null) return;
+          if (!reason.trim()) {
+            showMessage("El motivo de rechazo es obligatorio.", "error");
+            return;
+          }
+          payload = { motivo_rechazo: reason };
+        } else if (action === "solicitar-informacion") {
+          const note = window.prompt("¿Qué información adicional se necesita?");
+          if (note === null) return;
+          if (!note.trim()) {
+            showMessage("La nota de solicitud es obligatoria.", "error");
+            return;
+          }
+          payload = { nota: note };
+        }
+        try {
+          const result = await requestJson(`${getApiBaseUrl()}${endpoint}`, payload, headers);
+          showMessage(`Corrección ${result.estado.toLowerCase()}.`, "success");
+          await refreshCorrectionReviews();
+        } catch (error) {
+          showMessage(error.message || "No se pudo actualizar la corrección.", "error");
+        }
+      }
+
+      adminLoginButton.addEventListener("click", async () => {
+        const key = byId("adminKey").value;
+        const user = byId("adminUser").value.trim();
+        if (!key || !user) {
+          showMessage("Ingresa el usuario y la clave de administrador.", "error");
+          return;
+        }
+        adminCredentials = { key, user };
+        try {
+          await refreshCorrectionReviews();
+          showMessage(`Panel administrativo abierto para ${user}.`, "success");
+        } catch (error) {
+          adminCredentials = null;
+          byId("btn-reentrenar").disabled = true;
+          refreshReviewButton.disabled = true;
+          reviewPanel.hidden = true;
+          showMessage(error.message || "No se pudo autenticar al administrador.", "error");
+        }
+      });
+
+      refreshReviewButton.addEventListener("click", async () => {
+        try {
+          await refreshCorrectionReviews();
+        } catch (error) {
+          showMessage(error.message || "No se pudieron actualizar las revisiones.", "error");
+        }
+      });
+
+      function setRetrainStatus(message, isError = false) {
+        retrainStatus.textContent = message;
+        retrainStatus.className = `admin-status${isError ? " error" : ""}`;
+        retrainStatus.hidden = false;
+      }
+
+      function closeRetrainDialog() {
+        if (retrainDialog.open) retrainDialog.close();
+      }
+
+      retrainButton.addEventListener("click", () => {
+        retrainStatus.hidden = true;
+        retrainDialog.showModal();
+      });
+      byId("btn-cancelar-reentrenar").addEventListener("click", closeRetrainDialog);
+      byId("closeRetrain").addEventListener("click", closeRetrainDialog);
+
+      confirmRetrainButton.addEventListener("click", async () => {
+        if (!adminCredentials) {
+          setRetrainStatus("Inicia sesión como administrador antes de reentrenar.", true);
+          return;
+        }
+        closeRetrainDialog();
+        retrainStatus.hidden = true;
+        retrainSpinner.hidden = false;
+        retrainButton.disabled = true;
+        confirmRetrainButton.disabled = true;
+        try {
+          // Consulta la versión activa para solicitar un identificador nuevo y evitar sobrescribir artefactos.
+          const healthResponse = await fetch(`${getApiBaseUrl()}/health`);
+          let health;
+          try { health = await healthResponse.json(); }
+          catch (error) { throw new Error("La API devolvió una respuesta que no se pudo interpretar."); }
+          if (!healthResponse.ok) throw new Error(getErrorMessage(health, healthResponse.status));
+          const activeVersion = /^v\d+$/.test(health.model_version) ? Number(health.model_version.slice(1)) : 1;
+          const nextVersion = `v${activeVersion + 1}`;
+          const result = await requestJson(`${getApiBaseUrl()}/reentrenar`, {
+            validar_correcciones: true,
+            nueva_version: nextVersion
+          }, adminHeaders());
+          if (result.correcciones_validadas === 0) {
+            setRetrainStatus("No hay correcciones guardadas para reentrenar", true);
+            return;
+          }
+          setRetrainStatus(
+            `Reentrenamiento completado · Nuevos ejemplos totales: ${result.nuevos_totales} · Accuracy del nuevo modelo: ${Number(result.accuracy).toFixed(2)} · Modelo activo: ${result.modelo_activo}`
+          );
+        } catch (error) {
+          if (error instanceof TypeError) {
+            setRetrainStatus("No se pudo conectar con el servidor. ¿Está corriendo la API?", true);
+          } else if (error.message.includes("No hay correcciones")) {
+            setRetrainStatus("No hay correcciones guardadas para reentrenar", true);
+          } else {
+            setRetrainStatus(`Error al reentrenar: ${error.message}`, true);
+          }
+        } finally {
+          retrainSpinner.hidden = true;
+          retrainButton.disabled = false;
+          confirmRetrainButton.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

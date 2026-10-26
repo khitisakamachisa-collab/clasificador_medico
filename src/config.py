@@ -45,6 +45,10 @@ class Config:
         os.getenv("PROCESSED_DIR", str(DATA_DIR / "processed"))
     )
     MODELS_DIR = Path(os.getenv("MODELS_DIR", str(MODELS_DIR)))
+    CORRECTIONS_DB_PATH = Path(
+        os.getenv("CORRECTIONS_DB_PATH", str(DATA_DIR / "corrections.db"))
+    )
+    ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "")
     EMDN_EXCEL_PATH = Path(
         os.getenv(
             "EMDN_EXCEL_PATH",

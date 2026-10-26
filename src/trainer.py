@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+from collections import Counter
 from pathlib import Path
 
 import joblib
@@ -90,37 +91,91 @@ def train_model(dataset_path: str | Path | None = None):
     }
 
     model.fit(X, labels)
-    joblib.dump(model, MODELS_DIR / "classifier_v1.pkl")
-    joblib.dump(vectorizer, MODELS_DIR / "vectorizer_v1.pkl")
+    joblib.dump(model, MODELS_DIR / f"classifier_{Config.MODEL_VERSION}.pkl")
+    joblib.dump(vectorizer, MODELS_DIR / f"vectorizer_{Config.MODEL_VERSION}.pkl")
 
     cm = confusion_matrix(labels, y_pred, labels=sorted(set(labels)))
     plt.figure(figsize=(10, 8))
     plt.imshow(cm, interpolation="nearest", cmap="Blues")
     plt.title("Matriz de confusión")
     plt.colorbar()
-    plt.savefig(MODELS_DIR / "confusion_matrix_v1.png")
+    plt.savefig(MODELS_DIR / f"confusion_matrix_{Config.MODEL_VERSION}.png")
     plt.close()
 
-    with open(MODELS_DIR / "metrics_v1.json", "w", encoding="utf-8") as file:
+    with open(MODELS_DIR / f"metrics_{Config.MODEL_VERSION}.json", "w", encoding="utf-8") as file:
         json.dump(metrics, file, ensure_ascii=False, indent=2)
 
     return {"model": model, "vectorizer": vectorizer, "metrics": metrics}
 
 
-def re_entrenar(nuevos_ejemplos: list[dict], dataset_path: str | Path | None = None):
-    """Añade nuevos ejemplos y entrena una nueva versión del modelo."""
+def re_entrenar(
+    dataset_path: str | Path | None = None,
+    *,
+    validar_correcciones: bool = True,
+    nueva_version: str | None = None,
+):
+    """Valida ejemplos, entrena métricas cruzadas y activa la versión solicitada."""
+    if not validar_correcciones:
+        raise ValueError("El reentrenamiento requiere validar las correcciones guardadas.")
+    from .corrections import load_training_examples, validate_saved_corrections
+
+    correction_count = validate_saved_corrections()
+    if correction_count == 0:
+        raise ValueError("No hay correcciones aprobadas para reentrenar.")
+    if correction_count < 10:
+        raise ValueError(
+            "Se necesitan al menos 10 correcciones aprobadas para reentrenar. "
+            f"Actualmente: {correction_count}"
+        )
     dataset = load_validated_dataset(dataset_path)
-    dataset.extend(nuevos_ejemplos)
-    version = 2
-    while (MODELS_DIR / f"classifier_v{version}.pkl").exists():
-        version += 1
+    dataset.extend(load_training_examples())
+    labels = [item.get("categoria") or "OTR-01" for item in dataset]
+    counts = Counter(labels)
+    if len(counts) < 2 or min(counts.values()) < 2:
+        raise ValueError("Se requieren al menos dos ejemplos por categoría para validar el modelo.")
+
+    if nueva_version is None:
+        version_number = 2
+        while (Config.MODELS_DIR / f"classifier_v{version_number}.pkl").exists():
+            version_number += 1
+        version_name = f"v{version_number}"
+    else:
+        version_name = nueva_version
+        if not re.fullmatch(r"v[1-9][0-9]*", version_name):
+            raise ValueError("La versión debe tener formato vN, por ejemplo v2.")
+        version_number = int(version_name[1:])
+
+    classifier_path = Config.MODELS_DIR / f"classifier_{version_name}.pkl"
+    vectorizer_path = Config.MODELS_DIR / f"vectorizer_{version_name}.pkl"
+    metrics_path = Config.MODELS_DIR / f"metrics_{version_name}.json"
+    if any(path.exists() for path in (classifier_path, vectorizer_path, metrics_path)):
+        raise FileExistsError(f"Ya existen artefactos para la versión {version_name}.")
 
     vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
     texts = [preprocess_text(f"{item.get('nombre','')} {item.get('marca','')} {item.get('ubicacion','')}") for item in dataset]
-    labels = [item.get("categoria", "OTR-01") for item in dataset]
     X = vectorizer.fit_transform(texts)
     model = LogisticRegression(C=1.0, max_iter=1000, class_weight="balanced", random_state=42)
+    folds = min(5, min(counts.values()))
+    cv = StratifiedKFold(n_splits=folds, shuffle=True, random_state=42)
+    predictions = cross_val_predict(model, X, labels, cv=cv)
+    accuracy = round(accuracy_score(labels, predictions), 4)
     model.fit(X, labels)
-    joblib.dump(model, MODELS_DIR / f"classifier_v{version}.pkl")
-    joblib.dump(vectorizer, MODELS_DIR / f"vectorizer_v{version}.pkl")
-    return {"status": "ok", "version": version, "nuevos_totales": len(dataset)}
+    ensure_directories()
+    Config.MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, classifier_path)
+    joblib.dump(vectorizer, vectorizer_path)
+    with open(metrics_path, "w", encoding="utf-8") as file:
+        json.dump({"accuracy": accuracy}, file, ensure_ascii=False, indent=2)
+
+    Config.MODEL_VERSION = version_name
+    from . import classifier
+
+    classifier.load_model_assets.cache_clear()
+    return {
+        "status": "ok",
+        "version": version_number,
+        "modelo_activo": version_name,
+        "nuevos_totales": len(dataset),
+        "correcciones_validadas": correction_count,
+        "accuracy": accuracy,
+    }
