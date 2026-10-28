@@ -1,0 +1,51 @@
+[
+  {
+    "keyword": "lámpara exploración",
+    "categoria": "CIR-01",
+    "emdn_code": "Z129004",
+    "mdr_class": "I",
+    "criticidad": "MEDIA"
+  },
+  {
+    "keyword": "monitor secuencial",
+    "categoria": "MON-01",
+    "emdn_code": "Z1203020201",
+    "mdr_class": "IIa",
+    "criticidad": "ALTA"
+  },
+  {
+    "keyword": "bisturí armónico",
+    "categoria": "CIR-02",
+    "emdn_code": "K0202010201",
+    "mdr_class": "IIb",
+    "criticidad": "ALTA"
+  },
+  {
+    "keyword": "armónico",
+    "categoria": "CIR-02",
+    "emdn_code": "K0202010201",
+    "mdr_class": "IIb",
+    "criticidad": "ALTA"
+  },
+  {
+    "keyword": "harmonic",
+    "categoria": "CIR-02",
+    "emdn_code": "K0202010201",
+    "mdr_class": "IIb",
+    "criticidad": "ALTA"
+  },
+  {
+    "keyword": "cama uci",
+    "categoria": "MOB-01",
+    "emdn_code": "V08060102",
+    "mdr_class": "I",
+    "criticidad": "ALTA"
+  },
+  {
+    "keyword": "resucitación",
+    "categoria": "MOB-01",
+    "emdn_code": "V08060102",
+    "mdr_class": "I",
+    "criticidad": "ALTA"
+  }
+]

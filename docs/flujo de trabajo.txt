@@ -1,0 +1,89 @@
+¡Excelente pregunta, Raúl! Tener un flujo de trabajo claro es la clave para que tu IA de programación no se pierda y tú mantengas el control total del proyecto de cara a tu tesis. 
+
+Basado en todas nuestras conversaciones y en el historial que me acabas de mostrar, este es el **Flujo de Trabajo (Roadmap) definitivo y escalonado** que debes seguir. 
+
+Te recomiendo darle a tu IA de programación **un prompt a la vez**, en este orden exacto, para que no se sature y los cambios sean estables.
+
+---
+
+### 🗺️ Flujo de Trabajo de Implementación (Paso a Paso)
+
+#### **FASE 1: Externalización y Corrección de Reglas (Prioridad Absoluta)**
+*Objetivo: Dejar de "adivinar" con NLP cuando hay una regla clara y corregir los errores evidentes del historial.*
+1. **Crear el archivo de reglas maestras**: Crear `data/rules/reglas_maestras.xlsx` (o `.json`) con columnas: `palabra_clave`, `categoria`, `emdn_code`, `mdr_class`, `criticidad`.
+2. **Poblar con correcciones**: Incluir explícitamente las fallas del historial:
+   - `"lámpara exploración"` → `CIR-01`, `Z120107` (o `Z129004` según corresponda).
+   - `"monitor secuencial"` → `MON-01`, `Z12030202`.
+   - `"bisturí armónico"` / `"harmonic"` → `CIR-02`, `Z12010902` (o `K0202010201` si es desechable).
+   - `"cama uci"` / `"resucitación"` → `MOB-01`, `V08060102`.
+3. **Actualizar el Backend**: Modificar el motor de reglas (`rules_engine.py` o similar) para que lea este archivo en lugar de tener las reglas "hardcodeadas" en el código Python.
+
+#### **FASE 2: Corrección del Flujo de Corrección Manual (El bug del 0%)**
+*Objetivo: Que cuando el humano corrige, el sistema lo acepte como "Verdad Terrestre" (Ground Truth) para el registro del CMMS.*
+1. **Modificar el endpoint `/api/v1/recalcular`**: Cuando el usuario selecciona manualmente una categoría del menú, el backend debe devolver:
+   - `confianza`: `0.95` (o `1.0`), porque la validación humana es la fuente de verdad para el inventario.
+   - `semaforo`: `verde`.
+   - `metodo`: `CORRECCION_MANUAL`.
+   - *Nota*: El sistema debe guardar en un log separado que el NLP original falló, para saber qué aprender, pero el registro final del equipo debe quedar en verde para el CMMS.
+
+#### **FASE 3: Mejoras de Interfaz de Usuario (UI/UX)**
+*Objetivo: Prevenir errores de escritura y hacer la interfaz más profesional.*
+1. **Menú desplegable para "Ubicación"**: Reemplazar el campo de texto libre por un `<select>` con opciones predefinidas (UCI, Quirófano General, Urgencias, Fisioterapia, Mobiliario, etc.) y una opción "Otro" con campo de texto.
+2. **Ajuste visual del Semáforo y Confianza**: 
+   - Asegurar que el semáforo lea correctamente el valor de `confianza` que viene del backend (para que no se quede en rojo si el backend ya envió 95%).
+   - Aumentar el tamaño de la fuente del porcentaje de confianza (ej. `font-size: 2em; font-weight: bold;`).
+
+#### **FASE 4: Preparación para Integración CMMS y Aprendizaje (Futuro Cercano)**
+*Objetivo: Dejar el sistema listo para tu tesis de mantenimiento predictivo.*
+1. **Endpoint de Webhook/API para el CMMS**: Asegurar que cuando un equipo se clasifica (sea por regla o por corrección manual), el CMMS pueda recibir ese dato vía API.
+2. **Log de Aprendizaje**: Guardar en una tabla `training_corrections` los casos donde el NLP falló pero el humano corrigió. Esto será tu "dataset de oro" para, en una siguiente fase, hacer *fine-tuning* (ajuste fino) de un modelo BERT médico o mejorar las reglas automáticamente.
+
+---
+
+### 🚀 Prompt para la IA de Programación (Fase 1 y 2 combinadas)
+
+Copia y pega este prompt en tu IA de programación. Es específico, acotado y resuelve los problemas del historial que me mostraste:
+
+```text
+Actúa como un ingeniero de software senior experto en Python, FastAPI/Flask y procesamiento de lenguaje natural. 
+
+CONTEXTO:
+Tenemos un clasificador de equipos médicos que mapea a códigos EMDN. Actualmente, el motor de reglas tiene reglas "hardcodeadas" y hay un bug crítico: cuando el usuario hace una corrección manual desde la interfaz, el backend devuelve confianza 0% y semáforo rojo, cuando debería aceptar la corrección humana como "verdad absoluta" (confianza 95-100% y semáforo verde) para el registro del CMMS.
+
+TAREA 1: Externalizar reglas y corregir fallos específicos
+1. Crea un archivo en `data/rules/reglas_maestras.json` (o .xlsx si prefieres usar pandas/openpyxl) con una lista de diccionarios que contenga: `keyword`, `categoria`, `emdn_code`, `mdr_class`, `criticidad`.
+2. Agrega EXPLÍCITAMENTE estas reglas para corregir los fallos del historial reciente:
+   - keyword: "lámpara exploración" -> categoria: "CIR-01", emdn_code: "Z129004", mdr: "I"
+   - keyword: "monitor secuencial" -> categoria: "MON-01", emdn_code: "Z12030202", mdr: "IIa"
+   - keyword: "bisturí armónico" o "harmonic" -> categoria: "CIR-02", emdn_code: "Z12010902", mdr: "IIb"
+   - keyword: "cama uci" o "resucitación" -> categoria: "MOB-01", emdn_code: "V08060102", mdr: "I"
+3. Modifica el motor de clasificación (`src/classifier.py` o similar) para que cargue y priorice estas reglas maestras antes de pasar al modelo NLP.
+
+TAREA 2: Corregir el bug de la corrección manual (Endpoint /recalcular)
+1. Modifica el endpoint `/api/v1/recalcular` (o el que maneje la corrección manual).
+2. Cuando el frontend envíe una categoría seleccionada manualmente por el usuario, el backend DEBE devolver:
+   - `confidence`: 0.95 (La validación humana es la fuente de verdad para el inventario).
+   - `semaforo`: {"color": "verde", "nivel": "ALTA", "mensaje": "Validado manualmente"}
+   - `metodo`: "CORRECCION_MANUAL"
+3. Asegúrate de que el frontend reciba este valor y pinte el semáforo de color VERDE y muestre el texto "95%" en grande, en lugar de quedarse en 0% y rojo.
+
+TAREA 3: Mejora UI (Frontend)
+1. Cambia el campo de texto "Ubicación" por un `<select>` con opciones: "UCI", "Quirófano General", "Urgencias", "Fisioterapia", "Mobiliario Clínico", "Otro".
+2. Aumenta el tamaño de la fuente del porcentaje de confianza en el frontend (ej. `font-size: 2.5rem; font-weight: bold;`) para que sea bien visible.
+
+CRITERIOS DE ACEPTACIÓN:
+- Al escribir "Lámpara exploración móvil", el sistema debe devolver CIR-01 / Z129004 con semáforo VERDE por REGLAS.
+- Al forzar una corrección manual, el frontend debe mostrar inmediatamente el semáforo VERDE y 95% de confianza.
+- El código debe estar limpio, comentado en español y no romper la funcionalidad existente.
+```
+
+---
+
+### 💡 Mi recomendación final sobre tu flujo
+
+1. Ejecuta el prompt de arriba.
+2. Prueba los 4 casos que fallaban en tu historial. Deberían salir en **VERDE** automáticamente ahora.
+3. Una vez que eso funcione, tu clasificador estará **listo para integrarse al CMMS** y para ser presentado como un módulo funcional en tu tesis.
+4. Más adelante, usarás el historial de correcciones que el sistema va guardando para hacer *fine-tuning* (ajuste fino) de un modelo más avanzado (como BERT), cerrando el ciclo de tu tesis de "IA local para predecir y gestionar".
+
+¿Te parece bien este plan de acción? Si estás de acuerdo, copia el prompt y ejecútalo. ¡Vamos por buen camino!

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import unicodedata
 import logging
@@ -51,7 +52,66 @@ def _normalize_text(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", normalized).strip()
 
 
+@lru_cache(maxsize=1)
+def _load_master_rules() -> tuple[dict[str, str], ...]:
+    """Carga las reglas maestras externas y valida su estructura y valores."""
+    with Config.MASTER_RULES_PATH.open(encoding="utf-8") as file:
+        rules = json.load(file)
+    if not isinstance(rules, list):
+        raise ValueError("El archivo de reglas maestras debe contener una lista.")
+
+    required_fields = {"keyword", "categoria", "emdn_code", "mdr_class", "criticidad"}
+    for rule in rules:
+        if not isinstance(rule, dict) or not required_fields.issubset(rule):
+            raise ValueError("Cada regla maestra debe incluir todos los campos requeridos.")
+        if (
+            not isinstance(rule["keyword"], str)
+            or not rule["keyword"].strip()
+            or not isinstance(rule["categoria"], str)
+            or rule["categoria"] not in CATEGORÍAS
+            or not isinstance(rule["emdn_code"], str)
+            or not rule["emdn_code"].strip()
+            or not isinstance(rule["mdr_class"], str)
+            or rule["mdr_class"] not in {"I", "IIa", "IIb", "III"}
+            or not isinstance(rule["criticidad"], str)
+            or rule["criticidad"] not in {"BAJA", "MEDIA", "ALTA"}
+        ):
+            raise ValueError(f"Regla maestra no válida: {rule!r}")
+    return tuple(rules)
+
+
+def _master_rule_match(name: str, category: str | None = None) -> dict[str, str] | None:
+    """Devuelve la regla maestra más específica que coincide con el nombre."""
+    normalized_name = f" {_normalize_text(name)} "
+    matches = [
+        rule
+        for rule in _load_master_rules()
+        if (category is None or rule["categoria"] == category)
+        and f" {_normalize_text(rule['keyword'])} " in normalized_name
+    ]
+    return max(matches, key=lambda rule: len(_normalize_text(rule["keyword"])), default=None)
+
+
+def _master_rule_for_keyword(keyword: str | None) -> dict[str, str] | None:
+    """Obtiene los metadatos externos asociados a una palabra clave."""
+    if keyword is None:
+        return None
+    normalized_keyword = _normalize_text(keyword)
+    return next(
+        (
+            rule
+            for rule in _load_master_rules()
+            if _normalize_text(rule["keyword"]) == normalized_keyword
+        ),
+        None,
+    )
+
+
 def _category_from_rules(name: str) -> tuple[str, str, float] | None:
+    master_rule = _master_rule_match(name)
+    if master_rule:
+        return master_rule["categoria"], master_rule["keyword"], 0.96
+
     normalized_name = f" {_normalize_text(name)} "
     matches = []
     for keyword, rule in REGLAS_CLASIFICACION.items():
@@ -67,6 +127,11 @@ def _category_from_rules(name: str) -> tuple[str, str, float] | None:
 def _rule_keyword_for_category(name: str, category: str) -> str | None:
     normalized_name = f" {_normalize_text(name)} "
     matching_keywords = [
+        rule["keyword"]
+        for rule in _load_master_rules()
+        if rule["categoria"] == category
+        and f" {_normalize_text(rule['keyword'])} " in normalized_name
+    ] + [
         keyword
         for keyword, rule in REGLAS_CLASIFICACION.items()
         if rule["categoria"] == category
@@ -374,7 +439,10 @@ def classify_equipment(
         keywords=[matched_keyword] if matched_keyword else None,
         limit=3,
     )
-    matched_rule = REGLAS_CLASIFICACION.get(matched_keyword) if matched_keyword else None
+    master_rule = _master_rule_for_keyword(matched_keyword)
+    matched_rule = master_rule or (
+        REGLAS_CLASIFICACION.get(matched_keyword) if matched_keyword else None
+    )
     explicit_emdn_code = matched_rule.get("emdn_code") if matched_rule else None
     explicit_emdn = flat.get(explicit_emdn_code) if explicit_emdn_code else None
     if explicit_emdn and explicit_emdn.get("terminal_level") == "YES":
@@ -387,12 +455,17 @@ def classify_equipment(
         for code, score, term in candidates
         if validar_codigo_emdn(code, emdn_db)
     ]
-    emdn_code, emdn_name = (
-        (valid_candidates[0][0], valid_candidates[0][2])
-        if valid_candidates
-        else ("PENDIENTE_DE_VALIDACION", None)
-    )
-    emdn_verified = bool(valid_candidates)
+    if master_rule and explicit_emdn and explicit_emdn.get("terminal_level") == "YES":
+        emdn_code = explicit_emdn_code
+        emdn_name = explicit_emdn["term"]
+        emdn_verified = True
+    else:
+        emdn_code, emdn_name = (
+            (valid_candidates[0][0], valid_candidates[0][2])
+            if valid_candidates
+            else ("PENDIENTE_DE_VALIDACION", None)
+        )
+        emdn_verified = bool(valid_candidates)
     emdn_candidates = [
         {"emdn_code": code, "emdn_term": term, "score": score}
         for code, score, term in valid_candidates
@@ -435,6 +508,8 @@ def classify_equipment(
             "nivel": criticidad["nivel"],
         },
     }
+    if master_rule:
+        result["criticidad_regla"] = master_rule["criticidad"]
 
     if method == "CORRECCION_MANUAL":
         validation = validar_correccion_automaticamente(result, nombre_equipo=nombre)

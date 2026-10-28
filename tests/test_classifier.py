@@ -92,6 +92,40 @@ def test_tens_for_physiotherapy_has_high_confidence_green_light():
     assert result["semaforo"]["requiere_revision"] is False
 
 
+def test_master_rules_match_exploration_lamp_before_nlp():
+    result = classify_equipment("Lámpara exploración móvil")
+
+    assert result["categoria_propia"] == "CIR-01"
+    assert result["emdn_code"] == "Z129004"
+    assert result["mdr_class"] == "I"
+    assert result["metodo"] == "REGLAS"
+    assert result["confidence"] == 0.96
+    assert result["semaforo"]["color"] == "verde"
+
+
+@pytest.mark.parametrize(
+    ("name", "category", "emdn_code", "mdr_class"),
+    [
+        ("Monitor secuencial", "MON-01", "Z1203020201", "IIa"),
+        ("Bisturí armónico", "CIR-02", "K0202010201", "IIb"),
+        ("Bisturí armónico (Harmonic)", "CIR-02", "K0202010201", "IIb"),
+        ("Harmonic scalpel", "CIR-02", "K0202010201", "IIb"),
+        ("Cama UCI", "MOB-01", "V08060102", "I"),
+        ("Equipo de resucitación", "MOB-01", "V08060102", "I"),
+    ],
+)
+def test_master_rules_override_legacy_classification(name, category, emdn_code, mdr_class):
+    result = classify_equipment(name)
+
+    assert result["categoria_propia"] == category
+    assert result["emdn_code"] == emdn_code
+    assert result["mdr_class"] == mdr_class
+    assert result["metodo"] == "REGLAS"
+    assert result["semaforo"]["color"] == "verde"
+    assert result["emdn_verified"] is True
+    assert result["emdn_code"] != "Z12030202"
+
+
 def test_typo_context_preserves_fisioterapia_rule():
     result = classify_equipment(
         "ENS para fisioterapia Enraf Nonius Fisioterapia",

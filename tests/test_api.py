@@ -85,7 +85,8 @@ def test_recalculate_forces_category_and_cmms_id(client):
     assert result["confidence"] == 0.95
     assert result["metodo"] == "CORRECCION_MANUAL"
     assert result["semaforo"]["color"] == "verde"
-    assert result["semaforo"]["mensaje"] == result["validacion_correccion"]["mensaje"]
+    assert result["semaforo"]["nivel"] == "ALTA"
+    assert result["semaforo"]["mensaje"] == "Validado manualmente"
     assert result["emdn_code"] == "Z120616"
     assert result["emdn_term"] == "ELECTROMECHANICAL SYSTEMS FOR PHYSICAL THERAPY"
     assert result["mdr_class"] == CATEGORÍAS["TER-01"]["mdr_default"]
@@ -108,7 +109,11 @@ def test_recalculate_returns_validation_review_and_rejection_states(client, monk
         json={"nombre": "Electroestimulador", "categoria_forzada": "TER-01"},
     )
     assert pending.status_code == 200
-    assert pending.json()["confidence"] == 0.75
+    assert pending.json()["confidence"] == 0.95
+    assert pending.json()["semaforo"]["color"] == "verde"
+    assert pending.json()["semaforo"]["nivel"] == "ALTA"
+    assert pending.json()["semaforo"]["mensaje"] == "Validado manualmente"
+    assert pending.json()["metodo"] == "CORRECCION_MANUAL"
     assert pending.json()["validacion_correccion"]["estado"] == "PENDIENTE_REVISION"
 
     def classify_with_invalid_emdn_and_mdr(*args, **kwargs):
@@ -122,8 +127,23 @@ def test_recalculate_returns_validation_review_and_rejection_states(client, monk
         json={"nombre": "Electroestimulador", "categoria_forzada": "TER-01"},
     )
     assert rejected.status_code == 200
-    assert rejected.json()["confidence"] == 0.30
+    assert rejected.json()["confidence"] == 0.95
+    assert rejected.json()["semaforo"]["color"] == "verde"
+    assert rejected.json()["semaforo"]["mensaje"] == "Validado manualmente"
     assert rejected.json()["validacion_correccion"]["estado"] == "RECHAZADA"
+
+    saved = client.post(
+        "/api/v1/registrar-correccion",
+        json={
+            "entrada_original": {"nombre": "Electroestimulador"},
+            "categoria_correcta": "TER-01",
+            "resultado_corregido": rejected.json(),
+        },
+    )
+    assert saved.status_code == 200
+    assert saved.json()["estado"] == "PENDIENTE_REVISION"
+    assert saved.json()["resultado_corregido"]["confidence"] == 0.95
+    assert corrections.load_training_examples() == []
 
 
 def test_register_correction_requires_approval_before_training(client):

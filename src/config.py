@@ -48,6 +48,9 @@ class Config:
     CORRECTIONS_DB_PATH = Path(
         os.getenv("CORRECTIONS_DB_PATH", str(DATA_DIR / "corrections.db"))
     )
+    MASTER_RULES_PATH = Path(
+        os.getenv("MASTER_RULES_PATH", str(DATA_DIR / "rules" / "reglas_maestras.json"))
+    )
     ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "")
     EMDN_EXCEL_PATH = Path(
         os.getenv(

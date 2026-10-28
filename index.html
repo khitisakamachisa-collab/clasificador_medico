@@ -155,7 +155,7 @@
     .confidence-bar.high { background-color: #10B981; }
     .confidence-bar.medium { background-color: #F59E0B; }
     .confidence-bar.low { background-color: #EF4444; }
-    .confidence-value { min-width: 44px; color: #344158; font-size: 2em; font-weight: 700; text-align: right; }
+    .confidence-value { min-width: 44px; color: #344158; font-size: 2.5rem; font-weight: 700; text-align: right; }
     .confidence-text { display: block; margin-top: 6px; font-size: 10px; font-weight: 600; }
     .confidence-text.high { color: #10B981; }
     .confidence-text.medium { color: #F59E0B; }
@@ -352,19 +352,10 @@
                     <option value="">Seleccionar ubicación…</option>
                     <option value="UCI">UCI</option>
                     <option value="Quirófano General">Quirófano General</option>
-                    <option value="Emergencia">Emergencia</option>
-                    <option value="Imagenología">Imagenología</option>
-                    <option value="Cardiología">Cardiología</option>
-                    <option value="Neonatología">Neonatología</option>
-                    <option value="Nefrología">Nefrología</option>
+                    <option value="Urgencias">Urgencias</option>
                     <option value="Fisioterapia">Fisioterapia</option>
-                    <option value="Central de Esterilización">Central de Esterilización</option>
-                    <option value="Endoscopía">Endoscopía</option>
-                    <option value="Laboratorio">Laboratorio</option>
-                    <option value="Farmacia">Farmacia</option>
-                    <option value="Consulta Externa">Consulta Externa</option>
-                    <option value="Hospitalización">Hospitalización</option>
-                    <option value="Otro">Otro (especificar)</option>
+                    <option value="Mobiliario Clínico">Mobiliario Clínico</option>
+                    <option value="Otro">Otro</option>
                   </select>
                 </span>
                 <span id="otherLocationWrap" class="input-wrap" hidden>
@@ -696,8 +687,25 @@
 
       // Inserta texto con textContent para mantener seguros los datos proporcionados por el usuario y la API.
       function renderResult(data, equipmentName, demo, recordInHistory = true, inputDetails = {}) {
+        const method = data.metodo || "No especificado";
+        const isManualCorrection = method === "CORRECCION_MANUAL";
+        if (isManualCorrection) {
+          data = {
+            ...data,
+            confidence: 0.95,
+            semaforo: {
+              ...data.semaforo,
+              color: "verde",
+              nivel: "ALTA",
+              mensaje: "Validado manualmente",
+              requiere_revision: false
+            }
+          };
+        }
         const confidence = Number.isFinite(Number(data.confidence)) ? Number(data.confidence) : 0;
-        const semaforo = data.validacion_correccion
+        const semaforo = isManualCorrection
+          ? data.semaforo
+          : data.validacion_correccion
           ? { ...getSemaforo(confidence), ...data.semaforo }
           : getSemaforo(confidence);
         const categoryCode = data.categoria_propia || data.categoria || "Sin categoría";
@@ -707,8 +715,6 @@
         const code = data.emdn_code || "PENDIENTE_DE_VALIDACION";
         const term = data.emdn_term || data.emdn_name || "Término no disponible";
         const isVerified = data.emdn_verified === true;
-        const method = data.metodo || "No especificado";
-
         byId("resultName").textContent = equipmentName;
         byId("methodBadge").textContent = demo ? "MODO DEMO" : method;
         byId("methodBadge").className = `source-badge${demo ? " demo-source" : ""}`;
@@ -871,8 +877,11 @@
         history.forEach((item, index) => {
           const data = item.data || {};
           const criticality = data.criticidad || {};
-          const semaforo = data.semaforo || getSemaforo(Number(data.confidence) || 0);
-          const confidence = Number(data.confidence);
+          const isManualCorrection = data.metodo === "CORRECCION_MANUAL";
+          const semaforo = isManualCorrection
+            ? { ...data.semaforo, color: "verde" }
+            : data.semaforo || getSemaforo(Number(data.confidence) || 0);
+          const confidence = isManualCorrection ? 0.95 : Number(data.confidence);
           content += `--- Clasificación #${index + 1} ---\n`;
           content += `Nombre: ${item.name || "N/A"}\n`;
           content += `Marca: ${item.inputDetails?.marca || "N/A"}\n`;
@@ -896,7 +905,9 @@
         }, {});
         const summaries = [
           ["método", countBy((item) => item.data?.metodo)],
-          ["semáforo", countBy((item) => item.data?.semaforo?.color || getSemaforo(Number(item.data?.confidence) || 0).color)],
+          ["semáforo", countBy((item) => item.data?.metodo === "CORRECCION_MANUAL"
+            ? "verde"
+            : item.data?.semaforo?.color || getSemaforo(Number(item.data?.confidence) || 0).color)],
           ["categoría", countBy((item) => item.data?.categoria_propia || item.category)]
         ];
         content += `${"=".repeat(50)}\n=== RESUMEN ESTADÍSTICO ===\n`;
@@ -1077,7 +1088,9 @@
             return;
           }
 
-          const confirmation = confidence >= 0.90
+          const confirmation = corrected.metodo === "CORRECCION_MANUAL"
+            ? "✅ Corrección validada manualmente. ¿Desea guardarla para revisión administrativa?"
+            : confidence >= 0.90
             ? "✅ Corrección validada automáticamente. ¿Desea guardarla para mejorar futuras clasificaciones?"
             : "Corrección pendiente de revisión (2 de 3 validaciones pasaron). ¿Desea guardarla para revisión?";
           const shouldSave = window.confirm(

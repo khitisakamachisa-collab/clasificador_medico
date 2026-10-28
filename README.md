@@ -151,7 +151,7 @@ from src.classifier import classify_equipment
 resultado = classify_equipment("Ecógrafo portátil Samsung", "Samsung", "Imagenología")
 ```
 
-Las reglas conocidas se aplican primero. Cuando ninguna regla coincide, se usa el clasificador TF-IDF/LogisticRegression con el texto de nombre, marca y ubicación. `metodo` indica `REGLAS` o `NLP`; `confidence` es la confianza de la categoría propia, no una probabilidad de que el EMDN sea clínicamente correcto.
+Las reglas maestras de `data/rules/reglas_maestras.json` se priorizan sobre las demás reglas. Cuando ninguna regla coincide, se usa el clasificador TF-IDF/LogisticRegression con el texto de nombre, marca y ubicación. `metodo` indica `REGLAS` o `NLP`; `confidence` es la confianza de la categoría propia, no una probabilidad de que el EMDN sea clínicamente correcto. Se devuelven códigos maestros solo cuando figuran como terminales en el catálogo local; de lo contrario, se usa un candidato terminal o se marca como pendiente.
 
 ### CLI interactiva
 
@@ -186,7 +186,7 @@ El pipeline importa el Excel, valida el dataset de ejemplo, entrena el modelo NL
 | `POST` | `/api/v1/reentrenar` | Añade ejemplos y crea una nueva versión del modelo. |
 | `GET` | `/api/v1/health` | Comprueba el estado de la API. |
 
-La confianza incluye un semáforo: verde (≥ 0.90), amarillo (≥ 0.70) y rojo (< 0.70). Las correcciones quedan almacenadas en `data/corrections.db`; `/api/v1/reentrenar` las incorpora al conjunto de ejemplos para producir una nueva versión local del modelo. Valida la nueva versión y configura `MODEL_VERSION` con su identificador antes de reiniciar la API para activarla.
+La confianza incluye un semáforo: verde (≥ 0.90), amarillo (≥ 0.70) y rojo (< 0.70). `/api/v1/recalcular` acepta una corrección humana como decisión autorizada con confianza `0.95` y semáforo verde; las validaciones técnicas se conservan como información complementaria. Las correcciones guardadas quedan en `data/corrections.db`; `/api/v1/reentrenar` las incorpora al conjunto de ejemplos para producir una nueva versión local del modelo, únicamente después de aprobación administrativa. Valida la nueva versión y configura `MODEL_VERSION` con su identificador antes de reiniciar la API para activarla.
 
 La API devuelve `400` para solicitudes no válidas, `429` cuando se supera el límite configurado y `503` si las métricas aún no existen. CORS y el límite de solicitudes se configuran con las variables de [.env.example](./.env.example); el limitador incluido es local a cada proceso.
 
@@ -261,7 +261,7 @@ Este proyecto se distribuye bajo la licencia Apache-2.0. Consulta [LICENSE](./LI
 
 1. **Usar el Excel como única fuente de códigos.** El importador lee las filas con `TERMINAL LEVEL = YES` y descarta las demás. Funcionó porque impide que un código genérico o una muestra inventada llegue a la respuesta.
 2. **Filtrar por prefijo antes de puntuar términos.** La búsqueda primero restringe candidatos a la familia EMDN de la categoría; después compara términos. Esto evita que coincidencias léxicas como “X-RAY” en accesorios de otra familia compitan con equipos de radiología.
-3. **Separar reglas de los códigos terminales.** `src/rules_dictionary.py` contiene categorías, palabras clave, prefijos y subprefijos; la selección final del código siempre se hace desde el índice leído del Excel. Así se puede mejorar el vocabulario sin hardcodear resultados EMDN.
+3. **Separar reglas de los códigos terminales.** `src/rules_dictionary.py` contiene categorías, palabras clave, prefijos y subprefijos; `data/rules/reglas_maestras.json` contiene las asignaciones explícitas prioritarias. `emdn_verified` indica si el catálogo local confirma el código configurado.
 4. **Añadir reglas para términos clínicos y siglas.** Variantes como “resonador”, “RM”, “MRI”, “tomógrafo”, “respirador” y “ecógrafo” elevan la categoría correcta a `REGLAS` con confianza alta, en vez de dejar esos nombres ambiguos al modelo NLP.
 5. **Refinar subfamilias con la ubicación y el tipo de equipo.** “UCI”, “UTI”, “hospital” y “quirófano” seleccionan ventilación hospitalaria; “domicilio” selecciona la rama no hospitalaria. MRI, CT y PET también se separan antes de buscar.
 6. **Tratar la ausencia del Excel como estado pendiente.** La clasificación propia sigue disponible, pero se devuelve `PENDIENTE_DE_VALIDACION`; no se fabrica un reemplazo. Esto permite operar sin confundir una categoría predicha con un EMDN verificado.

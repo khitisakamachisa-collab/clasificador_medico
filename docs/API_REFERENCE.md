@@ -12,11 +12,11 @@ Las entradas inválidas reciben `400` con detalle de validación. Se devuelve `4
 
 `nombre` es obligatorio; marca, ubicación y `cmms_equipment_id` son opcionales. Responde con categoría, confianza, código EMDN terminal verificado o estado pendiente, clase MDR, criticidad, código interno y `semaforo`. Sus niveles son verde (≥ 0.90), amarillo (≥ 0.70) y rojo (< 0.70); amarillo y rojo requieren revisión.
 
+Las reglas maestras configuradas en `data/rules/reglas_maestras.json` se aplican antes del modelo NLP. Un código definido por una regla se devuelve directamente solo si el catálogo EMDN local lo reconoce como terminal; los códigos no terminales nunca se devuelven como verificados.
+
 ## `POST /api/v1/recalcular`
 
-Recibe los campos de `/clasificar` y `categoria_forzada`, que debe ser una de las 25 categorías disponibles. Fuerza esa categoría y vuelve a calcular EMDN, clase MDR y criticidad. El método se devuelve como `CORRECCION_MANUAL`. La confianza no es una probabilidad NLP: es un puntaje de coherencia basado en (1) que el EMDN sea terminal y tenga un prefijo asociado a la categoría, (2) que la clase MDR esté a no más de un nivel de la predeterminada y (3) que la criticidad esté dentro de ±1 de los valores de la categoría y su índice/nivel sean consistentes. Tres comprobaciones aprobadas producen `0.95`/`VALIDADA_AUTOMATICAMENTE`, dos producen `0.75`/`PENDIENTE_REVISION` y menos de dos producen `0.30`/`RECHAZADA`. Además, el término EMDN se contrasta semánticamente con el nombre del equipo; si no hay coherencia semántica, la corrección se rechaza con confianza `0.0`, aunque pase las comprobaciones estructurales. La respuesta incluye las tres comprobaciones estructurales y `semantica_valida` en `validacion_correccion.validaciones`.
-
-La respuesta incluye `validacion_correccion` con las tres banderas y el mensaje. Estas comprobaciones son una validación estructural y no sustituyen la revisión clínica experta.
+Recibe los campos de `/clasificar` y `categoria_forzada`, que debe ser una de las 25 categorías disponibles. Fuerza esa categoría y vuelve a calcular EMDN, clase MDR y criticidad. La decisión humana se devuelve con `metodo: "CORRECCION_MANUAL"`, `confidence: 0.95` y semáforo verde (`nivel: "ALTA"`, mensaje `Validado manualmente`), con independencia del puntaje de las comprobaciones técnicas. Estas comprobaciones siguen disponibles en `validacion_correccion` para aportar contexto y no sustituyen la revisión clínica experta.
 
 ```json
 {"nombre":"TENS para fisioterapia","marca":"Enraf Nonius","ubicacion":"Fisioterapia","categoria_forzada":"TER-01","cmms_equipment_id":"ACT-1042"}
@@ -42,7 +42,7 @@ Guarda una corrección en estado `PENDIENTE` en la base SQLite local. Recibe `en
 }
 ```
 
-Solo se guardan correcciones cuyo puntaje recalculado por el servidor sea al menos `0.75` (dos de tres comprobaciones y coherencia semántica). El servidor ignora la confianza enviada como evidencia y vuelve a calcular EMDN, MDR, criticidad y puntaje. Todas las correcciones quedan pendientes de revisión administrativa, incluso las validadas automáticamente; no se usan para entrenamiento hasta su aprobación explícita. El resultado `VALIDADA_AUTOMATICAMENTE` representa coherencia de datos, no aprobación clínica.
+El servidor vuelve a calcular EMDN, MDR, criticidad y comprobaciones técnicas. Una decisión manual con `metodo: "CORRECCION_MANUAL"` y confianza `0.95` se conserva como decisión humana aunque las comprobaciones técnicas no coincidan; las demás solicitudes deben alcanzar el umbral automático de `0.75`. Todas las correcciones quedan pendientes de revisión administrativa y no se usan para entrenamiento hasta su aprobación explícita.
 
 ## Revisión administrativa
 
