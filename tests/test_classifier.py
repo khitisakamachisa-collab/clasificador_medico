@@ -93,37 +93,60 @@ def test_tens_for_physiotherapy_has_high_confidence_green_light():
 
 
 def test_master_rules_match_exploration_lamp_before_nlp():
-    result = classify_equipment("Lámpara exploración móvil")
+    result = classify_equipment("Lámpara exploración móvil", "GIMA", "UCI")
 
     assert result["categoria_propia"] == "CIR-01"
     assert result["emdn_code"] == "Z129004"
     assert result["mdr_class"] == "I"
     assert result["metodo"] == "REGLAS"
-    assert result["confidence"] == 0.96
+    assert result["confidence"] == 0.95
     assert result["semaforo"]["color"] == "verde"
+    assert result["emdn_verified"] is True
 
 
 @pytest.mark.parametrize(
-    ("name", "category", "emdn_code", "mdr_class"),
+    ("name", "brand", "location", "category", "emdn_code", "mdr_class", "confidence"),
     [
-        ("Monitor secuencial", "MON-01", "Z1203020201", "IIa"),
-        ("Bisturí armónico", "CIR-02", "K0202010201", "IIb"),
-        ("Bisturí armónico (Harmonic)", "CIR-02", "K0202010201", "IIb"),
-        ("Harmonic scalpel", "CIR-02", "K0202010201", "IIb"),
-        ("Cama UCI", "MOB-01", "V08060102", "I"),
-        ("Equipo de resucitación", "MOB-01", "V08060102", "I"),
+        ("Monitor secuencial", "Mindray", "UCI", "MON-01", "Z1203020201", "IIa", 0.95),
+        ("Monitor multiparametro", None, None, "MON-01", "Z1203020201", "IIa", 0.95),
+        ("Bisturí armónico", None, None, "CIR-02", "K0202010201", "IIb", 0.96),
+        ("Bisturí armónico (Harmonic)", "Ethicon", "Quirófano General", "CIR-02", "K0202010201", "IIb", 0.96),
+        ("Harmonic scalpel", None, None, "CIR-02", "K0202010201", "IIb", 0.90),
+        ("Bisturi ultrasonico", None, None, "CIR-02", "K0202010201", "IIb", 0.95),
+        ("Cama UCI", None, None, "MOB-01", "V08060102", "I", 0.96),
+        ("Equipo de resucitación", None, None, "MOB-01", "V08060102", "I", 0.96),
     ],
 )
-def test_master_rules_override_legacy_classification(name, category, emdn_code, mdr_class):
-    result = classify_equipment(name)
+def test_master_rules_override_legacy_classification(
+    name, brand, location, category, emdn_code, mdr_class, confidence
+):
+    result = classify_equipment(name, brand, location)
 
     assert result["categoria_propia"] == category
     assert result["emdn_code"] == emdn_code
     assert result["mdr_class"] == mdr_class
+    assert result["confidence"] == confidence
     assert result["metodo"] == "REGLAS"
     assert result["semaforo"]["color"] == "verde"
     assert result["emdn_verified"] is True
     assert result["emdn_code"] != "Z12030202"
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "Lampara exploracion movil",
+        "Lámpara de exploración móvil",
+    ],
+)
+def test_exploration_lamp_rule_accepts_spelling_variants(name):
+    result = classify_equipment(name)
+
+    assert result["categoria_propia"] == "CIR-01"
+    assert result["emdn_code"] == "Z129004"
+    assert result["confidence"] == 0.95
+    assert result["metodo"] == "REGLAS"
+    assert result["emdn_verified"] is True
 
 
 def test_typo_context_preserves_fisioterapia_rule():

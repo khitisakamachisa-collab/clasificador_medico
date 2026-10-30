@@ -4,35 +4,80 @@
     "categoria": "CIR-01",
     "emdn_code": "Z129004",
     "mdr_class": "I",
-    "criticidad": "MEDIA"
+    "criticidad": "MEDIA",
+    "confidence": 0.95
+  },
+  {
+    "keyword": "lampara exploracion",
+    "categoria": "CIR-01",
+    "emdn_code": "Z129004",
+    "mdr_class": "I",
+    "criticidad": "MEDIA",
+    "confidence": 0.95
+  },
+  {
+    "keyword": "lampara de exploracion",
+    "categoria": "CIR-01",
+    "emdn_code": "Z129004",
+    "mdr_class": "I",
+    "criticidad": "MEDIA",
+    "confidence": 0.95
   },
   {
     "keyword": "monitor secuencial",
     "categoria": "MON-01",
     "emdn_code": "Z1203020201",
     "mdr_class": "IIa",
-    "criticidad": "ALTA"
+    "criticidad": "ALTA",
+    "confidence": 0.95
+  },
+  {
+    "keyword": "monitor multiparametro",
+    "categoria": "MON-01",
+    "emdn_code": "Z1203020201",
+    "mdr_class": "IIa",
+    "criticidad": "ALTA",
+    "confidence": 0.95
   },
   {
     "keyword": "bisturí armónico",
     "categoria": "CIR-02",
     "emdn_code": "K0202010201",
     "mdr_class": "IIb",
-    "criticidad": "ALTA"
+    "criticidad": "ALTA",
+    "confidence": 0.96
+  },
+  {
+    "keyword": "bisturi armonico",
+    "categoria": "CIR-02",
+    "emdn_code": "K0202010201",
+    "mdr_class": "IIb",
+    "criticidad": "ALTA",
+    "confidence": 0.96
+  },
+  {
+    "keyword": "bisturi ultrasonico",
+    "categoria": "CIR-02",
+    "emdn_code": "K0202010201",
+    "mdr_class": "IIb",
+    "criticidad": "ALTA",
+    "confidence": 0.95
   },
   {
     "keyword": "armónico",
     "categoria": "CIR-02",
     "emdn_code": "K0202010201",
     "mdr_class": "IIb",
-    "criticidad": "ALTA"
+    "criticidad": "ALTA",
+    "confidence": 0.96
   },
   {
     "keyword": "harmonic",
     "categoria": "CIR-02",
     "emdn_code": "K0202010201",
     "mdr_class": "IIb",
-    "criticidad": "ALTA"
+    "criticidad": "ALTA",
+    "confidence": 0.90
   },
   {
     "keyword": "cama uci",

@@ -6,7 +6,12 @@ import math
 import os
 from pathlib import Path
 
+from dotenv import dotenv_values
+
 from .utils import DATA_DIR, MODELS_DIR, RAW_DIR
+
+
+_LOCAL_ENV = Path(__file__).resolve().parents[1] / ".env"
 
 
 def _load_criticality_weights() -> dict[str, float]:
@@ -51,7 +56,12 @@ class Config:
     MASTER_RULES_PATH = Path(
         os.getenv("MASTER_RULES_PATH", str(DATA_DIR / "rules" / "reglas_maestras.json"))
     )
-    ADMIN_API_KEY = os.getenv("ADMIN_API_KEY", "")
+    _local_admin_key = dotenv_values(_LOCAL_ENV).get("ADMIN_API_KEY")
+    ADMIN_API_KEY = (
+        _local_admin_key
+        if _local_admin_key is not None
+        else os.getenv("ADMIN_API_KEY", "")
+    )
     EMDN_EXCEL_PATH = Path(
         os.getenv(
             "EMDN_EXCEL_PATH",

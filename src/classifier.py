@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 import unicodedata
 import logging
@@ -75,6 +76,15 @@ def _load_master_rules() -> tuple[dict[str, str], ...]:
             or rule["mdr_class"] not in {"I", "IIa", "IIb", "III"}
             or not isinstance(rule["criticidad"], str)
             or rule["criticidad"] not in {"BAJA", "MEDIA", "ALTA"}
+            or (
+                "confidence" in rule
+                and (
+                    not isinstance(rule["confidence"], (int, float))
+                    or isinstance(rule["confidence"], bool)
+                    or not math.isfinite(rule["confidence"])
+                    or not 0 <= rule["confidence"] <= 1
+                )
+            )
         ):
             raise ValueError(f"Regla maestra no válida: {rule!r}")
     return tuple(rules)
@@ -110,7 +120,11 @@ def _master_rule_for_keyword(keyword: str | None) -> dict[str, str] | None:
 def _category_from_rules(name: str) -> tuple[str, str, float] | None:
     master_rule = _master_rule_match(name)
     if master_rule:
-        return master_rule["categoria"], master_rule["keyword"], 0.96
+        return (
+            master_rule["categoria"],
+            master_rule["keyword"],
+            float(master_rule.get("confidence", 0.96)),
+        )
 
     normalized_name = f" {_normalize_text(name)} "
     matches = []

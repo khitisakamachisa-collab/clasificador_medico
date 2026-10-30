@@ -100,7 +100,7 @@ def recalcular(payload: RecalculateRequest, request: Request):
     result["metodo"] = "CORRECCION_MANUAL"
     result["confidence"] = 0.95
     result["semaforo"] = obtener_semaforo(result["confidence"])
-    result["semaforo"]["mensaje"] = "Validado manualmente"
+    result["semaforo"]["mensaje"] = "Validado manualmente por experto biomédico"
     if payload.cmms_equipment_id:
         result["cmms_equipment_id"] = payload.cmms_equipment_id
     record_audit(

@@ -1276,7 +1276,7 @@
       }
 
       adminLoginButton.addEventListener("click", async () => {
-        const key = byId("adminKey").value;
+        const key = byId("adminKey").value.trim();
         const user = byId("adminUser").value.trim();
         if (!key || !user) {
           showMessage("Ingresa el usuario y la clave de administrador.", "error");

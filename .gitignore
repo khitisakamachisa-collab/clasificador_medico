@@ -1,3 +1,4 @@
 data/corrections.db
 data/corrections.db-shm
 data/corrections.db-wal
+.env

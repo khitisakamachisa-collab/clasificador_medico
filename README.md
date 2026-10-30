@@ -29,7 +29,7 @@ La opción `Bypass` se aplica únicamente a ese proceso de PowerShell, no cambia
 
 También se puede activar el entorno con `.\.venv\Scripts\Activate.ps1` y usar `python -m ...`. En Linux/macOS, activar con `source .venv/bin/activate`.
 
-La configuración está documentada en [.env.example](./.env.example). Copia ese archivo a `.env` antes de iniciar la aplicación. Para habilitar el panel administrativo, configura `ADMIN_API_KEY` con una clave aleatoria fuerte en `.env`; sin ella, las rutas de administración quedan deshabilitadas. No compartas ni publiques `.env`.
+La configuración está documentada en [.env.example](./.env.example). Copia ese archivo a `.env` antes de iniciar la aplicación. Para habilitar el panel administrativo, configura `ADMIN_API_KEY` en `.env`; una clave definida allí tiene prioridad sobre la variable del entorno de Windows. Sin una clave configurada, las rutas de administración quedan deshabilitadas. No guardes claves en este README ni publiques `.env`.
 
 Comprueba que el Excel esté en esta ruta:
 
@@ -125,7 +125,17 @@ La interfaz está en [index.html](./index.html) y se comunica con `http://localh
 
 Abre `http://localhost:3000/` en el navegador. Puedes activar **Modo Demo** en el formulario para mostrar datos simulados sin llamar a la API; si no logra conectarse, la interfaz también activa ese modo y lo indica claramente. Chart.js se carga desde CDN, por lo que el gráfico requiere conexión a Internet.
 
-El panel de administración usa la clave `ADMIN_API_KEY` por solicitud y no la guarda en el navegador. Inicia sesión en **Herramientas de administración** para revisar las correcciones pendientes y habilitar el reentrenamiento. Solo las correcciones aprobadas explícitamente se consideran para entrenar; se requieren al menos diez.
+El campo **Usuario administrador** es el nombre que se guarda en la auditoría; puedes escribir `admin` o tu nombre. La clave de acceso es `ADMIN_API_KEY`, que el servidor valida en cada solicitud y que la interfaz no guarda. Para una demo local en `localhost`, puedes usar temporalmente `admin123`; cámbiala por una clave aleatoria antes de exponer la API en una red. Solo las correcciones aprobadas explícitamente se consideran para entrenar; se requieren al menos diez.
+
+#### Configurar la clave local en Windows
+
+En la raíz del proyecto, copia `.env.example` a `.env` si todavía no existe y define `ADMIN_API_KEY` en ese archivo. Para una demo local puedes usar `ADMIN_API_KEY=admin123`; para otros usos, genera una clave aleatoria:
+
+```powershell
+$key = .\.venv\Scripts\python.exe -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+Edita la línea `ADMIN_API_KEY=` en `.env` y reinicia la API para que lea la nueva clave. En el panel, escribe `admin` (o tu nombre) como usuario y el valor de `ADMIN_API_KEY` como clave.
 
 ### Python
 
