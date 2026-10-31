@@ -146,6 +146,61 @@ def test_recalculate_returns_validation_review_and_rejection_states(client, monk
     assert corrections.load_training_examples() == []
 
 
+def test_semantic_failure_stays_rejected_and_cannot_be_saved(client):
+    recalculated = client.post(
+        "/api/v1/recalcular",
+        json={
+            "nombre": "Nebulizador ultrasónico",
+            "categoria_forzada": "NEO-01",
+        },
+    )
+    assert recalculated.status_code == 200
+    result = recalculated.json()
+    assert result["confidence"] == 0.30
+    assert result["validacion_correccion"]["confidence"] == 0.30
+    assert result["validacion_correccion"]["estado"] == "RECHAZADA"
+    assert result["validacion_correccion"]["validaciones"]["semantica_valida"] is False
+    assert result["semaforo"]["color"] == "rojo"
+
+    forged_result = {**result, "confidence": 0.95}
+    saved = client.post(
+        "/api/v1/registrar-correccion",
+        json={
+            "entrada_original": {"nombre": "Nebulizador ultrasónico"},
+            "categoria_correcta": "NEO-01",
+            "resultado_corregido": forged_result,
+        },
+    )
+    assert saved.status_code == 400
+    assert "relación semántica" in saved.json()["detail"]
+    assert corrections.list_corrections() == []
+    assert corrections.load_training_examples() == []
+
+
+def test_semantically_rejected_correction_cannot_be_approved_for_training(client):
+    correction_id = corrections.save_correction(
+        {"nombre": "Nebulizador ultrasónico"},
+        "NEO-01",
+        {
+            "confidence": 0.30,
+            "validacion_correccion": {
+                "validaciones": {"semantica_valida": False}
+            },
+        },
+    )
+
+    response = client.post(
+        f"/api/v1/correcciones/{correction_id}/aprobar",
+        headers=ADMIN_HEADERS,
+        json={},
+    )
+
+    assert response.status_code == 409
+    assert "validación semántica fallida" in response.json()["detail"]
+    assert corrections.validate_saved_corrections() == 0
+    assert corrections.load_training_examples() == []
+
+
 def test_register_correction_requires_approval_before_training(client):
     response = client.post(
         "/api/v1/registrar-correccion",
@@ -228,6 +283,7 @@ def test_register_correction_rejects_low_confidence(client):
     )
     assert response.status_code == 400
     assert "menos de 2 validaciones coherentes" in response.json()["detail"]
+    assert corrections.list_corrections() == []
     assert corrections.load_training_examples() == []
 
 
@@ -324,7 +380,8 @@ def test_register_correction_rejects_forged_confidence(client, monkeypatch):
         },
     )
     assert response.status_code == 400
-    assert "menos de 2 validaciones coherentes" in response.json()["detail"]
+    assert "relación semántica" in response.json()["detail"]
+    assert corrections.list_corrections() == []
 
 
 def test_validation_endpoint_and_legacy_alias(client):

@@ -17,7 +17,7 @@ git add .
 echo ==============================
 echo 3. Creando commit...
 echo ==============================
-git commit -m "Actualización automática clasificador_medico"
+git commit -m "Ajuste de lógica - La validación semántica debe afectar la confianza"
 
 echo ==============================
 echo 4. Subiendo a GitHub...

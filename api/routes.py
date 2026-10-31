@@ -98,9 +98,14 @@ def recalcular(payload: RecalculateRequest, request: Request):
     validation = validar_correccion_automaticamente(result, nombre_equipo=payload.nombre)
     result["validacion_correccion"] = validation
     result["metodo"] = "CORRECCION_MANUAL"
-    result["confidence"] = 0.95
-    result["semaforo"] = obtener_semaforo(result["confidence"])
-    result["semaforo"]["mensaje"] = "Validado manualmente por experto biomédico"
+    if validation["validaciones"]["semantica_valida"]:
+        result["confidence"] = 0.95
+        result["semaforo"] = obtener_semaforo(result["confidence"])
+        result["semaforo"]["mensaje"] = "Validado manualmente por experto biomédico"
+    else:
+        result["confidence"] = validation["confidence"]
+        result["semaforo"] = obtener_semaforo(validation["confidence"])
+        result["semaforo"]["mensaje"] = validation["mensaje"]
     if payload.cmms_equipment_id:
         result["cmms_equipment_id"] = payload.cmms_equipment_id
     record_audit(
@@ -153,6 +158,9 @@ def registrar_correccion(payload: RegisterCorrectionRequest, request: Request):
         recalculated, nombre_equipo=original["nombre"]
     )
     recalculated["validacion_correccion"] = validation
+    if not validation["validaciones"]["semantica_valida"]:
+        raise HTTPException(status_code=400, detail=validation["mensaje"])
+
     manual_correction = (
         corrected.get("metodo") == "CORRECCION_MANUAL" and confidence == 0.95
     )

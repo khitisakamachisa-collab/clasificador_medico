@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from difflib import SequenceMatcher
 from typing import Any
 
 from .criticality import calcular_criticidad
@@ -19,8 +20,8 @@ _CRITICALITY_FIELDS = (
 )
 _STOP_WORDS = {
     "a", "al", "con", "de", "del", "el", "en", "la", "las", "los", "para",
-    "por", "un", "una", "y", "and", "for", "or", "the", "with", "equipment",
-    "device", "devices", "medical",
+    "por", "un", "una", "unos", "unas", "y", "and", "for", "or", "the",
+    "with", "equipment", "device", "devices", "medical",
 }
 _SEMANTIC_SYNONYMS = {
     "bisturi": {"scalpel", "scalpels", "knife", "surgical"},
@@ -33,20 +34,71 @@ _SEMANTIC_SYNONYMS = {
     "quirofano": {"operating", "surgery", "surgical"},
     "uci": {"intensive", "care", "critical"},
 }
+SINONIMOS_MEDICOS = {
+    "monitor": {"monito", "monitores", "monitoreo", "monitor", "monitors"},
+    "ecografo": {
+        "ecografo", "ultrasonido", "eco", "ultrason", "ultrasound", "scanner", "scanners"
+    },
+    "respirador": {
+        "respirador",
+        "ventilador",
+        "ventilacion",
+        "respirator",
+        "respirators",
+        "ventilator",
+        "ventilators",
+    },
+    "bisturi": {"bisturi", "escalpelo", "scalpel", "scalpels", "knife", "surgical"},
+    "cama": {
+        "cama", "camilla", "litera", "bed", "beds", "patient", "intensive", "care",
+        "hospital",
+    },
+    "lampara": {
+        "lampara", "luz", "foco", "lamp", "lamps", "light", "lights", "source",
+        "sources", "scialytic", "scialytics",
+    },
+    "tens": {
+        "physical", "therapy", "physiotherapy", "fisioterapia", "terapia", "fisica",
+    },
+    "ems": {
+        "physical", "therapy", "physiotherapy", "fisioterapia", "terapia", "fisica",
+    },
+    "uci": {
+        "uci", "unidad", "unidades", "cuidados", "intensivos", "intensive", "care",
+        "critical",
+    },
+}
 _ADDITIONAL_EMDN_PREFIXES = {
     # Instrumentos quirúrgicos reutilizables pertenecen a L01 en EMDN, no a Z1201.
     "CIR-01": ("L0101",),
 }
+_ADDITIONAL_EMDN_CODES = {"CIR-01": {"Z129004"}}
+
+
+def _stem_word(word: str) -> str:
+    """Reduce plurales comunes en español e inglés a una forma comparable."""
+    if len(word) > 5 and word.endswith("es"):
+        return word[:-2]
+    if len(word) > 4 and word.endswith("s"):
+        return word[:-1]
+    return word
+
+
+def normalizar_texto(texto: str) -> str:
+    """Normaliza acentos, caracteres, palabras vacías y plurales comunes."""
+    normalized = unicodedata.normalize("NFKD", (texto or "").lower())
+    normalized = "".join(char for char in normalized if not unicodedata.combining(char))
+    words = re.findall(r"[a-z0-9]+", normalized)
+    return " ".join(_stem_word(word) for word in words if word not in _STOP_WORDS)
 
 
 def _normalize_words(value: str) -> set[str]:
-    normalized = unicodedata.normalize("NFKD", value.lower())
-    normalized = "".join(char for char in normalized if not unicodedata.combining(char))
-    return {
-        word
-        for word in re.findall(r"[a-z0-9]+", normalized)
-        if word not in _STOP_WORDS
-    }
+    return set(normalizar_texto(value).split())
+
+
+def calcular_similitud(str1: str, str2: str) -> float:
+    """Calcula la similitud entre dos términos mediante SequenceMatcher."""
+    return SequenceMatcher(None, str1, str2).ratio()
 
 
 def validar_semantica(nombre_equipo: str, termino_emdn: str) -> bool:
@@ -58,10 +110,16 @@ def validar_semantica(nombre_equipo: str, termino_emdn: str) -> bool:
     if equipment_words & term_words:
         return True
 
+    for word in equipment_words:
+        for canonical, synonyms in SINONIMOS_MEDICOS.items():
+            synonym_words = _normalize_words(" ".join({canonical, *synonyms}))
+            if word in synonym_words and synonym_words & term_words:
+                return True
+
     aliases = set()
     for word in equipment_words:
         aliases.update(_SEMANTIC_SYNONYMS.get(word, ()))
-    if aliases & term_words:
+    if _normalize_words(" ".join(aliases)) & term_words:
         return True
 
     # Las palabras clave de categoría amplían equivalencias de nombres de equipos médicos.
@@ -73,6 +131,15 @@ def validar_semantica(nombre_equipo: str, termino_emdn: str) -> bool:
             )
             if category_aliases & term_words:
                 return True
+
+    # La comparación aproximada se limita a palabras suficientemente largas para
+    # evitar coincidencias accidentales entre términos cortos.
+    for word in equipment_words:
+        if len(word) < 4:
+            continue
+        for term_word in term_words:
+            if len(term_word) >= 4 and calcular_similitud(word, term_word) >= 0.80:
+                return True
     return False
 
 
@@ -80,14 +147,16 @@ def verificar_emdn_en_excel(categoria: str, emdn_code: str) -> bool:
     """Comprueba que el código EMDN sea terminal y use el prefijo de la categoría."""
     prefixes = (EMDN_PREFIXES.get(categoria), *_ADDITIONAL_EMDN_PREFIXES.get(categoria, ()))
     prefixes = tuple(prefix for prefix in prefixes if prefix)
-    if not prefixes or not emdn_code:
+    allowed_codes = _ADDITIONAL_EMDN_CODES.get(categoria, set())
+    if (not prefixes and not allowed_codes) or not emdn_code:
         return False
     database = load_emdn_database()
-    item = database.get("flat", {}).get(str(emdn_code).strip())
+    code = str(emdn_code).strip()
+    item = database.get("flat", {}).get(code)
     return bool(
         item
         and item.get("terminal_level") == "YES"
-        and str(emdn_code).strip().startswith(prefixes)
+        and (code.startswith(prefixes) or code in allowed_codes)
     )
 
 
@@ -141,7 +210,7 @@ def verificar_criticidad_categoria(categoria: str, criticidad: dict[str, Any]) -
 def validar_correccion_automaticamente(
     correccion: dict[str, Any], *, nombre_equipo: str | None = None
 ) -> dict[str, Any]:
-    """Asigna una puntuación de coherencia basada en las tres validaciones objetivas."""
+    """Asigna confianza según las validaciones estructurales y semánticas."""
     category = correccion.get("categoria_propia") or correccion.get("categoria")
     emdn_code = correccion.get("emdn_code", "")
     database = load_emdn_database()
@@ -161,11 +230,12 @@ def validar_correccion_automaticamente(
     }
     passed = sum(checks[key] for key in ("emdn_valido", "mdr_coherente", "criticidad_razonable"))
     if not semantic_valid:
-        confidence = 0.0
+        confidence = 0.30
         state = "RECHAZADA"
         message = (
-            "Corrección rechazada: El término EMDN no tiene relación semántica "
-            "con el nombre del equipo. Por favor, revise la corrección."
+            "❌ Corrección rechazada: El nombre del equipo no tiene relación "
+            "semántica con el término EMDN seleccionado. Por favor, revise la "
+            "categoría elegida."
         )
     elif passed == 3:
         confidence = 0.95

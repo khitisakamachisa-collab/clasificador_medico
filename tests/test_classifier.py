@@ -249,11 +249,45 @@ def test_correction_validation_functions_check_emdn_and_criticality_details():
     result = classify_equipment("Electroestimulador", categoria_forzada="TER-01")
 
     assert correction_validation.verificar_emdn_en_excel("TER-01", "Z120616")
+    assert correction_validation.verificar_emdn_en_excel("CIR-01", "Z129004")
     assert not correction_validation.verificar_emdn_en_excel("IMG-03", "Z120616")
     assert correction_validation.verificar_criticidad_categoria("TER-01", result["criticidad"])
 
     inconsistent = {**result["criticidad"], "indice": 1.0}
     assert not correction_validation.verificar_criticidad_categoria("TER-01", inconsistent)
+
+
+@pytest.mark.parametrize(
+    ("nombre_equipo", "termino_emdn"),
+    [
+        ("Monito de signos", "MULTI-PARAMETER PATIENT BEDSIDE MONITORS"),
+        ("Ecografo", "PORTABLE ULTRASOUND SCANNERS"),
+        ("Lampara cialitica", "MOBILE SCIALYTIC LAMPS"),
+        ("Lámpara exploración", "LIGHT SOURCES"),
+        ("Ventilador", "ADULT PULMONARY VENTILATORS"),
+        ("TENS", "ELECTROMECHANICAL SYSTEMS FOR PHYSICAL THERAPY"),
+        ("EMS", "ELECTROMECHANICAL SYSTEMS FOR PHYSICAL THERAPY"),
+    ],
+)
+def test_semantic_validation_accepts_typos_and_medical_synonyms(
+    nombre_equipo, termino_emdn
+):
+    assert correction_validation.validar_semantica(nombre_equipo, termino_emdn)
+
+
+def test_semantic_validation_rejects_unrelated_equipment():
+    assert not correction_validation.validar_semantica(
+        "Nebulizador ultrasónico", "FIXED NEONATAL INCUBATORS"
+    )
+    assert not correction_validation.validar_semantica(
+        "Cama UCI", "NEUROMUSCULAR STIMULATION EQUIPMENT"
+    )
+
+
+def test_semantic_validation_normalizes_accents_and_plural_forms():
+    assert correction_validation.normalizar_texto(
+        "LÁMPARAS de quirófano"
+    ) == "lampara quirofano"
 
 
 def test_correction_validation_requires_review_when_two_checks_pass():
@@ -303,9 +337,28 @@ def test_semantic_check_rejects_unrelated_emdn_term_even_if_structure_matches():
         result, nombre_equipo="Cama UCI"
     )
 
-    assert validation["confidence"] == 0.0
+    assert validation["confidence"] == 0.30
     assert validation["estado"] == "RECHAZADA"
     assert validation["validaciones"]["semantica_valida"] is False
+
+
+@pytest.mark.parametrize(
+    ("name", "category", "emdn_code"),
+    [
+        ("Lámpara exploración", "CIR-01", "Z129004"),
+        ("TENS", "TER-01", "Z120616"),
+    ],
+)
+def test_semantic_synonyms_preserve_high_confidence_manual_corrections(
+    name, category, emdn_code
+):
+    result = classify_equipment(name, categoria_forzada=category)
+
+    assert result["emdn_code"] == emdn_code
+    assert result["confidence"] == 0.95
+    assert result["validacion_correccion"]["confidence"] == 0.95
+    assert result["validacion_correccion"]["estado"] == "VALIDADA_AUTOMATICAMENTE"
+    assert result["validacion_correccion"]["validaciones"]["semantica_valida"] is True
 
 
 @pytest.mark.parametrize(

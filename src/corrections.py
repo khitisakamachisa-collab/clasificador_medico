@@ -11,7 +11,6 @@ from sqlalchemy import (
     String,
     Text,
     create_engine,
-    func,
     inspect,
     select,
     text,
@@ -153,6 +152,13 @@ def save_correction(
         return log.id
 
 
+def _has_failed_semantic_validation(item: CorrectionLog) -> bool:
+    result = json.loads(item.resultado_corregido)
+    validation = result.get("validacion_correccion") or {}
+    validations = validation.get("validaciones") or {}
+    return validations.get("semantica_valida") is False
+
+
 def load_training_examples() -> list[dict[str, str | None]]:
     """Carga exclusivamente ejemplos aprobados explícitamente por un administrador."""
     engine = _engine()
@@ -171,6 +177,7 @@ def load_training_examples() -> list[dict[str, str | None]]:
                 "source": "USER_CORRECTION",
             }
             for item in corrections
+            if not _has_failed_semantic_validation(item)
         ]
 
 
@@ -178,11 +185,11 @@ def validate_saved_corrections() -> int:
     """Cuenta las correcciones aprobadas y aptas para reentrenar."""
     engine = _engine()
     with Session(engine) as session:
-        return session.scalar(
-            select(func.count())
-            .select_from(CorrectionLog)
+        corrections = session.scalars(
+            select(CorrectionLog)
             .where(CorrectionLog.estado_revision == "APROBADA")
-        ) or 0
+        ).all()
+        return sum(not _has_failed_semantic_validation(item) for item in corrections)
 
 
 def get_correction(correction_id: int) -> dict | None:
@@ -281,6 +288,10 @@ def review_correction(
             return None
         if item.estado_revision != "PENDIENTE":
             raise ValueError("La corrección ya fue revisada.")
+        if action == "APROBAR" and _has_failed_semantic_validation(item):
+            raise ValueError(
+                "No se puede aprobar una corrección con validación semántica fallida."
+            )
         previous = {"estado": item.estado_revision}
         if action == "SOLICITAR_INFORMACION":
             item.notas = reason.strip()
