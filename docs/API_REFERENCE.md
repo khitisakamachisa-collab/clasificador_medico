@@ -46,7 +46,7 @@ El servidor vuelve a calcular EMDN, MDR, criticidad y comprobaciones técnicas. 
 
 ## Revisión administrativa
 
-Configura `ADMIN_API_KEY` en `.env`. Todas las rutas administrativas comparten la misma validación y exigen los encabezados `X-Admin-Key` y `X-Admin-User`; las claves vacías o incorrectas no autorizan el acceso. La interfaz solicita la clave en un único modal reutilizado por las acciones administrativas.
+Configura `ADMIN_API_KEY` en `.env`. Las rutas administrativas validan `X-Admin-Key`; normalmente también exigen `X-Admin-User` para la auditoría. La ruta MTBF admite opcionalmente la identidad en su JSON y, si no se proporciona en el cuerpo ni en `X-Admin-User`, registra `SISTEMA`. Las claves vacías o incorrectas no autorizan el acceso. La interfaz solicita la clave en un único modal reutilizado por las acciones administrativas.
 
 - `POST /api/v1/admin/auth`: valida la clave y la identidad de auditoría con el mismo control que las operaciones protegidas. No almacena credenciales en `localStorage`.
 
@@ -152,7 +152,7 @@ Los equipos se identifican con `cmms_equipment_id` cuando se envía al clasifica
 
 ## MTBF y reportes de criticidad
 
-- `POST /api/v1/criticidad/mtbf`: actualización administrativa externa, individual (`equipo_id`, `mtbf_dias`) o por lote (`equipos`). Responde con totales actualizados/omitidos y detalle. Un ajuste manual reciente de `historial_fallas` prevalece durante 90 días.
+- `POST /api/v1/criticidad/mtbf`: actualización administrativa externa, individual (`equipo_id`, `mtbf_dias`) o por lote (`equipos`). `administrador` es opcional; si se omite, se usa `X-Admin-User` cuando está presente y, en caso contrario, `SISTEMA`. Responde con totales actualizados/omitidos y detalle. Un ajuste manual reciente de `historial_fallas` prevalece durante 90 días.
 - `GET /api/v1/criticidad/reportes/distribucion`: total evaluado, distribución por nivel y categoría y top 10.
 - `GET /api/v1/criticidad/reportes/auditoria`: ajustes administrativos, con filtros opcionales `usuario`, `fecha_inicio`, `fecha_fin` y `equipo_id`; requiere encabezados administrativos.
 

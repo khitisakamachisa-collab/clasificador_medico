@@ -192,12 +192,38 @@ def test_mtbf_updates_values_and_respects_recent_manual_history(client):
     baseline = first["criticidad"]["indice"]
     low_mtbf = client.post(
         "/api/v1/criticidad/mtbf",
-        headers=ADMIN_HEADERS,
+        headers={"X-Admin-Key": "test-admin-key"},
         json={"equipo_id": "ACT-MTBF-1", "mtbf_dias": 15},
     )
     assert low_mtbf.status_code == 200
     assert low_mtbf.json()["detalle"][0]["criticidad"]["historial_fallas"] == 5
     assert low_mtbf.json()["detalle"][0]["criticidad"]["indice"] > baseline
+    default_audit = client.get(
+        "/api/v1/criticidad/ACT-MTBF-1/auditoria", headers=ADMIN_HEADERS
+    )
+    assert any(
+        row["usuario"] == "SISTEMA" and row["origen"] == "MTBF"
+        for row in default_audit.json()
+    )
+
+    _classify_with_equipment_id(client, "ACT-MTBF-EXPLICIT")
+    explicit_mtbf = client.post(
+        "/api/v1/criticidad/mtbf",
+        headers={"X-Admin-Key": "test-admin-key"},
+        json={
+            "equipo_id": "ACT-MTBF-EXPLICIT",
+            "mtbf_dias": 15,
+            "administrador": "auditor-mtbf",
+        },
+    )
+    assert explicit_mtbf.status_code == 200
+    explicit_audit = client.get(
+        "/api/v1/criticidad/ACT-MTBF-EXPLICIT/auditoria", headers=ADMIN_HEADERS
+    )
+    assert any(
+        row["usuario"] == "auditor-mtbf" and row["origen"] == "MTBF"
+        for row in explicit_audit.json()
+    )
 
     second = _classify_with_equipment_id(client, "ACT-MTBF-2")
     baseline_high_mtbf = second["criticidad"]["indice"]

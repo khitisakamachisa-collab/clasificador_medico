@@ -1,6 +1,28 @@
 # Clasificador médico
 
-Clasificador de equipos médicos para CMMS. Usa nombre, marca y ubicación para obtener una categoría propia, sugerir un código EMDN terminal verificado, asignar clase MDR y calcular criticidad. Incluye reglas bilingües para equipos conocidos y un modelo NLP como respaldo.
+Sistema híbrido (reglas + NLP) para clasificar equipos médicos destinados a inventarios y CMMS. A partir del nombre, la marca y la ubicación, asigna una categoría propia, sugiere un código terminal de la nomenclatura EMDN v2026, determina la clase MDR y calcula la criticidad. El catálogo EMDN local se deriva del Excel oficial y es la fuente de verdad para verificar códigos.
+
+## Características principales
+
+- Motor de reglas bilingües priorizado sobre el modelo NLP, con validación de códigos terminales contra el catálogo oficial EMDN v2026.
+- Clasificación NLP TF-IDF/LogisticRegression como respaldo cuando no hay una regla aplicable.
+- Corrección manual con validación semántica. Cuando la decisión manual supera las comprobaciones semánticas, se conserva como decisión experta con confianza de 95 % y semáforo verde; las comprobaciones quedan disponibles como información complementaria.
+- Matriz de criticidad multicriterio ponderada por impacto clínico, redundancia, frecuencia de uso, historial de fallas y costo/tiempo, con ajustes manuales, actualización por MTBF y auditoría.
+- API REST con FastAPI y frontend web interactivo para clasificar, revisar y administrar equipos.
+- Registro y consulta de auditoría, además de exportación del historial de clasificaciones.
+- Pruebas de regresión para verificar las asignaciones esperadas y la terminalidad de los códigos contra el catálogo local.
+
+## Estado actual
+
+El proyecto está en la línea de versión 1.x. Se han corregido errores críticos de clasificación y de confianza en correcciones manuales, y se han incorporado la validación semántica y la matriz de criticidad. El detalle de cambios está en [CHANGELOG.md](./CHANGELOG.md). Las capacidades actuales, sus alcances y las limitaciones de evaluación se describen en este README y en la documentación enlazada.
+
+## Limitaciones conocidas
+
+- El modelo NLP base (TF-IDF/LogisticRegression) puede requerir revisión y corrección manual para nombres muy ambiguos o atípicos que no estén cubiertos por el diccionario de reglas. La ampliación y validación del dataset para reducir esta dependencia está planificada en la [Fase 2 del roadmap](./ROADMAP.md).
+- El conjunto de ejemplo sintético no representa una validación clínica ni permite afirmar una precisión clínica generalizable. Las pruebas de regresión verifican casos explícitos del proyecto; cualquier uso asistencial requiere validación institucional.
+- La clasificación y la criticidad son herramientas de apoyo. La decisión clínica, la configuración de los perfiles de criticidad y la aprobación para uso institucional corresponden a expertos y a la organización.
+
+Consulta [ROADMAP.md](./ROADMAP.md) para conocer los próximos pasos previstos.
 
 ## Requisitos
 

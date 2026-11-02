@@ -17,7 +17,7 @@ git add .
 echo ==============================
 echo 3. Creando commit...
 echo ==============================
-git commit -m "Ajuste de lógica - La validación semántica debe afectar la confianza"
+git commit -m "Fase 1: Estabilizacion y Reglas (COMPLETADA)"
 
 echo ==============================
 echo 4. Subiendo a GitHub...

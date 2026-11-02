@@ -526,7 +526,8 @@ def criticidad_actualizar_mtbf(
     x_admin_user: str = Header(default=""),
     x_admin_key: str | None = Header(default=None),
 ):
-    user = _require_admin(request, x_admin_key, x_admin_user)
+    admin_user = payload.administrador or x_admin_user.strip() or "SISTEMA"
+    user = _require_admin(request, x_admin_key, admin_user)
     records = (
         payload.equipos
         if payload.equipos is not None

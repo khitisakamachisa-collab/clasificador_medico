@@ -206,12 +206,23 @@ class MTBFRequest(BaseModel):
     equipo_id: str | None = Field(default=None, max_length=200)
     mtbf_dias: float | None = Field(default=None, ge=0, allow_inf_nan=False)
     equipos: list[MTBFRecord] | None = Field(default=None, min_length=1, max_length=500)
+    administrador: str | None = Field(default=None, max_length=200)
 
     @field_validator("mtbf_dias", mode="before")
     @classmethod
     def mtbf_not_boolean(cls, value):
         if isinstance(value, bool):
             raise ValueError("mtbf_dias debe ser un número, no un booleano.")
+        return value
+
+    @field_validator("administrador")
+    @classmethod
+    def administrador_not_blank(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        value = value.strip()
+        if not value:
+            raise ValueError("El nombre del administrador no puede estar vacío.")
         return value
 
     @model_validator(mode="after")
