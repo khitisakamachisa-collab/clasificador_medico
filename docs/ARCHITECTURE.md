@@ -30,6 +30,9 @@ FastAPI (api/main.py, api/routes.py, api/schemas.py)
 - El sistema híbrido prioriza reglas legibles y reproducibles para términos conocidos; NLP cubre nombres no contemplados.
 - El Excel EMDN incluido es la única fuente de códigos oficiales. La aplicación no consulta servicios externos en tiempo de ejecución.
 - El índice EMDN y los artefactos del modelo se mantienen en memoria/localmente. La caché de búsqueda se limita a 512 consultas y se invalida al cambiar la fecha de modificación del Excel.
+- Las sugerencias preclasificadas se validan en `scripts/validator.py` contra las filas del Excel completo: el código debe existir, ser terminal y concordar con la categoría. El validador no corrige datos; separa sugerencias válidas y discrepancias para revisión.
+- `equipos_validados.json` contiene solo sugerencias aceptadas por el validador estricto. El entrenamiento también conserva por separado el dataset sintético de demostración y agrega las correcciones manuales aprobadas, dando prioridad a estas últimas en caso de duplicados.
+- Las clases con un solo ejemplo se incluyen en el ajuste final del modelo, pero se excluyen de la validación cruzada hasta disponer de suficientes registros para evaluarlas sin folds vacíos; las métricas informan cuántos ejemplos se evaluaron y excluyeron.
 - Los límites de tasa están en memoria por proceso; para despliegues con varios workers se necesita un limitador compartido en el proxy o infraestructura.
 - La API permite CORS solo desde `CORS_ORIGINS` y aplica un límite de lote configurable.
 - El modelo de ejemplo de `src/validator.py` se genera sintéticamente. Sus métricas no sustituyen una validación clínica ni una evaluación con datos representativos de una institución.

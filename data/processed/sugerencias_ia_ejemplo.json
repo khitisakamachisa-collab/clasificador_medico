@@ -1,0 +1,52 @@
+[
+  {
+    "nombre_equipo": "Ecógrafo portátil",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "Z11040103"
+  },
+  {
+    "nombre_equipo": "Ventilador pulmonar adulto",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "Z1203010502"
+  },
+  {
+    "nombre_equipo": "Tomógrafo computarizado",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "Z11030601"
+  },
+  {
+    "nombre_equipo": "Equipo de hemodiálisis",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "Z12090201"
+  },
+  {
+    "nombre_equipo": "Bomba de infusión",
+    "categoria_sugerida": "INF-01",
+    "emdn_sugerido": "Z12030301"
+  },
+  {
+    "nombre_equipo": "Equipo médico sin código existente",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "Z99999999"
+  },
+  {
+    "nombre_equipo": "Unidad de electrocirugía",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "Z120109"
+  },
+  {
+    "nombre_equipo": "Ecógrafo de cardiología",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "Z11040103"
+  },
+  {
+    "nombre_equipo": "Bomba de infusión",
+    "categoria_sugerida": "A",
+    "emdn_sugerido": "Z12030301"
+  },
+  {
+    "nombre_equipo": "Tomógrafo computarizado",
+    "categoria_sugerida": "DEVICES FOR ADMINISTRATION",
+    "emdn_sugerido": "Z11030601"
+  }
+]

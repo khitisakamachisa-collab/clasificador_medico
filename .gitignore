@@ -1,4 +1,5 @@
 data/corrections.db
 data/corrections.db-shm
 data/corrections.db-wal
+data/processed/equipos_demo_nlp.json
 .env

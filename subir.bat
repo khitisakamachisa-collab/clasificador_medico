@@ -17,7 +17,7 @@ git add .
 echo ==============================
 echo 3. Creando commit...
 echo ==============================
-git commit -m "Fase 1: Estabilizacion y Reglas (COMPLETADA)"
+git commit -m "Fase 2: Mejora del NLP y Dataset (PENDIENTE)"
 
 echo ==============================
 echo 4. Subiendo a GitHub...

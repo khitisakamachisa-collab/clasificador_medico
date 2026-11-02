@@ -16,7 +16,7 @@ Este documento rastrea las observaciones, tareas pendientes y la evolución plan
 
 - [ ] **Generación de dataset base:** crear una lista de 200+ nombres de equipos médicos (`equipos_ejemplo.json`).
 - [ ] **Clasificación paralela y consenso:** evaluar el uso de 2-3 sistemas de IA para preclasificar, utilizando únicamente el Excel EMDN 2026 como fuente de verdad para los códigos.
-- [ ] **Validador automático (`validator.py`):** comparar las salidas y validarlas contra la base de datos EMDN local, separando coincidencias (`equipos_validos.json`) de discrepancias (`discrepancias.json`) para revisión experta.
+- [x] **Validador automático (`scripts/validator.py`):** comparar las sugerencias con el Excel oficial EMDN, exigir existencia, terminalidad y coherencia de categoría, y separar datos validados de discrepancias para revisión experta.
 - [ ] **Knowledge distillation (opcional/avanzado):** evaluar un modelo preentrenado (por ejemplo, BERT médico en español) como modelo maestro para proponer etiquetas que luego se revisen y sirvan para reentrenar el modelo NLP ligero.
 
 ## 🟠 Fase 3: Experiencia de Usuario (UX) (PENDIENTE)

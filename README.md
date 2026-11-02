@@ -201,6 +201,14 @@ Escribe el nombre del equipo y luego su marca y ubicación. Para salir, escribe 
 
 El pipeline importa el Excel, valida el dataset de ejemplo, entrena el modelo NLP, calcula métricas y clasifica cinco equipos de muestra. Puede tardar más que una consulta normal porque entrena y valida datos.
 
+Para validar sugerencias preclasificadas contra cada fila del Excel oficial (existencia, terminalidad y categoría), ejecuta:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\validator.py
+```
+
+Sin argumentos usa `data/processed/sugerencias_ia_ejemplo.json`. Para validar otro archivo, añade `--input data/processed/sugerencias_ia.json`. El script separa únicamente las sugerencias verificadas en `equipos_validados.json` y escribe los fallos con sus motivos en `discrepancias.json`; no corrige códigos ni etiquetas automáticamente. El entrenamiento combina los registros validados, el dataset sintético de demostración y las correcciones manuales aprobadas, eliminando duplicados y priorizando la corrección aprobada. El dataset sintético se guarda por separado como `equipos_demo_nlp.json` y no se considera un conjunto de oro.
+
 ## Endpoints
 
 | Método | Ruta | Uso |
@@ -285,7 +293,9 @@ Este proyecto se distribuye bajo la licencia Apache-2.0. Consulta [LICENSE](./LI
 
 - `data/processed/emdn_database.json`: términos terminales e índice por prefijo creados desde el Excel oficial.
 - `data/processed/discrepancias_report.json`: códigos de entrada que no se validaron y sus resultados de búsqueda, para revisión.
-- `data/processed/equipos_validados.json`: ejemplos corregidos cuando se encuentra un terminal oficial. Los códigos sin coincidencia no se conservan como válidos.
+- `data/processed/equipos_validados.json`: sugerencias que pasaron la validación estricta de código, terminalidad y categoría contra el Excel oficial.
+- `data/processed/discrepancias.json`: sugerencias no validadas, con motivos para revisión manual.
+- `data/processed/equipos_demo_nlp.json`: dataset sintético de demostración usado como base de entrenamiento, separado del conjunto de oro.
 - `data/models/`: vectorizador, modelo NLP y métricas generadas por el pipeline.
 - `data/processed/internal_code_sequences.json`: secuencias persistentes para generar códigos internos únicos por categoría.
 

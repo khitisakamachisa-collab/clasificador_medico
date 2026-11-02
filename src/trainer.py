@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import unicodedata
 from collections import Counter
 from pathlib import Path
 
@@ -52,20 +53,89 @@ def preprocess_text(text: str) -> str:
     return " ".join(tokens)
 
 
+def deduplicate_training_examples(*datasets: list[dict]) -> list[dict]:
+    """Conserva una sola etiqueta por equipo y prioriza correcciones aprobadas."""
+    priorities = {
+        "": 0,
+        "EMDN_VALIDATED_SUGGESTION": 1,
+        "USER_CORRECTION": 2,
+    }
+    selected: dict[tuple[str, str] | tuple[str, int], tuple[int, int, dict]] = {}
+    order = 0
+    for dataset in datasets:
+        for record in dataset:
+            order += 1
+            name = record.get("nombre") or record.get("nombre_equipo") or ""
+            brand = record.get("marca") or ""
+            normalized = unicodedata.normalize("NFKD", f"{name} {brand}".casefold())
+            identity_text = re.sub(
+                r"\s+", " ", "".join(
+                    char for char in normalized if not unicodedata.combining(char)
+                )
+            ).strip()
+            identity = ("equipo", identity_text) if identity_text else ("registro", order)
+            source = str(record.get("source") or "")
+            candidate = (priorities.get(source, 0), order, record)
+            current = selected.get(identity)
+            if current is None or candidate[:2] >= current[:2]:
+                selected[identity] = candidate
+    return [item[2] for item in selected.values()]
+
+
 def load_validated_dataset(path: str | Path | None = None):
     ensure_directories()
-    target = Path(path) if path else PROCESSED_DIR / "equipos_validados.json"
-    if not target.exists():
+    if path:
+        target = Path(path)
+        with open(target, "r", encoding="utf-8") as file:
+            return json.load(file)
+
+    demo_target = PROCESSED_DIR / "equipos_demo_nlp.json"
+    if not demo_target.exists():
         from .validator import validate_equipment_dataset
+
         validate_equipment_dataset()
-    with open(target, "r", encoding="utf-8") as file:
-        return json.load(file)
+    with open(demo_target, "r", encoding="utf-8") as file:
+        datasets = [json.load(file)]
+
+    validated_target = PROCESSED_DIR / "equipos_validados.json"
+    if validated_target.exists():
+        with open(validated_target, "r", encoding="utf-8") as file:
+            validated = json.load(file)
+        datasets.append(
+            [record for record in validated if record.get("estado") == "VALIDADO"]
+        )
+    return deduplicate_training_examples(*datasets)
+
+
+def _cross_validated_predictions(model, features, labels: list[str]):
+    counts = Counter(labels)
+    evaluable_indices = [
+        index for index, label in enumerate(labels) if counts[label] >= 2
+    ]
+    evaluable_labels = [labels[index] for index in evaluable_indices]
+    evaluable_counts = Counter(evaluable_labels)
+    if len(evaluable_counts) < 2:
+        raise ValueError(
+            "Se requieren al menos dos categorías con dos ejemplos cada una "
+            "para calcular métricas de validación cruzada."
+        )
+
+    folds = min(5, min(evaluable_counts.values()))
+    cv = StratifiedKFold(n_splits=folds, shuffle=True, random_state=42)
+    predictions = cross_val_predict(
+        model, features[evaluable_indices], evaluable_labels, cv=cv
+    )
+    return predictions, evaluable_labels, folds
 
 
 def train_model(dataset_path: str | Path | None = None):
     """Entrena un modelo NLP con validación cruzada y guarda artefactos."""
     ensure_directories()
-    dataset = load_validated_dataset(dataset_path)
+    from .corrections import load_training_examples
+
+    dataset = deduplicate_training_examples(
+        load_validated_dataset(dataset_path), load_training_examples()
+    )
     texts = []
     labels = []
     for record in dataset:
@@ -77,24 +147,27 @@ def train_model(dataset_path: str | Path | None = None):
     X = vectorizer.fit_transform(texts)
     model = LogisticRegression(C=1.0, max_iter=1000, class_weight="balanced", random_state=42)
 
-    skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-    y_pred = cross_val_predict(model, X, labels, cv=skf)
+    y_pred, evaluation_labels, folds = _cross_validated_predictions(model, X, labels)
 
     metrics = {
-        "accuracy": round(accuracy_score(labels, y_pred), 4),
-        "precision_macro": round(precision_score(labels, y_pred, average="macro", zero_division=0), 4),
-        "precision_weighted": round(precision_score(labels, y_pred, average="weighted", zero_division=0), 4),
-        "recall_macro": round(recall_score(labels, y_pred, average="macro", zero_division=0), 4),
-        "recall_weighted": round(recall_score(labels, y_pred, average="weighted", zero_division=0), 4),
-        "f1_macro": round(f1_score(labels, y_pred, average="macro", zero_division=0), 4),
-        "f1_weighted": round(f1_score(labels, y_pred, average="weighted", zero_division=0), 4),
+        "accuracy": round(accuracy_score(evaluation_labels, y_pred), 4),
+        "precision_macro": round(precision_score(evaluation_labels, y_pred, average="macro", zero_division=0), 4),
+        "precision_weighted": round(precision_score(evaluation_labels, y_pred, average="weighted", zero_division=0), 4),
+        "recall_macro": round(recall_score(evaluation_labels, y_pred, average="macro", zero_division=0), 4),
+        "recall_weighted": round(recall_score(evaluation_labels, y_pred, average="weighted", zero_division=0), 4),
+        "f1_macro": round(f1_score(evaluation_labels, y_pred, average="macro", zero_division=0), 4),
+        "f1_weighted": round(f1_score(evaluation_labels, y_pred, average="weighted", zero_division=0), 4),
+        "validation_examples": len(evaluation_labels),
+        "excluded_singleton_examples": len(labels) - len(evaluation_labels),
+        "cross_validation_folds": folds,
     }
 
     model.fit(X, labels)
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, MODELS_DIR / f"classifier_{Config.MODEL_VERSION}.pkl")
     joblib.dump(vectorizer, MODELS_DIR / f"vectorizer_{Config.MODEL_VERSION}.pkl")
 
-    cm = confusion_matrix(labels, y_pred, labels=sorted(set(labels)))
+    cm = confusion_matrix(evaluation_labels, y_pred, labels=sorted(set(evaluation_labels)))
     plt.figure(figsize=(10, 8))
     plt.imshow(cm, interpolation="nearest", cmap="Blues")
     plt.title("Matriz de confusión")
@@ -127,12 +200,10 @@ def re_entrenar(
             "Se necesitan al menos 10 correcciones aprobadas para reentrenar. "
             f"Actualmente: {correction_count}"
         )
-    dataset = load_validated_dataset(dataset_path)
-    dataset.extend(load_training_examples())
+    dataset = deduplicate_training_examples(
+        load_validated_dataset(dataset_path), load_training_examples()
+    )
     labels = [item.get("categoria") or "OTR-01" for item in dataset]
-    counts = Counter(labels)
-    if len(counts) < 2 or min(counts.values()) < 2:
-        raise ValueError("Se requieren al menos dos ejemplos por categoría para validar el modelo.")
 
     if nueva_version is None:
         version_number = 2
@@ -155,10 +226,8 @@ def re_entrenar(
     texts = [preprocess_text(f"{item.get('nombre','')} {item.get('marca','')} {item.get('ubicacion','')}") for item in dataset]
     X = vectorizer.fit_transform(texts)
     model = LogisticRegression(C=1.0, max_iter=1000, class_weight="balanced", random_state=42)
-    folds = min(5, min(counts.values()))
-    cv = StratifiedKFold(n_splits=folds, shuffle=True, random_state=42)
-    predictions = cross_val_predict(model, X, labels, cv=cv)
-    accuracy = round(accuracy_score(labels, predictions), 4)
+    predictions, evaluation_labels, _ = _cross_validated_predictions(model, X, labels)
+    accuracy = round(accuracy_score(evaluation_labels, predictions), 4)
     model.fit(X, labels)
     ensure_directories()
     Config.MODELS_DIR.mkdir(parents=True, exist_ok=True)

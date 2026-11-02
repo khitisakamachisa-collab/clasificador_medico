@@ -1,0 +1,53 @@
+[
+  {
+    "nombre_equipo": "Equipo médico sin código existente",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "Z99999999",
+    "estado": "DISCREPANCIA",
+    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "El código no existe en el Excel oficial.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Unidad de electrocirugía",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "Z120109",
+    "estado": "DISCREPANCIA",
+    "motivo": "El código existe, pero no es terminal (TERMINAL LEVEL != YES).",
+    "motivos": [
+      "El código existe, pero no es terminal (TERMINAL LEVEL != YES)."
+    ]
+  },
+  {
+    "nombre_equipo": "Ecógrafo de cardiología",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "Z11040103",
+    "estado": "DISCREPANCIA",
+    "motivo": "La categoría sugerida no coincide con la categoría EMDN ni con la familia interna del código.",
+    "motivos": [
+      "La categoría sugerida no coincide con la categoría EMDN ni con la familia interna del código."
+    ]
+  },
+  {
+    "nombre_equipo": "Bomba de infusión",
+    "categoria_sugerida": "A",
+    "emdn_sugerido": "Z12030301",
+    "estado": "DISCREPANCIA",
+    "motivo": "La categoría sugerida no coincide con la categoría EMDN ni con la familia interna del código.",
+    "motivos": [
+      "La categoría sugerida no coincide con la categoría EMDN ni con la familia interna del código."
+    ]
+  },
+  {
+    "nombre_equipo": "Tomógrafo computarizado",
+    "categoria_sugerida": "DEVICES FOR ADMINISTRATION",
+    "emdn_sugerido": "Z11030601",
+    "estado": "DISCREPANCIA",
+    "motivo": "La categoría sugerida no coincide con la categoría EMDN ni con la familia interna del código.",
+    "motivos": [
+      "La categoría sugerida no coincide con la categoría EMDN ni con la familia interna del código."
+    ]
+  }
+]
