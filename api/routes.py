@@ -3,6 +3,9 @@ from __future__ import annotations
 import json
 import math
 import secrets
+import uuid
+from datetime import date
+from typing import Any
 
 from fastapi import APIRouter, Header, HTTPException, Request
 from sqlalchemy.exc import SQLAlchemyError
@@ -19,12 +22,23 @@ from src.corrections import (
     validate_saved_corrections,
 )
 from src.correction_validation import validar_correccion_automaticamente
+from src.criticality import cargar_criticidad_defaults
+from src.criticality_store import (
+    ajustar_criticidad,
+    asegurar_equipo,
+    listar_ajustes,
+    obtener_criticidad,
+    recalcular_por_mtbf,
+    reporte_distribucion,
+)
 from src.emdn_importer import buscar_emdn, load_emdn_database
 from src.trainer import re_entrenar
 from src.utils import CATEGORÍAS
 from .schemas import (
     BatchClassificationRequest,
     ClassificationRequest,
+    AdjustCriticalityRequest,
+    MTBFRequest,
     RecalculateRequest,
     RegisterCorrectionRequest,
     EMDNValidationRequest,
@@ -35,6 +49,33 @@ from .schemas import (
 )
 
 router = APIRouter()
+
+
+def _apply_equipment_criticality(
+    result: dict[str, Any],
+    equipment_id: str | None,
+    name: str,
+    location: str | None,
+    allow_category_change: bool = False,
+) -> str:
+    identifier = equipment_id or result.get("codigo_interno") or uuid.uuid4().hex
+    try:
+        profile = asegurar_equipo(
+            identifier,
+            result["categoria_propia"],
+            name,
+            location,
+            permitir_cambio_categoria=allow_category_change,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    result["criticidad"] = {
+        key: value
+        for key, value in profile.items()
+        if key not in {"categoria", "defaults"}
+    }
+    result["equipo_id"] = identifier
+    return identifier
 
 
 def _require_admin(
@@ -84,6 +125,9 @@ def clasificar(payload: ClassificationRequest):
     result = classify_equipment(payload.nombre, payload.marca, payload.ubicacion)
     if payload.cmms_equipment_id:
         result["cmms_equipment_id"] = payload.cmms_equipment_id
+    _apply_equipment_criticality(
+        result, payload.cmms_equipment_id, payload.nombre, payload.ubicacion
+    )
     return result
 
 
@@ -95,7 +139,18 @@ def recalcular(payload: RecalculateRequest, request: Request):
         payload.ubicacion,
         categoria_forzada=payload.categoria_forzada,
     )
-    validation = validar_correccion_automaticamente(result, nombre_equipo=payload.nombre)
+    if payload.cmms_equipment_id:
+        result["cmms_equipment_id"] = payload.cmms_equipment_id
+    equipment_id = _apply_equipment_criticality(
+        result,
+        payload.cmms_equipment_id,
+        payload.nombre,
+        payload.ubicacion,
+        allow_category_change=True,
+    )
+    validation = validar_correccion_automaticamente(
+        result, nombre_equipo=payload.nombre, equipo_id=equipment_id
+    )
     result["validacion_correccion"] = validation
     result["metodo"] = "CORRECCION_MANUAL"
     if validation["validaciones"]["semantica_valida"]:
@@ -106,8 +161,6 @@ def recalcular(payload: RecalculateRequest, request: Request):
         result["confidence"] = validation["confidence"]
         result["semaforo"] = obtener_semaforo(validation["confidence"])
         result["semaforo"]["mensaje"] = validation["mensaje"]
-    if payload.cmms_equipment_id:
-        result["cmms_equipment_id"] = payload.cmms_equipment_id
     record_audit(
         user=payload.usuario or "USUARIO",
         action="CORREGIR",
@@ -154,8 +207,19 @@ def registrar_correccion(payload: RegisterCorrectionRequest, request: Request):
         original.get("ubicacion"),
         categoria_forzada=payload.categoria_correcta,
     )
+    original_equipment_id = (
+        original.get("cmms_equipment_id") or recalculated.get("codigo_interno")
+    )
+    recalculated["cmms_equipment_id"] = original.get("cmms_equipment_id")
+    equipment_id = _apply_equipment_criticality(
+        recalculated,
+        original_equipment_id,
+        original["nombre"],
+        original.get("ubicacion"),
+        allow_category_change=True,
+    )
     validation = validar_correccion_automaticamente(
-        recalculated, nombre_equipo=original["nombre"]
+        recalculated, nombre_equipo=original["nombre"], equipo_id=equipment_id
     )
     recalculated["validacion_correccion"] = validation
     if not validation["validaciones"]["semantica_valida"]:
@@ -339,21 +403,162 @@ def batch_clasificar(payload: BatchClassificationRequest):
         result = classify_equipment(equipo.nombre, equipo.marca, equipo.ubicacion)
         if equipo.cmms_equipment_id:
             result["cmms_equipment_id"] = equipo.cmms_equipment_id
+        _apply_equipment_criticality(
+            result, equipo.cmms_equipment_id, equipo.nombre, equipo.ubicacion
+        )
         results.append(result)
     return {"total": len(results), "resultados": results}
 
 
 @router.get("/categorias")
 def categorias():
+    defaults = cargar_criticidad_defaults()
     return [
         {
             "categoria": key,
             "nombre": value["nombre"],
             "mdr_default": value["mdr_default"],
-            "defaults": value["defaults"],
+            "defaults": {
+                field: defaults[key][field]
+                for field in (
+                    "impacto_clinico",
+                    "redundancia",
+                    "frecuencia_uso",
+                    "historial_fallas",
+                    "costo_tiempo",
+                )
+            },
         }
         for key, value in CATEGORÍAS.items()
     ]
+
+
+@router.post("/admin/auth")
+def validar_acceso_admin(
+    request: Request,
+    x_admin_user: str = Header(default=""),
+    x_admin_key: str | None = Header(default=None),
+):
+    """Valida las credenciales administrativas con el mismo control de las acciones protegidas."""
+    user = _require_admin(request, x_admin_key, x_admin_user)
+    return {"status": "ok", "usuario": user}
+
+
+@router.post("/criticidad/ajustar")
+def ajustar_criticidad_endpoint(
+    payload: AdjustCriticalityRequest,
+    request: Request,
+    x_admin_user: str = Header(default=""),
+    x_admin_key: str | None = Header(default=None),
+):
+    user = _require_admin(request, x_admin_key, x_admin_user)
+    try:
+        profile, changed = ajustar_criticidad(
+            payload.equipo_id,
+            payload.valores.model_dump(),
+            user,
+            payload.justificacion,
+        )
+    except LookupError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    if not changed:
+        return {"status": "sin_cambios", "criticidad": profile}
+    return {"status": "ok", "criticidad": profile}
+
+
+@router.get("/criticidad/reportes/distribucion")
+def criticidad_reporte_distribucion():
+    return reporte_distribucion()
+
+
+@router.get("/criticidad/reportes/auditoria")
+def criticidad_reporte_auditoria(
+    request: Request,
+    usuario: str | None = None,
+    fecha_inicio: str | None = None,
+    fecha_fin: str | None = None,
+    equipo_id: str | None = None,
+    x_admin_user: str = Header(default=""),
+    x_admin_key: str | None = Header(default=None),
+):
+    _require_admin(request, x_admin_key, x_admin_user)
+    for label, value in (("fecha_inicio", fecha_inicio), ("fecha_fin", fecha_fin)):
+        if value:
+            try:
+                date.fromisoformat(value)
+            except ValueError as exc:
+                raise HTTPException(
+                    status_code=422, detail=f"{label} debe tener formato YYYY-MM-DD."
+                ) from exc
+    return listar_ajustes(equipo_id, usuario, fecha_inicio, fecha_fin)
+
+
+@router.get("/criticidad/{equipo_id}/auditoria")
+def criticidad_equipo_auditoria(
+    equipo_id: str,
+    request: Request,
+    x_admin_user: str = Header(default=""),
+    x_admin_key: str | None = Header(default=None),
+):
+    _require_admin(request, x_admin_key, x_admin_user)
+    if not obtener_criticidad(equipo_id):
+        raise HTTPException(status_code=404, detail="No se encontró el equipo.")
+    return listar_ajustes(equipment_id=equipo_id)
+
+
+@router.get("/criticidad/{equipo_id}")
+def criticidad_equipo(equipo_id: str):
+    profile = obtener_criticidad(equipo_id)
+    if not profile:
+        raise HTTPException(status_code=404, detail="No se encontró el equipo.")
+    return {
+        **profile,
+        "historial_ajustes": listar_ajustes(equipment_id=equipo_id),
+    }
+
+
+@router.post("/criticidad/mtbf")
+def criticidad_actualizar_mtbf(
+    payload: MTBFRequest,
+    request: Request,
+    x_admin_user: str = Header(default=""),
+    x_admin_key: str | None = Header(default=None),
+):
+    user = _require_admin(request, x_admin_key, x_admin_user)
+    records = (
+        payload.equipos
+        if payload.equipos is not None
+        else [{"equipo_id": payload.equipo_id, "mtbf_dias": payload.mtbf_dias}]
+    )
+    for record in records:
+        equipment_id = (
+            record.equipo_id if hasattr(record, "equipo_id") else record["equipo_id"]
+        )
+        if not obtener_criticidad(equipment_id):
+            raise HTTPException(
+                status_code=404, detail=f"No se encontró el equipo {equipment_id}."
+            )
+    details = []
+    for record in records:
+        try:
+            details.append(
+                recalcular_por_mtbf(
+                    record.equipo_id if hasattr(record, "equipo_id") else record["equipo_id"],
+                    record.mtbf_dias if hasattr(record, "mtbf_dias") else record["mtbf_dias"],
+                    user,
+                )
+            )
+        except LookupError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+    return {
+        "actualizados": sum(item["actualizado"] for item in details),
+        "omitidos": sum(item["omitido"] for item in details),
+        "detalle": details,
+    }
 
 
 @router.get("/metricas")

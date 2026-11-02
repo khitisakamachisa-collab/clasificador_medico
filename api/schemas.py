@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator, model_validator
 
 from src.config import Config
 
@@ -149,3 +149,79 @@ class RequestInformationRequest(BaseModel):
         if not value:
             raise ValueError("La nota es obligatoria.")
         return value
+
+
+class CriticalityValues(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    impacto_clinico: StrictInt = Field(..., ge=1, le=5)
+    redundancia: StrictInt = Field(..., ge=1, le=5)
+    frecuencia_uso: StrictInt = Field(..., ge=1, le=5)
+    historial_fallas: StrictInt = Field(..., ge=1, le=5)
+    costo_tiempo: StrictInt = Field(..., ge=1, le=5)
+
+
+class AdjustCriticalityRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    equipo_id: str = Field(..., min_length=1, max_length=200)
+    valores: CriticalityValues
+    usuario: str = Field(..., min_length=1, max_length=200)
+    justificacion: str = Field(..., max_length=2000)
+
+    @field_validator("equipo_id", "usuario")
+    @classmethod
+    def trim_required(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("El campo es obligatorio.")
+        return value
+
+
+class MTBFRecord(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    equipo_id: str = Field(..., min_length=1, max_length=200)
+    mtbf_dias: float = Field(..., ge=0, allow_inf_nan=False)
+
+    @field_validator("equipo_id")
+    @classmethod
+    def equipment_id_not_blank(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("equipo_id es obligatorio.")
+        return value
+
+    @field_validator("mtbf_dias", mode="before")
+    @classmethod
+    def mtbf_not_boolean(cls, value):
+        if isinstance(value, bool):
+            raise ValueError("mtbf_dias debe ser un número, no un booleano.")
+        return value
+
+
+class MTBFRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    equipo_id: str | None = Field(default=None, max_length=200)
+    mtbf_dias: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+    equipos: list[MTBFRecord] | None = Field(default=None, min_length=1, max_length=500)
+
+    @field_validator("mtbf_dias", mode="before")
+    @classmethod
+    def mtbf_not_boolean(cls, value):
+        if isinstance(value, bool):
+            raise ValueError("mtbf_dias debe ser un número, no un booleano.")
+        return value
+
+    @model_validator(mode="after")
+    def single_or_batch(self):
+        if self.equipos is not None and (self.equipo_id is not None or self.mtbf_dias is not None):
+            raise ValueError("Envía equipo_id/mtbf_dias o equipos, no ambos.")
+        if self.equipos is None and (self.equipo_id is None or self.mtbf_dias is None):
+            raise ValueError("Se requiere equipo_id y mtbf_dias o una lista equipos.")
+        if self.equipo_id is not None:
+            self.equipo_id = self.equipo_id.strip()
+            if not self.equipo_id:
+                raise ValueError("equipo_id es obligatorio.")
+        return self

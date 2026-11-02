@@ -203,10 +203,6 @@
     .admin-spinner { display: inline-flex; align-items: center; gap: 9px; margin-top: 12px; color: #59677b; font-size: 11px; }
     .admin-spinner[hidden] { display: none; }
     .spinner-dark { width: 15px; height: 15px; border: 2px solid #d5e0f5; border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
-    .admin-dialog-copy { color: #59677b; font-size: 12px; line-height: 1.6; }
-    .admin-dialog-copy p { margin-bottom: 9px; }
-    .admin-login { display: grid; gap: 9px; margin: 12px 0; }
-    .admin-login input { min-width: 0; height: 39px; padding: 0 10px; border: 1px solid #dfe5ee; border-radius: 8px; font-size: 11px; }
     .admin-panel { margin-top: 14px; }
     .admin-panel[hidden] { display: none; }
     .admin-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 15px 0 8px; }
@@ -227,6 +223,37 @@
     .chart-heading h3, .history-heading h2 { margin: 0; font: 700 14px "Manrope", sans-serif; }
     .chart-caption { margin: 5px 0 0; color: #95a0b0; font-size: 10px; }
     .chart-wrap { position: relative; height: 245px; margin-top: 12px; }
+    .criticality-contributions { display: grid; gap: 8px; margin-top: 14px; }
+    .contribution-row { display: grid; grid-template-columns: minmax(94px, 1fr) 2fr 48px; align-items: center; gap: 8px; color: #647188; font-size: 10px; }
+    .contribution-track { height: 8px; overflow: hidden; background: #edf1f7; border-radius: 999px; }
+    .contribution-fill { height: 100%; background: #2563eb; border-radius: inherit; }
+    .criticality-adjust { margin-top: 16px; padding-top: 13px; border-top: 1px solid #eef1f6; }
+    .criticality-adjust summary { color: #344158; cursor: pointer; font-size: 11px; font-weight: 700; }
+    .criticality-adjust[hidden] { display: none; }
+    .criticality-sliders { display: grid; gap: 10px; margin-top: 14px; }
+    .criticality-slider-row { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; color: #59677b; font-size: 10px; }
+    .criticality-slider-row input { grid-column: 1 / -1; width: 100%; accent-color: var(--blue); }
+    .criticality-preview { margin: 12px 0; color: #7a5a15; font-size: 10px; font-weight: 700; }
+    .criticality-preview[hidden] { display: none; }
+    .criticality-justification { display: block; width: 100%; min-height: 76px; resize: vertical; padding: 10px; border: 1px solid #dfe5ee; border-radius: 8px; font: inherit; font-size: 11px; }
+    .criticality-adjust-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .criticality-adjust-actions button { min-height: 36px; }
+    .criticality-reports { margin-top: 22px; padding: 22px 24px; }
+    .criticality-report-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+    .criticality-stat { padding: 14px; background: #f8fafd; border: 1px solid #eef1f6; border-radius: 10px; }
+    .criticality-stat span { display: block; color: #7c8798; font-size: 10px; }
+    .criticality-stat strong { display: block; margin-top: 5px; font: 700 20px "Manrope", sans-serif; }
+    .criticality-report-charts { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(220px, .7fr); gap: 18px; }
+    .report-chart-wrap { position: relative; height: 270px; margin-top: 8px; }
+    .report-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 18px 0 10px; }
+    .report-filters select { min-height: 36px; padding: 0 10px; border: 1px solid #dfe5ee; border-radius: 8px; color: var(--ink); background: white; font-size: 11px; }
+    .report-table-wrap { overflow-x: auto; }
+    .report-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .report-table th, .report-table td { padding: 9px 7px; border-bottom: 1px solid #eef1f6; text-align: left; }
+    .report-table th { color: #718096; font-weight: 700; white-space: nowrap; }
+    .report-export { margin-left: auto; }
+    .criticality-report-status { margin: 10px 0 0; color: #718096; font-size: 11px; }
+    .criticality-report-status.error { color: #a23737; }
     .criticality-card { display: flex; flex-direction: column; justify-content: space-between; }
     .criticality-card h3 { margin: 0 0 4px; font: 700 14px "Manrope", sans-serif; }
     .criticality-card .chart-caption { margin: 0; }
@@ -277,6 +304,8 @@
       .form-card, .result-card { padding: 21px 19px; }
       .history-card { padding: 19px; }
       .history-name { max-width: 75vw; }
+      .criticality-report-charts { grid-template-columns: 1fr; }
+      .criticality-report-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 480px) {
       .form-grid, .result-details { grid-template-columns: 1fr; }
@@ -285,6 +314,7 @@
       .demo-hint { display: none; }
       .step-label { font-size: 9px; }
       .chart-card, .criticality-card { padding: 19px; }
+      .criticality-reports { padding: 19px; }
       .chart-wrap { height: 220px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -426,6 +456,18 @@
               <canvas id="criticalityChart" role="img" aria-label="Gráfico de radar con los cinco factores de criticidad"></canvas>
               <p id="chartFallback" class="history-empty" hidden>No se pudo cargar el gráfico. Comprueba tu conexión a Internet.</p>
             </div>
+            <div id="criticalityContributions" class="criticality-contributions" aria-label="Aportes de los criterios al índice"></div>
+            <details id="criticalityAdjustPanel" class="criticality-adjust">
+              <summary>Ajustar criticidad del equipo</summary>
+              <div id="criticalitySliders" class="criticality-sliders"></div>
+              <p id="criticalityPreview" class="criticality-preview" hidden></p>
+              <label class="field-name" for="criticalityJustification">Justificación del cambio (obligatoria, mínimo 15 caracteres)</label>
+              <textarea id="criticalityJustification" class="criticality-justification" maxlength="2000"></textarea>
+              <div class="criticality-adjust-actions">
+                <button id="saveCriticality" class="primary-button" type="button" disabled>Guardar ajuste</button>
+                <button id="resetCriticality" class="secondary-button" type="button">Restaurar valores por defecto</button>
+              </div>
+            </details>
           </article>
           <article class="card criticality-card">
             <div><h3>Índice de criticidad</h3><p class="chart-caption">Puntuación ponderada del equipo</p></div>
@@ -448,13 +490,9 @@
         <section class="card admin-card" aria-labelledby="adminTitle">
           <h2 id="adminTitle">Herramientas de administración</h2>
           <p>Las correcciones requieren aprobación administrativa antes de incorporarse al entrenamiento.</p>
-          <div class="admin-login" aria-label="Acceso administrativo">
-            <input id="adminUser" type="text" maxlength="200" autocomplete="username" placeholder="Usuario administrador" aria-label="Usuario administrador">
-            <input id="adminKey" type="password" autocomplete="current-password" placeholder="Clave de administrador" aria-label="Clave de administrador">
-            <button id="adminLogin" class="secondary-button" type="button">Ingresar al panel</button>
-          </div>
+          <button id="adminLogin" class="secondary-button admin-button" type="button">Autorizar revisiones administrativas</button>
           <button id="refreshReview" class="secondary-button admin-button" type="button" disabled>Actualizar revisiones</button>
-          <button id="btn-reentrenar" class="primary-button admin-button" type="button" disabled>
+          <button id="btn-reentrenar" class="primary-button admin-button" type="button">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5m-4.1-3A8 8 0 0 1 18.3 6L20 12M4 12l1.7 6A8 8 0 0 0 19.1 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Reentrenar modelo
           </button>
@@ -472,6 +510,33 @@
         </section>
       </aside>
     </div>
+    <section id="criticalityReports" class="card criticality-reports" aria-labelledby="criticalityReportsTitle">
+      <div class="section-heading">
+        <div><h2 id="criticalityReportsTitle">Reportes de Criticidad</h2><p>Distribución de los perfiles de equipo registrados en esta instancia.</p></div>
+        <button id="refreshCriticalityReport" class="secondary-button" type="button">Actualizar</button>
+      </div>
+      <p id="criticalityReportStatus" class="criticality-report-status" role="status" aria-live="polite">Cargando reporte…</p>
+      <div class="criticality-report-grid">
+        <div class="criticality-stat"><span>Equipos evaluados</span><strong id="reportTotal">0</strong></div>
+        <div class="criticality-stat"><span>ALTA</span><strong id="reportHigh">0%</strong></div>
+        <div class="criticality-stat"><span>MEDIA</span><strong id="reportMedium">0%</strong></div>
+        <div class="criticality-stat"><span>BAJA</span><strong id="reportLow">0%</strong></div>
+      </div>
+      <div class="criticality-report-charts">
+        <div><h3>Distribución por categoría</h3><div class="report-chart-wrap"><canvas id="reportCategoryChart" role="img" aria-label="Barras apiladas de criticidad por categoría"></canvas></div></div>
+        <div><h3>Distribución global por nivel</h3><div class="report-chart-wrap"><canvas id="reportLevelChart" role="img" aria-label="Gráfico de dona de criticidad global"></canvas></div></div>
+      </div>
+      <div class="report-filters">
+        <label for="reportLevelFilter" class="field-name">Nivel</label>
+        <select id="reportLevelFilter"><option value="">Todos</option><option>ALTA</option><option>MEDIA</option><option>BAJA</option></select>
+        <label for="reportCategoryFilter" class="field-name">Categoría</label>
+        <select id="reportCategoryFilter"><option value="">Todas</option></select>
+        <button id="exportCriticalityTxt" class="secondary-button report-export" type="button">Exportar .txt</button>
+        <button id="exportCriticalityCsv" class="secondary-button" type="button">Exportar .csv</button>
+      </div>
+      <h3>Top 10 equipos más críticos</h3>
+      <div class="report-table-wrap"><table class="report-table"><thead><tr><th>Equipo</th><th>Categoría</th><th>IC</th><th>Nivel</th><th>MTBF</th><th>Origen</th></tr></thead><tbody id="criticalityTopTable"></tbody></table></div>
+    </section>
   </main>
   <dialog id="correctionDialog" class="correction-dialog" aria-labelledby="correctionTitle">
     <form id="correctionForm" class="dialog-content">
@@ -496,21 +561,29 @@
       </div>
     </form>
   </dialog>
-  <dialog id="modal-reentrenar" class="correction-dialog" aria-labelledby="retrainTitle">
-    <div class="dialog-content">
+  <dialog id="modal-admin-auth" class="correction-dialog" aria-labelledby="adminAuthTitle">
+    <form id="adminAuthForm" class="dialog-content">
       <div class="dialog-heading">
-        <div><h2 id="retrainTitle">Confirmar reentrenamiento</h2></div>
-        <button id="closeRetrain" class="dialog-close" type="button" aria-label="Cerrar">×</button>
+        <div>
+          <h2 id="adminAuthTitle">Ingresa ADMIN_API_KEY para autorizar este ajuste</h2>
+          <p>La misma clave autoriza las acciones administrativas.</p>
+        </div>
+        <button id="closeAdminAuth" class="dialog-close" type="button" aria-label="Cerrar">×</button>
       </div>
-      <div class="admin-dialog-copy">
-        <p>¿Desea reentrenar el modelo con las correcciones guardadas?</p>
-        <p>Esto puede tardar varios minutos. Solo se incorporan correcciones validadas con confianza alta.</p>
+      <div class="dialog-field">
+        <label for="adminAuthUser">Usuario para auditoría</label>
+        <input id="adminAuthUser" type="text" maxlength="200" autocomplete="username" value="administrador" required>
       </div>
+      <div class="dialog-field">
+        <label for="adminAuthKey">ADMIN_API_KEY</label>
+        <input id="adminAuthKey" type="password" maxlength="500" autocomplete="current-password" required>
+      </div>
+      <p id="adminAuthError" class="dialog-error" role="alert" hidden></p>
       <div class="dialog-actions">
-        <button id="btn-cancelar-reentrenar" class="secondary-button" type="button">Cancelar</button>
-        <button id="btn-confirmar-reentrenar" class="primary-button" type="button">Confirmar</button>
+        <button id="cancelAdminAuth" class="secondary-button" type="button">Cancelar</button>
+        <button id="confirmAdminAuth" class="primary-button" type="submit">Autorizar</button>
       </div>
-    </div>
+    </form>
   </dialog>
   <footer class="page-shell">Herramienta de apoyo a la gestión de tecnología médica · Verifica toda recomendación antes de tomar decisiones clínicas.</footer>
 
@@ -536,8 +609,18 @@
       const locationSelect = byId("location");
       const otherLocation = byId("otherLocation");
       let adminCredentials = null;
+      let pendingAdminAction = null;
       const history = [];
       let chart;
+      let reportCategoryChart;
+      let reportLevelChart;
+      let criticalityValues = {};
+      let criticalityOriginalValues = {};
+      let criticalityDefaults = {};
+      let criticalityWeights = {};
+      let criticalityLabels = {};
+      let criticalityThresholds = { ALTA: 4, MEDIA: 2.5 };
+      let criticalityReport;
       let isLoading = false;
       let currentClassification;
 
@@ -556,7 +639,7 @@
           frecuencia_uso: 5,
           historial_fallas: 3,
           costo_tiempo: 3,
-          indice: 3.25,
+          indice: 3.10,
           nivel: "MEDIA"
         }
       };
@@ -746,7 +829,6 @@
         byId("confidenceContext").className = `confidence-context semaforo-${semaforo.color}`;
         renderCorrectionValidation(data.validacion_correccion);
         byId("correctClassification").hidden = !semaforo.requiere_revision || demo;
-        renderCriticality(criticality);
         byId("resultCard").hidden = false;
         byId("resultsGrid").hidden = false;
         currentClassification = {
@@ -763,6 +845,7 @@
           },
           demo
         };
+        renderCriticality(criticality, demo);
         if (recordInHistory) addHistory(currentClassification);
       }
 
@@ -795,7 +878,7 @@
         list.hidden = false;
       }
 
-      function renderCriticality(criticality) {
+      function renderCriticality(criticality, demo = false) {
         const axes = [
           { key: "impacto_clinico", label: "Impacto clínico" },
           { key: "redundancia", label: "Redundancia" },
@@ -804,6 +887,17 @@
           { key: "costo_tiempo", label: "Costo / tiempo" }
         ];
         const values = axes.map(({ key }) => Number(criticality[key]));
+        const radarData = Array.isArray(criticality.radar_data) ? criticality.radar_data : [];
+        criticalityDefaults = Object.fromEntries(axes.map(({ key }, index) => [
+          key, Number(radarData[index]?.default ?? values[index])
+        ]));
+        criticalityWeights = Object.fromEntries(axes.map(({ key }, index) => [
+          key, Number(radarData[index]?.peso ?? [0.4, 0.2, 0.15, 0.15, 0.1][index])
+        ]));
+        criticalityLabels = Object.fromEntries(axes.map(({ key, label }) => [key, label]));
+        criticalityValues = Object.fromEntries(axes.map(({ key }, index) => [key, values[index]]));
+        criticalityOriginalValues = { ...criticalityValues };
+        if (criticality.umbrales) criticalityThresholds = criticality.umbrales;
         const index = Number(criticality.indice);
         const level = criticality.nivel;
         if (values.some((value) => !Number.isFinite(value) || value < 1 || value > 5)
@@ -814,6 +908,8 @@
         byId("criticalityScore").textContent = index.toFixed(2);
         byId("criticalityLevel").textContent = level;
         byId("criticalityLevel").className = `level-badge level-${level}`;
+        renderCriticalityContributions(criticality, axes);
+        renderCriticalitySliders(axes, demo);
 
         if (typeof Chart === "undefined") {
           byId("criticalityChart").hidden = true;
@@ -828,6 +924,7 @@
           data: {
             labels: axes.map(({ label }) => label),
             datasets: [{
+              label: "Perfil del equipo",
               data: values,
               fill: true,
               backgroundColor: "rgba(37, 99, 235, .13)",
@@ -837,12 +934,35 @@
               pointBorderColor: "#ffffff",
               pointBorderWidth: 2,
               pointRadius: 4
+            }, {
+              label: "Referencia de la categoría",
+              data: axes.map(({ key }) => criticalityDefaults[key]),
+              fill: false,
+              borderColor: "#8994a5",
+              borderDash: [5, 4],
+              borderWidth: 1.5,
+              pointBackgroundColor: "#8994a5",
+              pointBorderColor: "#ffffff",
+              pointBorderWidth: 1,
+              pointRadius: 3
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => ` ${context.formattedValue} / 5` } } },
+            plugins: {
+              legend: { display: true, position: "bottom", labels: { boxWidth: 10, font: { size: 10 } } },
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    const axis = axes[context.dataIndex];
+                    const weight = criticalityWeights[axis.key];
+                    const contribution = Number(context.raw) * weight;
+                    return ` ${context.dataset.label}: ${context.formattedValue}/5 · peso ${(weight * 100).toFixed(0)}% · aporte ${contribution.toFixed(2)}`;
+                  }
+                }
+              }
+            },
             scales: {
               r: {
                 min: 0, max: 5, beginAtZero: true,
@@ -855,6 +975,317 @@
           }
         });
       }
+
+      function renderCriticalityContributions(criticality, axes) {
+        const container = byId("criticalityContributions");
+        container.replaceChildren();
+        const contributions = Array.isArray(criticality.contribuciones)
+          ? criticality.contribuciones
+          : axes.map(({ key, label }) => ({
+            criterio: label,
+            aporte: criticalityValues[key] * criticalityWeights[key],
+            porcentaje: criticalityValues[key] * criticalityWeights[key] / Number(criticality.indice) * 100
+          }));
+        contributions.forEach((item) => {
+          const row = document.createElement("div");
+          row.className = "contribution-row";
+          const label = document.createElement("span");
+          label.textContent = item.criterio;
+          const track = document.createElement("span");
+          track.className = "contribution-track";
+          const fill = document.createElement("span");
+          fill.className = "contribution-fill";
+          fill.style.display = "block";
+          fill.style.width = `${Math.max(0, Math.min(100, Number(item.porcentaje)))}%`;
+          track.append(fill);
+          const amount = document.createElement("strong");
+          amount.textContent = Number(item.aporte).toFixed(2);
+          row.append(label, track, amount);
+          container.append(row);
+        });
+      }
+
+      function renderCriticalitySliders(axes, demo) {
+        const panel = byId("criticalityAdjustPanel");
+        const hasEquipmentId = Boolean(currentClassification?.data?.equipo_id);
+        panel.hidden = demo || !hasEquipmentId;
+        const container = byId("criticalitySliders");
+        container.replaceChildren();
+        axes.forEach(({ key, label }) => {
+          const row = document.createElement("label");
+          row.className = "criticality-slider-row";
+          const title = document.createElement("span");
+          title.textContent = label;
+          const value = document.createElement("strong");
+          value.id = `criticalityValue-${key}`;
+          value.textContent = String(criticalityValues[key]);
+          const slider = document.createElement("input");
+          slider.type = "range";
+          slider.min = "1";
+          slider.max = "5";
+          slider.step = "1";
+          slider.value = String(criticalityValues[key]);
+          slider.dataset.criterion = key;
+          slider.setAttribute("aria-label", `${label}, peso ${(criticalityWeights[key] * 100).toFixed(0)} por ciento`);
+          slider.addEventListener("input", () => {
+            criticalityValues[key] = Number(slider.value);
+            value.textContent = slider.value;
+            updateCriticalityPreview();
+          });
+          const weight = document.createElement("span");
+          weight.textContent = `Peso ${(criticalityWeights[key] * 100).toFixed(0)}%`;
+          row.append(title, weight, slider, value);
+          container.append(row);
+        });
+        byId("criticalityJustification").value = "";
+        byId("criticalityPreview").hidden = true;
+        byId("saveCriticality").disabled = true;
+      }
+
+      function updateCriticalityPreview() {
+        const keys = Object.keys(criticalityWeights);
+        const changed = keys.some((key) => criticalityValues[key] !== criticalityOriginalValues[key]);
+        const index = keys.reduce((total, key) => total + criticalityValues[key] * criticalityWeights[key], 0);
+        const level = index >= criticalityThresholds.ALTA
+          ? "ALTA"
+          : index >= criticalityThresholds.MEDIA ? "MEDIA" : "BAJA";
+        const preview = byId("criticalityPreview");
+        preview.textContent = changed ? `Vista previa — sin guardar · IC ${index.toFixed(2)} · ${level}` : "Sin cambios respecto a la referencia de categoría.";
+        preview.hidden = false;
+        byId("criticalityScore").textContent = index.toFixed(2);
+        byId("criticalityLevel").textContent = level;
+        byId("criticalityLevel").className = `level-badge level-${level}`;
+        if (chart) {
+          chart.data.datasets[0].data = keys.map((key) => criticalityValues[key]);
+          chart.update();
+        }
+        renderCriticalityContributions({
+          indice: index,
+          contribuciones: keys.map((key) => ({
+            criterio: criticalityLabels[key],
+            aporte: criticalityValues[key] * criticalityWeights[key],
+            porcentaje: criticalityValues[key] * criticalityWeights[key] / index * 100
+          }))
+        }, keys.map((key) => ({ key, label: criticalityLabels[key] })));
+        byId("saveCriticality").disabled = !changed || byId("criticalityJustification").value.trim().length < 15;
+      }
+
+      byId("criticalityJustification").addEventListener("input", updateCriticalityPreview);
+
+      byId("resetCriticality").addEventListener("click", () => {
+        criticalityValues = { ...criticalityDefaults };
+        byId("criticalitySliders").querySelectorAll("input[type=range]").forEach((slider) => {
+          const key = slider.dataset.criterion;
+          slider.value = String(criticalityValues[key]);
+          byId(`criticalityValue-${key}`).textContent = slider.value;
+        });
+        updateCriticalityPreview();
+      });
+
+      byId("saveCriticality").addEventListener("click", async () => {
+        if (!currentClassification) {
+          showMessage("No hay un equipo activo para ajustar.", "error");
+          return;
+        }
+        authorizeAdminAction(async (credentials) => {
+          const result = await requestJson(
+            `${getApiBaseUrl()}/criticidad/ajustar`,
+            {
+              equipo_id: currentClassification.data.equipo_id,
+              valores: criticalityValues,
+              usuario: credentials.user,
+              justificacion: byId("criticalityJustification").value.trim()
+            },
+            adminHeaders(credentials)
+          );
+          currentClassification.data.criticidad = result.criticidad;
+          renderCriticality(result.criticidad);
+          showMessage("Ajuste de criticidad guardado y auditado.", "success");
+          await loadCriticalityReports();
+        });
+      });
+
+      function renderCriticalityTop() {
+        const table = byId("criticalityTopTable");
+        table.replaceChildren();
+        if (!criticalityReport) return;
+        const level = byId("reportLevelFilter").value;
+        const category = byId("reportCategoryFilter").value;
+        const items = criticalityReport.top_criticos.filter((item) =>
+          (!level || item.nivel === level) && (!category || item.categoria === category)
+        );
+        items.forEach((item) => {
+          const row = document.createElement("tr");
+          [
+            item.equipo || item.equipo_id,
+            item.categoria,
+            Number(item.indice).toFixed(2),
+            item.nivel,
+            item.mtbf_dias == null ? "—" : `${item.mtbf_dias} días`,
+            item.origen
+          ].forEach((value) => {
+            const cell = document.createElement("td");
+            cell.textContent = String(value);
+            row.append(cell);
+          });
+          table.append(row);
+        });
+        if (!items.length) {
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 6;
+          cell.textContent = "No hay equipos que coincidan con los filtros.";
+          row.append(cell);
+          table.append(row);
+        }
+      }
+
+      function renderCriticalityReport(data) {
+        criticalityReport = data;
+        const total = Number(data.total) || 0;
+        const counts = data.por_nivel || { ALTA: 0, MEDIA: 0, BAJA: 0 };
+        byId("reportTotal").textContent = String(total);
+        byId("reportHigh").textContent = `${total ? (counts.ALTA / total * 100).toFixed(1) : "0.0"}%`;
+        byId("reportMedium").textContent = `${total ? (counts.MEDIA / total * 100).toFixed(1) : "0.0"}%`;
+        byId("reportLow").textContent = `${total ? (counts.BAJA / total * 100).toFixed(1) : "0.0"}%`;
+
+        const categoryFilter = byId("reportCategoryFilter");
+        const previousCategory = categoryFilter.value;
+        categoryFilter.replaceChildren(new Option("Todas", ""));
+        data.por_categoria.forEach((item) => {
+          categoryFilter.add(new Option(item.categoria, item.categoria));
+        });
+        if ([...categoryFilter.options].some((option) => option.value === previousCategory)) {
+          categoryFilter.value = previousCategory;
+        }
+
+        if (typeof Chart !== "undefined") {
+          if (reportCategoryChart) reportCategoryChart.destroy();
+          reportCategoryChart = new Chart(byId("reportCategoryChart"), {
+            type: "bar",
+            data: {
+              labels: data.por_categoria.map((item) => item.categoria),
+              datasets: [
+                { label: "ALTA", data: data.por_categoria.map((item) => item.alta), backgroundColor: "#e96b6b" },
+                { label: "MEDIA", data: data.por_categoria.map((item) => item.media), backgroundColor: "#efbd53" },
+                { label: "BAJA", data: data.por_categoria.map((item) => item.baja), backgroundColor: "#45ae82" }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } } },
+              plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 10 } } } }
+            }
+          });
+          if (reportLevelChart) reportLevelChart.destroy();
+          reportLevelChart = new Chart(byId("reportLevelChart"), {
+            type: "doughnut",
+            data: {
+              labels: ["ALTA", "MEDIA", "BAJA"],
+              datasets: [{ data: [counts.ALTA, counts.MEDIA, counts.BAJA], backgroundColor: ["#e96b6b", "#efbd53", "#45ae82"] }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 10 } } } }
+            }
+          });
+        }
+        renderCriticalityTop();
+        const status = byId("criticalityReportStatus");
+        status.className = "criticality-report-status";
+        status.textContent = `${total} equipos registrados.`;
+      }
+
+      async function loadCriticalityReports() {
+        const status = byId("criticalityReportStatus");
+        status.className = "criticality-report-status";
+        status.textContent = "Cargando reporte…";
+        try {
+          const response = await fetch(`${getApiBaseUrl()}/criticidad/reportes/distribucion`);
+          let data;
+          try { data = await response.json(); }
+          catch (error) { throw new Error("La API devolvió un reporte que no se pudo interpretar."); }
+          if (!response.ok) throw new Error(getErrorMessage(data, response.status));
+          if (!data || !Array.isArray(data.por_categoria) || !Array.isArray(data.top_criticos)) {
+            throw new Error("La API devolvió una estructura de reporte inválida.");
+          }
+          renderCriticalityReport(data);
+        } catch (error) {
+          status.className = "criticality-report-status error";
+          status.textContent = error.message || "No se pudo cargar el reporte de criticidad.";
+        }
+      }
+
+      function downloadCriticalityReport(extension, content, mimeType) {
+        if (!criticalityReport) {
+          showMessage("No hay datos de criticidad para exportar.", "error");
+          return;
+        }
+        const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `reporte_criticidad_${new Date().toISOString().slice(0, 10)}.${extension}`;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function exportCriticalityCsv() {
+        if (!criticalityReport) {
+          downloadCriticalityReport("csv", "", "text/csv");
+          return;
+        }
+        const totals = criticalityReport.por_nivel;
+        const rows = [
+          ["tipo", "equipo", "categoria", "indice", "nivel", "mtbf_dias", "origen", "total", "alta", "media", "baja"],
+          ["resumen", "", "", "", "", "", "", criticalityReport.total, totals.ALTA, totals.MEDIA, totals.BAJA],
+          ...criticalityReport.por_categoria.map((item) => [
+            "categoria", "", item.categoria, item.ic_promedio, "", "", "",
+            item.total, item.alta, item.media, item.baja
+          ]),
+          ...criticalityReport.top_criticos.map((item) => [
+            "equipo", item.equipo || item.equipo_id, item.categoria, item.indice,
+            item.nivel, item.mtbf_dias ?? "", item.origen, "", "", "", ""
+          ])
+        ];
+        const csv = rows.map((row) => row.map((value) =>
+          `"${String(value).replaceAll('"', '""')}"`
+        ).join(",")).join("\r\n");
+        downloadCriticalityReport("csv", `\uFEFF${csv}`, "text/csv");
+      }
+
+      function exportCriticalityTxt() {
+        if (!criticalityReport) {
+          downloadCriticalityReport("txt", "", "text/plain");
+          return;
+        }
+        const counts = criticalityReport.por_nivel;
+        const lines = [
+          "REPORTE DE CRITICIDAD",
+          `Equipos evaluados: ${criticalityReport.total}`,
+          `ALTA: ${counts.ALTA} · MEDIA: ${counts.MEDIA} · BAJA: ${counts.BAJA}`,
+          "",
+          "DISTRIBUCIÓN POR CATEGORÍA",
+          ...criticalityReport.por_categoria.map((item) =>
+            `${item.categoria} | total ${item.total} | IC promedio ${Number(item.ic_promedio).toFixed(2)} | ALTA ${item.alta} | MEDIA ${item.media} | BAJA ${item.baja}`
+          ),
+          "",
+          "TOP 10 EQUIPOS MÁS CRÍTICOS",
+          ...criticalityReport.top_criticos.map((item) =>
+            `${item.equipo || item.equipo_id} | ${item.categoria} | IC ${Number(item.indice).toFixed(2)} | ${item.nivel} | MTBF ${item.mtbf_dias ?? "—"} | ${item.origen}`
+          )
+        ];
+        downloadCriticalityReport("txt", lines.join("\r\n"), "text/plain");
+      }
+
+      byId("reportLevelFilter").addEventListener("change", renderCriticalityTop);
+      byId("reportCategoryFilter").addEventListener("change", renderCriticalityTop);
+      byId("refreshCriticalityReport").addEventListener("click", loadCriticalityReports);
+      byId("exportCriticalityCsv").addEventListener("click", exportCriticalityCsv);
+      byId("exportCriticalityTxt").addEventListener("click", exportCriticalityTxt);
+      loadCriticalityReports();
 
       function addHistory(item) {
         history.unshift({ ...item, timestamp: new Date().toISOString() });
@@ -998,6 +1429,7 @@
             result = await classify(payload);
           }
           renderResult(result.data, payload.nombre, result.demo, true, payload);
+          if (!result.demo && !result.connectionError) await loadCriticalityReports();
           if (result.connectionError) {
             showMessage("No se pudo conectar con el servidor. Se activó el Modo Demo y se muestra un resultado simulado.", "demo");
           } else if (result.demo) {
@@ -1081,6 +1513,7 @@
             true,
             { ...original.inputDetails, originalData: original.originalData }
           );
+          await loadCriticalityReports();
           const confidence = Number(corrected.confidence);
           const validation = corrected.validacion_correccion;
           if (!Number.isFinite(confidence) || confidence < 0.75) {
@@ -1128,22 +1561,90 @@
         }
       });
 
-      const retrainDialog = byId("modal-reentrenar");
+      const adminAuthDialog = byId("modal-admin-auth");
+      const adminAuthForm = byId("adminAuthForm");
       const retrainButton = byId("btn-reentrenar");
-      const confirmRetrainButton = byId("btn-confirmar-reentrenar");
       const retrainSpinner = byId("retrainSpinner");
       const retrainStatus = byId("retrainStatus");
       const adminLoginButton = byId("adminLogin");
       const refreshReviewButton = byId("refreshReview");
       const reviewPanel = byId("reviewPanel");
 
-      function adminHeaders() {
-        if (!adminCredentials) throw new Error("Inicia sesión como administrador para continuar.");
+      function adminHeaders(credentials = adminCredentials) {
+        if (!credentials) throw new Error("Autoriza la acción con ADMIN_API_KEY.");
         return {
-          "X-Admin-Key": adminCredentials.key,
-          "X-Admin-User": adminCredentials.user
+          "X-Admin-Key": credentials.key,
+          "X-Admin-User": credentials.user
         };
       }
+
+      function authorizeAdminAction(action) {
+        // Todas las operaciones administrativas se autorizan con el mismo modal y endpoint.
+        pendingAdminAction = action;
+        byId("adminAuthError").hidden = true;
+        byId("adminAuthError").textContent = "";
+        byId("adminAuthKey").value = "";
+        byId("adminAuthUser").value = adminCredentials?.user || "administrador";
+        adminAuthDialog.showModal();
+        byId("adminAuthKey").focus();
+      }
+
+      function closeAdminAuthDialog() {
+        pendingAdminAction = null;
+        if (adminAuthDialog.open) adminAuthDialog.close();
+      }
+
+      byId("cancelAdminAuth").addEventListener("click", closeAdminAuthDialog);
+      byId("closeAdminAuth").addEventListener("click", closeAdminAuthDialog);
+
+      adminAuthForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const key = byId("adminAuthKey").value.trim();
+        const user = byId("adminAuthUser").value.trim();
+        const error = byId("adminAuthError");
+        if (!key || !user) {
+          error.textContent = "Ingresa ADMIN_API_KEY y el usuario para auditoría.";
+          error.hidden = false;
+          return;
+        }
+        const authorizeButton = byId("confirmAdminAuth");
+        authorizeButton.disabled = true;
+        error.hidden = true;
+        try {
+          const validation = await fetch(`${getApiBaseUrl()}/admin/auth`, {
+            method: "POST",
+            headers: {
+              "X-Admin-Key": key,
+              "X-Admin-User": user
+            }
+          });
+          let result;
+          try { result = await validation.json(); }
+          catch (parseError) {
+            throw new Error("La API devolvió una respuesta que no se pudo interpretar.");
+          }
+          if (validation.status === 403) {
+            throw new Error("ADMIN_API_KEY incorrecta. Verifica la clave e inténtalo de nuevo.");
+          }
+          if (!validation.ok) throw new Error(getErrorMessage(result, validation.status));
+
+          adminCredentials = { key, user: result.usuario };
+          const action = pendingAdminAction;
+          closeAdminAuthDialog();
+          if (action) await action(adminCredentials);
+        } catch (authError) {
+          if (adminAuthDialog.open) {
+            error.textContent = authError.message || "No se pudo validar ADMIN_API_KEY.";
+            error.hidden = false;
+            byId("adminAuthKey").value = "";
+            byId("adminAuthKey").focus();
+          } else {
+            showMessage(authError.message || "No se pudo completar la acción administrativa.", "error");
+          }
+        } finally {
+          authorizeButton.disabled = false;
+        }
+      });
 
       async function adminGet(path) {
         const response = await fetch(`${getApiBaseUrl()}${path}`, {
@@ -1227,7 +1728,7 @@
       }
 
       async function refreshCorrectionReviews() {
-        if (!adminCredentials) throw new Error("Inicia sesión como administrador para continuar.");
+        if (!adminCredentials) throw new Error("Autoriza la acción con ADMIN_API_KEY.");
         const [pending, reviewed] = await Promise.all([
           adminGet("/correcciones/pendientes-revision"),
           adminGet("/correcciones/revisadas")
@@ -1241,7 +1742,6 @@
         renderReviewTable(byId("pendingReviews"), pending, true);
         renderReviewTable(byId("reviewedCorrections"), reviewed, false);
         reviewPanel.hidden = false;
-        byId("btn-reentrenar").disabled = false;
         refreshReviewButton.disabled = false;
       }
 
@@ -1275,24 +1775,11 @@
         }
       }
 
-      adminLoginButton.addEventListener("click", async () => {
-        const key = byId("adminKey").value.trim();
-        const user = byId("adminUser").value.trim();
-        if (!key || !user) {
-          showMessage("Ingresa el usuario y la clave de administrador.", "error");
-          return;
-        }
-        adminCredentials = { key, user };
-        try {
+      adminLoginButton.addEventListener("click", () => {
+        authorizeAdminAction(async (credentials) => {
           await refreshCorrectionReviews();
-          showMessage(`Panel administrativo abierto para ${user}.`, "success");
-        } catch (error) {
-          adminCredentials = null;
-          byId("btn-reentrenar").disabled = true;
-          refreshReviewButton.disabled = true;
-          reviewPanel.hidden = true;
-          showMessage(error.message || "No se pudo autenticar al administrador.", "error");
-        }
+          showMessage(`Panel administrativo abierto para ${credentials.user}.`, "success");
+        });
       });
 
       refreshReviewButton.addEventListener("click", async () => {
@@ -1309,27 +1796,14 @@
         retrainStatus.hidden = false;
       }
 
-      function closeRetrainDialog() {
-        if (retrainDialog.open) retrainDialog.close();
-      }
-
       retrainButton.addEventListener("click", () => {
         retrainStatus.hidden = true;
-        retrainDialog.showModal();
+        authorizeAdminAction(runRetraining);
       });
-      byId("btn-cancelar-reentrenar").addEventListener("click", closeRetrainDialog);
-      byId("closeRetrain").addEventListener("click", closeRetrainDialog);
 
-      confirmRetrainButton.addEventListener("click", async () => {
-        if (!adminCredentials) {
-          setRetrainStatus("Inicia sesión como administrador antes de reentrenar.", true);
-          return;
-        }
-        closeRetrainDialog();
-        retrainStatus.hidden = true;
+      async function runRetraining(credentials) {
         retrainSpinner.hidden = false;
         retrainButton.disabled = true;
-        confirmRetrainButton.disabled = true;
         try {
           // Consulta la versión activa para solicitar un identificador nuevo y evitar sobrescribir artefactos.
           const healthResponse = await fetch(`${getApiBaseUrl()}/health`);
@@ -1342,7 +1816,7 @@
           const result = await requestJson(`${getApiBaseUrl()}/reentrenar`, {
             validar_correcciones: true,
             nueva_version: nextVersion
-          }, adminHeaders());
+          }, adminHeaders(credentials));
           if (result.correcciones_validadas === 0) {
             setRetrainStatus("No hay correcciones guardadas para reentrenar", true);
             return;
@@ -1361,9 +1835,8 @@
         } finally {
           retrainSpinner.hidden = true;
           retrainButton.disabled = false;
-          confirmRetrainButton.disabled = false;
         }
-      });
+      }
     })();
   </script>
 </body>

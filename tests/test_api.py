@@ -1,4 +1,6 @@
 import json
+import sqlite3
+from datetime import datetime, timedelta, timezone
 
 import pytest
 from fastapi.testclient import TestClient
@@ -8,6 +10,7 @@ from api import routes
 from api.main import app
 from src import code_generator
 from src.config import Config
+from src.criticality import obtener_valores_por_defecto
 from src import corrections
 from src.utils import CATEGORÍAS, MODELS_DIR
 
@@ -28,6 +31,272 @@ def test_root_redirects_to_docs(client):
     response = client.get("/", follow_redirects=False)
     assert response.status_code == 307
     assert response.headers["location"] == "/docs"
+
+
+def _classify_with_equipment_id(client, equipment_id, name="Ventilador mecánico"):
+    response = client.post(
+        "/api/v1/clasificar",
+        json={"nombre": name, "cmms_equipment_id": equipment_id},
+    )
+    assert response.status_code == 200
+    return response.json()
+
+
+def test_criticality_response_preserves_fields_and_adds_radar_data(client):
+    result = _classify_with_equipment_id(client, "ACT-CRIT-1")
+    criticality = result["criticidad"]
+    assert result["equipo_id"] == "ACT-CRIT-1"
+    assert {
+        "impacto_clinico",
+        "redundancia",
+        "frecuencia_uso",
+        "historial_fallas",
+        "costo_tiempo",
+        "indice",
+        "nivel",
+    }.issubset(criticality)
+    assert len(criticality["radar_data"]) == 5
+    assert len(criticality["contribuciones"]) == 5
+    assert criticality["radar_data"][0]["peso"] == 0.4
+
+
+def test_admin_authentication_endpoint_and_admin_actions_share_one_key(client, monkeypatch):
+    wrong_headers = {"X-Admin-Key": "wrong-key", "X-Admin-User": "test-admin"}
+    rejected_auth = client.post("/api/v1/admin/auth", headers=wrong_headers)
+    rejected_retrain = client.post(
+        "/api/v1/reentrenar",
+        headers=wrong_headers,
+        json={"validar_correcciones": True, "nueva_version": "v2"},
+    )
+    assert rejected_auth.status_code == rejected_retrain.status_code == 403
+    assert rejected_auth.json()["detail"] == rejected_retrain.json()["detail"]
+
+    authorized = client.post("/api/v1/admin/auth", headers=ADMIN_HEADERS)
+    assert authorized.status_code == 200
+    assert authorized.json() == {"status": "ok", "usuario": "test-admin"}
+
+    monkeypatch.setattr(routes, "validate_saved_corrections", lambda: 10)
+    monkeypatch.setattr(
+        routes,
+        "re_entrenar",
+        lambda **kwargs: {
+            "status": "ok",
+            "modelo_activo": "v2",
+            "nuevos_totales": 14,
+            "accuracy": 0.88,
+            "correcciones_validadas": 10,
+        },
+    )
+    retrained = client.post(
+        "/api/v1/reentrenar",
+        headers=ADMIN_HEADERS,
+        json={"validar_correcciones": True, "nueva_version": "v2"},
+    )
+    assert retrained.status_code == 200
+
+    _classify_with_equipment_id(client, "ACT-ADMIN-AUTH")
+    values = {
+        "impacto_clinico": 3,
+        "redundancia": 3,
+        "frecuencia_uso": 5,
+        "historial_fallas": 3,
+        "costo_tiempo": 3,
+    }
+    adjusted = client.post(
+        "/api/v1/criticidad/ajustar",
+        headers=ADMIN_HEADERS,
+        json={
+            "equipo_id": "ACT-ADMIN-AUTH",
+            "valores": values,
+            "usuario": "test-admin",
+            "justificacion": "Evaluación validada por el administrador.",
+        },
+    )
+    assert adjusted.status_code == 200
+
+
+def test_manual_criticality_adjustment_requires_justification_and_is_audited(client):
+    result = _classify_with_equipment_id(client, "ACT-CRIT-2")
+    values = {
+        key: result["criticidad"][key]
+        for key in (
+            "impacto_clinico",
+            "redundancia",
+            "frecuencia_uso",
+            "historial_fallas",
+            "costo_tiempo",
+        )
+    }
+    values["impacto_clinico"] = 3
+    payload = {
+        "equipo_id": "ACT-CRIT-2",
+        "valores": values,
+        "usuario": "biomedico",
+        "justificacion": "",
+    }
+    missing = client.post(
+        "/api/v1/criticidad/ajustar", json=payload, headers=ADMIN_HEADERS
+    )
+    assert missing.status_code == 422
+    payload["justificacion"] = "breve"
+    short = client.post(
+        "/api/v1/criticidad/ajustar", json=payload, headers=ADMIN_HEADERS
+    )
+    assert short.status_code == 422
+    assert client.get("/api/v1/criticidad/ACT-CRIT-2").json()["impacto_clinico"] == 5
+
+    payload["justificacion"] = "Evaluación clínica de impacto asistencial."
+    saved = client.post(
+        "/api/v1/criticidad/ajustar", json=payload, headers=ADMIN_HEADERS
+    )
+    assert saved.status_code == 200
+    assert saved.json()["criticidad"]["impacto_clinico"] == 3
+    assert saved.json()["criticidad"]["ajustado_manualmente"] is True
+    audit = client.get(
+        "/api/v1/criticidad/ACT-CRIT-2/auditoria", headers=ADMIN_HEADERS
+    )
+    assert audit.status_code == 200
+    assert any(row["origen"] == "MANUAL" for row in audit.json())
+
+    payload["justificacion"] = ""
+    no_op = client.post(
+        "/api/v1/criticidad/ajustar", json=payload, headers=ADMIN_HEADERS
+    )
+    assert no_op.status_code == 200
+    assert no_op.json()["status"] == "sin_cambios"
+    refreshed_audit = client.get(
+        "/api/v1/criticidad/ACT-CRIT-2/auditoria", headers=ADMIN_HEADERS
+    )
+    assert sum(row["origen"] == "MANUAL" for row in refreshed_audit.json()) == 1
+
+
+def test_criticality_adjustment_rejects_out_of_range_values(client):
+    _classify_with_equipment_id(client, "ACT-CRIT-3")
+    values = obtener_valores_por_defecto("RES-01")
+    values["impacto_clinico"] = 0
+    response = client.post(
+        "/api/v1/criticidad/ajustar",
+        headers=ADMIN_HEADERS,
+        json={
+            "equipo_id": "ACT-CRIT-3",
+            "valores": values,
+            "usuario": "biomedico",
+            "justificacion": "Cambio justificado por revisión.",
+        },
+    )
+    assert response.status_code == 422
+
+
+def test_mtbf_updates_values_and_respects_recent_manual_history(client):
+    first = _classify_with_equipment_id(client, "ACT-MTBF-1")
+    baseline = first["criticidad"]["indice"]
+    low_mtbf = client.post(
+        "/api/v1/criticidad/mtbf",
+        headers=ADMIN_HEADERS,
+        json={"equipo_id": "ACT-MTBF-1", "mtbf_dias": 15},
+    )
+    assert low_mtbf.status_code == 200
+    assert low_mtbf.json()["detalle"][0]["criticidad"]["historial_fallas"] == 5
+    assert low_mtbf.json()["detalle"][0]["criticidad"]["indice"] > baseline
+
+    second = _classify_with_equipment_id(client, "ACT-MTBF-2")
+    baseline_high_mtbf = second["criticidad"]["indice"]
+    high_mtbf = client.post(
+        "/api/v1/criticidad/mtbf",
+        headers=ADMIN_HEADERS,
+        json={"equipo_id": "ACT-MTBF-2", "mtbf_dias": 400},
+    )
+    assert high_mtbf.status_code == 200
+    assert high_mtbf.json()["detalle"][0]["criticidad"]["historial_fallas"] == 1
+    assert high_mtbf.json()["detalle"][0]["criticidad"]["indice"] < baseline_high_mtbf
+
+    values = {
+        key: second["criticidad"][key]
+        for key in (
+            "impacto_clinico",
+            "redundancia",
+            "frecuencia_uso",
+            "historial_fallas",
+            "costo_tiempo",
+        )
+    }
+    values["historial_fallas"] = 4
+    adjusted = client.post(
+        "/api/v1/criticidad/ajustar",
+        headers=ADMIN_HEADERS,
+        json={
+            "equipo_id": "ACT-MTBF-2",
+            "valores": values,
+            "usuario": "biomedico",
+            "justificacion": "Inspección reciente del equipo.",
+        },
+    )
+    assert adjusted.status_code == 200
+    omitted = client.post(
+        "/api/v1/criticidad/mtbf",
+        headers=ADMIN_HEADERS,
+        json={"equipo_id": "ACT-MTBF-2", "mtbf_dias": 15},
+    )
+    assert omitted.status_code == 200
+    assert omitted.json()["omitidos"] == 1
+    assert omitted.json()["detalle"][0]["motivo"] == (
+        "MTBF_OMITIDO_POR_AJUSTE_MANUAL_RECIENTE"
+    )
+
+    with sqlite3.connect(Config.CORRECTIONS_DB_PATH) as connection:
+        old_timestamp = (datetime.now(timezone.utc) - timedelta(days=120)).isoformat()
+        connection.execute(
+            "UPDATE criticidad_ajustes SET timestamp=? "
+            "WHERE equipo_id=? AND origen='MANUAL'",
+            (old_timestamp, "ACT-MTBF-2"),
+        )
+    updated = client.post(
+        "/api/v1/criticidad/mtbf",
+        headers=ADMIN_HEADERS,
+        json={"equipo_id": "ACT-MTBF-2", "mtbf_dias": 15},
+    )
+    assert updated.status_code == 200
+    assert updated.json()["actualizados"] == 1
+    assert updated.json()["detalle"][0]["criticidad"]["historial_fallas"] == 5
+
+
+def test_criticality_reports_and_admin_audit_filters(client):
+    _classify_with_equipment_id(client, "ACT-REPORT-1")
+    report = client.get("/api/v1/criticidad/reportes/distribucion")
+    assert report.status_code == 200
+    assert report.json()["total"] == 1
+    assert sum(report.json()["por_nivel"].values()) == 1
+    assert report.json()["top_criticos"][0]["equipo"] == "ACT-REPORT-1"
+
+    unauthorized = client.get("/api/v1/criticidad/reportes/auditoria")
+    assert unauthorized.status_code == 403
+    audit = client.get(
+        "/api/v1/criticidad/reportes/auditoria?equipo_id=ACT-REPORT-1",
+        headers=ADMIN_HEADERS,
+    )
+    assert audit.status_code == 200
+    assert any(row["origen"] == "DEFAULT" for row in audit.json())
+
+
+def test_manual_category_correction_keeps_equipment_criticality_record(client):
+    _classify_with_equipment_id(client, "ACT-CATEGORY-1")
+    corrected = client.post(
+        "/api/v1/recalcular",
+        json={
+            "nombre": "Ventilador mecánico",
+            "categoria_forzada": "OTR-01",
+            "cmms_equipment_id": "ACT-CATEGORY-1",
+        },
+    )
+    assert corrected.status_code == 200
+    assert corrected.json()["categoria_propia"] == "OTR-01"
+    profile = client.get("/api/v1/criticidad/ACT-CATEGORY-1")
+    assert profile.status_code == 200
+    assert profile.json()["categoria"] == "OTR-01"
+    assert any(
+        item["origen"] == "CORRECCION_CATEGORIA"
+        for item in profile.json()["historial_ajustes"]
+    )
 
 
 def test_health_reports_runtime_resources(client):
@@ -317,6 +586,7 @@ def test_register_correction_accepts_two_checks_for_review_but_not_training(
 def test_admin_routes_require_credentials_and_fail_closed_without_server_key(
     client, monkeypatch
 ):
+    assert client.post("/api/v1/admin/auth").status_code == 403
     assert client.get("/api/v1/correcciones/pendientes-revision").status_code == 403
     assert client.get(
         "/api/v1/correcciones/pendientes-revision",
@@ -327,6 +597,7 @@ def test_admin_routes_require_credentials_and_fail_closed_without_server_key(
         "/api/v1/correcciones/pendientes-revision", headers=ADMIN_HEADERS
     )
     assert unavailable.status_code == 503
+    assert client.post("/api/v1/admin/auth", headers=ADMIN_HEADERS).status_code == 503
 
 
 def test_admin_can_request_information_then_reject_and_audit(client):

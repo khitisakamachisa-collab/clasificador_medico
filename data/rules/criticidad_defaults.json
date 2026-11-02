@@ -1,0 +1,252 @@
+{
+  "ANE-01": {
+    "nombre": "Anestesia",
+    "impacto_clinico": 5,
+    "redundancia": 4,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 4,
+    "indice": 4.4,
+    "justificacion": "La falla puede comprometer la anestesia; uso intensivo y reparación especializada."
+  },
+  "CAR-01": {
+    "nombre": "Cardiología Diagnóstica",
+    "impacto_clinico": 3,
+    "redundancia": 2,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 2,
+    "indice": 2.85,
+    "justificacion": "Equipo diagnóstico de uso frecuente, con alternativas clínicas y reparación moderada."
+  },
+  "CAR-02": {
+    "nombre": "Cardiología Terapéutica",
+    "impacto_clinico": 5,
+    "redundancia": 5,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 5,
+    "indice": 4.55,
+    "justificacion": "Intervención terapéutica crítica, sin sustitución inmediata y de reparación costosa."
+  },
+  "CIR-01": {
+    "nombre": "Quirófano General",
+    "impacto_clinico": 4,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 4,
+    "indice": 3.65,
+    "justificacion": "Equipamiento de quirófano; impacto alto pero con redundancia parcial."
+  },
+  "CIR-02": {
+    "nombre": "Electrocirugía",
+    "impacto_clinico": 5,
+    "redundancia": 4,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 3,
+    "indice": 4.15,
+    "justificacion": "La falla interrumpe una intervención; suele existir equipo alternativo y soporte técnico."
+  },
+  "DEN-01": {
+    "nombre": "Odontología",
+    "impacto_clinico": 2,
+    "redundancia": 2,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 3,
+    "indice": 2.7,
+    "justificacion": "Uso frecuente en consulta con sustitución posible y consecuencias clínicas acotadas."
+  },
+  "DIA-01": {
+    "nombre": "Diálisis",
+    "impacto_clinico": 5,
+    "redundancia": 4,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 4,
+    "indice": 4.4,
+    "justificacion": "Soporta tratamiento vital recurrente y requiere infraestructura especializada."
+  },
+  "END-01": {
+    "nombre": "Endoscopía",
+    "impacto_clinico": 4,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 4,
+    "indice": 3.8,
+    "justificacion": "Equipo de procedimiento frecuente con reparación especializada y respaldo parcial."
+  },
+  "EST-01": {
+    "nombre": "Esterilización",
+    "impacto_clinico": 3,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 3,
+    "indice": 3.3,
+    "justificacion": "Su indisponibilidad reduce capacidad de reprocesamiento, aunque suele haber alternativas."
+  },
+  "GAS-01": {
+    "nombre": "Gases Medicinales",
+    "impacto_clinico": 5,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 2,
+    "indice": 3.85,
+    "justificacion": "Servicio esencial de uso continuo, con redundancia parcial y reparación relativamente rápida."
+  },
+  "IMG-01": {
+    "nombre": "Imagenología Rayos X",
+    "impacto_clinico": 4,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 4,
+    "indice": 3.8,
+    "justificacion": "Equipo diagnóstico de alta demanda con respaldo variable y mantenimiento especializado."
+  },
+  "IMG-02": {
+    "nombre": "Tomografía/Resonancia",
+    "impacto_clinico": 4,
+    "redundancia": 5,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 5,
+    "indice": 4.3,
+    "justificacion": "Equipo diagnóstico de alto costo, difícil sustitución y reparación prolongada."
+  },
+  "IMG-03": {
+    "nombre": "Ultrasonido",
+    "impacto_clinico": 3,
+    "redundancia": 2,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 3,
+    "indice": 3.1,
+    "justificacion": "Equipo diagnóstico frecuente y parcialmente sustituible con reparación moderada."
+  },
+  "LAB-01": {
+    "nombre": "Laboratorio Análisis",
+    "impacto_clinico": 4,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 4,
+    "indice": 3.8,
+    "justificacion": "La indisponibilidad retrasa diagnósticos; tiene uso intensivo y soporte especializado."
+  },
+  "LAB-02": {
+    "nombre": "Banco de Sangre",
+    "impacto_clinico": 5,
+    "redundancia": 4,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 3,
+    "indice": 4.15,
+    "justificacion": "Conserva y procesa componentes críticos con repercusión directa en la atención."
+  },
+  "MON-01": {
+    "nombre": "Monitoreo Vital",
+    "impacto_clinico": 4,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 3,
+    "indice": 3.7,
+    "justificacion": "Monitoreo continuo en atención clínica con respaldo parcial y mantenimiento moderado."
+  },
+  "NEO-01": {
+    "nombre": "Neonatología",
+    "impacto_clinico": 5,
+    "redundancia": 4,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 4,
+    "indice": 4.4,
+    "justificacion": "La falla puede afectar directamente a pacientes neonatales vulnerables."
+  },
+  "OFI-01": {
+    "nombre": "Oficina/General",
+    "impacto_clinico": 1,
+    "redundancia": 2,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 1,
+    "indice": 1.95,
+    "justificacion": "Equipo administrativo sin impacto asistencial directo y de sustitución sencilla."
+  },
+  "RES-01": {
+    "nombre": "Respiratorio",
+    "impacto_clinico": 5,
+    "redundancia": 4,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 4,
+    "indice": 4.4,
+    "justificacion": "Equipo de soporte respiratorio con repercusión directa en pacientes críticos."
+  },
+  "TER-01": {
+    "nombre": "Terapia Física",
+    "impacto_clinico": 2,
+    "redundancia": 2,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 2,
+    "indice": 2.45,
+    "justificacion": "Equipo de terapia de uso frecuente y con alternativas de servicio disponibles."
+  },
+  "URG-01": {
+    "nombre": "Emergencia",
+    "impacto_clinico": 5,
+    "redundancia": 4,
+    "frecuencia_uso": 4,
+    "historial_fallas": 2,
+    "costo_tiempo": 4,
+    "indice": 4.1,
+    "justificacion": "Equipo disponible para atención inmediata, con impacto alto ante indisponibilidad."
+  },
+  "INF-01": {
+    "nombre": "Infusión",
+    "impacto_clinico": 5,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 3,
+    "indice": 4.1,
+    "justificacion": "La administración precisa de fluidos y fármacos puede ser crítica para el paciente."
+  },
+  "FRM-01": {
+    "nombre": "Farmacia",
+    "impacto_clinico": 3,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 2,
+    "costo_tiempo": 2,
+    "indice": 3.05,
+    "justificacion": "Equipo de apoyo al suministro de medicamentos con impacto indirecto y opciones de respaldo."
+  },
+  "MOB-01": {
+    "nombre": "Mobiliario Clínico",
+    "impacto_clinico": 2,
+    "redundancia": 2,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 2,
+    "indice": 2.6,
+    "justificacion": "Mobiliario de uso frecuente cuya indisponibilidad suele mitigarse con sustitución."
+  },
+  "OTR-01": {
+    "nombre": "Otros Equipos",
+    "impacto_clinico": 2,
+    "redundancia": 2,
+    "frecuencia_uso": 4,
+    "historial_fallas": 3,
+    "costo_tiempo": 2,
+    "indice": 2.45,
+    "justificacion": "Perfil provisional de impacto moderado que debe individualizarse según el equipo."
+  }
+}

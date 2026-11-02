@@ -5,7 +5,7 @@ import unicodedata
 from difflib import SequenceMatcher
 from typing import Any
 
-from .criticality import calcular_criticidad
+from .criticality import calcular_criticidad, obtener_valores_por_defecto
 from .emdn_importer import load_emdn_database
 from .rules_dictionary import EMDN_PREFIXES
 from .utils import CATEGORÍAS, CATEGORY_KEYWORDS
@@ -174,13 +174,25 @@ def verificar_mdr_categoria(categoria: str, mdr_class: str) -> bool:
     )
 
 
-def verificar_criticidad_categoria(categoria: str, criticidad: dict[str, Any]) -> bool:
+def verificar_criticidad_categoria(
+    categoria: str,
+    criticidad: dict[str, Any],
+    equipo_id: str | None = None,
+) -> bool:
     """Verifica rangos, proximidad a los valores de categoría e índice coherente."""
     category = CATEGORÍAS.get(categoria)
     if not category or not isinstance(criticidad, dict):
         return False
 
-    defaults = category["defaults"]
+    defaults = obtener_valores_por_defecto(categoria)
+    if equipo_id:
+        from .criticality_store import obtener_criticidad
+
+        equipment_profile = obtener_criticidad(equipo_id)
+        if equipment_profile:
+            defaults = {
+                field: equipment_profile[field] for field in _CRITICALITY_FIELDS
+            }
     values = {}
     for field in _CRITICALITY_FIELDS:
         value = criticidad.get(field)
@@ -208,7 +220,10 @@ def verificar_criticidad_categoria(categoria: str, criticidad: dict[str, Any]) -
 
 
 def validar_correccion_automaticamente(
-    correccion: dict[str, Any], *, nombre_equipo: str | None = None
+    correccion: dict[str, Any],
+    *,
+    nombre_equipo: str | None = None,
+    equipo_id: str | None = None,
 ) -> dict[str, Any]:
     """Asigna confianza según las validaciones estructurales y semánticas."""
     category = correccion.get("categoria_propia") or correccion.get("categoria")
@@ -224,7 +239,9 @@ def validar_correccion_automaticamente(
         "emdn_valido": verificar_emdn_en_excel(category, emdn_code),
         "mdr_coherente": verificar_mdr_categoria(category, correccion.get("mdr_class", "")),
         "criticidad_razonable": verificar_criticidad_categoria(
-            category, correccion.get("criticidad", {})
+            category,
+            correccion.get("criticidad", {}),
+            equipo_id or correccion.get("cmms_equipment_id") or correccion.get("codigo_interno"),
         ),
         "semantica_valida": semantic_valid,
     }

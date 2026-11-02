@@ -35,9 +35,12 @@ def _load_criticality_weights() -> dict[str, float]:
     weights = {key: float(value) for key, value in parsed.items()}
     if (
         any(not math.isfinite(value) or value < 0 for value in weights.values())
-        or abs(sum(weights.values()) - 1.0) > 1e-6
+        or abs(sum(weights.values()) - 1.0) > 0.001
     ):
-        raise ValueError("Los pesos de criticidad deben ser no negativos y sumar 1.")
+        raise ValueError(
+            "Los pesos de criticidad deben ser no negativos y sumar 1.00 "
+            "(tolerancia 0.001)."
+        )
     return weights
 
 
@@ -55,6 +58,12 @@ class Config:
     )
     MASTER_RULES_PATH = Path(
         os.getenv("MASTER_RULES_PATH", str(DATA_DIR / "rules" / "reglas_maestras.json"))
+    )
+    CRITICALITY_DEFAULTS_PATH = Path(
+        os.getenv(
+            "CRITICALITY_DEFAULTS_PATH",
+            str(DATA_DIR / "rules" / "criticidad_defaults.json"),
+        )
     )
     _local_admin_key = dotenv_values(_LOCAL_ENV).get("ADMIN_API_KEY")
     ADMIN_API_KEY = (
@@ -75,7 +84,17 @@ class Config:
     NLP_CONFIDENCE_THRESHOLD = float(os.getenv("NLP_CONFIDENCE_THRESHOLD", "0.70"))
     LOW_CONFIDENCE_THRESHOLD = float(os.getenv("LOW_CONFIDENCE_THRESHOLD", "0.50"))
     CRITICALITY_WEIGHTS = _load_criticality_weights()
-    CRITICALITY_LEVELS = {"ALTA": 4.0, "MEDIA": 2.5, "BAJA": 0.0}
+    CRITICALITY_LEVELS = {
+        "ALTA": float(os.getenv("CRITICALITY_LEVEL_HIGH", "4.00")),
+        "MEDIA": float(os.getenv("CRITICALITY_LEVEL_MEDIUM", "2.50")),
+        "BAJA": 0.0,
+    }
+    if (
+        not math.isfinite(CRITICALITY_LEVELS["ALTA"])
+        or not math.isfinite(CRITICALITY_LEVELS["MEDIA"])
+        or not 0 < CRITICALITY_LEVELS["MEDIA"] < CRITICALITY_LEVELS["ALTA"] <= 5
+    ):
+        raise ValueError("Los umbrales de criticidad deben cumplir 0 < MEDIA < ALTA <= 5.")
     HOSPITAL_LOCATIONS = (
         "uci",
         "uti",

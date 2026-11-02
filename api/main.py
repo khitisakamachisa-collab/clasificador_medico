@@ -11,6 +11,8 @@ from fastapi.responses import JSONResponse, RedirectResponse
 
 from .routes import router
 from src.config import Config
+from src.criticality import cargar_criticidad_defaults
+from src.criticality_store import inicializar_criticidad
 from src.emdn_importer import load_emdn_database
 
 logging.basicConfig(
@@ -21,6 +23,10 @@ logging.basicConfig(
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    if abs(sum(Config.CRITICALITY_WEIGHTS.values()) - 1.0) > 0.001:
+        raise ValueError("Los pesos de criticidad deben sumar 1.00 (tolerancia 0.001).")
+    cargar_criticidad_defaults()
+    inicializar_criticidad()
     app.state.emdn_database = load_emdn_database()
     yield
 
@@ -74,10 +80,15 @@ async def enforce_rate_limit(request: Request, call_next):
 
 @app.exception_handler(RequestValidationError)
 async def request_validation_error(
-    _request: Request, exc: RequestValidationError
+    request: Request, exc: RequestValidationError
 ) -> JSONResponse:
+    status_code = (
+        422
+        if request.url.path.startswith("/api/v1/criticidad/")
+        else 400
+    )
     return JSONResponse(
-        status_code=400,
+        status_code=status_code,
         content={
             "detail": "Solicitud inválida.",
             "errores": jsonable_encoder(exc.errors()),

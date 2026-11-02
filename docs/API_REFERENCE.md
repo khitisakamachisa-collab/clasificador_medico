@@ -46,7 +46,9 @@ El servidor vuelve a calcular EMDN, MDR, criticidad y comprobaciones técnicas. 
 
 ## Revisión administrativa
 
-Configura `ADMIN_API_KEY` en `.env`. Cada ruta administrativa exige los encabezados `X-Admin-Key` y `X-Admin-User`; las claves vacías o incorrectas no autorizan el acceso.
+Configura `ADMIN_API_KEY` en `.env`. Todas las rutas administrativas comparten la misma validación y exigen los encabezados `X-Admin-Key` y `X-Admin-User`; las claves vacías o incorrectas no autorizan el acceso. La interfaz solicita la clave en un único modal reutilizado por las acciones administrativas.
+
+- `POST /api/v1/admin/auth`: valida la clave y la identidad de auditoría con el mismo control que las operaciones protegidas. No almacena credenciales en `localStorage`.
 
 - `GET /api/v1/correcciones/pendientes-revision`: lista las correcciones pendientes.
 - `GET /api/v1/correcciones/revisadas`: lista las aprobadas y rechazadas.
@@ -124,6 +126,37 @@ Devuelve una lista de coincidencias terminales con `code`, `name` y `score`; una
 ## `GET /api/v1/categorias`
 
 Devuelve las 25 categorías propias, su nombre, clase MDR predeterminada y valores de criticidad.
+
+## Criticidad por equipo
+
+Los equipos se identifican con `cmms_equipment_id` cuando se envía al clasificador; si no, la respuesta devuelve `equipo_id` con el código interno generado. La criticidad conserva sus campos previos y añade origen, estado de ajuste, perfil de referencia, contribuciones al índice y datos para el radar. Los perfiles se guardan en la base SQLite local; no se requiere conexión con un CMMS.
+
+- `GET /api/v1/criticidad/{equipo_id}`: valores efectivos, referencia de categoría e historial.
+- `GET /api/v1/criticidad/{equipo_id}/auditoria`: auditoría del equipo; requiere `X-Admin-Key` y `X-Admin-User`.
+- `POST /api/v1/criticidad/ajustar`: ajuste administrativo. Si cambió algún criterio, exige justificación de al menos 15 caracteres.
+
+```json
+{
+  "equipo_id": "ACT-1042",
+  "valores": {
+    "impacto_clinico": 5,
+    "redundancia": 3,
+    "frecuencia_uso": 5,
+    "historial_fallas": 3,
+    "costo_tiempo": 3
+  },
+  "usuario": "biomedico",
+  "justificacion": "La evaluación clínica confirma exposición asistencial alta."
+}
+```
+
+## MTBF y reportes de criticidad
+
+- `POST /api/v1/criticidad/mtbf`: actualización administrativa externa, individual (`equipo_id`, `mtbf_dias`) o por lote (`equipos`). Responde con totales actualizados/omitidos y detalle. Un ajuste manual reciente de `historial_fallas` prevalece durante 90 días.
+- `GET /api/v1/criticidad/reportes/distribucion`: total evaluado, distribución por nivel y categoría y top 10.
+- `GET /api/v1/criticidad/reportes/auditoria`: ajustes administrativos, con filtros opcionales `usuario`, `fecha_inicio`, `fecha_fin` y `equipo_id`; requiere encabezados administrativos.
+
+Todos los endpoints conservan errores HTTP explícitos para entradas inválidas o equipos no registrados.
 
 ## `GET /api/v1/metricas`
 

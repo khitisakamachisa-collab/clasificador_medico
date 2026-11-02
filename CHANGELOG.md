@@ -14,6 +14,11 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - "Monitor secuencial" ahora clasifica correctamente como MON-01 / Z1203020201 (MULTI-PARAMETER PATIENT BEDSIDE MONITORS) con 95% de confianza.
 
 ### Agregado
+- Modelo de criticidad ponderada por equipo con perfiles externos por categoría, modificadores contextuales de creación, auditoría de ajustes y actualización externa por MTBF; incluye simulador de datos de prueba.
+- Endpoints administrativos para ajustar criticidad y actualizar MTBF, consulta de auditoría y reporte de distribución.
+- Autenticación administrativa unificada: un único modal reutilizable valida `ADMIN_API_KEY` para reentrenamiento, ajustes de criticidad y acceso a revisiones.
+- Radar comparativo equipo/categoría, panel de ajuste justificado y reportes de criticidad en la página principal.
+- Documentación del modelo y validador del catálogo de valores por defecto.
 - Reglas específicas para equipos de electrocirugía ultrasónica (Harmonic).
 - Reglas específicas para lámparas de exploración.
 - Reglas específicas para monitores multiparámetro secuenciales.
