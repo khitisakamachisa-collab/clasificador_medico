@@ -209,6 +209,14 @@ Para validar sugerencias preclasificadas contra cada fila del Excel oficial (exi
 
 Sin argumentos usa `data/processed/sugerencias_ia_ejemplo.json`. Para validar otro archivo, añade `--input data/processed/sugerencias_ia.json`. El script separa únicamente las sugerencias verificadas en `equipos_validados.json` y escribe los fallos con sus motivos en `discrepancias.json`; no corrige códigos ni etiquetas automáticamente. El entrenamiento combina los registros validados, el dataset sintético de demostración y las correcciones manuales aprobadas, eliminando duplicados y priorizando la corrección aprobada. El dataset sintético se guarda por separado como `equipos_demo_nlp.json` y no se considera un conjunto de oro.
 
+Para preclasificar las primeras 100-200 filas de `data/raw/equipos_medicos_emdn_2026_corregido.xlsx` con Ollama local y validar los resultados:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\generar_dataset_masivo.py --limit 150
+```
+
+El XLSX debe estar disponible localmente y contener una columna de nombre reconocible; usa `--name-column "Nombre del equipo"` si no se detecta automáticamente. Ollama debe estar activo y tener descargado el modelo configurado con `--model` (por defecto `qwen2.5:7b`). Para usar una API OpenAI-compatible en lugar del modelo local, selecciona explícitamente `--provider openai-compatible --api-base-url ...`; configura opcionalmente `LLM_API_KEY` y `LLM_MODEL` en el entorno. En ese modo, los nombres de equipos se envían al proveedor configurado. El script conserva las sugerencias en `sugerencias_ia_masivo.json`, invoca el validador estricto y genera `equipos_validados_masivo.json` y `discrepancias_masivo.json`; sugerencias sin código o categoría pasan al validador y se marcan como discrepancias, y ninguna propuesta del modelo se considera válida hasta pasar la verificación.
+
 ## Endpoints
 
 | Método | Ruta | Uso |

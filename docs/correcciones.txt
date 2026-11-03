@@ -1,0 +1,234 @@
+Resumen consolidado para tu CMMS (con la corrección del tomógrafo)
+
+La filosofía que hemos acordado es:
+
+Clasificar al nivel EMDN más bajo posible únicamente cuando la información disponible lo permite.
+
+Si el nombre del equipo no contiene información suficiente para distinguir entre varias hojas terminales, se debe utilizar el último nodo válido conocido y marcarlo como pendiente de desambiguación.
+
+1. Unidad de electrocirugía
+Código EMDN
+
+Z12010902
+
+Descripción
+
+ELECTROSURGICAL UNITS (ESU) FOR GENERAL USE
+
+Justificación
+
+La función principal es generar corriente de alta frecuencia para corte, coagulación y otros procedimientos electroquirúrgicos. El nombre del equipo permite identificar directamente una unidad de electrocirugía de uso general.
+
+Categoría funcional
+
+Terapia Quirúrgica
+
+Ubicación habitual
+Quirófanos
+Cirugía ambulatoria
+Endoscopia
+Ginecología quirúrgica
+Salas de procedimientos
+Criticidad
+
+Alta
+
+Resultado CMMS
+JSON
+{
+"nombre_equipo": "Unidad de electrocirugía",
+"emdn": "Z12010902",
+"categoria": "Terapia Quirúrgica",
+"criticidad": "Alta"
+}
+2. Ecógrafo de cardiología
+Código EMDN
+
+Z11040102
+
+Descripción
+
+CARDIOLOGY ULTRASOUND SCANNERS
+
+Justificación
+
+El equipo está específicamente destinado al diagnóstico cardiovascular mediante ultrasonido. La especialidad clínica "cardiología" permite seleccionar una hoja terminal de forma inequívoca.
+
+Categoría funcional
+
+Diagnóstico por Imagen
+
+Ubicación habitual
+Cardiología
+Ecocardiografía
+Unidad Coronaria
+UCI
+Hemodinamia
+Criticidad
+
+Alta
+
+Resultado CMMS
+JSON
+{
+"nombre_equipo": "Ecógrafo de cardiología",
+"emdn": "Z11040102",
+"categoria": "Diagnóstico por Imagen",
+"criticidad": "Alta"
+}
+3. Bomba de infusión
+Código EMDN
+
+Z12030301
+
+Descripción
+
+INFUSION PUMPS
+
+Justificación
+
+Permite la administración controlada y precisa de medicamentos y fluidos. El término "bomba de infusión" identifica directamente la categoría terminal EMDN.
+
+Categoría funcional
+
+Terapia / Sistemas de Infusión
+
+Ubicación habitual
+UCI
+Hospitalización
+Urgencias
+Quirófano
+Oncología
+Neonatología
+Criticidad
+
+Muy Alta
+
+Resultado CMMS
+JSON
+{
+"nombre_equipo": "Bomba de infusión",
+"emdn": "Z12030301",
+"categoria": "Sistemas de Infusión",
+"criticidad": "Muy Alta"
+}
+4. Tomógrafo computarizado
+Código EMDN recomendado
+
+Z110306
+
+Descripción
+
+COMPUTED TOMOGRAPHS (CT)
+
+Justificación
+
+El nombre "Tomógrafo computarizado" únicamente permite identificar la familia CT.
+
+Existen múltiples hojas terminales:
+
+Plain Text
+Z11030601 Hasta 2 cortes
+Z11030602 >2 y <16 cortes
+Z11030603 16 a 63 cortes
+Z11030605 64 a 127 cortes
+Z11030606 128 a 255 cortes
+Z11030607 256 o más cortes
+
+Como el número de cortes no está presente en el nombre del equipo, no es posible seleccionar una hoja terminal con certeza.
+
+Por tanto, la clasificación correcta es:
+
+Plain Text
+Z110306
+
+hasta disponer de información adicional.
+
+Categoría funcional
+
+Diagnóstico por Imagen
+
+Ubicación habitual
+Radiología
+Centro de Imagenología
+Urgencias
+Trauma
+Neurología
+Oncología
+Criticidad
+
+Alta
+
+Resultado CMMS
+JSON
+{
+"nombre_equipo": "Tomógrafo computarizado",
+"emdn": "Z110306",
+"categoria": "Diagnóstico por Imagen",
+"criticidad": "Alta",
+"requiere_desambiguacion": true
+}
+ 
+Recomendación para la IA de clasificación
+
+Yo implementaría esta regla general:
+
+Plain Text
+1. Buscar la categoría EMDN más específica posible.
+ 
+2. Si existe una única hoja terminal compatible:
+devolver la hoja terminal.
+ 
+3. Si existen varias hojas terminales posibles:
+devolver el último nodo común.
+ 
+4. Registrar:
+requiere_desambiguacion = true
+Ejemplo
+Plain Text
+Entrada:
+Tomógrafo computarizado
+ 
+Resultado:
+Z110306
+
+✅ Correcto
+
+Plain Text
+Entrada:
+Tomógrafo computarizado 64 cortes
+ 
+Resultado:
+Z11030605
+
+✅ Correcto
+
+Plain Text
+Entrada:
+Tomógrafo computarizado Siemens Somatom Definition AS 128
+ 
+Resultado:
+Z11030606
+
+✅ Correcto
+
+Conclusión
+
+De los cuatro equipos evaluados:
+
+Equipo	EMDN final	EstadoUnidad de electrocirugía	Z12010902	Determinado
+Ecógrafo de cardiología	Z11040102	Determinado
+Bomba de infusión	Z12030301	Determinado
+Tomógrafo computarizado	Z110306	Requiere desambiguación
+
+Para un clasificador EMDN profesional, considero que esta estrategia es más sólida que forzar siempre una hoja terminal, porque evita introducir información que no está presente en el inventario y mantiene la trazabilidad de por qué se eligió cada código.
+
+Corrección menor en tu redacción (para que sea precisa al documentar):
+
+Z110306 tiene término COMPUTED TOMOGRAPHS (CT) (nivel 4, NO terminal). No es que "existen múltiples hojas terminales" — es que existen 01-07 y no sabes cuál. El nodo Z110306 es válido como referencia, pero debe marcarse requisito_desambiguacion = true.
+Sobre la ubicación por categoría (ya está implícito en tu resumen, solo confirmo que es coherente con Z = equipo médico):
+
+Terapia Quirúrgica → Quirófanos / Endoscopia
+Diagnóstico por Imagen → Cardiología / Ecocardiografía / Radiología
+Sistemas de Infusión → UCI / Hospitalización / Quirófano
+Si quieres, puedo actualizar el archivo resumen_emdn_4_equipos.md con esta filosofía (nodo común + flag de desambiguación para el CT) y generarte el bloque CMMS final en JSON, o crear una plantilla para que tu IA clasifique nuevos equipos con esa misma regla. ¿Cuál prefieres?
