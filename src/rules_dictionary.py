@@ -33,6 +33,13 @@ EMDN_PREFIXES = {
     "OTR-01": "Z12",
 }
 
+EMDN_ADDITIONAL_CATEGORY_PREFIXES = {
+    "CIR-01": ("L0101", "Z129004"),
+    "CIR-02": ("K020201",),
+    "GAS-01": ("Z12159004",),
+    "IMG-02": ("Z1105",),
+}
+
 EMDN_SUBCATEGORY_PREFIXES = {
     "CIR-01": {"scialytic_fixed": "Z12010701", "scialytic_mobile": "Z12010702"},
     "EST-01": {"small_load_autoclave": "Z12011305", "large_autoclave": "Z12011304"},

@@ -87,6 +87,41 @@ def test_suggestion_validator_accepts_official_emdn_category_and_description(
     assert {item["categoria"] for item in validated} == {"IMG-03", "IMG-02"}
 
 
+def test_suggestion_validator_accepts_additional_category_prefixes(tmp_path):
+    suggestions_path = tmp_path / "sugerencias_prefijos_adicionales.json"
+    suggestions_path.write_text(
+        json.dumps(
+            [
+                {
+                    "nombre_equipo": "Bisturí armónico",
+                    "categoria_sugerida": "CIR-02",
+                    "emdn_sugerido": "K0202010201",
+                },
+                {
+                    "nombre_equipo": "Resonador magnético",
+                    "categoria_sugerida": "IMG-02",
+                    "emdn_sugerido": "Z11050104",
+                },
+                {
+                    "nombre_equipo": "Concentrador de oxígeno",
+                    "categoria_sugerida": "GAS-01",
+                    "emdn_sugerido": "Z12159004",
+                },
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    report = validate_suggestions(
+        input_path=suggestions_path,
+        validated_output=tmp_path / "validos_prefijos_adicionales.json",
+        discrepancies_output=tmp_path / "fallos_prefijos_adicionales.json",
+    )
+
+    assert report["validados"] == 3
+    assert report["discrepancias"] == 0
+
+
 def test_duplicate_training_examples_prefer_approved_manual_correction():
     dataset = deduplicate_training_examples(
         [

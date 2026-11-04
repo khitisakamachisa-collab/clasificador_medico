@@ -7,6 +7,7 @@ import re
 import subprocess
 import sys
 import unicodedata
+from difflib import SequenceMatcher
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -17,12 +18,78 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.config import Config
+from src.emdn_importer import load_emdn_database
+from src.rules_dictionary import (
+    EMDN_ADDITIONAL_CATEGORY_PREFIXES,
+    EMDN_PREFIXES,
+)
 from src.utils import CATEGORÍAS, PROCESSED_DIR
 
 DEFAULT_INPUT = ROOT / "data" / "raw" / "equipos_medicos_emdn_2026_corregido.xlsx"
 DEFAULT_MODEL = "qwen2.5:7b"
 MAX_ROWS = 200
+MIN_ROWS = 1
+MIN_EMDN_SIMILARITY = 0.40
+_SPANISH_TO_ENGLISH_TERMS = {
+    "anestesia": "anaesthesia",
+    "vaporizador": "vaporizer",
+    "ventilador": "ventilator",
+    "electrocardiografo": "electrocardiograph",
+    "ecografo": "ultrasound",
+    "ecografia": "ultrasound",
+    "ultrasonido": "ultrasound",
+    "portatil": "portable",
+    "registrador": "recorder",
+    "marcapasos": "pacemaker",
+    "bomba": "pump",
+    "jeringa": "syringe",
+    "infusion": "infusion",
+    "desfibrilador": "defibrillator",
+    "incubadora": "incubator",
+    "fototerapia": "phototherapy",
+    "autoclave": "autoclave",
+    "monitor": "monitor",
+    "cama": "bed",
+    "silla": "chair",
+    "rayos": "x ray",
+    "tomografo": "tomograph",
+    "resonador": "resonance",
+    "centrifuga": "centrifuge",
+    "microscopio": "microscope",
+    "analizador": "analyser",
+    "estacion": "station",
+    "trabajo": "work",
+    "presion": "pressure",
+    "concentrador": "concentrator",
+    "oxigeno": "oxygen",
+    "magnetico": "magnetic",
+    "magnetica": "magnetic",
+}
+_SPANISH_TO_ENGLISH_PHRASES = {
+    "bisturi armonico": "ultrasonic open surgery handpieces",
+}
+_ANCILLARY_TERM_MARKERS = {
+    "accessories",
+    "consumables",
+    "software",
+    "parts",
+    "leads",
+    "probes",
+    "receivers",
+    "transmitters",
+}
+
+# Se reutilizan los prefijos oficiales compartidos con el validador.
+MAPEO_CATEGORIAS_A_PREFIJOS = {
+    category: (prefix,) for category, prefix in EMDN_PREFIXES.items()
+}
+for category, prefixes in EMDN_ADDITIONAL_CATEGORY_PREFIXES.items():
+    MAPEO_CATEGORIAS_A_PREFIJOS[category] = (
+        *MAPEO_CATEGORIAS_A_PREFIJOS.get(category, ()),
+        *prefixes,
+    )
+# OTR-01 no identifica una familia EMDN única; no se asigna un código automático.
+MAPEO_CATEGORIAS_A_PREFIJOS["OTR-01"] = ()
 
 
 def _normalize_header(value: object) -> str:
@@ -78,19 +145,19 @@ def _prompt_for_equipment(name: str) -> list[dict[str, str]]:
             "content": (
                 "Eres un asistente de preclasificación de dispositivos médicos. "
                 "Responde exclusivamente con un objeto JSON válido que contenga "
-                "nombre_equipo, categoria_sugerida y emdn_sugerido. "
-                "categoria_sugerida debe ser uno de los códigos internos listados. "
-                "emdn_sugerido debe ser un código EMDN terminal que conozcas; "
-                "no inventes códigos. Si no puedes determinarlo con confianza, "
-                "usa una cadena vacía para el código. Estas sugerencias siempre "
-                "serán verificadas después contra el Excel oficial.\n"
+                "la clave categoria_sugerida. Solo debes sugerir el código de "
+                "categoría propia que corresponda al equipo. No incluyas ni "
+                "inventes códigos EMDN; esos códigos se buscarán después en el "
+                "catálogo oficial. Formato de respuesta: "
+                '{"categoria_sugerida": "ANE-01"}.\n'
                 f"Categorías internas permitidas:\n{category_list}"
             ),
         },
         {
             "role": "user",
             "content": (
-                f"Preclasifica este equipo usando solo el nombre proporcionado: "
+                f"Devuelve solo la categoría propia para este equipo, sin códigos "
+                f"EMDN: "
                 f"{json.dumps(name, ensure_ascii=False)}"
             ),
         },
@@ -184,8 +251,19 @@ def _load_source_rows(
     input_path: Path, limit: int, name_column: str | None
 ) -> list[str]:
     if not input_path.is_file():
-        raise FileNotFoundError(f"No se encontró el Excel de equipos: {input_path}")
-    frame = pd.read_excel(input_path, nrows=limit)
+        raise FileNotFoundError(f"No se encontró el archivo de equipos: {input_path}")
+    extension = input_path.suffix.casefold()
+    if extension == ".json":
+        frame = pd.read_json(input_path).head(limit)
+    elif extension in {".xlsx", ".xls"}:
+        frame = pd.read_excel(input_path, nrows=limit)
+    else:
+        raise ValueError(
+            f"Formato de archivo no compatible: {extension or '(sin extensión)'}. "
+            "Usa JSON, XLSX o XLS."
+        )
+
+    # La misma detección de columna se aplica a los archivos JSON y Excel.
     column = find_name_column(frame, name_column)
     names = []
     for value in frame[column].tolist():
@@ -199,6 +277,64 @@ def _load_source_rows(
     return names
 
 
+def _normalize_search_text(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value.casefold())
+    without_accents = "".join(
+        character for character in normalized if not unicodedata.combining(character)
+    )
+    return re.sub(r"[^a-z0-9]+", " ", without_accents).strip()
+
+
+def buscar_codigo_terminal(
+    nombre_equipo: str, categoria_propia: str, emdn_database: dict
+) -> tuple[str, str, float]:
+    """Busca el término EMDN terminal más parecido dentro de la categoría."""
+    prefixes = MAPEO_CATEGORIAS_A_PREFIJOS.get(categoria_propia, ())
+    if not prefixes:
+        return "", "", 0.0
+
+    normalized_name = _normalize_search_text(nombre_equipo)
+    translated_tokens = [
+        _SPANISH_TO_ENGLISH_TERMS.get(token, token)
+        for token in normalized_name.split()
+    ]
+    translated_name = " ".join(translated_tokens)
+    for spanish_phrase, english_phrase in _SPANISH_TO_ENGLISH_PHRASES.items():
+        translated_name = translated_name.replace(
+            _normalize_search_text(spanish_phrase),
+            _normalize_search_text(english_phrase),
+        )
+    best_code = ""
+    best_term = ""
+    best_similarity = 0.0
+    for code, item in emdn_database.get("flat", {}).items():
+        if not code.startswith(prefixes):
+            continue
+        term = str(item.get("term") or item.get("name") or "")
+        normalized_term = _normalize_search_text(term)
+        term_tokens = set(normalized_term.split())
+        if (
+            term_tokens & _ANCILLARY_TERM_MARKERS
+            and not term_tokens.intersection(translated_tokens)
+        ):
+            continue
+        if (
+            {"blood", "pressure"}.issubset(term_tokens)
+            and not {"blood", "pressure"}.intersection(translated_tokens)
+        ):
+            continue
+        similarity = max(
+            SequenceMatcher(None, normalized_name, normalized_term).ratio(),
+            SequenceMatcher(None, translated_name, normalized_term).ratio(),
+        )
+        if similarity > best_similarity:
+            best_code = code
+            best_term = term
+            best_similarity = similarity
+
+    return best_code, best_term, best_similarity
+
+
 def generate_suggestions(
     names: list[str],
     *,
@@ -208,7 +344,13 @@ def generate_suggestions(
     api_base_url: str | None,
     api_key: str | None,
     timeout: int,
-) -> list[dict[str, str]]:
+) -> list[dict[str, str | float | bool]]:
+    emdn_database = load_emdn_database()
+    if not emdn_database.get("available"):
+        raise RuntimeError(
+            "No se pudo cargar el catálogo oficial EMDN; no es posible sugerir códigos."
+        )
+
     suggestions = []
     for index, name in enumerate(names, start=1):
         messages = _prompt_for_equipment(name)
@@ -223,13 +365,21 @@ def generate_suggestions(
                 response = query_openai_compatible(
                     messages, model, api_base_url, api_key, timeout
                 )
-            category = str(response.get("categoria_sugerida") or "").strip()
-            code = str(response.get("emdn_sugerido") or "").strip()
+            category = str(response.get("categoria_sugerida") or "").strip().upper()
+            code, term, similarity = buscar_codigo_terminal(
+                name, category, emdn_database
+            )
+            category_is_valid = category in CATEGORÍAS
+            has_match = bool(code) and similarity >= MIN_EMDN_SIMILARITY
             suggestions.append(
                 {
                     "nombre_equipo": name,
                     "categoria_sugerida": category,
-                    "emdn_sugerido": code,
+                    "emdn_sugerido": code if has_match else "",
+                    "termino_emdn": term,
+                    "similitud": round(similarity, 4),
+                    "fuente_codigo": "BUSQUEDA_DIFUSA",
+                    "requiere_desambiguacion": not (category_is_valid and has_match),
                 }
             )
         except (RuntimeError, ValueError) as exc:
@@ -252,7 +402,7 @@ def main() -> None:
         "--limit",
         type=int,
         default=150,
-        help="Filas iniciales a leer (100-200; por defecto 150).",
+        help=f"Filas iniciales a leer ({MIN_ROWS}-{MAX_ROWS}; por defecto 150).",
     )
     parser.add_argument(
         "--provider",
@@ -281,8 +431,8 @@ def main() -> None:
     parser.add_argument("--timeout", type=int, default=120)
     arguments = parser.parse_args()
 
-    if not 100 <= arguments.limit <= MAX_ROWS:
-        parser.error(f"--limit debe estar entre 100 y {MAX_ROWS}.")
+    if not MIN_ROWS <= arguments.limit <= MAX_ROWS:
+        parser.error(f"--limit debe estar entre {MIN_ROWS} y {MAX_ROWS}.")
     if arguments.timeout < 1:
         parser.error("--timeout debe ser mayor que cero.")
     if arguments.provider == "openai-compatible" and not arguments.api_base_url:

@@ -1,0 +1,1002 @@
+[
+  {
+    "nombre_equipo": "Máquina de anestesia con ventilador integrado",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "0416"
+  },
+  {
+    "nombre_equipo": "Estación de trabajo de anestesia",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "31011000"
+  },
+  {
+    "nombre_equipo": "Vaporizador de sevoflurano",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "27041900"
+  },
+  {
+    "nombre_equipo": "Ventilador para anestesia",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "42089000"
+  },
+  {
+    "nombre_equipo": "Monitor de gases anestésicos",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "30023000"
+  },
+  {
+    "nombre_equipo": "Analizador de profundidad anestésica",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "3004450028"
+  },
+  {
+    "nombre_equipo": "Sistema de evacuación de gases anestésicos",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "2207.1"
+  },
+  {
+    "nombre_equipo": "Carro para máquina de anestesia",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "661930"
+  },
+  {
+    "nombre_equipo": "Mezclador de gases para anestesia",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "282"
+  },
+  {
+    "nombre_equipo": "Electrocardiógrafo de 12 derivaciones",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "85169006"
+  },
+  {
+    "nombre_equipo": "Electrocardiógrafo portátil de 3 canales",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "0415"
+  },
+  {
+    "nombre_equipo": "Registrador Holter de 24 horas",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "04051000"
+  },
+  {
+    "nombre_equipo": "Monitor Holter de arritmias",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "51150"
+  },
+  {
+    "nombre_equipo": "Sistema de prueba de esfuerzo cardíaco",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Analizador de electrocardiograma en reposo",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "50"
+  },
+  {
+    "nombre_equipo": "Electrocardiógrafo digital de 6 canales",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "4215"
+  },
+  {
+    "nombre_equipo": "Sistema de monitoreo ambulatorio de presión arterial",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "98061000"
+  },
+  {
+    "nombre_equipo": "Registrador de eventos cardíacos",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "92089006"
+  },
+  {
+    "nombre_equipo": "Marcapasos cardíaco implantable",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "090290"
+  },
+  {
+    "nombre_equipo": "Marcapasos temporal externo",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "84199999"
+  },
+  {
+    "nombre_equipo": "Desfibrilador cardioversor implantable",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "57"
+  },
+  {
+    "nombre_equipo": "Generador de marcapasos bicameral",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "29"
+  },
+  {
+    "nombre_equipo": "Sistema de ablación cardíaca por radiofrecuencia",
+    "categoria_sugerida": "CAR-02",
+    "emdn_sugerido": "04109000"
+  },
+  {
+    "nombre_equipo": "Generador de ablación cardíaca por crioterapia",
+    "categoria_sugerida": "CAR-02",
+    "emdn_sugerido": "38245002"
+  },
+  {
+    "nombre_equipo": "Balón de contrapulsación intraaórtico",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "86102010"
+  },
+  {
+    "nombre_equipo": "Sistema de asistencia ventricular temporal",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "04"
+  },
+  {
+    "nombre_equipo": "Programador de marcapasos implantable",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "85169010"
+  },
+  {
+    "nombre_equipo": "Mesa quirúrgica electrohidráulica",
+    "categoria_sugerida": "CIR-01",
+    "emdn_sugerido": "8416.31"
+  },
+  {
+    "nombre_equipo": "Mesa de operaciones radiotransparente",
+    "categoria_sugerida": "IMG-01",
+    "emdn_sugerido": "8517.40"
+  },
+  {
+    "nombre_equipo": "Lámpara cialítica de techo",
+    "categoria_sugerida": "IMG-01",
+    "emdn_sugerido": "8517.20"
+  },
+  {
+    "nombre_equipo": "Lámpara quirúrgica móvil de doble domo",
+    "categoria_sugerida": "CIR-01",
+    "emdn_sugerido": "84199000"
+  },
+  {
+    "nombre_equipo": "Mesa para cirugía ortopédica",
+    "categoria_sugerida": "CIR-01",
+    "emdn_sugerido": "69"
+  },
+  {
+    "nombre_equipo": "Mesa de operaciones para neurocirugía",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "84199000"
+  },
+  {
+    "nombre_equipo": "Calentador de mantas quirúrgicas",
+    "categoria_sugerida": "CIR-01",
+    "emdn_sugerido": "4212"
+  },
+  {
+    "nombre_equipo": "Sistema de posicionamiento para cirugía",
+    "categoria_sugerida": "CIR-01",
+    "emdn_sugerido": "84179990"
+  },
+  {
+    "nombre_equipo": "Lámpara de exploración móvil",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "84199990"
+  },
+  {
+    "nombre_equipo": "Unidad de electrocirugía monopolar y bipolar",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "282"
+  },
+  {
+    "nombre_equipo": "Electrobisturí de alta frecuencia",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "9204.00"
+  },
+  {
+    "nombre_equipo": "Generador electroquirúrgico con sellado vascular",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "38244002"
+  },
+  {
+    "nombre_equipo": "Sistema de bisturí armónico",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "38245004"
+  },
+  {
+    "nombre_equipo": "Generador de electrocirugía bipolar",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "421390005"
+  },
+  {
+    "nombre_equipo": "Unidad electroquirúrgica para endoscopia",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "310690007"
+  },
+  {
+    "nombre_equipo": "Generador de plasma de argón",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "282"
+  },
+  {
+    "nombre_equipo": "Sistema de corte y coagulación por radiofrecuencia",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "38259002"
+  },
+  {
+    "nombre_equipo": "Lápiz electroquirúrgico con evacuador de humo",
+    "categoria_sugerida": "CIR-02",
+    "emdn_sugerido": "01109090"
+  },
+  {
+    "nombre_equipo": "Unidad dental con sillón integrado",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "421220000"
+  },
+  {
+    "nombre_equipo": "Sillón odontológico eléctrico",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "84169000"
+  },
+  {
+    "nombre_equipo": "Turbina dental de alta velocidad",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "8516.90"
+  },
+  {
+    "nombre_equipo": "Micromotor dental eléctrico",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "85169000"
+  },
+  {
+    "nombre_equipo": "Equipo de radiografía dental intraoral",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "85169007"
+  },
+  {
+    "nombre_equipo": "Lámpara de fotocurado dental",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "8515.40"
+  },
+  {
+    "nombre_equipo": "Escáner intraoral odontológico",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "95136000"
+  },
+  {
+    "nombre_equipo": "Cavitador ultrasónico dental",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "85159099"
+  },
+  {
+    "nombre_equipo": "Compresor de aire para unidad dental",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "8416.99"
+  },
+  {
+    "nombre_equipo": "Equipo de hemodiálisis para adulto",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "041820"
+  },
+  {
+    "nombre_equipo": "Monitor de hemodiálisis",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "84199000"
+  },
+  {
+    "nombre_equipo": "Máquina de hemodiafiltración",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "851890"
+  },
+  {
+    "nombre_equipo": "Sistema de diálisis peritoneal automatizada",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "84193005"
+  },
+  {
+    "nombre_equipo": "Monitor para terapia de reemplazo renal continua",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": "90130000"
+  },
+  {
+    "nombre_equipo": "Planta de tratamiento de agua para hemodiálisis",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "84199000"
+  },
+  {
+    "nombre_equipo": "Máquina portátil de hemodiálisis",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "84199000"
+  },
+  {
+    "nombre_equipo": "Mezclador de concentrado para diálisis",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "84199990"
+  },
+  {
+    "nombre_equipo": "Báscula para paciente en hemodiálisis",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "8516.30"
+  },
+  {
+    "nombre_equipo": "Videoendoscopio gastrointestinal",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "22029000"
+  },
+  {
+    "nombre_equipo": "Colonoscopio flexible de alta definición",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "84199000"
+  },
+  {
+    "nombre_equipo": "Gastroscopio de video",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "442000"
+  },
+  {
+    "nombre_equipo": "Broncoscopio flexible",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "64"
+  },
+  {
+    "nombre_equipo": "Duodenoscopio terapéutico",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "90270000"
+  },
+  {
+    "nombre_equipo": "Procesador de video para endoscopia",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "84199000"
+  },
+  {
+    "nombre_equipo": "Fuente de luz para endoscopio",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "8517.10"
+  },
+  {
+    "nombre_equipo": "Lavadora desinfectadora de endoscopios",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "3813.1"
+  },
+  {
+    "nombre_equipo": "Cápsula endoscópica para intestino delgado",
+    "categoria_sugerida": "END-01",
+    "emdn_sugerido": "59"
+  },
+  {
+    "nombre_equipo": "Autoclave de vapor de mesa",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "8514.90"
+  },
+  {
+    "nombre_equipo": "Esterilizador de vapor de gran capacidad",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "31049090"
+  },
+  {
+    "nombre_equipo": "Esterilizador de baja temperatura con peróxido de hidrógeno",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "283651"
+  },
+  {
+    "nombre_equipo": "Lavadora termodesinfectadora de instrumental",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "8514.20"
+  },
+  {
+    "nombre_equipo": "Selladora térmica para bolsas de esterilización",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "84169990"
+  },
+  {
+    "nombre_equipo": "Incubadora de indicadores biológicos",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Esterilizador de óxido de etileno",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "29219000"
+  },
+  {
+    "nombre_equipo": "Equipo ultrasónico de limpieza de instrumental",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "84179099"
+  },
+  {
+    "nombre_equipo": "Secadora de instrumental médico",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "84169000"
+  },
+  {
+    "nombre_equipo": "Refrigerador para conservación de medicamentos",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "8516.99"
+  },
+  {
+    "nombre_equipo": "Refrigerador para vacunas con monitoreo de temperatura",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "8516.99"
+  },
+  {
+    "nombre_equipo": "Congelador de laboratorio para medicamentos",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "8516.89"
+  },
+  {
+    "nombre_equipo": "Gabinete automatizado de dispensación de medicamentos",
+    "categoria_sugerida": "FRM-01",
+    "emdn_sugerido": "421990000"
+  },
+  {
+    "nombre_equipo": "Sistema robotizado de preparación de dosis",
+    "categoria_sugerida": "FRM-01",
+    "emdn_sugerido": "300390000"
+  },
+  {
+    "nombre_equipo": "Refrigerador de farmacia con puerta de vidrio",
+    "categoria_sugerida": "FRM-01",
+    "emdn_sugerido": "8516.90"
+  },
+  {
+    "nombre_equipo": "Contador automático de tabletas",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Empacadora de dosis unitarias",
+    "categoria_sugerida": "FRM-01",
+    "emdn_sugerido": "30059000"
+  },
+  {
+    "nombre_equipo": "Sistema de almacenamiento automatizado de medicamentos",
+    "categoria_sugerida": "FRM-01",
+    "emdn_sugerido": "8517.99"
+  },
+  {
+    "nombre_equipo": "Concentrador de oxígeno medicinal estacionario",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "30022000"
+  },
+  {
+    "nombre_equipo": "Concentrador portátil de oxígeno",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "3212"
+  },
+  {
+    "nombre_equipo": "Mezclador de aire y oxígeno medicinal",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "30013000"
+  },
+  {
+    "nombre_equipo": "Flujómetro para oxígeno con humidificador",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "30049000"
+  },
+  {
+    "nombre_equipo": "Sistema de vacío médico central",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "841690"
+  },
+  {
+    "nombre_equipo": "Manifold automático para cilindros de oxígeno",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "28219000"
+  },
+  {
+    "nombre_equipo": "Analizador de oxígeno para gases respiratorios",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "30039990"
+  },
+  {
+    "nombre_equipo": "Regulador de presión para cilindro de oxígeno",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "3002.10"
+  },
+  {
+    "nombre_equipo": "Compresor de aire medicinal libre de aceite",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "27039000"
+  },
+  {
+    "nombre_equipo": "Equipo fijo de rayos X digital",
+    "categoria_sugerida": "IMG-01",
+    "emdn_sugerido": "8518.20"
+  },
+  {
+    "nombre_equipo": "Equipo portátil de rayos X",
+    "categoria_sugerida": "IMG-01",
+    "emdn_sugerido": "8540.99"
+  },
+  {
+    "nombre_equipo": "Arco en C móvil para fluoroscopia",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "84179990"
+  },
+  {
+    "nombre_equipo": "Sistema de radiografía digital portátil",
+    "categoria_sugerida": "IMG-01",
+    "emdn_sugerido": "8419990030"
+  },
+  {
+    "nombre_equipo": "Mastógrafo digital",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "84982006"
+  },
+  {
+    "nombre_equipo": "Fluoroscopio digital para procedimientos",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "90193000"
+  },
+  {
+    "nombre_equipo": "Equipo de radiografía dental panorámica",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "8517.21"
+  },
+  {
+    "nombre_equipo": "Densitómetro óseo por rayos X",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "8419.99"
+  },
+  {
+    "nombre_equipo": "Detector digital de panel plano para radiografía",
+    "categoria_sugerida": "IMG-01",
+    "emdn_sugerido": "8466.30"
+  },
+  {
+    "nombre_equipo": "Resonador magnético de 1.5 teslas",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "8412.30"
+  },
+  {
+    "nombre_equipo": "Resonador magnético de 3 teslas",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "99069000"
+  },
+  {
+    "nombre_equipo": "Resonador magnético abierto",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "99069000"
+  },
+  {
+    "nombre_equipo": "Tomógrafo computarizado de 64 cortes",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "8705.20"
+  },
+  {
+    "nombre_equipo": "Tomógrafo computarizado de 128 cortes",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "85169090"
+  },
+  {
+    "nombre_equipo": "Tomógrafo de haz cónico dental",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "8518.20"
+  },
+  {
+    "nombre_equipo": "Tomógrafo por emisión de positrones PET/CT",
+    "categoria_sugerida": "IMG-02: Tomografía/Resonancia",
+    "emdn_sugerido": "9206.30"
+  },
+  {
+    "nombre_equipo": "Inyector de medio de contraste para tomografía",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "8516.99"
+  },
+  {
+    "nombre_equipo": "Inyector de contraste para resonancia magnética",
+    "categoria_sugerida": "IMG-02",
+    "emdn_sugerido": "8516.99"
+  },
+  {
+    "nombre_equipo": "Ecógrafo portátil",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "84189005"
+  },
+  {
+    "nombre_equipo": "Ecógrafo cardíaco Doppler color",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "8410.29"
+  },
+  {
+    "nombre_equipo": "Ecógrafo obstétrico 4D",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "8419999"
+  },
+  {
+    "nombre_equipo": "Ultrasonido diagnóstico para abdomen",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "90189009"
+  },
+  {
+    "nombre_equipo": "Ecocardiógrafo transtorácico",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "92150003"
+  },
+  {
+    "nombre_equipo": "Sistema de ultrasonido intravascular",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "9214001"
+  },
+  {
+    "nombre_equipo": "Ecógrafo portátil para punto de atención",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "902"
+  },
+  {
+    "nombre_equipo": "Ultrasonido diagnóstico para mama",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "84199990"
+  },
+  {
+    "nombre_equipo": "Ecógrafo Doppler vascular",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "84192030"
+  },
+  {
+    "nombre_equipo": "Analizador hematológico automatizado",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "84159002"
+  },
+  {
+    "nombre_equipo": "Analizador clínico de química sanguínea",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "2705.40"
+  },
+  {
+    "nombre_equipo": "Analizador de gases en sangre",
+    "categoria_sugerida": "GAS-01",
+    "emdn_sugerido": "30053000"
+  },
+  {
+    "nombre_equipo": "Centrífuga refrigerada de laboratorio",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "8418.99"
+  },
+  {
+    "nombre_equipo": "Microscopio binocular de laboratorio",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "84799000"
+  },
+  {
+    "nombre_equipo": "Analizador de coagulación",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "902100900"
+  },
+  {
+    "nombre_equipo": "Analizador de inmunoensayo",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "401490003"
+  },
+  {
+    "nombre_equipo": "Cabina de bioseguridad clase II",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": "84239990"
+  },
+  {
+    "nombre_equipo": "Analizador de electrolitos séricos",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "84179000"
+  },
+  {
+    "nombre_equipo": "Refrigerador para banco de sangre",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "8414.99"
+  },
+  {
+    "nombre_equipo": "Congelador para plasma sanguíneo",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "511490"
+  },
+  {
+    "nombre_equipo": "Centrífuga refrigerada para bolsas de sangre",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "8422.59"
+  },
+  {
+    "nombre_equipo": "Agitador de plaquetas con incubadora",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "28252000"
+  },
+  {
+    "nombre_equipo": "Separador automatizado de componentes sanguíneos",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "45132000"
+  },
+  {
+    "nombre_equipo": "Sellador estéril de tubuladuras para sangre",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "90154002"
+  },
+  {
+    "nombre_equipo": "Descongelador de plasma controlado",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "30023000"
+  },
+  {
+    "nombre_equipo": "Analizador inmunohematológico",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "9214"
+  },
+  {
+    "nombre_equipo": "Sistema de aféresis terapéutica",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": "980700003"
+  },
+  {
+    "nombre_equipo": "Monitor multiparámetro de cabecera",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "90181000"
+  },
+  {
+    "nombre_equipo": "Monitor de signos vitales portátil",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "60-02"
+  },
+  {
+    "nombre_equipo": "Central de monitoreo de pacientes",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Monitor de transporte intrahospitalario",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "901890"
+  },
+  {
+    "nombre_equipo": "Monitor de presión arterial no invasiva",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "98080000"
+  },
+  {
+    "nombre_equipo": "Monitor de oximetría de pulso de cabecera",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "90170000"
+  },
+  {
+    "nombre_equipo": "Sistema de telemetría cardíaca",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "04"
+  },
+  {
+    "nombre_equipo": "Monitor de gasto cardíaco",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "98060000"
+  },
+  {
+    "nombre_equipo": "Monitor de profundidad anestésica cerebral",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "2204.39"
+  },
+  {
+    "nombre_equipo": "Incubadora neonatal de cuidados intensivos",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "90141000"
+  },
+  {
+    "nombre_equipo": "Cuna radiante neonatal",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "421990008"
+  },
+  {
+    "nombre_equipo": "Equipo de fototerapia para recién nacido",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "90121010"
+  },
+  {
+    "nombre_equipo": "Incubadora de transporte neonatal",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "90199000"
+  },
+  {
+    "nombre_equipo": "Ventilador neonatal de alta frecuencia",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "92141000"
+  },
+  {
+    "nombre_equipo": "Monitor de apnea para recién nacido",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Reanimador neonatal en T",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "30023000"
+  },
+  {
+    "nombre_equipo": "Bilirrubinómetro transcutáneo neonatal",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "8517.59"
+  },
+  {
+    "nombre_equipo": "Báscula electrónica para recién nacido",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "99060090"
+  },
+  {
+    "nombre_equipo": "Equipo de oficina para estación clínica",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Computadora todo en uno para consultorio",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Impresora láser para expediente clínico",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Escáner de documentos médicos",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "8419999"
+  },
+  {
+    "nombre_equipo": "Impresora de etiquetas para laboratorio",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "90121090"
+  },
+  {
+    "nombre_equipo": "Lector de código de barras para identificación clínica",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Monitor de computadora grado médico",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "84193005"
+  },
+  {
+    "nombre_equipo": "Terminal administrativa para expediente electrónico",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Impresora de brazaletes de identificación hospitalaria",
+    "categoria_sugerida": "OFI-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Ventilador mecánico para adulto",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "37010000"
+  },
+  {
+    "nombre_equipo": "Ventilador mecánico para transporte",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "9214"
+  },
+  {
+    "nombre_equipo": "Ventilador no invasivo de dos niveles",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "9206.1000"
+  },
+  {
+    "nombre_equipo": "Equipo CPAP para apnea del sueño",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Concentrador de oxígeno portátil para terapia respiratoria",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "42191090"
+  },
+  {
+    "nombre_equipo": "Nebulizador ultrasónico",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "90124000"
+  },
+  {
+    "nombre_equipo": "Oxímetro de pulso portátil",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "30023000"
+  },
+  {
+    "nombre_equipo": "Aspirador de secreciones portátil",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "421640"
+  },
+  {
+    "nombre_equipo": "Espirómetro diagnóstico de consultorio",
+    "categoria_sugerida": "RES-01",
+    "emdn_sugerido": "9214"
+  },
+  {
+    "nombre_equipo": "Equipo de electroterapia TENS",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "95015000"
+  },
+  {
+    "nombre_equipo": "Estimulador neuromuscular EMS",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "98089000"
+  },
+  {
+    "nombre_equipo": "Equipo de ultrasonido terapéutico",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "9208.22"
+  },
+  {
+    "nombre_equipo": "Láser terapéutico de baja intensidad",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "85401030"
+  },
+  {
+    "nombre_equipo": "Sistema de ondas de choque para fisioterapia",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "84199990"
+  },
+  {
+    "nombre_equipo": "Bicicleta ergométrica de rehabilitación",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Unidad de tracción cervical y lumbar",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "90182000"
+  },
+  {
+    "nombre_equipo": "Equipo de terapia combinada electroestimulación y ultrasonido",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "84192099"
+  },
+  {
+    "nombre_equipo": "Paralelas para entrenamiento de marcha",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "8517990030"
+  },
+  {
+    "nombre_equipo": "Desfibrilador externo automático",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "040890"
+  },
+  {
+    "nombre_equipo": "Desfibrilador manual bifásico",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "040301006"
+  },
+  {
+    "nombre_equipo": "Desfibrilador monitor para ambulancia",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "60"
+  },
+  {
+    "nombre_equipo": "Carro rojo para reanimación cardiopulmonar",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Camilla de emergencia hidráulica",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Camilla de transporte para ambulancia",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": ""
+  },
+  {
+    "nombre_equipo": "Aspirador portátil para emergencias",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": "84229000"
+  },
+  {
+    "nombre_equipo": "Inmovilizador espinal para trauma",
+    "categoria_sugerida": "TER-01",
+    "emdn_sugerido": "09029090"
+  },
+  {
+    "nombre_equipo": "Resucitador manual autoinflable para emergencia",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": "421290002"
+  },
+  {
+    "nombre_equipo": "Bomba volumétrica de infusión",
+    "categoria_sugerida": "INF-01",
+    "emdn_sugerido": "851690"
+  },
+  {
+    "nombre_equipo": "Bomba de infusión intravenosa",
+    "categoria_sugerida": "INF-01",
+    "emdn_sugerido": "84179005"
+  }
+]

@@ -9,14 +9,8 @@ import pandas as pd
 
 from .config import Config
 from .emdn_importer import buscar_emdn, load_emdn_database
-from .rules_dictionary import EMDN_PREFIXES
+from .rules_dictionary import EMDN_ADDITIONAL_CATEGORY_PREFIXES, EMDN_PREFIXES
 from .utils import CATEGORÍAS, PROCESSED_DIR, RAW_DIR, ensure_directories
-
-
-_EXTRA_CATEGORY_PREFIXES = {
-    "CIR-01": ("L0101",),
-}
-_EXTRA_CATEGORY_CODES = {"CIR-01": {"Z129004"}}
 
 
 def _normalize_label(value: object) -> str:
@@ -41,7 +35,7 @@ def _find_column(frame: pd.DataFrame, expected: str) -> object | None:
 def _category_prefixes(category: str) -> tuple[str, ...]:
     return (
         EMDN_PREFIXES.get(category, ""),
-        *_EXTRA_CATEGORY_PREFIXES.get(category, ()),
+        *EMDN_ADDITIONAL_CATEGORY_PREFIXES.get(category, ()),
     )
 
 
@@ -77,9 +71,7 @@ def _category_matches(
         allowed_prefixes = tuple(
             prefix for prefix in _category_prefixes(internal_category) if prefix
         )
-        matches = code.startswith(allowed_prefixes) or code in _EXTRA_CATEGORY_CODES.get(
-            internal_category, set()
-        )
+        matches = code.startswith(allowed_prefixes)
         return matches, internal_category if matches else None
 
     emdn_category = _normalize_label(official_row.get("category", ""))
