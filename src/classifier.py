@@ -16,7 +16,6 @@ from .criticality import ajustar_por_mdr, calcular_criticidad, obtener_valores_p
 from .correction_validation import validar_correccion_automaticamente
 from .emdn_importer import buscar_emdn, load_emdn_database, validar_codigo_emdn
 from .code_generator import generar_codigo_interno
-from .trainer import preprocess_text, train_model
 from .rules_dictionary import EMDN_PREFIXES, EMDN_SUBCATEGORY_PREFIXES, REGLAS_CLASIFICACION
 from .utils import CATEGORÍAS, MODELS_DIR
 
@@ -24,13 +23,34 @@ logger = logging.getLogger(__name__)
 
 @lru_cache(maxsize=1)
 def load_model_assets():
+    massive_classifier_path = Config.MODELS_DIR / "nlp_model_masivo.pkl"
+    massive_vectorizer_path = Config.MODELS_DIR / "vectorizer_masivo.pkl"
+    if massive_classifier_path.exists():
+        if not massive_vectorizer_path.exists():
+            raise FileNotFoundError(
+                "Existe nlp_model_masivo.pkl, pero falta vectorizer_masivo.pkl."
+            )
+        return (
+            joblib.load(massive_classifier_path),
+            joblib.load(massive_vectorizer_path),
+        )
+
     classifier_path = MODELS_DIR / f"classifier_{Config.MODEL_VERSION}.pkl"
     vectorizer_path = MODELS_DIR / f"vectorizer_{Config.MODEL_VERSION}.pkl"
     if not classifier_path.exists() or not vectorizer_path.exists():
+        from .trainer import train_model
+
         train_model()
     clf = joblib.load(classifier_path)
     vectorizer = joblib.load(vectorizer_path)
     return clf, vectorizer
+
+
+def preprocess_text(text: str) -> str:
+    """Preprocesa texto bajo demanda para no importar el módulo de entrenamiento al iniciar."""
+    from .trainer import preprocess_text as preprocess
+
+    return preprocess(text)
 
 
 @lru_cache(maxsize=512)

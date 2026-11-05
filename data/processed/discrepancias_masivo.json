@@ -1,151 +1,27 @@
 [
   {
-    "nombre_equipo": "Máquina de anestesia con ventilador integrado",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "0416",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Estación de trabajo de anestesia",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "31011000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
     "nombre_equipo": "Vaporizador de sevoflurano",
     "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "27041900",
+    "emdn_sugerido": "",
+    "termino_emdn": "ANAESTHESIA SYSTEMS - OTHER",
+    "similitud": 0.3137,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ventilador para anestesia",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "42089000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de gases anestésicos",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "30023000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador de profundidad anestésica",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "3004450028",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Sistema de evacuación de gases anestésicos",
     "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "2207.1",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Carro para máquina de anestesia",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "661930",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Mezclador de gases para anestesia",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "282",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Electrocardiógrafo de 12 derivaciones",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "85169006",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Electrocardiógrafo portátil de 3 canales",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "0415",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Registrador Holter de 24 horas",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "04051000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor Holter de arritmias",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "51150",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de prueba de esfuerzo cardíaco",
-    "categoria_sugerida": "CAR-01",
     "emdn_sugerido": "",
+    "termino_emdn": "ANAESTHESIA DEVICES",
+    "similitud": 0.3279,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -154,702 +30,28 @@
     ]
   },
   {
-    "nombre_equipo": "Analizador de electrocardiograma en reposo",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "50",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Electrocardiógrafo digital de 6 canales",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "4215",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de monitoreo ambulatorio de presión arterial",
+    "nombre_equipo": "Monitor Holter de arritmias",
     "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "98061000",
+    "emdn_sugerido": "",
+    "termino_emdn": "CARBON DIOXIDE ANALYSERS",
+    "similitud": 0.3922,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Registrador de eventos cardíacos",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "92089006",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Marcapasos cardíaco implantable",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "090290",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Marcapasos temporal externo",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "84199999",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Desfibrilador cardioversor implantable",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "57",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Generador de marcapasos bicameral",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "29",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de ablación cardíaca por radiofrecuencia",
-    "categoria_sugerida": "CAR-02",
-    "emdn_sugerido": "04109000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Generador de ablación cardíaca por crioterapia",
-    "categoria_sugerida": "CAR-02",
-    "emdn_sugerido": "38245002",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Balón de contrapulsación intraaórtico",
     "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "86102010",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de asistencia ventricular temporal",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "04",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Programador de marcapasos implantable",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "85169010",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Mesa quirúrgica electrohidráulica",
-    "categoria_sugerida": "CIR-01",
-    "emdn_sugerido": "8416.31",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Mesa de operaciones radiotransparente",
-    "categoria_sugerida": "IMG-01",
-    "emdn_sugerido": "8517.40",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lámpara cialítica de techo",
-    "categoria_sugerida": "IMG-01",
-    "emdn_sugerido": "8517.20",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lámpara quirúrgica móvil de doble domo",
-    "categoria_sugerida": "CIR-01",
-    "emdn_sugerido": "84199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Mesa para cirugía ortopédica",
-    "categoria_sugerida": "CIR-01",
-    "emdn_sugerido": "69",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Mesa de operaciones para neurocirugía",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "84199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Calentador de mantas quirúrgicas",
-    "categoria_sugerida": "CIR-01",
-    "emdn_sugerido": "4212",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de posicionamiento para cirugía",
-    "categoria_sugerida": "CIR-01",
-    "emdn_sugerido": "84179990",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lámpara de exploración móvil",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "84199990",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Unidad de electrocirugía monopolar y bipolar",
-    "categoria_sugerida": "CIR-02",
-    "emdn_sugerido": "282",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Electrobisturí de alta frecuencia",
-    "categoria_sugerida": "CIR-02",
-    "emdn_sugerido": "9204.00",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Generador electroquirúrgico con sellado vascular",
-    "categoria_sugerida": "CIR-02",
-    "emdn_sugerido": "38244002",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de bisturí armónico",
-    "categoria_sugerida": "CIR-02",
-    "emdn_sugerido": "38245004",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Generador de electrocirugía bipolar",
-    "categoria_sugerida": "CIR-02",
-    "emdn_sugerido": "421390005",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Unidad electroquirúrgica para endoscopia",
-    "categoria_sugerida": "CIR-02",
-    "emdn_sugerido": "310690007",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Generador de plasma de argón",
-    "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "282",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de corte y coagulación por radiofrecuencia",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "38259002",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lápiz electroquirúrgico con evacuador de humo",
-    "categoria_sugerida": "CIR-02",
-    "emdn_sugerido": "01109090",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Unidad dental con sillón integrado",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "421220000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sillón odontológico eléctrico",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "84169000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Turbina dental de alta velocidad",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "8516.90",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Micromotor dental eléctrico",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "85169000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de radiografía dental intraoral",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "85169007",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lámpara de fotocurado dental",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "8515.40",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Escáner intraoral odontológico",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "95136000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Cavitador ultrasónico dental",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "85159099",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Compresor de aire para unidad dental",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "8416.99",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de hemodiálisis para adulto",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "041820",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de hemodiálisis",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "84199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Máquina de hemodiafiltración",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "851890",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de diálisis peritoneal automatizada",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "84193005",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor para terapia de reemplazo renal continua",
-    "categoria_sugerida": "URG-01",
-    "emdn_sugerido": "90130000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Planta de tratamiento de agua para hemodiálisis",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "84199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Máquina portátil de hemodiálisis",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "84199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Mezclador de concentrado para diálisis",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "84199990",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Báscula para paciente en hemodiálisis",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "8516.30",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Videoendoscopio gastrointestinal",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "22029000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Colonoscopio flexible de alta definición",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "84199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Gastroscopio de video",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "442000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Broncoscopio flexible",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "64",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Duodenoscopio terapéutico",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "90270000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Procesador de video para endoscopia",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "84199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Fuente de luz para endoscopio",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "8517.10",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lavadora desinfectadora de endoscopios",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "3813.1",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Cápsula endoscópica para intestino delgado",
-    "categoria_sugerida": "END-01",
-    "emdn_sugerido": "59",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Autoclave de vapor de mesa",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "8514.90",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Esterilizador de vapor de gran capacidad",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "31049090",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Esterilizador de baja temperatura con peróxido de hidrógeno",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "283651",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lavadora termodesinfectadora de instrumental",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "8514.20",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Selladora térmica para bolsas de esterilización",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "84169990",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Incubadora de indicadores biológicos",
-    "categoria_sugerida": "URG-01",
     "emdn_sugerido": "",
+    "termino_emdn": "EXTRA-CORPOREAL CIRCULATION SYSTEMS",
+    "similitud": 0.3889,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -858,108 +60,253 @@
     ]
   },
   {
-    "nombre_equipo": "Esterilizador de óxido de etileno",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "29219000",
+    "nombre_equipo": "Lámpara quirúrgica móvil de doble domo",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "MULTI–PARAMETER MONITORS - OTHER",
+    "similitud": 0.3529,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
-    "nombre_equipo": "Equipo ultrasónico de limpieza de instrumental",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "84179099",
+    "nombre_equipo": "Lámpara de exploración móvil",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "",
+    "termino_emdn": "CARDIOLOGY ULTRASOUND SCANNERS",
+    "similitud": 0.3103,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
-    "nombre_equipo": "Secadora de instrumental médico",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "84169000",
+    "nombre_equipo": "Sistema de corte y coagulación por radiofrecuencia",
+    "categoria_sugerida": "CAR-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "HOLTER SYSTEM INSTRUMENTS FOR CARDIOVASCULAR PARAMETERS – OTHER",
+    "similitud": 0.3604,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Lámpara de fotocurado dental",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "COLD LIGHT DENTAL EQUIPMENT",
+    "similitud": 0.3636,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Escáner intraoral odontológico",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "ENDODONTIC COMPACTORS",
+    "similitud": 0.3922,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Cavitador ultrasónico dental",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "PULP VITALITY ANALYSERS",
+    "similitud": 0.3529,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Compresor de aire para unidad dental",
+    "categoria_sugerida": "DEN-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "EQUIPMENT FOR DIAGNOSIS OF PERIODONTAL DISEASES",
+    "similitud": 0.3855,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Monitor para terapia de reemplazo renal continua",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CARBON DIOXIDE ANALYSERS",
+    "similitud": 0.3333,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Báscula para paciente en hemodiálisis",
+    "categoria_sugerida": "DIA-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "HAEMODIALYSIS EQUIPMENT",
+    "similitud": 0.3667,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Autoclave de vapor de mesa",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "AUTOCLAVES WITH A CHAMBER LARGER THAN OR EQUAL TO 1 STANDARD STERILISATION UNIT",
+    "similitud": 0.381,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Esterilizador de vapor de gran capacidad",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CHEMICAL STERILISATION EQUIPMENT",
+    "similitud": 0.3611,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Esterilizador de baja temperatura con peróxido de hidrógeno",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CHEMICAL STERILISATION EQUIPMENT",
+    "similitud": 0.3516,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Incubadora de indicadores biológicos",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CENTRAL INFORMATION COMPUTING SYSTEMS",
+    "similitud": 0.3562,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Refrigerador para conservación de medicamentos",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "8516.99",
+    "categoria_sugerida": "LAB-02",
+    "emdn_sugerido": "",
+    "termino_emdn": "THERAPEUTIC APHERESIS EQUIPMENT",
+    "similitud": 0.3896,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Refrigerador para vacunas con monitoreo de temperatura",
     "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "8516.99",
+    "emdn_sugerido": "",
+    "termino_emdn": "BETA PARTICLES COUNTERS",
+    "similitud": 0.3896,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Congelador de laboratorio para medicamentos",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "8516.89",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Gabinete automatizado de dispensación de medicamentos",
-    "categoria_sugerida": "FRM-01",
-    "emdn_sugerido": "421990000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Sistema robotizado de preparación de dosis",
-    "categoria_sugerida": "FRM-01",
-    "emdn_sugerido": "300390000",
+    "categoria_sugerida": "INF-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "ENTERAL FEEDING PUMPS",
+    "similitud": 0.2857,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Refrigerador de farmacia con puerta de vidrio",
     "categoria_sugerida": "FRM-01",
-    "emdn_sugerido": "8516.90",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Contador automático de tabletas",
-    "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
+    "termino_emdn": "INTENSIVE CARE OR RESUSCITATION ELECTRIC MEDICAL BEDS",
+    "similitud": 0.3265,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -969,646 +316,252 @@
   },
   {
     "nombre_equipo": "Empacadora de dosis unitarias",
-    "categoria_sugerida": "FRM-01",
-    "emdn_sugerido": "30059000",
+    "categoria_sugerida": "EST-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CLEANING AND DISINFECTION EQUIPMENT",
+    "similitud": 0.375,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de almacenamiento automatizado de medicamentos",
-    "categoria_sugerida": "FRM-01",
-    "emdn_sugerido": "8517.99",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Concentrador de oxígeno medicinal estacionario",
-    "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "30022000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Concentrador portátil de oxígeno",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "3212",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Mezclador de aire y oxígeno medicinal",
     "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "30013000",
+    "emdn_sugerido": "",
+    "termino_emdn": "OXYGEN CONCENTRATORS",
+    "similitud": 0.3571,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Flujómetro para oxígeno con humidificador",
-    "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "30049000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de vacío médico central",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "841690",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Manifold automático para cilindros de oxígeno",
     "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "28219000",
+    "emdn_sugerido": "",
+    "termino_emdn": "OXYGEN CONCENTRATORS",
+    "similitud": 0.1875,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Analizador de oxígeno para gases respiratorios",
     "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "30039990",
+    "emdn_sugerido": "",
+    "termino_emdn": "NEONATAL/PAEDIATRIC PULMONARY VENTILATORS",
+    "similitud": 0.381,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Regulador de presión para cilindro de oxígeno",
     "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "3002.10",
+    "emdn_sugerido": "",
+    "termino_emdn": "OXYGEN CONCENTRATORS",
+    "similitud": 0.1846,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Compresor de aire medicinal libre de aceite",
-    "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "27039000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo fijo de rayos X digital",
-    "categoria_sugerida": "IMG-01",
-    "emdn_sugerido": "8518.20",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo portátil de rayos X",
-    "categoria_sugerida": "IMG-01",
-    "emdn_sugerido": "8540.99",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Arco en C móvil para fluoroscopia",
     "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "84179990",
+    "emdn_sugerido": "",
+    "termino_emdn": "CARDIOLOGY ULTRASOUND SCANNERS",
+    "similitud": 0.3492,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de radiografía digital portátil",
-    "categoria_sugerida": "IMG-01",
-    "emdn_sugerido": "8419990030",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Mastógrafo digital",
     "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "84982006",
+    "emdn_sugerido": "",
+    "termino_emdn": "ECHOPHTHALMOGRAPHS",
+    "similitud": 0.2778,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Fluoroscopio digital para procedimientos",
     "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "90193000",
+    "emdn_sugerido": "",
+    "termino_emdn": "VARIOUS ULTRASOUND INSTRUMENTS - OTHER",
+    "similitud": 0.3684,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de radiografía dental panorámica",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "8517.21",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Densitómetro óseo por rayos X",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "8419.99",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Detector digital de panel plano para radiografía",
     "categoria_sugerida": "IMG-01",
-    "emdn_sugerido": "8466.30",
+    "emdn_sugerido": "",
+    "termino_emdn": "TOMOGRAPHS",
+    "similitud": 0.359,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Resonador magnético de 1.5 teslas",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "8412.30",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Resonador magnético de 3 teslas",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "99069000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Resonador magnético abierto",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "99069000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Tomógrafo computarizado de 64 cortes",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "8705.20",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Tomógrafo computarizado de 128 cortes",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "85169090",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Tomógrafo de haz cónico dental",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "8518.20",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "",
+    "termino_emdn": "ECHOPHTHALMOGRAPHS",
+    "similitud": 0.3333,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Tomógrafo por emisión de positrones PET/CT",
-    "categoria_sugerida": "IMG-02: Tomografía/Resonancia",
-    "emdn_sugerido": "9206.30",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Inyector de medio de contraste para tomografía",
     "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "8516.99",
+    "emdn_sugerido": "",
+    "termino_emdn": "COMPUTED TOMOGRAPHS (CT) - OTHER",
+    "similitud": 0.3243,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Inyector de contraste para resonancia magnética",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "8516.99",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ecógrafo portátil",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "84189005",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ecógrafo cardíaco Doppler color",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "8410.29",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ecógrafo obstétrico 4D",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "8419999",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ultrasonido diagnóstico para abdomen",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "90189009",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ecocardiógrafo transtorácico",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "92150003",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de ultrasonido intravascular",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "9214001",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ecógrafo portátil para punto de atención",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "902",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ultrasonido diagnóstico para mama",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "84199990",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ecógrafo Doppler vascular",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "84192030",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador hematológico automatizado",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "84159002",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador clínico de química sanguínea",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "2705.40",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Analizador de gases en sangre",
     "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "30053000",
+    "emdn_sugerido": "",
+    "termino_emdn": "OXYGEN CONCENTRATORS",
+    "similitud": 0.2553,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Centrífuga refrigerada de laboratorio",
     "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "8418.99",
+    "emdn_sugerido": "",
+    "termino_emdn": "CARDIAC MARKER PORTABLE ANALYSERS",
+    "similitud": 0.3714,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Microscopio binocular de laboratorio",
     "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "84799000",
+    "emdn_sugerido": "",
+    "termino_emdn": "URINALYSIS (UR) - LABORATORY ANALYSERS- INSTRUMENTS",
+    "similitud": 0.3951,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador de coagulación",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "902100900",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador de inmunoensayo",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "401490003",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Cabina de bioseguridad clase II",
-    "categoria_sugerida": "OFI-01",
-    "emdn_sugerido": "84239990",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador de electrolitos séricos",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "84179000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Refrigerador para banco de sangre",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "8414.99",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Congelador para plasma sanguíneo",
     "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "511490",
+    "emdn_sugerido": "",
+    "termino_emdn": "LIMITED PANEL ANALYSERS FOR BLOOD GAS ANALYSIS / ELECTROLYTES - OTHER",
+    "similitud": 0.3299,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Centrífuga refrigerada para bolsas de sangre",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "8422.59",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Agitador de plaquetas con incubadora",
     "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "28252000",
+    "emdn_sugerido": "",
+    "termino_emdn": "HIGH PERFORMANCE LIQUID CHROMATOGRAPHY SYSTEMS",
+    "similitud": 0.3704,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Separador automatizado de componentes sanguíneos",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "45132000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sellador estéril de tubuladuras para sangre",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "90154002",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Descongelador de plasma controlado",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "30023000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador inmunohematológico",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "9214",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Sistema de aféresis terapéutica",
     "categoria_sugerida": "URG-01",
-    "emdn_sugerido": "980700003",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor multiparámetro de cabecera",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "90181000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de signos vitales portátil",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "60-02",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Central de monitoreo de pacientes",
-    "categoria_sugerida": "MON-01",
     "emdn_sugerido": "",
+    "termino_emdn": "SEMI-AUTOMATIC DEFIBRILLATORS",
+    "similitud": 0.3333,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1619,128 +572,11 @@
   {
     "nombre_equipo": "Monitor de transporte intrahospitalario",
     "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "901890",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de presión arterial no invasiva",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "98080000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de oximetría de pulso de cabecera",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "90170000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de telemetría cardíaca",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "04",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de gasto cardíaco",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "98060000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de profundidad anestésica cerebral",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "2204.39",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Incubadora neonatal de cuidados intensivos",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "90141000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Cuna radiante neonatal",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "421990008",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de fototerapia para recién nacido",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "90121010",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Incubadora de transporte neonatal",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "90199000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ventilador neonatal de alta frecuencia",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "92141000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de apnea para recién nacido",
-    "categoria_sugerida": "MON-01",
     "emdn_sugerido": "",
+    "termino_emdn": "TRANSPORTABLE/PORTABLE MULTI–PARAMETER PATIENT MONITORS",
+    "similitud": 0.383,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1749,42 +585,58 @@
     ]
   },
   {
-    "nombre_equipo": "Reanimador neonatal en T",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "30023000",
+    "nombre_equipo": "Monitor de oximetría de pulso de cabecera",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CEREBRAL OXIMETERS",
+    "similitud": 0.3729,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Monitor de profundidad anestésica cerebral",
+    "categoria_sugerida": "ANE-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "ANAESTHESIA SYSTEMS - OTHER",
+    "similitud": 0.3582,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Monitor de apnea para recién nacido",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "VITAL SIGNS MONITORING INSTRUMENTS - OTHER",
+    "similitud": 0.3733,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Bilirrubinómetro transcutáneo neonatal",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "8517.59",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Báscula electrónica para recién nacido",
-    "categoria_sugerida": "NEO-01",
-    "emdn_sugerido": "99060090",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de oficina para estación clínica",
     "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
+    "termino_emdn": "PATIENT TRANSFER SHEETS AND MATTRESSES",
+    "similitud": 0.3947,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1796,6 +648,10 @@
     "nombre_equipo": "Computadora todo en uno para consultorio",
     "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
+    "termino_emdn": "TREATMENT, DIAGNOSIS AND MONITORING MEDICAL BEDS",
+    "similitud": 0.3448,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1807,6 +663,10 @@
     "nombre_equipo": "Impresora láser para expediente clínico",
     "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
+    "termino_emdn": "BURN PATIENT ELECTRIC MEDICAL BEDS",
+    "similitud": 0.3288,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1817,22 +677,15 @@
   {
     "nombre_equipo": "Escáner de documentos médicos",
     "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "8419999",
+    "emdn_sugerido": "",
+    "termino_emdn": "VARIOUS ULTRASOUND INSTRUMENTS - OTHER",
+    "similitud": 0.3692,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Impresora de etiquetas para laboratorio",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "90121090",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
@@ -1840,6 +693,10 @@
     "nombre_equipo": "Lector de código de barras para identificación clínica",
     "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
+    "termino_emdn": "ACTIVE ANTI-DECUBITUS MEDICAL CUSHIONS",
+    "similitud": 0.3696,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1850,29 +707,11 @@
   {
     "nombre_equipo": "Monitor de computadora grado médico",
     "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "84193005",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Terminal administrativa para expediente electrónico",
-    "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Impresora de brazaletes de identificación hospitalaria",
-    "categoria_sugerida": "OFI-01",
-    "emdn_sugerido": "",
+    "termino_emdn": "CENTRAL INFORMATION COMPUTING SYSTEMS",
+    "similitud": 0.3333,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1883,40 +722,11 @@
   {
     "nombre_equipo": "Ventilador mecánico para adulto",
     "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "37010000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ventilador mecánico para transporte",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "9214",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ventilador no invasivo de dos niveles",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "9206.1000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo CPAP para apnea del sueño",
-    "categoria_sugerida": "URG-01",
     "emdn_sugerido": "",
+    "termino_emdn": "VENTILATION MONITORS",
+    "similitud": 0.3922,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -1925,119 +735,73 @@
     ]
   },
   {
-    "nombre_equipo": "Concentrador de oxígeno portátil para terapia respiratoria",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "42191090",
+    "nombre_equipo": "Equipo CPAP para apnea del sueño",
+    "categoria_sugerida": "URG-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "SEMI-AUTOMATIC DEFIBRILLATORS",
+    "similitud": 0.3279,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Nebulizador ultrasónico",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "90124000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Oxímetro de pulso portátil",
     "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "30023000",
+    "emdn_sugerido": "",
+    "termino_emdn": "PULSE OXIMETERS",
+    "similitud": 0.3902,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Aspirador de secreciones portátil",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "421640",
+    "categoria_sugerida": "MON-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CARBON DIOXIDE ANALYSERS",
+    "similitud": 0.3509,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Espirómetro diagnóstico de consultorio",
     "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "9214",
+    "emdn_sugerido": "",
+    "termino_emdn": "NITRIC OXIDE DISPENSERS",
+    "similitud": 0.3934,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de electroterapia TENS",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "95015000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Estimulador neuromuscular EMS",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "98089000",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de ultrasonido terapéutico",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "9208.22",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Láser terapéutico de baja intensidad",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "85401030",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Sistema de ondas de choque para fisioterapia",
     "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "84199990",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Bicicleta ergométrica de rehabilitación",
-    "categoria_sugerida": "TER-01",
     "emdn_sugerido": "",
+    "termino_emdn": "ELECTROMECHANICAL SYSTEMS FOR PHYSICAL THERAPY",
+    "similitud": 0.3778,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -2047,74 +811,42 @@
   },
   {
     "nombre_equipo": "Unidad de tracción cervical y lumbar",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "90182000",
+    "categoria_sugerida": "OTR-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "",
+    "similitud": 0.0,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Equipo de terapia combinada electroestimulación y ultrasonido",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "84192099",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Paralelas para entrenamiento de marcha",
     "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "8517990030",
+    "emdn_sugerido": "",
+    "termino_emdn": "DYNAMOMETRIC SYSTEMS FOR MOVEMENT ANALYSIS – OTHER",
+    "similitud": 0.3488,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Desfibrilador externo automático",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "040890",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Desfibrilador manual bifásico",
-    "categoria_sugerida": "CAR-01",
-    "emdn_sugerido": "040301006",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Desfibrilador monitor para ambulancia",
     "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "60",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Carro rojo para reanimación cardiopulmonar",
-    "categoria_sugerida": "MON-01",
     "emdn_sugerido": "",
+    "termino_emdn": "MULTI–PARAMETER MONITORS - OTHER",
+    "similitud": 0.3881,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -2126,17 +858,10 @@
     "nombre_equipo": "Camilla de emergencia hidráulica",
     "categoria_sugerida": "URG-01",
     "emdn_sugerido": "",
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Camilla de transporte para ambulancia",
-    "categoria_sugerida": "URG-01",
-    "emdn_sugerido": "",
+    "termino_emdn": "DEFIBRILLATORS - OTHER",
+    "similitud": 0.2692,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
@@ -2147,55 +872,60 @@
   {
     "nombre_equipo": "Aspirador portátil para emergencias",
     "categoria_sugerida": "URG-01",
-    "emdn_sugerido": "84229000",
+    "emdn_sugerido": "",
+    "termino_emdn": "AUTOMATIC DEFIBRILLATORS",
+    "similitud": 0.3051,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Inmovilizador espinal para trauma",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "09029090",
+    "categoria_sugerida": "IMG-03",
+    "emdn_sugerido": "",
+    "termino_emdn": "INTERNAL ULTRASOUND SCANNERS",
+    "similitud": 0.3934,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Resucitador manual autoinflable para emergencia",
     "categoria_sugerida": "URG-01",
-    "emdn_sugerido": "421290002",
+    "emdn_sugerido": "",
+    "termino_emdn": "MANUAL DEFIBRILLATORS",
+    "similitud": 0.3235,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   },
   {
     "nombre_equipo": "Bomba volumétrica de infusión",
     "categoria_sugerida": "INF-01",
-    "emdn_sugerido": "851690",
+    "emdn_sugerido": "",
+    "termino_emdn": "INFUSION PUMPS",
+    "similitud": 0.381,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
     "motivos": [
-      "El código no existe en el Excel oficial.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Bomba de infusión intravenosa",
-    "categoria_sugerida": "INF-01",
-    "emdn_sugerido": "84179005",
-    "estado": "DISCREPANCIA",
-    "motivo": "El código no existe en el Excel oficial. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "El código no existe en el Excel oficial.",
+      "Falta emdn_sugerido.",
       "No se pudo validar la categoría sin un código existente."
     ]
   }

@@ -168,7 +168,7 @@ def load_training_examples() -> list[dict[str, str | None]]:
             .where(CorrectionLog.estado_revision == "APROBADA")
             .order_by(CorrectionLog.id)
         ).all()
-        return [
+        approved_corrections = [
             {
                 "nombre": item.nombre_equipo,
                 "marca": item.marca,
@@ -179,6 +179,36 @@ def load_training_examples() -> list[dict[str, str | None]]:
             for item in corrections
             if not _has_failed_semantic_validation(item)
         ]
+        correction_keys = {
+            (
+                example["nombre"],
+                example["marca"],
+                example["ubicacion"],
+                example["categoria"],
+            )
+            for example in approved_corrections
+        }
+        approved_examples = session.scalars(
+            select(TrainingExample).order_by(TrainingExample.id)
+        ).all()
+        legacy_examples = [
+            {
+                "nombre": item.nombre,
+                "marca": item.marca,
+                "ubicacion": item.ubicacion,
+                "categoria": item.categoria,
+                "source": item.source,
+            }
+            for item in approved_examples
+            if item.source == "USER_CORRECTION"
+            and (
+                item.nombre,
+                item.marca,
+                item.ubicacion,
+                item.categoria,
+            ) not in correction_keys
+        ]
+        return approved_corrections + legacy_examples
 
 
 def validate_saved_corrections() -> int:

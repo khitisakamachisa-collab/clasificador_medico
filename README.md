@@ -236,6 +236,8 @@ El XLSX debe estar disponible localmente y contener una columna de nombre recono
 
 La confianza incluye un semáforo: verde (≥ 0.90), amarillo (≥ 0.70) y rojo (< 0.70). `/api/v1/recalcular` acepta una corrección humana como decisión autorizada con confianza `0.95` y semáforo verde; las validaciones técnicas se conservan como información complementaria. Las correcciones guardadas quedan en `data/corrections.db`; `/api/v1/reentrenar` las incorpora al conjunto de ejemplos para producir una nueva versión local del modelo, únicamente después de aprobación administrativa. Valida la nueva versión y configura `MODEL_VERSION` con su identificador antes de reiniciar la API para activarla.
 
+Para entrenar el clasificador NLP con el conjunto masivo, ejecuta `python -m src.trainer`. El comando requiere `data/processed/equipos_validados_masivo.json`, incorpora correcciones aprobadas de `data/corrections.db` y genera `data/models/nlp_model_masivo.pkl`, `data/models/vectorizer_masivo.pkl` y `data/models/metrics_masivo.json` sin sobrescribir los artefactos versionados existentes. Cuando el modelo masivo está presente, la carga del clasificador lo prioriza.
+
 La API devuelve `400` para solicitudes no válidas, `429` cuando se supera el límite configurado y `503` si las métricas aún no existen. CORS y el límite de solicitudes se configuran con las variables de [.env.example](./.env.example); el limitador incluido es local a cada proceso.
 
 La preparación de integración con un CMMS, incluida la consulta de correcciones por identificador, está en [docs/CMMS_INTEGRATION.md](./docs/CMMS_INTEGRATION.md).
