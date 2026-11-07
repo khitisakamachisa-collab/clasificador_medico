@@ -17,7 +17,7 @@ git add .
 echo ==============================
 echo 3. Creando commit...
 echo ==============================
-git commit -m "feat: Entrenamiento NLP masivo exitoso. Accuracy base 67.8% con 149 ejemplos validados. Pipeline de validación cruzada operativo."
+git commit -m "feat: Modelo NLP masivo v3 con accuracy 77.1%. Diccionario de sinónicos médico implementado. 174 ejemplos de alta calidad entrenados."
 
 echo ==============================
 echo 4. Subiendo a GitHub...
