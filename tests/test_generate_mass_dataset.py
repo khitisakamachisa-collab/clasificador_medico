@@ -82,7 +82,7 @@ def test_generate_suggestions_ignores_llm_codes_and_uses_official_terminal(
     assert suggestion["emdn_sugerido"] != "0416"
     assert suggestion["emdn_sugerido"] in official
     assert official[suggestion["emdn_sugerido"]]["terminal_level"] == "YES"
-    assert suggestion["fuente_codigo"] == "BUSQUEDA_DIFUSA"
+    assert suggestion["fuente_codigo"] == "REGLA_MAESTRA"
     assert suggestion["requiere_desambiguacion"] is False
 
 
@@ -105,6 +105,71 @@ def test_low_fuzzy_similarity_requires_manual_review(monkeypatch):
 
     assert suggestions[0]["emdn_sugerido"] == ""
     assert suggestions[0]["requiere_desambiguacion"] is True
+
+
+def test_similarity_combines_text_and_clinical_token_overlap():
+    unrelated = generar_dataset_masivo._similarity_score(
+        "objeto sin relacion clinica", "anaesthesia systems"
+    )
+    synonym_match = generar_dataset_masivo._similarity_score(
+        "vaporizer anaesthesia sevoflurano", "anaesthesia systems"
+    )
+
+    assert unrelated < generar_dataset_masivo.MIN_EMDN_SIMILARITY
+    assert synonym_match >= generar_dataset_masivo.MIN_EMDN_SIMILARITY
+
+
+def test_search_normalizes_accents_stopwords_and_expands_medical_synonyms():
+    normalized = generar_dataset_masivo._normalize_search_text(
+        "Vaporizador de sevoflurano"
+    )
+    translated = generar_dataset_masivo._translated_search_text(normalized)
+
+    assert normalized == "vaporizador sevoflurano"
+    assert "vaporizer" in translated
+    assert "anaesthesia" in translated
+
+
+def test_master_rule_skips_llm_and_overrides_ambiguous_model(monkeypatch):
+    def fail_if_called(*args, **kwargs):
+        raise AssertionError("El LLM no debe ejecutarse cuando coincide una regla.")
+
+    monkeypatch.setattr(generar_dataset_masivo, "query_ollama", fail_if_called)
+
+    suggestions = generar_dataset_masivo.generate_suggestions(
+        ["Monitor Holter de arritmias"],
+        provider="ollama",
+        model="qwen2.5:7b",
+        ollama_url="http://localhost:11434",
+        api_base_url=None,
+        api_key=None,
+        timeout=1,
+    )
+
+    assert suggestions[0]["categoria_sugerida"] == "CAR-01"
+    assert suggestions[0]["fuente_codigo"] == "REGLA_MAESTRA"
+
+
+def test_terminal_search_never_returns_nonterminal_emdn_codes():
+    database = {
+        "flat": {
+            "Z1203010101": {
+                "term": "VAPORIZER",
+                "terminal_level": "NO",
+            },
+            "Z1203010102": {
+                "term": "ANAESTHESIA SYSTEMS",
+                "terminal_level": "YES",
+            },
+        }
+    }
+
+    code, _, similarity = generar_dataset_masivo.buscar_codigo_terminal(
+        "Vaporizador de sevoflurano", "ANE-01", database
+    )
+
+    assert code == "Z1203010102"
+    assert similarity >= generar_dataset_masivo.MIN_EMDN_SIMILARITY
 
 
 def test_terminal_search_supports_additional_category_prefixes():
@@ -185,7 +250,12 @@ def test_main_generates_and_validates_mass_dataset(tmp_path, monkeypatch, capsys
     assert len(validated) == 2
     assert len(discrepancies) == 1
     assert "no es terminal" in discrepancies[0]["motivo"]
-    assert "2 validados, 1 discrepancias para revisión manual" in capsys.readouterr().out
+    output = capsys.readouterr().out
+    assert (
+        "Recuperados 0 equipos adicionales gracias a la mejora de similitud"
+        in output
+    )
+    assert "2 validados, 1 discrepancias para revisión manual" in output
 
 
 def test_source_row_limit_is_capped_by_cli_validation(monkeypatch):

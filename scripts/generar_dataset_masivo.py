@@ -8,6 +8,7 @@ import subprocess
 import sys
 import unicodedata
 from difflib import SequenceMatcher
+from functools import lru_cache
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -22,6 +23,7 @@ from src.emdn_importer import load_emdn_database
 from src.rules_dictionary import (
     EMDN_ADDITIONAL_CATEGORY_PREFIXES,
     EMDN_PREFIXES,
+    REGLAS_CLASIFICACION,
 )
 from src.utils import CATEGORÍAS, PROCESSED_DIR
 
@@ -29,8 +31,11 @@ DEFAULT_INPUT = ROOT / "data" / "raw" / "equipos_medicos_emdn_2026_corregido.xls
 DEFAULT_MODEL = "qwen2.5:7b"
 MAX_ROWS = 200
 MIN_ROWS = 1
-MIN_EMDN_SIMILARITY = 0.40
-_SPANISH_TO_ENGLISH_TERMS = {
+MIN_EMDN_SIMILARITY = 0.30
+PREVIOUS_MIN_EMDN_SIMILARITY = 0.40
+SYNONYMS_PATH = ROOT / "data" / "rules" / "sinonimos_medico.json"
+_SPANISH_STOPWORDS = {"de", "el", "la", "con", "para", "y"}
+_LEGACY_SPANISH_TO_ENGLISH_TERMS = {
     "anestesia": "anaesthesia",
     "vaporizador": "vaporizer",
     "ventilador": "ventilator",
@@ -282,7 +287,150 @@ def _normalize_search_text(value: str) -> str:
     without_accents = "".join(
         character for character in normalized if not unicodedata.combining(character)
     )
-    return re.sub(r"[^a-z0-9]+", " ", without_accents).strip()
+    tokens = re.sub(r"[^a-z0-9]+", " ", without_accents).split()
+    return " ".join(token for token in tokens if token not in _SPANISH_STOPWORDS)
+
+
+@lru_cache(maxsize=1)
+def _load_medical_synonyms() -> dict[str, tuple[str, ...]]:
+    """Carga sinónimos español-EMDN y normaliza sus claves y términos."""
+    with SYNONYMS_PATH.open(encoding="utf-8") as file:
+        synonyms = json.load(file)
+    if not isinstance(synonyms, dict) or any(
+        not isinstance(key, str)
+        or not isinstance(terms, list)
+        or not terms
+        or any(not isinstance(term, str) or not term.strip() for term in terms)
+        for key, terms in synonyms.items()
+    ):
+        raise ValueError(
+            "El diccionario de sinónimos debe mapear términos a listas de texto."
+        )
+    return {
+        _normalize_search_text(key): tuple(
+            _normalize_search_text(term) for term in terms
+        )
+        for key, terms in synonyms.items()
+    }
+
+
+def _translated_search_text(normalized_name: str) -> str:
+    synonyms = _load_medical_synonyms()
+    translated_name = normalized_name
+    for spanish_phrase, english_phrase in _SPANISH_TO_ENGLISH_PHRASES.items():
+        translated_name = translated_name.replace(
+            _normalize_search_text(spanish_phrase),
+            _normalize_search_text(english_phrase),
+        )
+    for spanish_term, english_terms in sorted(
+        synonyms.items(), key=lambda item: len(item[0]), reverse=True
+    ):
+        translated_name = re.sub(
+            rf"\b{re.escape(spanish_term)}\b",
+            " ".join(english_terms),
+            translated_name,
+        )
+    translated_name = " ".join(
+        _LEGACY_SPANISH_TO_ENGLISH_TERMS.get(token, token)
+        for token in translated_name.split()
+    )
+    return translated_name
+
+
+def _rule_match_for_equipment(name: str) -> str | None:
+    """Busca una regla exacta o una coincidencia de texto de alta confianza."""
+    normalized_name = _normalize_search_text(name)
+    if not normalized_name:
+        return None
+
+    padded_name = f" {normalized_name} "
+    exact_matches = []
+    fuzzy_matches = []
+    name_tokens = normalized_name.split()
+    for keyword, rule in REGLAS_CLASIFICACION.items():
+        normalized_keyword = _normalize_search_text(keyword)
+        if not normalized_keyword:
+            continue
+        if f" {normalized_keyword} " in padded_name:
+            exact_matches.append(
+                (
+                    len(normalized_keyword.split()),
+                    len(normalized_keyword),
+                    rule["categoria"],
+                    rule,
+                )
+            )
+            continue
+
+        keyword_tokens = normalized_keyword.split()
+        width = len(keyword_tokens)
+        if len(normalized_keyword) < 5 or width > len(name_tokens):
+            continue
+        similarity = max(
+            SequenceMatcher(
+                None,
+                normalized_keyword,
+                " ".join(name_tokens[start : start + width]),
+            ).ratio()
+            for start in range(len(name_tokens) - width + 1)
+        )
+        if similarity >= 0.88:
+            fuzzy_matches.append(
+                (similarity, len(normalized_keyword), rule["categoria"], rule)
+            )
+
+    if exact_matches:
+        best_specificity = max((match[0], match[1]) for match in exact_matches)
+        best_matches = [
+            match
+            for match in exact_matches
+            if (match[0], match[1]) == best_specificity
+        ]
+        categories = {match[2] for match in best_matches}
+        if len(categories) == 1:
+            return best_matches[0][2]
+        return None
+
+    if fuzzy_matches:
+        best_score = max(match[0] for match in fuzzy_matches)
+        best_matches = [
+            match for match in fuzzy_matches if abs(match[0] - best_score) < 0.001
+        ]
+        best_length = max(match[1] for match in best_matches)
+        best_matches = [match for match in best_matches if match[1] == best_length]
+        categories = {match[2] for match in best_matches}
+        if len(categories) == 1:
+            return best_matches[0][2]
+    return None
+
+
+def _similarity_score(left: str, right: str) -> float:
+    """Combina similitud textual y coincidencia de términos clínicos."""
+    character_score = SequenceMatcher(None, left, right).ratio()
+    left_tokens = left.split()
+    right_tokens = right.split()
+    candidate_pairs = []
+    for left_index, left_token in enumerate(left_tokens):
+        for right_index, right_token in enumerate(right_tokens):
+            token_score = SequenceMatcher(
+                None, left_token, right_token
+            ).ratio()
+            if token_score >= 0.65:
+                candidate_pairs.append((token_score, left_index, right_index))
+
+    used_left = set()
+    used_right = set()
+    matched_score = 0.0
+    for token_score, left_index, right_index in sorted(candidate_pairs, reverse=True):
+        if left_index not in used_left and right_index not in used_right:
+            used_left.add(left_index)
+            used_right.add(right_index)
+            matched_score += token_score
+    token_score = matched_score / max(
+        len(set(left_tokens)), len(set(right_tokens)), 1
+    )
+    # La ponderación evita aceptar coincidencias de caracteres sin apoyo léxico.
+    return 0.7 * character_score + 0.3 * token_score
 
 
 def buscar_codigo_terminal(
@@ -294,21 +442,15 @@ def buscar_codigo_terminal(
         return "", "", 0.0
 
     normalized_name = _normalize_search_text(nombre_equipo)
-    translated_tokens = [
-        _SPANISH_TO_ENGLISH_TERMS.get(token, token)
-        for token in normalized_name.split()
-    ]
-    translated_name = " ".join(translated_tokens)
-    for spanish_phrase, english_phrase in _SPANISH_TO_ENGLISH_PHRASES.items():
-        translated_name = translated_name.replace(
-            _normalize_search_text(spanish_phrase),
-            _normalize_search_text(english_phrase),
-        )
+    translated_name = _translated_search_text(normalized_name)
+    translated_tokens = translated_name.split()
     best_code = ""
     best_term = ""
     best_similarity = 0.0
     for code, item in emdn_database.get("flat", {}).items():
         if not code.startswith(prefixes):
+            continue
+        if str(item.get("terminal_level") or "").strip().upper() != "YES":
             continue
         term = str(item.get("term") or item.get("name") or "")
         normalized_term = _normalize_search_text(term)
@@ -324,8 +466,8 @@ def buscar_codigo_terminal(
         ):
             continue
         similarity = max(
-            SequenceMatcher(None, normalized_name, normalized_term).ratio(),
-            SequenceMatcher(None, translated_name, normalized_term).ratio(),
+            _similarity_score(normalized_name, normalized_term),
+            _similarity_score(translated_name, normalized_term),
         )
         if similarity > best_similarity:
             best_code = code
@@ -355,17 +497,23 @@ def generate_suggestions(
     for index, name in enumerate(names, start=1):
         messages = _prompt_for_equipment(name)
         try:
-            if provider == "ollama":
-                response = query_ollama(messages, model, ollama_url, timeout)
+            rule_category = _rule_match_for_equipment(name)
+            if rule_category:
+                category = rule_category
             else:
-                if not api_base_url:
-                    raise ValueError(
-                        "Configura LLM_API_BASE_URL o indica --api-base-url."
+                if provider == "ollama":
+                    response = query_ollama(messages, model, ollama_url, timeout)
+                else:
+                    if not api_base_url:
+                        raise ValueError(
+                            "Configura LLM_API_BASE_URL o indica --api-base-url."
+                        )
+                    response = query_openai_compatible(
+                        messages, model, api_base_url, api_key, timeout
                     )
-                response = query_openai_compatible(
-                    messages, model, api_base_url, api_key, timeout
-                )
-            category = str(response.get("categoria_sugerida") or "").strip().upper()
+                category = str(
+                    response.get("categoria_sugerida") or ""
+                ).strip().upper()
             code, term, similarity = buscar_codigo_terminal(
                 name, category, emdn_database
             )
@@ -378,7 +526,9 @@ def generate_suggestions(
                     "emdn_sugerido": code if has_match else "",
                     "termino_emdn": term,
                     "similitud": round(similarity, 4),
-                    "fuente_codigo": "BUSQUEDA_DIFUSA",
+                    "fuente_codigo": (
+                        "REGLA_MAESTRA" if rule_category else "BUSQUEDA_DIFUSA"
+                    ),
                     "requiere_desambiguacion": not (category_is_valid and has_match),
                 }
             )
@@ -477,6 +627,18 @@ def main() -> None:
         validated = json.load(file)
     with discrepancies_path.open("r", encoding="utf-8") as file:
         discrepancies = json.load(file)
+    recovered_by_similarity = sum(
+        1
+        for record in validated
+        if record.get("fuente_codigo") == "BUSQUEDA_DIFUSA"
+        and MIN_EMDN_SIMILARITY
+        <= float(record.get("similitud") or 0)
+        < PREVIOUS_MIN_EMDN_SIMILARITY
+    )
+    print(
+        "Recuperados "
+        f"{recovered_by_similarity} equipos adicionales gracias a la mejora de similitud"
+    )
     print(
         f"{len(validated)} validados, {len(discrepancies)} discrepancias para revisión manual"
     )

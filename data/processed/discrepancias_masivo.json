@@ -1,55 +1,10 @@
 [
   {
-    "nombre_equipo": "Vaporizador de sevoflurano",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "ANAESTHESIA SYSTEMS - OTHER",
-    "similitud": 0.3137,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de evacuación de gases anestésicos",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "ANAESTHESIA DEVICES",
-    "similitud": 0.3279,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor Holter de arritmias",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "CARBON DIOXIDE ANALYSERS",
-    "similitud": 0.3922,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
     "nombre_equipo": "Balón de contrapulsación intraaórtico",
     "categoria_sugerida": "CAR-01",
     "emdn_sugerido": "",
     "termino_emdn": "EXTRA-CORPOREAL CIRCULATION SYSTEMS",
-    "similitud": 0.3889,
+    "similitud": 0.2841,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -60,11 +15,26 @@
     ]
   },
   {
-    "nombre_equipo": "Lámpara quirúrgica móvil de doble domo",
+    "nombre_equipo": "Mesa de operaciones para neurocirugía",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "TRANSCUTANEOUS BILIRUBINOMETERS",
+    "similitud": 0.2567,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Calentador de mantas quirúrgicas",
     "categoria_sugerida": "MON-01",
     "emdn_sugerido": "",
-    "termino_emdn": "MULTI–PARAMETER MONITORS - OTHER",
-    "similitud": 0.3529,
+    "termino_emdn": "CARBON MONOXIDE ANALYSERS",
+    "similitud": 0.2852,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -78,8 +48,8 @@
     "nombre_equipo": "Lámpara de exploración móvil",
     "categoria_sugerida": "IMG-03",
     "emdn_sugerido": "",
-    "termino_emdn": "CARDIOLOGY ULTRASOUND SCANNERS",
-    "similitud": 0.3103,
+    "termino_emdn": "MULTIDISCIPLINARY ULTRASOUND SCANNERS (INTERNAL AND CARDIOLOGY, ETC.)",
+    "similitud": 0.2039,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -90,26 +60,11 @@
     ]
   },
   {
-    "nombre_equipo": "Sistema de corte y coagulación por radiofrecuencia",
-    "categoria_sugerida": "CAR-01",
+    "nombre_equipo": "Generador de plasma de argón",
+    "categoria_sugerida": "IMG-03",
     "emdn_sugerido": "",
-    "termino_emdn": "HOLTER SYSTEM INSTRUMENTS FOR CARDIOVASCULAR PARAMETERS – OTHER",
-    "similitud": 0.3604,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Lámpara de fotocurado dental",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "COLD LIGHT DENTAL EQUIPMENT",
-    "similitud": 0.3636,
+    "termino_emdn": "ECHOPHTHALMOGRAPHS",
+    "similitud": 0.175,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -124,68 +79,8 @@
     "categoria_sugerida": "DEN-01",
     "emdn_sugerido": "",
     "termino_emdn": "ENDODONTIC COMPACTORS",
-    "similitud": 0.3922,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Cavitador ultrasónico dental",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "PULP VITALITY ANALYSERS",
-    "similitud": 0.3529,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Compresor de aire para unidad dental",
-    "categoria_sugerida": "DEN-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "EQUIPMENT FOR DIAGNOSIS OF PERIODONTAL DISEASES",
-    "similitud": 0.3855,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor para terapia de reemplazo renal continua",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "CARBON DIOXIDE ANALYSERS",
-    "similitud": 0.3333,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Báscula para paciente en hemodiálisis",
-    "categoria_sugerida": "DIA-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "HAEMODIALYSIS EQUIPMENT",
-    "similitud": 0.3667,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "similitud": 0.2745,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -198,24 +93,9 @@
     "nombre_equipo": "Autoclave de vapor de mesa",
     "categoria_sugerida": "EST-01",
     "emdn_sugerido": "",
-    "termino_emdn": "AUTOCLAVES WITH A CHAMBER LARGER THAN OR EQUAL TO 1 STANDARD STERILISATION UNIT",
-    "similitud": 0.381,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Esterilizador de vapor de gran capacidad",
-    "categoria_sugerida": "EST-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "CHEMICAL STERILISATION EQUIPMENT",
-    "similitud": 0.3611,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "termino_emdn": "ENDOSCOPE DRYERS",
+    "similitud": 0.2722,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -229,8 +109,8 @@
     "categoria_sugerida": "EST-01",
     "emdn_sugerido": "",
     "termino_emdn": "CHEMICAL STERILISATION EQUIPMENT",
-    "similitud": 0.3516,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "similitud": 0.2835,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -244,37 +124,7 @@
     "categoria_sugerida": "MON-01",
     "emdn_sugerido": "",
     "termino_emdn": "CENTRAL INFORMATION COMPUTING SYSTEMS",
-    "similitud": 0.3562,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Refrigerador para conservación de medicamentos",
-    "categoria_sugerida": "LAB-02",
-    "emdn_sugerido": "",
-    "termino_emdn": "THERAPEUTIC APHERESIS EQUIPMENT",
-    "similitud": 0.3896,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Refrigerador para vacunas con monitoreo de temperatura",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "BETA PARTICLES COUNTERS",
-    "similitud": 0.3896,
+    "similitud": 0.26,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -289,7 +139,7 @@
     "categoria_sugerida": "INF-01",
     "emdn_sugerido": "",
     "termino_emdn": "ENTERAL FEEDING PUMPS",
-    "similitud": 0.2857,
+    "similitud": 0.2211,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -303,9 +153,9 @@
     "nombre_equipo": "Refrigerador de farmacia con puerta de vidrio",
     "categoria_sugerida": "FRM-01",
     "emdn_sugerido": "",
-    "termino_emdn": "INTENSIVE CARE OR RESUSCITATION ELECTRIC MEDICAL BEDS",
-    "similitud": 0.3265,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "termino_emdn": "SEMI-INTENSIVE THERAPY OR CARDIAC INTENSIVE CARE UNITS (CICU) ELECTRIC MEDICAL BEDS",
+    "similitud": 0.2414,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -319,22 +169,7 @@
     "categoria_sugerida": "EST-01",
     "emdn_sugerido": "",
     "termino_emdn": "CLEANING AND DISINFECTION EQUIPMENT",
-    "similitud": 0.375,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Mezclador de aire y oxígeno medicinal",
-    "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "OXYGEN CONCENTRATORS",
-    "similitud": 0.3571,
+    "similitud": 0.2754,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -349,22 +184,7 @@
     "categoria_sugerida": "GAS-01",
     "emdn_sugerido": "",
     "termino_emdn": "OXYGEN CONCENTRATORS",
-    "similitud": 0.1875,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador de oxígeno para gases respiratorios",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "NEONATAL/PAEDIATRIC PULMONARY VENTILATORS",
-    "similitud": 0.381,
+    "similitud": 0.225,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -379,7 +199,7 @@
     "categoria_sugerida": "GAS-01",
     "emdn_sugerido": "",
     "termino_emdn": "OXYGEN CONCENTRATORS",
-    "similitud": 0.1846,
+    "similitud": 0.2651,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -394,7 +214,7 @@
     "categoria_sugerida": "IMG-03",
     "emdn_sugerido": "",
     "termino_emdn": "CARDIOLOGY ULTRASOUND SCANNERS",
-    "similitud": 0.3492,
+    "similitud": 0.2172,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -409,7 +229,7 @@
     "categoria_sugerida": "IMG-03",
     "emdn_sugerido": "",
     "termino_emdn": "ECHOPHTHALMOGRAPHS",
-    "similitud": 0.2778,
+    "similitud": 0.1944,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -423,98 +243,8 @@
     "nombre_equipo": "Fluoroscopio digital para procedimientos",
     "categoria_sugerida": "IMG-03",
     "emdn_sugerido": "",
-    "termino_emdn": "VARIOUS ULTRASOUND INSTRUMENTS - OTHER",
-    "similitud": 0.3684,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Densitómetro óseo por rayos X",
-    "categoria_sugerida": "IMG-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "TOMOGRAPHS",
-    "similitud": 0.359,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Tomógrafo de haz cónico dental",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "",
-    "termino_emdn": "ECHOPHTHALMOGRAPHS",
-    "similitud": 0.3333,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Inyector de medio de contraste para tomografía",
-    "categoria_sugerida": "IMG-02",
-    "emdn_sugerido": "",
-    "termino_emdn": "COMPUTED TOMOGRAPHS (CT) - OTHER",
-    "similitud": 0.3243,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Analizador de gases en sangre",
-    "categoria_sugerida": "GAS-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "OXYGEN CONCENTRATORS",
-    "similitud": 0.2553,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Centrífuga refrigerada de laboratorio",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "CARDIAC MARKER PORTABLE ANALYSERS",
-    "similitud": 0.3714,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Microscopio binocular de laboratorio",
-    "categoria_sugerida": "LAB-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "URINALYSIS (UR) - LABORATORY ANALYSERS- INSTRUMENTS",
-    "similitud": 0.3951,
+    "termino_emdn": "OBSTETRIC/GYNAECOLOGICAL ULTRASOUND SCANNERS",
+    "similitud": 0.2658,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -528,9 +258,24 @@
     "nombre_equipo": "Congelador para plasma sanguíneo",
     "categoria_sugerida": "LAB-01",
     "emdn_sugerido": "",
-    "termino_emdn": "LIMITED PANEL ANALYSERS FOR BLOOD GAS ANALYSIS / ELECTROLYTES - OTHER",
-    "similitud": 0.3299,
+    "termino_emdn": "CHLORIDE ANALYSERS",
+    "similitud": 0.2489,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Centrífuga refrigerada para bolsas de sangre",
+    "categoria_sugerida": "LAB-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "CARDIAC MARKER PORTABLE ANALYSERS",
+    "similitud": 0.2638,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -543,8 +288,8 @@
     "nombre_equipo": "Agitador de plaquetas con incubadora",
     "categoria_sugerida": "LAB-01",
     "emdn_sugerido": "",
-    "termino_emdn": "HIGH PERFORMANCE LIQUID CHROMATOGRAPHY SYSTEMS",
-    "similitud": 0.3704,
+    "termino_emdn": "VARIOUS ELECTROPHORESIS INSTRUMENTS - OTHER",
+    "similitud": 0.2841,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -556,70 +301,10 @@
   },
   {
     "nombre_equipo": "Sistema de aféresis terapéutica",
-    "categoria_sugerida": "URG-01",
+    "categoria_sugerida": "OTR-01",
     "emdn_sugerido": "",
-    "termino_emdn": "SEMI-AUTOMATIC DEFIBRILLATORS",
-    "similitud": 0.3333,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de transporte intrahospitalario",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "TRANSPORTABLE/PORTABLE MULTI–PARAMETER PATIENT MONITORS",
-    "similitud": 0.383,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de oximetría de pulso de cabecera",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "CEREBRAL OXIMETERS",
-    "similitud": 0.3729,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de profundidad anestésica cerebral",
-    "categoria_sugerida": "ANE-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "ANAESTHESIA SYSTEMS - OTHER",
-    "similitud": 0.3582,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Monitor de apnea para recién nacido",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "VITAL SIGNS MONITORING INSTRUMENTS - OTHER",
-    "similitud": 0.3733,
+    "termino_emdn": "",
+    "similitud": 0.0,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -631,10 +316,25 @@
   },
   {
     "nombre_equipo": "Bilirrubinómetro transcutáneo neonatal",
-    "categoria_sugerida": "OFI-01",
+    "categoria_sugerida": "INF-01",
     "emdn_sugerido": "",
-    "termino_emdn": "PATIENT TRANSFER SHEETS AND MATTRESSES",
-    "similitud": 0.3947,
+    "termino_emdn": "INFUSION HEATERS",
+    "similitud": 0.1815,
+    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Báscula electrónica para recién nacido",
+    "categoria_sugerida": "NEO-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "NEONATAL RESUSCITATION BEDS",
+    "similitud": 0.28,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -648,8 +348,8 @@
     "nombre_equipo": "Computadora todo en uno para consultorio",
     "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
-    "termino_emdn": "TREATMENT, DIAGNOSIS AND MONITORING MEDICAL BEDS",
-    "similitud": 0.3448,
+    "termino_emdn": "MEDICAL SUPPORT EQUIPMENT - OTHER",
+    "similitud": 0.2545,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -663,9 +363,9 @@
     "nombre_equipo": "Impresora láser para expediente clínico",
     "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
-    "termino_emdn": "BURN PATIENT ELECTRIC MEDICAL BEDS",
-    "similitud": 0.3288,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "termino_emdn": "MANUAL CLINICAL CRIBS FOR NEWBORNS",
+    "similitud": 0.2745,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -675,12 +375,12 @@
     ]
   },
   {
-    "nombre_equipo": "Escáner de documentos médicos",
-    "categoria_sugerida": "IMG-03",
+    "nombre_equipo": "Impresora de etiquetas para laboratorio",
+    "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
-    "termino_emdn": "VARIOUS ULTRASOUND INSTRUMENTS - OTHER",
-    "similitud": 0.3692,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "termino_emdn": "MEDICAL SUPPORT EQUIPMENT - OTHER",
+    "similitud": 0.2935,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -693,8 +393,8 @@
     "nombre_equipo": "Lector de código de barras para identificación clínica",
     "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
-    "termino_emdn": "ACTIVE ANTI-DECUBITUS MEDICAL CUSHIONS",
-    "similitud": 0.3696,
+    "termino_emdn": "ELECTRIC MEDICAL CHAIRS - OTHER",
+    "similitud": 0.2956,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -705,27 +405,12 @@
     ]
   },
   {
-    "nombre_equipo": "Monitor de computadora grado médico",
-    "categoria_sugerida": "MON-01",
+    "nombre_equipo": "Impresora de brazaletes de identificación hospitalaria",
+    "categoria_sugerida": "OFI-01",
     "emdn_sugerido": "",
-    "termino_emdn": "CENTRAL INFORMATION COMPUTING SYSTEMS",
-    "similitud": 0.3333,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Ventilador mecánico para adulto",
-    "categoria_sugerida": "RES-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "VENTILATION MONITORS",
-    "similitud": 0.3922,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "termino_emdn": "MEDICAL CUSHIONS - OTHER",
+    "similitud": 0.26,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -736,26 +421,11 @@
   },
   {
     "nombre_equipo": "Equipo CPAP para apnea del sueño",
-    "categoria_sugerida": "URG-01",
+    "categoria_sugerida": "RES-01",
     "emdn_sugerido": "",
-    "termino_emdn": "SEMI-AUTOMATIC DEFIBRILLATORS",
-    "similitud": 0.3279,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Oxímetro de pulso portátil",
-    "categoria_sugerida": "MON-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "PULSE OXIMETERS",
-    "similitud": 0.3902,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "termino_emdn": "ADULT AND PAEDIATRIC/NEONATAL PULMONARY VENTILATORS",
+    "similitud": 0.2513,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -766,10 +436,10 @@
   },
   {
     "nombre_equipo": "Aspirador de secreciones portátil",
-    "categoria_sugerida": "MON-01",
+    "categoria_sugerida": "RES-01",
     "emdn_sugerido": "",
-    "termino_emdn": "CARBON DIOXIDE ANALYSERS",
-    "similitud": 0.3509,
+    "termino_emdn": "PORTABLE PULMONARY VENTILATORS",
+    "similitud": 0.2867,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -784,22 +454,7 @@
     "categoria_sugerida": "RES-01",
     "emdn_sugerido": "",
     "termino_emdn": "NITRIC OXIDE DISPENSERS",
-    "similitud": 0.3934,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Sistema de ondas de choque para fisioterapia",
-    "categoria_sugerida": "TER-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "ELECTROMECHANICAL SYSTEMS FOR PHYSICAL THERAPY",
-    "similitud": 0.3778,
+    "similitud": 0.2655,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -828,8 +483,8 @@
     "nombre_equipo": "Paralelas para entrenamiento de marcha",
     "categoria_sugerida": "TER-01",
     "emdn_sugerido": "",
-    "termino_emdn": "DYNAMOMETRIC SYSTEMS FOR MOVEMENT ANALYSIS – OTHER",
-    "similitud": 0.3488,
+    "termino_emdn": "PASSIVE REHABILITATIVE GYMNASTICS EQUIPMENT",
+    "similitud": 0.2685,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -840,11 +495,11 @@
     ]
   },
   {
-    "nombre_equipo": "Desfibrilador monitor para ambulancia",
-    "categoria_sugerida": "MON-01",
+    "nombre_equipo": "Carro rojo para reanimación cardiopulmonar",
+    "categoria_sugerida": "TER-01",
     "emdn_sugerido": "",
-    "termino_emdn": "MULTI–PARAMETER MONITORS - OTHER",
-    "similitud": 0.3881,
+    "termino_emdn": "PREHENSION STIMULATORS",
+    "similitud": 0.2847,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
@@ -856,11 +511,26 @@
   },
   {
     "nombre_equipo": "Camilla de emergencia hidráulica",
-    "categoria_sugerida": "URG-01",
+    "categoria_sugerida": "MOB-01",
     "emdn_sugerido": "",
-    "termino_emdn": "DEFIBRILLATORS - OTHER",
-    "similitud": 0.2692,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
+    "termino_emdn": "MANUAL MEDICAL BEDS",
+    "similitud": 0.2625,
+    "fuente_codigo": "REGLA_MAESTRA",
+    "requiere_desambiguacion": true,
+    "estado": "DISCREPANCIA",
+    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
+    "motivos": [
+      "Falta emdn_sugerido.",
+      "No se pudo validar la categoría sin un código existente."
+    ]
+  },
+  {
+    "nombre_equipo": "Camilla de transporte para ambulancia",
+    "categoria_sugerida": "MOB-01",
+    "emdn_sugerido": "",
+    "termino_emdn": "BED SUPPORTS",
+    "similitud": 0.2049,
+    "fuente_codigo": "REGLA_MAESTRA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",
     "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
@@ -873,53 +543,8 @@
     "nombre_equipo": "Aspirador portátil para emergencias",
     "categoria_sugerida": "URG-01",
     "emdn_sugerido": "",
-    "termino_emdn": "AUTOMATIC DEFIBRILLATORS",
-    "similitud": 0.3051,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Inmovilizador espinal para trauma",
-    "categoria_sugerida": "IMG-03",
-    "emdn_sugerido": "",
-    "termino_emdn": "INTERNAL ULTRASOUND SCANNERS",
-    "similitud": 0.3934,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Resucitador manual autoinflable para emergencia",
-    "categoria_sugerida": "URG-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "MANUAL DEFIBRILLATORS",
-    "similitud": 0.3235,
-    "fuente_codigo": "BUSQUEDA_DIFUSA",
-    "requiere_desambiguacion": true,
-    "estado": "DISCREPANCIA",
-    "motivo": "Falta emdn_sugerido. No se pudo validar la categoría sin un código existente.",
-    "motivos": [
-      "Falta emdn_sugerido.",
-      "No se pudo validar la categoría sin un código existente."
-    ]
-  },
-  {
-    "nombre_equipo": "Bomba volumétrica de infusión",
-    "categoria_sugerida": "INF-01",
-    "emdn_sugerido": "",
-    "termino_emdn": "INFUSION PUMPS",
-    "similitud": 0.381,
+    "termino_emdn": "DEFIBRILLATORS - OTHER",
+    "similitud": 0.224,
     "fuente_codigo": "BUSQUEDA_DIFUSA",
     "requiere_desambiguacion": true,
     "estado": "DISCREPANCIA",

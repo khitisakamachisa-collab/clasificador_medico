@@ -1,12 +1,12 @@
 {
-  "accuracy": 0.6786,
-  "precision_macro": 0.5875,
-  "recall_macro": 0.6417,
-  "f1_macro": 0.5945,
-  "total_examples": 149,
-  "train_examples": 121,
-  "test_examples": 28,
-  "validated_examples": 138,
+  "accuracy": 0.7714,
+  "precision_macro": 0.7197,
+  "recall_macro": 0.7652,
+  "f1_macro": 0.7258,
+  "total_examples": 174,
+  "train_examples": 139,
+  "test_examples": 35,
+  "validated_examples": 163,
   "approved_corrections": 12,
   "evaluation": "stratified_holdout"
 }

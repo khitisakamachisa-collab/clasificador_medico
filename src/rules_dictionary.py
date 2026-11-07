@@ -60,7 +60,14 @@ EMDN_SUBCATEGORY_PREFIXES = {
 
 REGLAS_ADICIONALES = {
     "ANE-01": ["anesthesia", "anaesthesia", "vaporizer", "vaporizador"],
-    "CAR-01": ["holter", "electrocardiograph", "electrocardiograma", "prueba de esfuerzo"],
+    "CAR-01": [
+        "holter",
+        "monitor holter",
+        "holter monitor",
+        "electrocardiograph",
+        "electrocardiograma",
+        "prueba de esfuerzo",
+    ],
     "CAR-02": ["implantable defibrillator", "desfibrilador implantable"],
     "CIR-01": ["operating table", "mesa quirúrgica", "lámpara cialítica", "lampara cialitica", "lampara quirurgica", "lámpara quirúrgica", "cialitica", "cialítica", "lampara movil", "lámpara móvil"],
     "CIR-02": ["electrosurgical", "diathermocoagulator", "electrobisturí"],

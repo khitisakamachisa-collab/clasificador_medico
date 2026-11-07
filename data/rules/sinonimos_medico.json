@@ -1,0 +1,9 @@
+{
+  "vaporizador": ["vaporizer", "anaesthesia"],
+  "lámpara": ["lamp", "light", "scialytic"],
+  "monitor": ["monitor", "monitors"],
+  "bomba": ["pump", "infusion"],
+  "ecógrafo": ["ultrasound", "scanners"],
+  "bisturí": ["scalpel", "surgical", "electrosurgical"],
+  "cama": ["bed", "medical bed"]
+}
