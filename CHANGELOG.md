@@ -23,6 +23,28 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Reglas específicas para lámparas de exploración.
 - Reglas específicas para monitores multiparámetro secuenciales.
 
+## [1.2.0] - 2026-11-05
+
+### Agregado
+- Buscador con autocompletado estilo EUDAMATE en el frontend.
+- Endpoint `GET /api/v1/buscar` para búsqueda difusa de términos y códigos EMDN.
+- Diccionario de sinónimos médicos en `data/rules/sinonimos_medico.json`.
+- Normalización de texto en la búsqueda difusa (tildes, mayúsculas y palabras vacías).
+- Priorización de reglas maestras sobre el LLM en la generación del dataset.
+
+### Mejorado
+- Accuracy del modelo NLP de 67.8 % a 77.1 % (v3).
+- Recuperación de 27 equipos adicionales del conjunto de discrepancias.
+- Umbral de similitud ajustado de 0.40 a 0.30 para términos español-inglés.
+
+### Corregido
+- Importación relativa en `trainer.py` para su ejecución como módulo.
+- Campo `administrador` opcional en el endpoint de MTBF.
+
+### Documentación
+- README actualizado con métricas y estado actual.
+- ROADMAP actualizado con fases completadas y pendientes.
+
 ## [1.0.0] - 2026-10-26
 
 ### Agregado

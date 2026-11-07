@@ -363,6 +363,68 @@ def test_classification_and_batch_endpoints(client):
     assert batch.json()["resultados"][1]["cmms_equipment_id"] == "ACT-2042"
 
 
+def test_emdn_search_returns_relevant_results_and_expected_shape(client):
+    response = client.get("/api/v1/buscar", params={"q": "ventilador"})
+
+    assert response.status_code == 200
+    results = response.json()
+    assert results
+    assert any(
+        result["codigo_emdn"].startswith("Z120301")
+        and result["categoria_propia"] == "RES-01"
+        for result in results
+    )
+    assert set(results[0]) == {
+        "codigo_emdn",
+        "termino_emdn",
+        "categoria_propia",
+        "clase_mdr",
+        "nivel_terminal",
+        "similitud",
+    }
+
+def test_emdn_search_prioritizes_prefix_matches_for_autocomplete(client):
+    response = client.get("/api/v1/buscar", params={"q": "vent"})
+
+    assert response.status_code == 200
+    results = response.json()
+    assert results
+    assert "VENTILATOR" in results[0]["termino_emdn"]
+
+
+def test_emdn_search_matches_code_prefix_and_respects_limit(client):
+    response = client.get(
+        "/api/v1/buscar", params={"q": "Z120301", "limit": 5}
+    )
+
+    assert response.status_code == 200
+    results = response.json()
+    assert 0 < len(results) <= 5
+    assert all(result["codigo_emdn"].startswith("Z120301") for result in results)
+    assert all(result["nivel_terminal"] is True for result in results)
+
+
+def test_emdn_search_returns_empty_list_for_unmatched_query(client):
+    response = client.get("/api/v1/buscar", params={"q": "xyz"})
+
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_emdn_search_normalizes_accents_and_uses_category_keywords(client):
+    response = client.get("/api/v1/buscar", params={"q": "ecógrafo"})
+
+    assert response.status_code == 200
+    assert response.json()
+    assert all(result["categoria_propia"] == "IMG-03" for result in response.json())
+
+def test_emdn_search_uses_medical_synonyms(client):
+    response = client.get("/api/v1/buscar", params={"q": "bomba"})
+
+    assert response.status_code == 200
+    assert any("PUMP" in result["termino_emdn"] for result in response.json())
+
+
 def test_recalculate_forces_category_and_cmms_id(client):
     response = client.post(
         "/api/v1/recalcular",

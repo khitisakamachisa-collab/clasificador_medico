@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+import json
 import logging
 from threading import Lock
 from time import monotonic
@@ -9,7 +10,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from .routes import router
+from .routes import build_emdn_search_index, router
 from src.config import Config
 from src.criticality import cargar_criticidad_defaults
 from src.criticality_store import inicializar_criticidad
@@ -28,10 +29,20 @@ async def lifespan(app: FastAPI):
     cargar_criticidad_defaults()
     inicializar_criticidad()
     app.state.emdn_database = load_emdn_database()
+    search_database = app.state.emdn_database
+    search_database_path = Config.PROCESSED_DIR / "emdn_database.json"
+    if search_database_path.is_file():
+        with search_database_path.open("r", encoding="utf-8") as file:
+            search_database = json.load(file)
+        if not isinstance(search_database, dict) or not isinstance(
+            search_database.get("flat"), dict
+        ):
+            raise ValueError("El catálogo EMDN procesado tiene una estructura inválida.")
+    app.state.emdn_search_index = build_emdn_search_index(search_database)
     yield
 
 
-app = FastAPI(title="Clasificador médico", version="1.0.0", lifespan=lifespan)
+app = FastAPI(title="Clasificador médico", version="1.2.0", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=list(Config.CORS_ORIGINS),

@@ -123,6 +123,29 @@ Devuelve `exists`, `emdn_code`, `name`, `term`, `parent` y `level`. Un código i
 
 Devuelve una lista de coincidencias terminales con `code`, `name` y `score`; una búsqueda sin resultados devuelve `[]`.
 
+## `GET /api/v1/buscar`
+
+Busca términos del catálogo EMDN por texto difuso, prefijo de código o categoría propia. El índice se carga en memoria al iniciar la API. `q` acepta entre 1 y 100 caracteres; `limit` es opcional, vale 10 por defecto y admite valores entre 1 y 50.
+
+```text
+GET /api/v1/buscar?q=ventilador&limit=10
+```
+
+La respuesta es una lista con `codigo_emdn`, `termino_emdn`, `categoria_propia`, `clase_mdr`, `nivel_terminal` y `similitud`. Las búsquedas de código devuelven códigos que empiezan por el prefijo indicado; una consulta sin coincidencias devuelve `[]`.
+
+```json
+[
+  {
+    "codigo_emdn": "Z1203010502",
+    "termino_emdn": "ADULT PULMONARY VENTILATORS",
+    "categoria_propia": "RES-01",
+    "clase_mdr": "IIb",
+    "nivel_terminal": true,
+    "similitud": 0.8571
+  }
+]
+```
+
 ## `GET /api/v1/categorias`
 
 Devuelve las 25 categorías propias, su nombre, clase MDR predeterminada y valores de criticidad.

@@ -1,10 +1,11 @@
 # Clasificador médico
 
-Sistema híbrido (reglas + NLP) para clasificar equipos médicos destinados a inventarios y CMMS. A partir del nombre, la marca y la ubicación, asigna una categoría propia, sugiere un código terminal de la nomenclatura EMDN v2026, determina la clase MDR y calcula la criticidad. El catálogo EMDN local se deriva del Excel oficial y es la fuente de verdad para verificar códigos.
+Sistema híbrido (reglas + NLP) para clasificar equipos médicos destinados a inventarios y CMMS. A partir del nombre, la marca y la ubicación, asigna una categoría propia, sugiere un código terminal de la nomenclatura EMDN v2026, determina la clase MDR y calcula la criticidad. Incluye un buscador EUDAMATE con autocompletado para localizar términos y códigos del catálogo EMDN local, derivado del Excel oficial.
 
 ## Características principales
 
 - Motor de reglas bilingües priorizado sobre el modelo NLP, con validación de códigos terminales contra el catálogo oficial EMDN v2026.
+- Buscador con autocompletado estilo EUDAMATE para seleccionar rápidamente códigos y términos EMDN.
 - Clasificación NLP TF-IDF/LogisticRegression como respaldo cuando no hay una regla aplicable.
 - Corrección manual con validación semántica. Cuando la decisión manual supera las comprobaciones semánticas, se conserva como decisión experta con confianza de 95 % y semáforo verde; las comprobaciones quedan disponibles como información complementaria.
 - Matriz de criticidad multicriterio ponderada por impacto clínico, redundancia, frecuencia de uso, historial de fallas y costo/tiempo, con ajustes manuales, actualización por MTBF y auditoría.
@@ -14,12 +15,21 @@ Sistema híbrido (reglas + NLP) para clasificar equipos médicos destinados a in
 
 ## Estado actual
 
-El proyecto está en la línea de versión 1.x. Se han corregido errores críticos de clasificación y de confianza en correcciones manuales, y se han incorporado la validación semántica y la matriz de criticidad. El detalle de cambios está en [CHANGELOG.md](./CHANGELOG.md). Las capacidades actuales, sus alcances y las limitaciones de evaluación se describen en este README y en la documentación enlazada.
+**Versión: 1.2.0.** El modelo NLP masivo v3 alcanza 77.1 % de accuracy (0.7714) sobre 174 ejemplos de alta calidad. El pipeline de entrenamiento con validación cruzada está operativo; la métrica publicada de v3 procede de una partición estratificada (*holdout*). El buscador EMDN con autocompletado estilo EUDAMATE está implementado. El detalle de cambios está en [CHANGELOG.md](./CHANGELOG.md).
+
+## Métricas del modelo
+
+| Versión | Dataset | Accuracy | Observación |
+|---------|---------|----------|-------------|
+| v1 | ~228 sintéticos | 1.00 (overfitting) | Memorización |
+| v2 | 149 validados | 0.6786 | Pipeline base |
+| v3 | 174 ejemplos | 0.7714 | Con diccionario de sinónimos |
 
 ## Limitaciones conocidas
 
 - El modelo NLP base (TF-IDF/LogisticRegression) puede requerir revisión y corrección manual para nombres muy ambiguos o atípicos que no estén cubiertos por el diccionario de reglas. La ampliación y validación del dataset para reducir esta dependencia está planificada en la [Fase 2 del roadmap](./ROADMAP.md).
 - El conjunto de ejemplo sintético no representa una validación clínica ni permite afirmar una precisión clínica generalizable. Las pruebas de regresión verifican casos explícitos del proyecto; cualquier uso asistencial requiere validación institucional.
+- El buscador EMDN utiliza búsqueda difusa sobre términos del catálogo; puede no encontrar nombres muy específicos, traducciones no contempladas o consultas con errores ortográficos graves.
 - La clasificación y la criticidad son herramientas de apoyo. La decisión clínica, la configuración de los perfiles de criticidad y la aprobación para uso institucional corresponden a expertos y a la organización.
 
 Consulta [ROADMAP.md](./ROADMAP.md) para conocer los próximos pasos previstos.
@@ -139,7 +149,7 @@ Los candidatos EMDN contienen hasta tres sugerencias de la familia filtrada. La 
 
 ### Interfaz web interactiva
 
-La interfaz está en [index.html](./index.html) y se comunica con `http://localhost:8000/api/v1/clasificar`. Con la API iniciada en una terminal, sirve el proyecto desde otra terminal en la raíz para usar el origen CORS predeterminado (`http://localhost:3000`):
+La interfaz está en [index.html](./index.html) y se comunica con `http://localhost:8000/api/v1`. El buscador EMDN sugiere códigos al escribir dos o más caracteres; al seleccionar uno, completa el nombre del equipo y muestra la categoría sugerida. Con la API iniciada en una terminal, sirve el proyecto desde otra terminal en la raíz para usar el origen CORS predeterminado (`http://localhost:3000`):
 
 ```powershell
 .\.venv\Scripts\python.exe -m http.server 3000
@@ -229,6 +239,7 @@ El XLSX debe estar disponible localmente y contener una columna de nombre recono
 | `POST` | `/api/v1/validar-emdn` | Comprueba si un `emdn_code` existe en el índice terminal. |
 | `POST` | `/api/v1/validar` | Alias histórico de `/validar-emdn`. |
 | `POST` | `/api/v1/buscar-emdn` | Busca términos en los terminales oficiales. |
+| `GET` | `/api/v1/buscar?q={texto}&limit=10` | Autocompleta búsquedas por término EMDN, prefijo de código o categoría propia. |
 | `GET` | `/api/v1/categorias` | Devuelve las categorías propias y sus valores MDR por defecto. |
 | `GET` | `/api/v1/metricas` | Devuelve métricas del modelo o `503` si todavía no se generaron. |
 | `POST` | `/api/v1/reentrenar` | Añade ejemplos y crea una nueva versión del modelo. |

@@ -17,7 +17,7 @@ git add .
 echo ==============================
 echo 3. Creando commit...
 echo ==============================
-git commit -m "feat: Modelo NLP masivo v3 con accuracy 77.1%. Diccionario de sinónicos médico implementado. 174 ejemplos de alta calidad entrenados."
+git commit -m "Fase 3 - Buscador estilo EUDAMATE con autocompletado + Actualización de README y CHANGELOG"
 
 echo ==============================
 echo 4. Subiendo a GitHub...

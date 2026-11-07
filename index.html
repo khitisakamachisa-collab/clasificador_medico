@@ -96,6 +96,30 @@
     .field input:focus { border-color: #6c95f2; box-shadow: 0 0 0 3px rgba(37, 99, 235, .1); }
     .field-name-row { display: flex; justify-content: space-between; gap: 12px; }
     .optional { color: #a1aaba; font-size: 10px; font-weight: 500; }
+    .emdn-autocomplete-field { grid-column: 1 / -1; }
+    .emdn-search-wrap { position: relative; }
+    .emdn-search-input { padding-left: 12px !important; }
+    .emdn-category-input { padding-left: 12px !important; background: #f8fafd !important; }
+    .emdn-suggestions {
+      position: absolute; z-index: 20; top: calc(100% + 5px); left: 0; right: 0;
+      max-height: 416px; overflow-y: auto; padding: 5px;
+      background: white; border: 1px solid #dfe5ee; border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(30, 55, 90, .15);
+    }
+    .emdn-suggestions[hidden], .emdn-search-status[hidden] { display: none; }
+    .emdn-suggestion {
+      display: grid; width: 100%; gap: 5px; padding: 9px 10px;
+      color: var(--ink); background: white; border: 0; border-radius: 7px;
+      cursor: pointer; text-align: left;
+    }
+    .emdn-suggestion:hover, .emdn-suggestion:focus-visible { background: #f5f8fe; outline: none; }
+    .emdn-suggestion-topline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .emdn-suggestion-code { font-size: 11px; }
+    .emdn-suggestion-term { color: #657187; font-size: 11px; line-height: 1.4; }
+    .emdn-suggestion .category-badge { padding: 4px 7px; color: #2458bf; background: #eaf1ff; }
+    .emdn-suggestion .mdr-badge { padding: 3px 6px; color: #59677b; background: #f0f3f8; }
+    .emdn-match { padding: 0 1px; color: inherit; background: #fff0a8; border-radius: 2px; }
+    .emdn-search-status { margin: 0; color: var(--muted); font-size: 11px; }
     .actions-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; }
     .privacy-note { display: flex; align-items: center; gap: 7px; margin: 0; color: #8995a7; font-size: 11px; }
     .primary-button {
@@ -360,6 +384,18 @@
           </div>
           <form id="classificationForm">
             <div class="form-grid">
+              <div class="field emdn-autocomplete-field" id="emdnSearchWrap">
+                <label class="field-name" for="emdnSearch">Buscador EMDN</label>
+                <div class="emdn-search-wrap">
+                  <input id="emdnSearch" class="emdn-search-input" type="search" maxlength="100" placeholder="Buscar equipo médico o código EMDN..." autocomplete="off" aria-autocomplete="list" aria-controls="emdnSuggestions" aria-expanded="false">
+                  <div id="emdnSuggestions" class="emdn-suggestions" role="listbox" aria-label="Sugerencias EMDN" hidden></div>
+                </div>
+                <p id="emdnSearchStatus" class="emdn-search-status" role="status" aria-live="polite" hidden></p>
+              </div>
+              <label class="field" for="emdnCategory" style="grid-column: 1 / -1">
+                <span class="field-name">Categoría sugerida</span>
+                <input id="emdnCategory" class="emdn-category-input" type="text" placeholder="Se completa al seleccionar una sugerencia EMDN" readonly>
+              </label>
               <label class="field" for="equipmentName" style="grid-column: 1 / -1">
                 <span class="field-name">Nombre del equipo <span class="required" aria-hidden="true">*</span></span>
                 <span class="input-wrap">
@@ -594,6 +630,10 @@
       // URL predeterminada de la API local; puede cambiarse desde la consola del navegador.
       const API_URL = window.CLASSIFIER_API_URL || "http://localhost:8000/api/v1/clasificar";
       const form = document.getElementById("classificationForm");
+      const emdnSearchInput = document.getElementById("emdnSearch");
+      const emdnSuggestions = document.getElementById("emdnSuggestions");
+      const emdnSearchStatus = document.getElementById("emdnSearchStatus");
+      const emdnSearchWrap = document.getElementById("emdnSearchWrap");
       const submitButton = document.getElementById("submitButton");
       const buttonText = document.getElementById("buttonText");
       const buttonIcon = document.getElementById("buttonIcon");
@@ -623,6 +663,8 @@
       let criticalityReport;
       let isLoading = false;
       let currentClassification;
+      let emdnSearchTimer;
+      let emdnSearchController;
 
       const demoResult = {
         categoria_propia: "IMG-03",
@@ -679,6 +721,183 @@
       function getApiBaseUrl() {
         return API_URL.replace(/\/clasificar\/?$/, "");
       }
+
+      function normalizeSearchText(value) {
+        return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      }
+
+      function appendHighlightedText(container, text, query) {
+        const normalizedCharacters = [];
+        const characterOffsets = [];
+        for (let index = 0; index < text.length; index += 1) {
+          const characters = normalizeSearchText(text[index]);
+          for (const character of characters) {
+            normalizedCharacters.push(character);
+            characterOffsets.push(index);
+          }
+        }
+        const normalizedText = normalizedCharacters.join("");
+        const normalizedQuery = normalizeSearchText(query);
+        let matchStart = normalizedText.indexOf(normalizedQuery);
+        let matchLength = matchStart >= 0 ? normalizedQuery.length : 0;
+
+        if (matchStart < 0 && normalizedQuery) {
+          let previous = new Uint16Array(normalizedText.length + 1);
+          for (let queryIndex = 0; queryIndex < normalizedQuery.length; queryIndex += 1) {
+            const current = new Uint16Array(normalizedText.length + 1);
+            for (let textIndex = 0; textIndex < normalizedText.length; textIndex += 1) {
+              if (normalizedQuery[queryIndex] === normalizedText[textIndex]) {
+                current[textIndex + 1] = previous[textIndex] + 1;
+                if (current[textIndex + 1] > matchLength) {
+                  matchLength = current[textIndex + 1];
+                  matchStart = textIndex - matchLength + 1;
+                }
+              }
+            }
+            previous = current;
+          }
+        }
+
+        if (matchStart < 0 || matchLength < 2) {
+          container.textContent = text;
+          return;
+        }
+        const start = characterOffsets[matchStart];
+        const end = characterOffsets[matchStart + matchLength - 1] + 1;
+        container.append(document.createTextNode(text.slice(0, start)));
+        const highlighted = document.createElement("mark");
+        highlighted.className = "emdn-match";
+        highlighted.textContent = text.slice(start, end);
+        container.append(highlighted, document.createTextNode(text.slice(end)));
+      }
+
+      function hideEmdnSuggestions() {
+        window.clearTimeout(emdnSearchTimer);
+        if (emdnSearchController) {
+          emdnSearchController.abort();
+          emdnSearchController = null;
+        }
+        emdnSuggestions.hidden = true;
+        emdnSuggestions.replaceChildren();
+        emdnSearchInput.setAttribute("aria-expanded", "false");
+        emdnSearchStatus.hidden = true;
+        emdnSearchStatus.textContent = "";
+      }
+
+      function showEmdnSearchStatus(message, isError = false) {
+        emdnSearchStatus.textContent = message;
+        emdnSearchStatus.classList.toggle("notice-error", isError);
+        emdnSearchStatus.hidden = !message;
+      }
+
+      function renderEmdnSuggestions(results, query) {
+        emdnSuggestions.replaceChildren();
+        results.forEach((result) => {
+          const option = document.createElement("button");
+          option.className = "emdn-suggestion";
+          option.type = "button";
+          option.setAttribute("role", "option");
+          option.setAttribute(
+            "aria-label",
+            `${result.codigo_emdn}, ${result.termino_emdn}, ${result.categoria_propia || "Sin categoría"}, clase MDR ${result.clase_mdr || "no disponible"}`
+          );
+          const topline = document.createElement("span");
+          topline.className = "emdn-suggestion-topline";
+          const code = document.createElement("strong");
+          code.className = "emdn-suggestion-code";
+          appendHighlightedText(code, result.codigo_emdn, query);
+          const category = document.createElement("span");
+          category.className = "category-badge";
+          category.textContent = result.categoria_propia || "Sin categoría";
+          const mdr = document.createElement("span");
+          mdr.className = "mdr-badge";
+          mdr.textContent = result.clase_mdr || "MDR N/D";
+          topline.append(code, category, mdr);
+          const term = document.createElement("span");
+          term.className = "emdn-suggestion-term";
+          appendHighlightedText(term, result.termino_emdn, query);
+          option.append(topline, term);
+          option.addEventListener("click", () => {
+            byId("equipmentName").value = result.termino_emdn;
+            byId("emdnCategory").value = result.categoria_propia || "Sin categoría";
+            hideEmdnSuggestions();
+            showMessage(
+              `Sugerencia EMDN seleccionada: ${result.codigo_emdn} - ${result.termino_emdn}`,
+              "success"
+            );
+            byId("equipmentName").focus();
+          });
+          emdnSuggestions.append(option);
+        });
+        emdnSuggestions.hidden = results.length === 0;
+        emdnSearchInput.setAttribute("aria-expanded", String(results.length > 0));
+      }
+
+      async function fetchEmdnSuggestions(query) {
+        const controller = new AbortController();
+        emdnSearchController = controller;
+        try {
+          const url = `${getApiBaseUrl()}/buscar?q=${encodeURIComponent(query)}&limit=10`;
+          const response = await fetch(url, { signal: controller.signal });
+          let results;
+          try { results = await response.json(); }
+          catch (error) { throw new Error("La API devolvió una respuesta de búsqueda inválida."); }
+          if (!response.ok) throw new Error(getErrorMessage(results, response.status));
+          if (!Array.isArray(results)) throw new Error("La API devolvió sugerencias en un formato inválido.");
+          if (controller.signal.aborted) return;
+          renderEmdnSuggestions(results, query);
+          showEmdnSearchStatus(
+            results.length ? "" : "No se encontraron coincidencias EMDN."
+          );
+        } catch (error) {
+          if (error.name === "AbortError") return;
+          emdnSuggestions.hidden = true;
+          emdnSearchInput.setAttribute("aria-expanded", "false");
+          showEmdnSearchStatus(
+            error.message || "No se pudieron cargar las sugerencias EMDN.",
+            true
+          );
+        } finally {
+          if (emdnSearchController === controller) emdnSearchController = null;
+        }
+      }
+
+      emdnSearchInput.addEventListener("input", () => {
+        window.clearTimeout(emdnSearchTimer);
+        if (emdnSearchController) {
+          emdnSearchController.abort();
+          emdnSearchController = null;
+        }
+        const query = emdnSearchInput.value.trim();
+        emdnSuggestions.replaceChildren();
+        emdnSuggestions.hidden = true;
+        emdnSearchInput.setAttribute("aria-expanded", "false");
+        byId("emdnCategory").value = "";
+        if (query.length < 2) {
+          showEmdnSearchStatus("");
+          return;
+        }
+        showEmdnSearchStatus("Buscando en el catálogo EMDN...");
+        emdnSearchTimer = window.setTimeout(
+          () => fetchEmdnSuggestions(query),
+          300
+        );
+      });
+
+      emdnSearchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          if (!byId("equipmentName").value.trim()) {
+            byId("equipmentName").value = emdnSearchInput.value.trim();
+          }
+          hideEmdnSuggestions();
+        } else if (event.key === "Escape") {
+          hideEmdnSuggestions();
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!emdnSearchWrap.contains(event.target)) hideEmdnSuggestions();
+      });
 
       async function requestJson(url, payload, extraHeaders = {}) {
         const response = await fetch(url, {
