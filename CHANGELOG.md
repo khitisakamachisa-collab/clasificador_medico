@@ -23,6 +23,15 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Reglas específicas para lámparas de exploración.
 - Reglas específicas para monitores multiparámetro secuenciales.
 
+## [1.2.4] - 2026-11-08
+
+### Corregido (Fixed)
+- **UX Ubicación:** Se reemplazó el `<datalist>` por un `<select>` nativo en el formulario de clasificación. Esto elimina el "círculo vicioso" de auto-filtrado y permite cambiar la ubicación seleccionada con un solo clic.
+- **Panel de Administración:** Se eliminó el título "Panel de administración" y el botón "Volver al inicio" duplicados en la parte superior de la vista de admin, dejando solo los controles de acción inferiores.
+
+### Mejorado (Improved)
+- Flujo de navegación en la vista de Administración más limpio y directo.
+
 ## [1.2.0] - 2026-11-05
 
 ### Agregado

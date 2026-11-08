@@ -17,7 +17,7 @@ git add .
 echo ==============================
 echo 3. Creando commit...
 echo ==============================
-git commit -m "Fase 3 - Buscador estilo EUDAMATE con autocompletado + Actualización de README y CHANGELOG"
+git commit -m "fix(ui): replace location datalist with native select and clean up admin panel layout (v1.2.4)"
 
 echo ==============================
 echo 4. Subiendo a GitHub...

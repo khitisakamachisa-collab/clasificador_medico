@@ -1,4 +1,5 @@
 import json
+import re
 import sqlite3
 from datetime import datetime, timedelta, timezone
 
@@ -31,6 +32,15 @@ def test_root_redirects_to_docs(client):
     response = client.get("/", follow_redirects=False)
     assert response.status_code == 307
     assert response.headers["location"] == "/docs"
+
+
+def test_locations_endpoint_returns_classifier_locations(client):
+    response = client.get("/api/v1/ubicaciones")
+
+    assert response.status_code == 200
+    assert "radiología" in response.json()
+    assert "uci" in response.json()
+    assert "quirófano general" in response.json()
 
 
 def _classify_with_equipment_id(client, equipment_id, name="Ventilador mecánico"):
@@ -390,6 +400,50 @@ def test_emdn_search_prioritizes_prefix_matches_for_autocomplete(client):
     results = response.json()
     assert results
     assert "VENTILATOR" in results[0]["termino_emdn"]
+
+
+def test_emdn_search_prioritizes_main_tomography_devices_over_accessories(client):
+    response = client.get("/api/v1/buscar", params={"q": "TOMOGR", "limit": 12})
+    expanded_response = client.get(
+        "/api/v1/buscar", params={"q": "TOMOGR", "limit": 50}
+    )
+
+    assert response.status_code == 200
+    assert expanded_response.status_code == 200
+    results = response.json()
+    assert len(results) >= 12
+    variable_mdr_terms = ("ACCESSORIES", "CONSUMABLES", "SOFTWARE", "OTHER", "PARTS", "COMPONENTS")
+    is_variable_mdr = lambda result: any(re.search(
+        rf"\b{term}\b", result["termino_emdn"], re.IGNORECASE
+    ) for term in variable_mdr_terms)
+    first_variable_result = next(
+        (index for index, result in enumerate(results) if is_variable_mdr(result)),
+        len(results),
+    )
+    assert all(not is_variable_mdr(result) for result in results[:first_variable_result])
+    assert all(is_variable_mdr(result) for result in results[first_variable_result:])
+    positions = {
+        result["codigo_emdn"]: index
+        for index, result in enumerate(results)
+    }
+    main_codes = ("Z11030601", "Z11030602", "Z11030603")
+    accessory_codes = ("Z11030680", "Z11030682", "Z11030685", "Z11030699")
+    assert all(code in positions for code in (*main_codes, *accessory_codes))
+    assert positions["Z11030601"] < positions["Z11030602"] < positions["Z11030603"]
+    assert max(positions[code] for code in main_codes) < min(
+        positions[code] for code in accessory_codes
+    )
+    expanded_results = expanded_response.json()
+    first_expanded_variable = next(
+        (index for index, result in enumerate(expanded_results) if is_variable_mdr(result)),
+        len(expanded_results),
+    )
+    assert all(
+        not is_variable_mdr(result) for result in expanded_results[:first_expanded_variable]
+    )
+    assert all(
+        is_variable_mdr(result) for result in expanded_results[first_expanded_variable:]
+    )
 
 
 def test_emdn_search_matches_code_prefix_and_respects_limit(client):

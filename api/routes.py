@@ -54,6 +54,11 @@ from .schemas import (
 )
 
 router = APIRouter()
+# Estos términos representan complementos con clase MDR variable o heredada.
+_EMDN_VARIABLE_MDR_TERMS = re.compile(
+    r"\b(?:ACCESSORIES|CONSUMABLES|SOFTWARE|OTHER|PARTS|COMPONENTS)\b",
+    re.IGNORECASE,
+)
 
 
 def _normalize_search_text(value: str) -> str:
@@ -233,8 +238,14 @@ def _find_emdn_matches(search_index: dict[str, Any], query: str, limit: int):
                 for search_term in search_terms
             )
             matches.append((exact_term_match, similarity, record))
+    # Si hay suficientes coincidencias textuales, evita completar la lista con falsos positivos difusos.
+    exact_matches = [match for match in matches if match[0]]
+    if len(exact_matches) >= limit:
+        matches = exact_matches
     matches.sort(
         key=lambda match: (
+            # Los equipos principales aparecen antes que accesorios y componentes.
+            bool(_EMDN_VARIABLE_MDR_TERMS.search(match[2]["termino_emdn"])),
             not match[0],
             -match[1],
             match[2]["codigo_emdn"],
@@ -595,7 +606,7 @@ def buscar_emdn_endpoint(payload: SearchEMDNRequest):
 def buscar_emdn_autocomplete(
     request: Request,
     q: str = Query(..., min_length=1, max_length=100),
-    limit: int = Query(10, ge=1, le=50),
+    limit: int = Query(12, ge=1, le=50),
 ):
     """Busca códigos terminales por término, código o categoría propia."""
     return _find_emdn_matches(request.app.state.emdn_search_index, q, limit)
@@ -636,6 +647,12 @@ def categorias():
         }
         for key, value in CATEGORÍAS.items()
     ]
+
+
+@router.get("/ubicaciones")
+def ubicaciones():
+    """Expone las ubicaciones hospitalarias compartidas con el clasificador."""
+    return list(Config.HOSPITAL_LOCATIONS)
 
 
 @router.post("/admin/auth")

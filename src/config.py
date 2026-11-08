@@ -101,6 +101,7 @@ class Config:
         "cuidados intensivos",
         "quirófano",
         "quirofano",
+        "quirófano general",  # Sugerencia específica del autocompletado de ubicaciones.
         "hospitalización",
         "hospitalizacion",
         "hospital",

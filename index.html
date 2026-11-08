@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;icon_names=home,history,passkey,help">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     :root {
@@ -30,18 +31,20 @@
     }
 
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--canvas); color: var(--ink); }
+    body { margin: 0; background: var(--canvas); color: var(--ink); font-size: 16px; }
     button, input { font: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
     .page-shell { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
 
     .topbar {
+      position: sticky; top: 0; z-index: 30;
       height: 76px;
       background: rgba(255, 255, 255, .92);
       border-bottom: 1px solid var(--line);
     }
-    .topbar-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .topbar-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .brand-copy { display: grid; gap: 4px; }
     .brand-mark {
       display: grid; width: 40px; height: 40px; place-items: center;
       color: white; background: var(--blue); border-radius: 12px;
@@ -63,37 +66,70 @@
     h1, h2, h3, p { margin-top: 0; }
     h1 { margin-bottom: 9px; font: 800 clamp(26px, 4vw, 34px)/1.2 "Manrope", sans-serif; letter-spacing: -1.1px; }
     .hero-copy { max-width: 630px; margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
-    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 22px; align-items: start; }
-    .main-column, .side-column { display: grid; gap: 20px; }
+    .workspace, .main-column { display: grid; gap: 20px; }
+    .topbar-navigation { display: flex; align-items: center; gap: 8px; }
+    .nav-item { min-height: 48px; display: flex; align-items: center; gap: 7px; padding: 0 12px; color: white; background: #1746ad; border: 1px solid transparent; border-radius: 9px; cursor: pointer; font-size: 14px; font-weight: 700; white-space: nowrap; }
+    .nav-item:hover, .nav-item[aria-current="page"] { color: white; background: #123b97; }
+    .material-symbols-outlined { margin-right: 8px; color: #e3e3e3; font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+    .nav-item:hover .material-symbols-outlined { color: #ffffff; }
+    #homeView[hidden], #historyView[hidden], #helpView[hidden], #adminView[hidden] { display: none; }
+    .help-view, .admin-view { display: grid; gap: 20px; }
+    .help-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .help-card { padding: 22px 24px; }
+    .help-card h2 { margin: 0 0 9px; font: 700 16px "Manrope", sans-serif; }
+    .help-card p, .help-card li { color: #647188; font-size: 12px; line-height: 1.7; }
+    .help-card p:last-child, .help-card ol:last-child { margin-bottom: 0; }
+    .help-card ol { display: grid; gap: 8px; padding-left: 21px; }
+    .help-card ul { display: grid; gap: 7px; padding-left: 20px; }
+    .admin-view-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+    .admin-view-heading h1 { margin: 0; }
+    .admin-view-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .admin-review-card { padding: 22px 24px; }
+    .admin-review-card .review-table { font-size: 12px; }
+    .admin-review-card .review-table th, .admin-review-card .review-table td { padding: 12px 10px; white-space: pre-line; }
+    .admin-login-card { max-width: 560px; padding: 24px; }
+    .admin-login-card h2 { margin: 0 0 8px; font: 700 20px "Manrope", sans-serif; }
+    .admin-login-card p { color: var(--muted); line-height: 1.6; }
+    .admin-login-form { display: grid; gap: 14px; }
+    .admin-login-form input { width: 100%; min-height: 46px; padding: 0 12px; color: var(--ink); background: white; border: 1px solid #dfe5ee; border-radius: 9px; font: inherit; }
+    .admin-login-error { margin: 0; color: #a23737; font-size: 14px; }
+    .admin-login-error[hidden], .admin-workspace[hidden] { display: none; }
+    .admin-workspace { display: grid; gap: 18px; }
+    .admin-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .admin-tools .admin-button { width: auto; }
+    .admin-tools .admin-status { flex-basis: 100%; }
+    .history-view { display: grid; gap: 22px; }
     .card {
       background: var(--surface); border: 1px solid #e9edf4; border-radius: 16px;
       box-shadow: var(--shadow);
     }
     .form-card { padding: 25px 27px 27px; }
     .section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
-    .section-heading h2 { margin: 0 0 5px; font: 700 17px "Manrope", sans-serif; letter-spacing: -.3px; }
+    .section-heading h2 { margin: 0 0 5px; font: 700 20px "Manrope", sans-serif; letter-spacing: -.3px; }
     .section-heading p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .step-label { color: #94a0b2; font-size: 11px; font-weight: 700; white-space: nowrap; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .field { display: grid; gap: 7px; }
-    .field-name { color: #344158; font-size: 12px; font-weight: 600; }
+    .field-name { color: #344158; font-size: 15px; font-weight: 600; }
     .required { color: #e25353; }
     .input-wrap { position: relative; }
     .input-icon { position: absolute; top: 13px; left: 13px; color: #96a2b3; pointer-events: none; }
     .field input {
       width: 100%; height: 44px; padding: 0 12px 0 39px; color: var(--ink);
       background: #fff; border: 1px solid #dfe5ee; border-radius: 9px; outline: none;
-      font-size: 13px; transition: border-color .15s, box-shadow .15s;
+      font-size: 16px; transition: border-color .15s, box-shadow .15s;
     }
     .field select {
       width: 100%; height: 44px; padding: 0 12px 0 39px; color: var(--ink);
       background: #fff; border: 1px solid #dfe5ee; border-radius: 9px; outline: none;
-      font-size: 13px;
+      font-size: 16px;
     }
     .field select:focus, .field input:focus { border-color: #6c95f2; box-shadow: 0 0 0 3px rgba(37, 99, 235, .1); }
     .field [hidden] { display: none; }
     .field input::placeholder { color: #a7b0be; }
     .field input:focus { border-color: #6c95f2; box-shadow: 0 0 0 3px rgba(37, 99, 235, .1); }
+    .location-status { margin: 0; color: #647188; font-size: 13px; }
+    .location-status[hidden] { display: none; }
     .field-name-row { display: flex; justify-content: space-between; gap: 12px; }
     .optional { color: #a1aaba; font-size: 10px; font-weight: 500; }
     .emdn-autocomplete-field { grid-column: 1 / -1; }
@@ -118,6 +154,7 @@
     .emdn-suggestion-term { color: #657187; font-size: 11px; line-height: 1.4; }
     .emdn-suggestion .category-badge { padding: 4px 7px; color: #2458bf; background: #eaf1ff; }
     .emdn-suggestion .mdr-badge { padding: 3px 6px; color: #59677b; background: #f0f3f8; }
+    .emdn-suggestion .mdr-badge.mdr-variable { color: #315b83; background: #e8f2fb; }
     .emdn-match { padding: 0 1px; color: inherit; background: #fff0a8; border-radius: 2px; }
     .emdn-search-status { margin: 0; color: var(--muted); font-size: 11px; }
     .actions-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; }
@@ -167,6 +204,11 @@
     .mdr-IIa { color: #8c6700; background: #fff5d5; }
     .mdr-IIb { color: #b45d14; background: #fff0df; }
     .mdr-III { color: #b63838; background: #ffebeb; }
+    .mdr-variable { color: #315b83; background: #e8f2fb; }
+    .mdr-detail-box { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .mdr-detail-box .detail-label { margin: 0; }
+    .mdr-detail-box .mdr-badge { min-width: 0; padding: 0; border-radius: 0; background: transparent; font-size: clamp(24px, 3vw, 36px); line-height: 1.15; }
+    .mdr-detail-box .mdr-badge.mdr-variable { padding: 7px 12px; border-radius: 999px; background: #e8f2fb; font-size: clamp(24px, 3vw, 36px); }
     .emdn-line { display: flex; align-items: center; gap: 8px; }
     .emdn-link { color: var(--blue); text-decoration: none; }
     .emdn-link:hover { text-decoration: underline; }
@@ -174,11 +216,11 @@
     .unverified { color: #9b6a1b; font-size: 10px; font-weight: 600; }
     .term-text { font-size: 11px; font-weight: 500; line-height: 1.45; }
     .confidence-row { display: flex; align-items: center; gap: 9px; }
-    .confidence-track { width: 100%; height: 20px; flex: 1; overflow: hidden; background: #e7edf6; border-radius: 10px; }
-    .confidence-bar { width: 0%; height: 100%; border-radius: 10px; transition: width .3s ease, background-color .3s ease; }
-    .confidence-bar.high { background-color: #10B981; }
-    .confidence-bar.medium { background-color: #F59E0B; }
-    .confidence-bar.low { background-color: #EF4444; }
+    .confidence-track { display: block; width: 100%; height: 20px; flex: 1; overflow: hidden; background: #e7edf6; border-radius: 10px; }
+    .confidence-bar { display: block; width: 0%; height: 100%; border-radius: 10px; transition: width .3s ease, background-color .3s ease; }
+    .confidence-bar.high { background-color: #10b981; }
+    .confidence-bar.medium { background-color: #f59e0b; }
+    .confidence-bar.low { background-color: #ef4444; }
     .confidence-value { min-width: 44px; color: #344158; font-size: 2.5rem; font-weight: 700; text-align: right; }
     .confidence-text { display: block; margin-top: 6px; font-size: 10px; font-weight: 600; }
     .confidence-text.high { color: #10B981; }
@@ -262,6 +304,10 @@
     .criticality-justification { display: block; width: 100%; min-height: 76px; resize: vertical; padding: 10px; border: 1px solid #dfe5ee; border-radius: 8px; font: inherit; font-size: 11px; }
     .criticality-adjust-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .criticality-adjust-actions button { min-height: 36px; }
+    .criticality-auth-notice { margin: 12px 0 0; color: #b42318; font-size: 13px; font-weight: 700; line-height: 1.5; }
+    .criticality-auth-notice.authorized { color: #176d4d; }
+    .criticality-auth-button { margin-top: 10px; }
+    .criticality-auth-button[hidden] { display: none; }
     .criticality-reports { margin-top: 22px; padding: 22px 24px; }
     .criticality-report-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
     .criticality-stat { padding: 14px; background: #f8fafd; border: 1px solid #eef1f6; border-radius: 10px; }
@@ -314,24 +360,42 @@
     footer { padding: 18px 0 26px; color: #9aa4b3; font-size: 10px; text-align: center; }
 
     @media (max-width: 900px) {
-      .workspace { grid-template-columns: minmax(0, 1fr) 275px; gap: 16px; }
       .results-grid { grid-template-columns: 1fr; }
       .criticality-card { min-height: 205px; }
     }
+    @media (min-width: 701px) {
+      .hero-copy, .help-card p, .help-card li { max-width: 780px; font-size: 16px; }
+      .section-heading p, .dialog-heading p, .confidence-context, .validation-checks li { font-size: 15px; }
+      .detail-label, .step-label, .optional, .admin-counts, .history-footnote { font-size: 13px; }
+      .detail-value, .term-text, .emdn-suggestion-term { font-size: 15px; }
+      .review-table, .report-table { font-size: 14px; }
+      .review-table th, .review-table td, .report-table th, .report-table td { padding: 11px 9px; }
+    }
     @media (max-width: 700px) {
       .page-shell { width: min(100% - 30px, 560px); }
-      .topbar { height: 66px; }
-      .topbar-meta { font-size: 0; }
+      .topbar { height: auto; min-height: 66px; }
       main { padding-top: 32px; }
-      .workspace { grid-template-columns: 1fr; }
-      .side-column { order: 2; }
+      .topbar-inner { gap: 8px; }
+      .topbar-meta { display: none; }
+      .brand-copy { display: none; }
+      .topbar-navigation { flex: 1; justify-content: space-between; gap: 3px; }
+      .nav-item { min-width: 0; min-height: 54px; flex: 1; flex-direction: column; justify-content: center; gap: 1px; padding: 3px 4px; font-size: 11px; }
+      .nav-item:last-child { flex: .7; }
+      .nav-item .material-symbols-outlined { margin: 0; font-size: 24px; line-height: 1; }
       .form-card, .result-card { padding: 21px 19px; }
       .history-card { padding: 19px; }
       .history-name { max-width: 75vw; }
+      .help-grid { grid-template-columns: 1fr; }
+      .help-card, .admin-review-card { padding: 19px; }
       .criticality-report-charts { grid-template-columns: 1fr; }
       .criticality-report-grid { grid-template-columns: repeat(2, 1fr); }
+      .admin-view-actions { justify-content: flex-start; }
+      .review-table { min-width: 900px; }
     }
     @media (max-width: 480px) {
+      .brand-mark { width: 34px; height: 34px; }
+      .topbar-navigation { gap: 2px; }
+      .nav-item { font-size: 10px; }
       .form-grid, .result-details { grid-template-columns: 1fr; }
       .actions-row { align-items: stretch; flex-direction: column; }
       .primary-button { width: 100%; }
@@ -340,6 +404,56 @@
       .chart-card, .criticality-card { padding: 19px; }
       .criticality-reports { padding: 19px; }
       .chart-wrap { height: 220px; }
+      .admin-login-card { padding: 19px; }
+      .admin-tools .admin-button { width: 100%; }
+    }
+    .brand-name { font-size: 17px; }
+    .brand-caption { margin: 0; font-size: 13px; }
+    .topbar-meta { font-size: 14px; }
+    .hero-copy { font-size: 16px; }
+    .eyebrow { font-size: 13px; }
+    h1 { font-size: clamp(30px, 4vw, 40px); }
+    .section-heading h2, .admin-login-card h2 { font-size: 20px; }
+    .section-heading p, .dialog-heading p { font-size: 14px; }
+    .field-name { font-size: 15px; }
+    .dialog-field label { font-size: 15px; }
+    .field input, .field select { font-size: 16px; }
+    .step-label, .optional, .privacy-note, .demo-control, .notice { font-size: 14px; }
+    .primary-button, .secondary-button, .nav-item { font-size: 14px; }
+    .result-title { font-size: 20px; }
+    .result-subtitle { font-size: 15px; }
+    .source-badge, .category-badge, .mdr-badge, .level-badge { font-size: 12px; }
+    .detail-label { color: #647188; font-size: 12px; }
+    .detail-value, .term-text { font-size: 15px; }
+    .chart-caption, .criticality-footnote { font-size: 14px; }
+    .criticality-card h3, .chart-heading h3, .admin-card h2 { font-size: 18px; }
+    .confidence-track { height: 16px; }
+    .confidence-text, .confidence-context, .validation-checks li { font-size: 14px; }
+    .help-card h2 { font-size: 19px; }
+    .help-card p, .help-card li { font-size: 15px; }
+    .admin-counts, .history-empty { font-size: 14px; }
+    .history-name { max-width: 65%; font-size: 15px; }
+    .history-code, .history-category, .history-footnote { font-size: 13px; }
+    .admin-review-card .review-table, .report-table { font-size: 14px; }
+    .review-table th, .review-table td, .report-table th, .report-table td { padding: 10px 8px; }
+    .review-action { font-size: 13px; }
+    .report-export, .criticality-report-status { font-size: 14px; }
+    .criticality-reports h3 { font-size: 17px; }
+    .admin-login-card p { font-size: 15px; }
+    .admin-login-form input { font-size: 16px; }
+    .admin-login-error { font-size: 14px; }
+    @media (max-width: 900px) {
+      .brand-caption, .topbar-meta { display: none; }
+      .brand-name { font-size: 14px; }
+      .topbar-navigation { gap: 4px; }
+      .nav-item { padding: 0 7px; font-size: 12px; }
+    }
+    @media (max-width: 700px) {
+      .nav-item { font-size: 11px; }
+      .nav-item .material-symbols-outlined { margin-right: 0; }
+    }
+    @media (max-width: 480px) {
+      .nav-item { font-size: 10px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
@@ -356,8 +470,14 @@
             <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" opacity=".65"/>
           </svg>
         </span>
-        <span><span class="brand-name">Clasificador médico</span><span class="brand-caption">Gestión inteligente de activos clínicos</span></span>
+        <span class="brand-copy"><span class="brand-name">Clasificador médico</span><span class="brand-caption">Gestión inteligente de activos clínicos</span></span>
       </a>
+      <nav class="topbar-navigation" aria-label="Menú principal">
+        <button id="homeNavigation" class="nav-item" type="button" aria-current="page"><span class="material-symbols-outlined" title="Ir al Inicio">home</span>Inicio</button>
+        <button id="historyNavigation" class="nav-item" type="button" aria-current="false"><span class="material-symbols-outlined" title="Ver historial">history</span>Historial</button>
+        <button id="adminNavigation" class="nav-item" type="button" aria-current="false"><span class="material-symbols-outlined" title="Acceso con contraseña">passkey</span>Contraseña / Admin</button>
+        <button id="helpNavigation" class="nav-item" type="button" aria-current="false"><span class="material-symbols-outlined" title="Abrir ayuda">help</span>Ayuda</button>
+      </nav>
       <div class="topbar-meta" aria-live="polite">
         <span id="apiIndicator" class="api-indicator" aria-hidden="true"></span>
         <span id="apiStatus">API lista para conectar</span>
@@ -366,6 +486,7 @@
   </header>
 
   <main class="page-shell">
+    <div id="homeView">
     <section class="hero" aria-labelledby="pageTitle">
       <p class="eyebrow">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -414,18 +535,35 @@
                 <span class="field-name-row"><span class="field-name">Ubicación</span><span class="optional">OPCIONAL</span></span>
                 <span class="input-wrap">
                   <svg class="input-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+                  <!-- El select nativo permite cambiar la ubicación directamente sin borrar la selección actual. -->
                   <select id="location" name="ubicacion">
-                    <option value="">Seleccionar ubicación…</option>
+                    <option value="" disabled selected>Seleccionar ubicación…</option>
                     <option value="UCI">UCI</option>
+                    <option value="UTI">UTI</option>
+                    <option value="Cuidados Intensivos">Cuidados Intensivos</option>
+                    <option value="Quirófano">Quirófano</option>
                     <option value="Quirófano General">Quirófano General</option>
+                    <option value="Hospitalización">Hospitalización</option>
+                    <option value="Hospital">Hospital</option>
+                    <option value="Emergencia">Emergencia</option>
                     <option value="Urgencias">Urgencias</option>
-                    <option value="Fisioterapia">Fisioterapia</option>
-                    <option value="Mobiliario Clínico">Mobiliario Clínico</option>
-                    <option value="Otro">Otro</option>
+                    <option value="Radiología">Radiología</option>
+                    <option value="Imagenología">Imagenología</option>
+                    <option value="Cardiología">Cardiología</option>
+                    <option value="Oncología">Oncología</option>
+                    <option value="Pediatría">Pediatría</option>
+                    <option value="Neonatología">Neonatología</option>
+                    <option value="UCIN">UCIN</option>
+                    <option value="Área Crítica">Área Crítica</option>
+                    <option value="Laboratorio">Laboratorio</option>
+                    <option value="Farmacia">Farmacia</option>
+                    <option value="Esterilización">Esterilización</option>
+                    <option value="Endoscopía">Endoscopía</option>
+                    <option value="Diálisis">Diálisis</option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Ambulatorio">Ambulatorio</option>
+                    <option value="Consultorio">Consultorio</option>
                   </select>
-                </span>
-                <span id="otherLocationWrap" class="input-wrap" hidden>
-                  <input id="otherLocation" type="text" maxlength="200" placeholder="Especificar ubicación…" autocomplete="off">
                 </span>
               </label>
               <label class="field" for="cmmsEquipmentId">
@@ -465,14 +603,14 @@
           </div>
           <div class="result-details">
             <div class="detail-box"><span class="detail-label">Categoría propia</span><span id="categoryValue" class="category-badge"></span></div>
-            <div class="detail-box"><span class="detail-label">Clase MDR</span><span id="mdrValue" class="mdr-badge"></span></div>
+            <div class="detail-box mdr-detail-box"><span class="detail-label">Clase MDR</span><span id="mdrValue" class="mdr-badge"></span></div>
             <div class="detail-box">
               <span class="detail-label">Código EMDN</span>
               <div class="emdn-line"><span id="emdnValue" class="detail-value"></span><span id="emdnVerified"></span></div>
             </div>
             <div class="detail-box">
               <span class="detail-label">Nivel de confianza</span>
-              <div class="confidence-row"><span class="confidence-track"><span id="confidence-bar" class="confidence-bar"></span></span><span id="confidence-percentage" class="confidence-value"></span></div>
+              <div class="confidence-row"><span id="confidenceTrack" class="confidence-track" role="progressbar" aria-label="Nivel de confianza" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="confidence-bar" class="confidence-bar" aria-hidden="true"></span></span><span id="confidence-percentage" class="confidence-value"></span></div>
               <span id="confidence-text" class="confidence-text" aria-live="polite"></span>
             </div>
             <div class="detail-box" style="grid-column: 1 / -1"><span class="detail-label">Término EMDN</span><span id="termValue" class="detail-value term-text"></span></div>
@@ -498,11 +636,13 @@
               <div id="criticalitySliders" class="criticality-sliders"></div>
               <p id="criticalityPreview" class="criticality-preview" hidden></p>
               <label class="field-name" for="criticalityJustification">Justificación del cambio (obligatoria, mínimo 15 caracteres)</label>
-              <textarea id="criticalityJustification" class="criticality-justification" maxlength="2000"></textarea>
+              <textarea id="criticalityJustification" class="criticality-justification" maxlength="2000" placeholder="Ingrese contraseña para habilitar este campo" disabled></textarea>
               <div class="criticality-adjust-actions">
                 <button id="saveCriticality" class="primary-button" type="button" disabled>Guardar ajuste</button>
                 <button id="resetCriticality" class="secondary-button" type="button">Restaurar valores por defecto</button>
               </div>
+              <p id="criticalityAuthNotice" class="criticality-auth-notice" role="status" aria-live="polite">⚠️ Las modificaciones requieren contraseña de administrador</p>
+              <button id="criticalityAuthButton" class="secondary-button criticality-auth-button" type="button" hidden>Ingresar contraseña</button>
             </details>
           </article>
           <article class="card criticality-card">
@@ -513,40 +653,19 @@
         </section>
       </div>
 
-      <aside class="side-column" aria-labelledby="historyTitle">
-        <section class="card history-card">
-          <div class="history-heading">
-            <div class="history-heading-main"><h2 id="historyTitle">Actividad reciente</h2><span id="historyCount" class="history-count">0</span></div>
-            <button id="exportHistory" class="export-button" type="button">📥 Exportar historial</button>
-          </div>
-          <p id="historyEmpty" class="history-empty">Tus clasificaciones recientes aparecerán aquí para consultarlas rápidamente.</p>
-          <ol id="historyList" class="history-list"></ol>
-          <p class="history-footnote">Se conserva solo durante esta sesión.</p>
-        </section>
-        <section class="card admin-card" aria-labelledby="adminTitle">
-          <h2 id="adminTitle">Herramientas de administración</h2>
-          <p>Las correcciones requieren aprobación administrativa antes de incorporarse al entrenamiento.</p>
-          <button id="adminLogin" class="secondary-button admin-button" type="button">Autorizar revisiones administrativas</button>
-          <button id="refreshReview" class="secondary-button admin-button" type="button" disabled>Actualizar revisiones</button>
-          <button id="btn-reentrenar" class="primary-button admin-button" type="button">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5m-4.1-3A8 8 0 0 1 18.3 6L20 12M4 12l1.7 6A8 8 0 0 0 19.1 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Reentrenar modelo
-          </button>
-          <div id="retrainSpinner" class="admin-spinner" role="status" aria-live="polite" hidden><span class="spinner-dark" aria-hidden="true"></span><span>Validando correcciones y entrenando el modelo…</span></div>
-          <p id="retrainStatus" class="admin-status" role="status" aria-live="polite" hidden></p>
-          <div id="reviewPanel" class="admin-panel" hidden>
-            <p id="reviewSummary" class="admin-counts" aria-live="polite"></p>
-            <div class="admin-panel-heading"><strong>Correcciones pendientes</strong></div>
-            <div id="pendingReviews" class="review-table-wrap"></div>
-            <details class="review-history">
-              <summary>Historial de aprobadas y rechazadas</summary>
-              <div id="reviewedCorrections" class="review-table-wrap"></div>
-            </details>
-          </div>
-        </section>
-      </aside>
     </div>
-    <section id="criticalityReports" class="card criticality-reports" aria-labelledby="criticalityReportsTitle">
+    </div>
+    <section id="historyView" class="history-view" aria-label="Historial y reportes" hidden>
+      <section class="card history-card" aria-labelledby="historyTitle">
+        <div class="history-heading">
+          <div class="history-heading-main"><h2 id="historyTitle">Actividad reciente</h2><span id="historyCount" class="history-count">0</span></div>
+          <button id="exportHistory" class="export-button" type="button">📥 Exportar historial</button>
+        </div>
+        <p id="historyEmpty" class="history-empty">Tus clasificaciones recientes aparecerán aquí para consultarlas rápidamente.</p>
+        <ol id="historyList" class="history-list"></ol>
+        <p class="history-footnote">Se conserva solo durante esta sesión.</p>
+      </section>
+      <section id="criticalityReports" class="card criticality-reports" aria-labelledby="criticalityReportsTitle">
       <div class="section-heading">
         <div><h2 id="criticalityReportsTitle">Reportes de Criticidad</h2><p>Distribución de los perfiles de equipo registrados en esta instancia.</p></div>
         <button id="refreshCriticalityReport" class="secondary-button" type="button">Actualizar</button>
@@ -572,6 +691,106 @@
       </div>
       <h3>Top 10 equipos más críticos</h3>
       <div class="report-table-wrap"><table class="report-table"><thead><tr><th>Equipo</th><th>Categoría</th><th>IC</th><th>Nivel</th><th>MTBF</th><th>Origen</th></tr></thead><tbody id="criticalityTopTable"></tbody></table></div>
+      </section>
+    </div>
+    </section>
+    </div>
+    <section id="helpView" class="help-view" aria-labelledby="helpTitle" hidden>
+      <div class="hero">
+        <p class="eyebrow">Guía de uso</p>
+        <h1 id="helpTitle">¿Cómo funciona?</h1>
+        <p class="hero-copy">Una guía para clasificar equipos médicos, interpretar la criticidad y aprovechar los datos en su gestión.</p>
+      </div>
+      <div class="help-grid">
+        <article class="card help-card">
+          <h2>¿Qué es EMDN?</h2>
+          <p>EMDN (European Medical Device Nomenclature o Nomenclatura Europea de Dispositivos Médicos) es el sistema estandarizado de clasificación de dispositivos médicos en Europa, requerido por el Reglamento MDR 2017/745. Su estructura es jerárquica: categoría, subcategoría y código terminal. Por ejemplo, Z1203010502 identifica “Adult Pulmonary Ventilators”.</p>
+        </article>
+        <article class="card help-card">
+          <h2>¿Cómo funciona este clasificador?</h2>
+          <p>Combina reglas maestras con NLP (aprendizaje automático), un buscador con autocompletado sobre la base oficial EMDN 2026 y validación semántica para evitar asignaciones ilógicas. En la evaluación actual, el modelo v3 alcanza 77,1 % de accuracy con 174 ejemplos validados.</p>
+        </article>
+        <article class="card help-card">
+          <h2>Cómo usarlo</h2>
+          <ol>
+            <li>Busca el equipo por nombre o código, o escribe su nombre en el formulario.</li>
+            <li>Selecciona una sugerencia EMDN adecuada o corrige manualmente la clasificación si hace falta.</li>
+            <li>Revisa el índice de criticidad y el gráfico de radar para entender los factores evaluados.</li>
+          </ol>
+        </article>
+        <article class="card help-card">
+          <h2>¿Qué es el perfil de criticidad?</h2>
+          <ul>
+            <li><strong>Impacto clínico (40 %):</strong> consecuencias para el paciente si el equipo falla.</li>
+            <li><strong>Redundancia (20 %):</strong> disponibilidad de equipos de respaldo.</li>
+            <li><strong>Frecuencia de uso (15 %):</strong> horas de utilización al día.</li>
+            <li><strong>Historial de fallas (15 %):</strong> MTBF (tiempo medio entre fallas).</li>
+            <li><strong>Costo/tiempo (10 %):</strong> impacto económico y de disponibilidad.</li>
+          </ul>
+          <p><strong>IC = Σ (criterio × peso)</strong>. Los niveles son ALTA (≥ 4,0), MEDIA (2,5–3,9) y BAJA (&lt; 2,5).</p>
+        </article>
+        <article class="card help-card">
+          <h2>Actividad reciente y reportes</h2>
+          <p>El historial de la sesión reúne las clasificaciones recientes con equipo, código EMDN, criticidad y fecha/hora. Los reportes resumen la distribución de criticidad y ayudan a la auditoría y trazabilidad.</p>
+        </article>
+        <article class="card help-card">
+          <h2>Etiquetado y CMMS</h2>
+          <p>El código EMDN, la categoría y la criticidad generados sirven para alimentar el sistema de gestión de mantenimiento (CMMS) y crear etiquetas físicas o QR para cada equipo. Así se favorecen la trazabilidad del activo y el mantenimiento basado en riesgo.</p>
+        </article>
+        <article class="card help-card">
+          <h2>¿Qué significa “Requiere desambiguación”?</h2>
+          <p>Indica que la descripción no permite elegir con confianza una entrada EMDN específica. Por ejemplo, “tomógrafo” no identifica cuántos cortes tiene el equipo. Añade ese dato u otra característica distintiva y vuelve a clasificarlo.</p>
+        </article>
+        <article class="card help-card">
+          <h2>Correcciones pendientes y revisión administrativa</h2>
+          <p>La aprobación se reserva al personal autorizado, como Ingeniería Biomédica, para reducir cambios incorrectos en códigos EMDN y preservar la integridad de los datos del CMMS.</p>
+          <p>Flujo: el usuario propone una corrección, un administrador la revisa y aprueba, y la corrección validada puede incorporarse al entrenamiento del NLP.</p>
+        </article>
+      </div>
+    </section>
+    <section id="adminView" class="admin-view" aria-label="Administración" hidden>
+      <section id="adminLoginCard" class="card admin-login-card" aria-labelledby="adminLoginTitle">
+        <h2 id="adminLoginTitle">Acceso de administración</h2>
+        <p>Ingresa tu clave para consultar y gestionar las correcciones pendientes.</p>
+        <form id="adminLoginForm" class="admin-login-form">
+          <label class="field-name" for="adminPageUser">Usuario para auditoría</label>
+          <input id="adminPageUser" type="text" maxlength="200" autocomplete="username" value="administrador" required>
+          <label class="field-name" for="adminPageKey">Contraseña de administrador</label>
+          <input id="adminPageKey" type="password" maxlength="500" autocomplete="current-password" required>
+          <p id="adminLoginError" class="admin-login-error" role="alert" hidden></p>
+          <button id="adminLogin" class="primary-button" type="submit">Ingresar</button>
+        </form>
+      </section>
+      <div id="adminWorkspace" class="admin-workspace" hidden>
+        <p id="adminAccessStatus" class="admin-status error" role="alert" hidden></p>
+        <div class="admin-view-heading">
+          <h1>Panel de administración</h1>
+          <div class="admin-view-actions">
+            <button id="refreshReview" class="secondary-button" type="button" disabled>Actualizar revisiones</button>
+            <button id="adminLogout" class="secondary-button" type="button">Cerrar sesión admin</button>
+          </div>
+        </div>
+        <section class="card admin-card">
+          <h2>Herramientas de administración</h2>
+          <p>Las correcciones requieren aprobación administrativa antes de incorporarse al entrenamiento.</p>
+          <div class="admin-tools">
+            <button id="btn-reentrenar" class="primary-button admin-button" type="button">
+              Reentrenar modelo
+            </button>
+            <div id="retrainSpinner" class="admin-spinner" role="status" aria-live="polite" hidden><span class="spinner-dark" aria-hidden="true"></span><span>Validando correcciones y entrenando el modelo…</span></div>
+            <p id="retrainStatus" class="admin-status" role="status" aria-live="polite" hidden></p>
+          </div>
+        </section>
+        <section id="reviewPanel" class="card admin-review-card admin-panel" hidden>
+          <p id="reviewSummary" class="admin-counts" aria-live="polite"></p>
+          <div class="admin-panel-heading"><strong>Correcciones pendientes</strong></div>
+          <div id="pendingReviews" class="review-table-wrap"></div>
+          <details class="review-history">
+            <summary>Historial de aprobadas y rechazadas</summary>
+            <div id="reviewedCorrections" class="review-table-wrap"></div>
+          </details>
+        </section>
+      </div>
     </section>
   </main>
   <dialog id="correctionDialog" class="correction-dialog" aria-labelledby="correctionTitle">
@@ -642,12 +861,19 @@
       const apiStatus = document.getElementById("apiStatus");
       const apiIndicator = document.getElementById("apiIndicator");
       const byId = (id) => document.getElementById(id);
+      const homeView = byId("homeView");
+      const historyView = byId("historyView");
+      const helpView = byId("helpView");
+      const adminView = byId("adminView");
+      const homeNavigation = byId("homeNavigation");
+      const historyNavigation = byId("historyNavigation");
+      const adminNavigation = byId("adminNavigation");
+      const helpNavigation = byId("helpNavigation");
       const correctionDialog = byId("correctionDialog");
       const correctionForm = byId("correctionForm");
       const correctionError = byId("correctionError");
       const recalculateButton = byId("recalculateButton");
-      const locationSelect = byId("location");
-      const otherLocation = byId("otherLocation");
+      const locationInput = byId("location");
       let adminCredentials = null;
       let pendingAdminAction = null;
       const history = [];
@@ -665,6 +891,26 @@
       let currentClassification;
       let emdnSearchTimer;
       let emdnSearchController;
+
+      function showPageView(view) {
+        const views = { home: homeView, history: historyView, admin: adminView, help: helpView };
+        const navigation = {
+          home: homeNavigation,
+          history: historyNavigation,
+          admin: adminNavigation,
+          help: helpNavigation
+        };
+        Object.entries(views).forEach(([name, element]) => {
+          element.hidden = name !== view;
+          navigation[name].setAttribute("aria-current", name === view ? "page" : "false");
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      homeNavigation.addEventListener("click", () => showPageView("home"));
+      historyNavigation.addEventListener("click", () => showPageView("history"));
+      adminNavigation.addEventListener("click", () => showPageView("admin"));
+      helpNavigation.addEventListener("click", () => showPageView("help"));
 
       const demoResult = {
         categoria_propia: "IMG-03",
@@ -793,13 +1039,16 @@
       function renderEmdnSuggestions(results, query) {
         emdnSuggestions.replaceChildren();
         results.forEach((result) => {
+          const mdrVariable = /\b(?:SOFTWARE|ACCESSORIES|CONSUMABLES|OTHER|PARTS|COMPONENTS)\b/i
+            .test(result.termino_emdn || "");
+          const mdrLabel = mdrVariable ? "Clase variable" : result.clase_mdr || "MDR N/D";
           const option = document.createElement("button");
           option.className = "emdn-suggestion";
           option.type = "button";
           option.setAttribute("role", "option");
           option.setAttribute(
             "aria-label",
-            `${result.codigo_emdn}, ${result.termino_emdn}, ${result.categoria_propia || "Sin categoría"}, clase MDR ${result.clase_mdr || "no disponible"}`
+            `${result.codigo_emdn}, ${result.termino_emdn}, ${result.categoria_propia || "Sin categoría"}, ${mdrLabel}`
           );
           const topline = document.createElement("span");
           topline.className = "emdn-suggestion-topline";
@@ -810,8 +1059,8 @@
           category.className = "category-badge";
           category.textContent = result.categoria_propia || "Sin categoría";
           const mdr = document.createElement("span");
-          mdr.className = "mdr-badge";
-          mdr.textContent = result.clase_mdr || "MDR N/D";
+          mdr.className = `mdr-badge${mdrVariable ? " mdr-variable" : ""}`;
+          mdr.textContent = mdrLabel;
           topline.append(code, category, mdr);
           const term = document.createElement("span");
           term.className = "emdn-suggestion-term";
@@ -837,7 +1086,7 @@
         const controller = new AbortController();
         emdnSearchController = controller;
         try {
-          const url = `${getApiBaseUrl()}/buscar?q=${encodeURIComponent(query)}&limit=10`;
+          const url = `${getApiBaseUrl()}/buscar?q=${encodeURIComponent(query)}&limit=12`;
           const response = await fetch(url, { signal: controller.signal });
           let results;
           try { results = await response.json(); }
@@ -915,17 +1164,8 @@
         return data;
       }
 
-      function updateOtherLocationVisibility() {
-        const isOther = locationSelect.value === "Otro";
-        byId("otherLocationWrap").hidden = !isOther;
-        otherLocation.required = isOther;
-        if (!isOther) otherLocation.value = "";
-      }
-
-      locationSelect.addEventListener("change", updateOtherLocationVisibility);
-      updateOtherLocationVisibility();
-
       function getSemaforo(confidence) {
+        confidence = normalizeConfidence(confidence);
         if (confidence >= 0.90) {
           return { color: "verde", mensaje: "✅ Clasificación confiable", requiere_revision: false };
         }
@@ -935,20 +1175,30 @@
         return { color: "rojo", mensaje: "❌ Requiere revisión manual", requiere_revision: true };
       }
 
+      function normalizeConfidence(value) {
+        const numeric = Number(value);
+        if (!Number.isFinite(numeric)) return 0;
+        const ratio = numeric > 1 ? numeric / 100 : numeric;
+        return Math.max(0, Math.min(1, ratio));
+      }
+
       // Actualiza el color, el ancho y la etiqueta de la barra según la confianza recibida.
       function actualizarBarraConfianza(confidence) {
-        const porcentajeValor = Math.round(Math.max(0, Math.min(1, confidence)) * 100);
+        const confidenceRatio = normalizeConfidence(confidence);
+        const porcentajeValor = Math.round(confidenceRatio * 100);
         const barra = byId("confidence-bar");
+        const track = byId("confidenceTrack");
         const porcentaje = byId("confidence-percentage");
         const texto = byId("confidence-text");
         porcentaje.textContent = `${porcentajeValor}%`;
         barra.style.width = `${porcentajeValor}%`;
+        track.setAttribute("aria-valuenow", String(porcentajeValor));
 
-        if (confidence >= 0.90) {
+        if (confidenceRatio >= 0.90) {
           barra.className = "confidence-bar high";
           texto.className = "confidence-text high";
           texto.textContent = "Alta confianza";
-        } else if (confidence >= 0.70) {
+        } else if (confidenceRatio >= 0.70) {
           barra.className = "confidence-bar medium";
           texto.className = "confidence-text medium";
           texto.textContent = "Confianza media";
@@ -1004,7 +1254,7 @@
             }
           };
         }
-        const confidence = Number.isFinite(Number(data.confidence)) ? Number(data.confidence) : 0;
+        const confidence = normalizeConfidence(data.confidence);
         const semaforo = isManualCorrection
           ? data.semaforo
           : data.validacion_correccion
@@ -1012,17 +1262,21 @@
           : getSemaforo(confidence);
         const categoryCode = data.categoria_propia || data.categoria || "Sin categoría";
         const categoryName = data.categoria_nombre ? ` · ${data.categoria_nombre}` : "";
-        const mdrClass = data.mdr_class || "No disponible";
         const criticality = data.criticidad || {};
         const code = data.emdn_code || "PENDIENTE_DE_VALIDACION";
         const term = data.emdn_term || data.emdn_name || "Término no disponible";
+        const mdrVariable = /\b(?:SOFTWARE|ACCESSORIES|CONSUMABLES|OTHER|PARTS|COMPONENTS)\b/i
+          .test(term);
+        const mdrClass = mdrVariable ? "Clase variable" : data.mdr_class || "No disponible";
         const isVerified = data.emdn_verified === true;
         byId("resultName").textContent = equipmentName;
         byId("methodBadge").textContent = demo ? "MODO DEMO" : method;
         byId("methodBadge").className = `source-badge${demo ? " demo-source" : ""}`;
         byId("categoryValue").textContent = `${categoryCode}${categoryName}`;
         byId("mdrValue").textContent = mdrClass;
-        byId("mdrValue").className = `mdr-badge mdr-${String(mdrClass).replace(/[^a-zA-Z0-9]/g, "")}`;
+        byId("mdrValue").className = mdrVariable
+          ? "mdr-badge mdr-variable"
+          : `mdr-badge mdr-${String(mdrClass).replace(/[^a-zA-Z0-9]/g, "")}`;
 
         const emdnValue = byId("emdnValue");
         emdnValue.replaceChildren();
@@ -1043,7 +1297,6 @@
         byId("termValue").textContent = term;
 
         actualizarBarraConfianza(confidence);
-        byId("confidence-bar").setAttribute("aria-label", `${Math.round(confidence * 100)} por ciento de confianza`);
         byId("confidenceContext").textContent = semaforo.mensaje;
         byId("confidenceContext").className = `confidence-context semaforo-${semaforo.color}`;
         renderCorrectionValidation(data.validacion_correccion);
@@ -1259,6 +1512,25 @@
         byId("criticalityJustification").value = "";
         byId("criticalityPreview").hidden = true;
         byId("saveCriticality").disabled = true;
+        updateCriticalityAuthorizationState(false);
+      }
+
+      // Solo se habilita la justificación después de validar la clave administrativa.
+      function updateCriticalityAuthorizationState(changed) {
+        const authorized = Boolean(adminCredentials);
+        const justification = byId("criticalityJustification");
+        const notice = byId("criticalityAuthNotice");
+        justification.disabled = !authorized;
+        justification.placeholder = authorized
+          ? "Describe por qué se requiere modificar la criticidad"
+          : "Ingrese contraseña para habilitar este campo";
+        notice.classList.toggle("authorized", authorized);
+        notice.textContent = authorized
+          ? "Contraseña validada. Ya puede justificar y guardar el ajuste."
+          : changed
+          ? "⚠️ Se requiere contraseña de administrador para habilitar la justificación."
+          : "⚠️ Las modificaciones requieren contraseña de administrador";
+        byId("criticalityAuthButton").hidden = !changed || authorized;
       }
 
       function updateCriticalityPreview() {
@@ -1286,10 +1558,21 @@
             porcentaje: criticalityValues[key] * criticalityWeights[key] / index * 100
           }))
         }, keys.map((key) => ({ key, label: criticalityLabels[key] })));
-        byId("saveCriticality").disabled = !changed || byId("criticalityJustification").value.trim().length < 15;
+        const authorized = Boolean(adminCredentials);
+        updateCriticalityAuthorizationState(changed);
+        byId("saveCriticality").disabled = !changed
+          || !authorized
+          || byId("criticalityJustification").value.trim().length < 15;
       }
 
       byId("criticalityJustification").addEventListener("input", updateCriticalityPreview);
+
+      byId("criticalityAuthButton").addEventListener("click", () => {
+        authorizeAdminAction(() => {
+          updateCriticalityPreview();
+          byId("criticalityJustification").focus();
+        });
+      });
 
       byId("resetCriticality").addEventListener("click", () => {
         criticalityValues = { ...criticalityDefaults };
@@ -1301,27 +1584,38 @@
         updateCriticalityPreview();
       });
 
-      byId("saveCriticality").addEventListener("click", async () => {
+      // Persiste el ajuste usando la credencial ya validada para evitar pedirla dos veces.
+      async function saveCriticalityAdjustment(credentials) {
         if (!currentClassification) {
           showMessage("No hay un equipo activo para ajustar.", "error");
           return;
         }
-        authorizeAdminAction(async (credentials) => {
-          const result = await requestJson(
-            `${getApiBaseUrl()}/criticidad/ajustar`,
-            {
-              equipo_id: currentClassification.data.equipo_id,
-              valores: criticalityValues,
-              usuario: credentials.user,
-              justificacion: byId("criticalityJustification").value.trim()
-            },
-            adminHeaders(credentials)
-          );
-          currentClassification.data.criticidad = result.criticidad;
-          renderCriticality(result.criticidad);
-          showMessage("Ajuste de criticidad guardado y auditado.", "success");
-          await loadCriticalityReports();
-        });
+        const result = await requestJson(
+          `${getApiBaseUrl()}/criticidad/ajustar`,
+          {
+            equipo_id: currentClassification.data.equipo_id,
+            valores: criticalityValues,
+            usuario: credentials.user,
+            justificacion: byId("criticalityJustification").value.trim()
+          },
+          adminHeaders(credentials)
+        );
+        currentClassification.data.criticidad = result.criticidad;
+        renderCriticality(result.criticidad);
+        showMessage("Ajuste de criticidad guardado y auditado.", "success");
+        await loadCriticalityReports();
+      }
+
+      byId("saveCriticality").addEventListener("click", async () => {
+        if (!adminCredentials) {
+          showMessage("Autentícate para guardar el ajuste de criticidad.", "error");
+          return;
+        }
+        try {
+          await saveCriticalityAdjustment(adminCredentials);
+        } catch (error) {
+          showMessage(error.message || "No se pudo guardar el ajuste de criticidad.", "error");
+        }
       });
 
       function renderCriticalityTop() {
@@ -1614,6 +1908,7 @@
             history.unshift(item);
             history.splice(20);
             renderHistory();
+            showPageView("home");
             byId("resultCard").scrollIntoView({ behavior: "smooth", block: "start" });
           });
           row.append(button);
@@ -1628,9 +1923,7 @@
         const payload = {
           nombre: byId("equipmentName").value.trim(),
           marca: byId("brand").value.trim() || null,
-          ubicacion: (locationSelect.value === "Otro"
-            ? otherLocation.value
-            : locationSelect.value).trim() || null,
+          ubicacion: locationInput.value.trim() || null,
           cmms_equipment_id: byId("cmmsEquipmentId").value.trim() || null
         };
         if (!payload.nombre) {
@@ -1658,7 +1951,6 @@
             setApiState("online", "Clasificación conectada a la API");
           }
           form.reset();
-          updateOtherLocationVisibility();
         } catch (error) {
           showMessage(error.message || "No se pudo completar la clasificación. Inténtalo nuevamente.", "error");
         } finally {
@@ -1786,6 +2078,8 @@
       const retrainSpinner = byId("retrainSpinner");
       const retrainStatus = byId("retrainStatus");
       const adminLoginButton = byId("adminLogin");
+      const adminLoginForm = byId("adminLoginForm");
+      const adminWorkspace = byId("adminWorkspace");
       const refreshReviewButton = byId("refreshReview");
       const reviewPanel = byId("reviewPanel");
 
@@ -1813,6 +2107,26 @@
         if (adminAuthDialog.open) adminAuthDialog.close();
       }
 
+      async function validateAdminCredentials(key, user) {
+        const validation = await fetch(`${getApiBaseUrl()}/admin/auth`, {
+          method: "POST",
+          headers: {
+            "X-Admin-Key": key,
+            "X-Admin-User": user
+          }
+        });
+        let result;
+        try { result = await validation.json(); }
+        catch (error) {
+          throw new Error("La API devolvió una respuesta que no se pudo interpretar.");
+        }
+        if (validation.status === 403) {
+          throw new Error("ADMIN_API_KEY incorrecta. Verifica la clave e inténtalo de nuevo.");
+        }
+        if (!validation.ok) throw new Error(getErrorMessage(result, validation.status));
+        return { key, user: result.usuario };
+      }
+
       byId("cancelAdminAuth").addEventListener("click", closeAdminAuthDialog);
       byId("closeAdminAuth").addEventListener("click", closeAdminAuthDialog);
 
@@ -1830,24 +2144,12 @@
         authorizeButton.disabled = true;
         error.hidden = true;
         try {
-          const validation = await fetch(`${getApiBaseUrl()}/admin/auth`, {
-            method: "POST",
-            headers: {
-              "X-Admin-Key": key,
-              "X-Admin-User": user
-            }
-          });
-          let result;
-          try { result = await validation.json(); }
-          catch (parseError) {
-            throw new Error("La API devolvió una respuesta que no se pudo interpretar.");
-          }
-          if (validation.status === 403) {
-            throw new Error("ADMIN_API_KEY incorrecta. Verifica la clave e inténtalo de nuevo.");
-          }
-          if (!validation.ok) throw new Error(getErrorMessage(result, validation.status));
-
-          adminCredentials = { key, user: result.usuario };
+          adminCredentials = await validateAdminCredentials(key, user);
+          updateCriticalityAuthorizationState(
+            Object.keys(criticalityWeights).some((criterion) =>
+              criticalityValues[criterion] !== criticalityOriginalValues[criterion]
+            )
+          );
           const action = pendingAdminAction;
           closeAdminAuthDialog();
           if (action) await action(adminCredentials);
@@ -1862,6 +2164,40 @@
           }
         } finally {
           authorizeButton.disabled = false;
+        }
+      });
+
+      adminLoginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const error = byId("adminLoginError");
+        error.hidden = true;
+        adminLoginButton.disabled = true;
+        try {
+          adminCredentials = await validateAdminCredentials(
+            byId("adminPageKey").value.trim(),
+            byId("adminPageUser").value.trim()
+          );
+          updateCriticalityAuthorizationState(
+            Object.keys(criticalityWeights).some((criterion) =>
+              criticalityValues[criterion] !== criticalityOriginalValues[criterion]
+            )
+          );
+          byId("adminAccessStatus").hidden = true;
+          byId("adminPageKey").value = "";
+          byId("adminLoginCard").hidden = true;
+          adminWorkspace.hidden = false;
+          await refreshCorrectionReviews();
+        } catch (loginError) {
+          if (adminCredentials) {
+            byId("adminAccessStatus").textContent =
+              loginError.message || "No se pudieron cargar las correcciones pendientes.";
+            byId("adminAccessStatus").hidden = false;
+          } else {
+            error.textContent = loginError.message || "No se pudo validar la contraseña de administrador.";
+            error.hidden = false;
+          }
+        } finally {
+          adminLoginButton.disabled = false;
         }
       });
 
@@ -1994,19 +2330,34 @@
         }
       }
 
-      adminLoginButton.addEventListener("click", () => {
-        authorizeAdminAction(async (credentials) => {
-          await refreshCorrectionReviews();
-          showMessage(`Panel administrativo abierto para ${credentials.user}.`, "success");
-        });
-      });
-
       refreshReviewButton.addEventListener("click", async () => {
         try {
           await refreshCorrectionReviews();
         } catch (error) {
           showMessage(error.message || "No se pudieron actualizar las revisiones.", "error");
         }
+      });
+
+      byId("adminLogout").addEventListener("click", () => {
+        adminCredentials = null;
+        updateCriticalityAuthorizationState(
+          Object.keys(criticalityWeights).some((criterion) =>
+            criticalityValues[criterion] !== criticalityOriginalValues[criterion]
+          )
+        );
+        byId("saveCriticality").disabled = true;
+        refreshReviewButton.disabled = true;
+        reviewPanel.hidden = true;
+        adminWorkspace.hidden = true;
+        byId("adminAccessStatus").hidden = true;
+        byId("adminLoginCard").hidden = false;
+        byId("adminPageKey").value = "";
+        byId("adminLoginError").hidden = true;
+        byId("reviewSummary").textContent = "";
+        byId("pendingReviews").replaceChildren();
+        byId("reviewedCorrections").replaceChildren();
+        showPageView("home");
+        showMessage("Sesión administrativa cerrada.", "success");
       });
 
       function setRetrainStatus(message, isError = false) {
