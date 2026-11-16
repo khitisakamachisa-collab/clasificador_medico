@@ -17,7 +17,7 @@ git add .
 echo ==============================
 echo 3. Creando commit...
 echo ==============================
-git commit -m "fix(ui): replace location datalist with native select and clean up admin panel layout (v1.2.4)"
+git commit -m "docs: Agregar metodologia de tesis con pipeline anti-alucinaciones, evolucion NLP v1-v4 y arquitectura hibrida"
 
 echo ==============================
 echo 4. Subiendo a GitHub...

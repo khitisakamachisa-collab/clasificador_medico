@@ -12,12 +12,21 @@ import joblib
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.pipeline import FeatureUnion
+from sklearn.pipeline import FeatureUnion, Pipeline
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score
-from sklearn.model_selection import StratifiedKFold, cross_val_predict
+from sklearn.dummy import DummyClassifier
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    f1_score,
+    make_scorer,
+    precision_score,
+    recall_score,
+)
+from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_predict
 
 from .config import Config
 from .utils import MODELS_DIR, PROCESSED_DIR, ensure_directories
@@ -183,26 +192,28 @@ def train_model(dataset_path: str | Path | None = None):
     return {"model": model, "vectorizer": vectorizer, "metrics": metrics}
 
 
-def _load_massive_dataset() -> list[dict]:
+def _load_massive_dataset(dataset_path: str | Path | None = None) -> list[dict]:
     """Carga el dataset masivo obligatorio y verifica sus registros."""
-    dataset_path = Config.PROCESSED_DIR / "equipos_validados_masivo.json"
-    if not dataset_path.is_file():
+    target = Path(dataset_path) if dataset_path else (
+        Config.PROCESSED_DIR / "equipos_validados_masivo.json"
+    )
+    if not target.is_file():
         raise FileNotFoundError(
             "No se encontró el dataset masivo obligatorio: "
-            f"{dataset_path}"
+            f"{target}"
         )
 
-    with dataset_path.open(encoding="utf-8") as file:
+    with target.open(encoding="utf-8") as file:
         dataset = json.load(file)
     if not isinstance(dataset, list):
-        raise ValueError(f"El dataset masivo debe ser una lista JSON: {dataset_path}")
+        raise ValueError(f"El dataset masivo debe ser una lista JSON: {target}")
 
     validated = [
         record for record in dataset
         if isinstance(record, dict) and record.get("estado") == "VALIDADO"
     ]
     if not validated:
-        raise ValueError(f"El dataset masivo está vacío: {dataset_path}")
+        raise ValueError(f"El dataset masivo está vacío: {target}")
     if len(validated) != len(dataset):
         raise ValueError(
             "El dataset masivo contiene registros inválidos o no validados: "
@@ -270,101 +281,270 @@ def _massive_vectorizer() -> FeatureUnion:
     )
 
 
-def train_massive_model():
-    """Entrena el clasificador usando el dataset masivo y correcciones aprobadas."""
+def train_massive_model(dataset_path: str | Path | None = None):
+    """Optimiza hiperparámetros con CV estratificada y entrena el modelo final."""
     ensure_directories()
     from .corrections import load_training_examples
 
-    equipos_validados = _load_massive_dataset()
+    if dataset_path is None:
+        merged_dataset_path = (
+            Config.PROCESSED_DIR / "equipos_entrenamiento_final.json"
+        )
+        dataset_path = (
+            merged_dataset_path
+            if merged_dataset_path.is_file()
+            else Config.PROCESSED_DIR / "equipos_validados_masivo.json"
+        )
+    equipos_validados = _load_massive_dataset(dataset_path)
     correcciones = load_training_examples()
     dataset = deduplicate_training_examples(equipos_validados, correcciones)
     if not dataset:
         raise ValueError("No hay ejemplos disponibles para entrenar el modelo masivo.")
 
-    total = len(dataset)
-    print("=" * 60)
-    print("ENTRENAMIENTO NLP - DATASET MASIVO")
-    print("=" * 60)
-    print(f"Equipos validados masivo: {len(equipos_validados)} registros")
-    print(f"Correcciones aprobadas: {len(correcciones)} registros")
-    print(f"Total ejemplos: {total}")
-    print("División train/test: 80/20")
-    print()
-    if total < 50:
-        logger.warning(
-            "WARNING: el dataset de entrenamiento contiene menos de 50 ejemplos (%s).",
-            total,
-        )
+    total_original = len(dataset)
+    original_labels = [str(record["categoria"]).strip() for record in dataset]
+    original_counts = Counter(original_labels)
+    excluded_categories = sorted(
+        category for category, count in original_counts.items() if count < 3
+    )
+    clean_dataset = [
+        record for record in dataset if original_counts[str(record["categoria"]).strip()] >= 3
+    ]
+    total_clean = len(clean_dataset)
+    excluded_minor_examples = total_original - total_clean
+    fallback = not clean_dataset or len(
+        {str(record["categoria"]).strip() for record in clean_dataset}
+    ) < 2
+    if fallback:
+        # Si la limpieza impide entrenar varias clases, conservar el dataset original.
+        training_dataset = dataset
+    else:
+        training_dataset = clean_dataset
 
-    labels = [str(record["categoria"]).strip() for record in dataset]
+    labels = [str(record["categoria"]).strip() for record in training_dataset]
     texts = [
         preprocess_text(
             f"{record.get('nombre') or record.get('nombre_equipo', '')} "
             f"{record.get('marca') or ''} {record.get('ubicacion') or ''}"
         )
-        for record in dataset
+        for record in training_dataset
     ]
-    train_indices, test_indices = _massive_holdout_indices(labels)
-    train_texts = [texts[index] for index in train_indices]
-    test_texts = [texts[index] for index in test_indices]
-    train_labels = [labels[index] for index in train_indices]
-    test_labels = [labels[index] for index in test_indices]
+    folds = 5
+    category_counts = Counter(labels)
+    evaluation_indices = [
+        index for index, label in enumerate(labels)
+        if category_counts[label] >= folds
+    ]
+    excluded_indices = [
+        index for index, label in enumerate(labels)
+        if category_counts[label] < folds
+    ]
+    evaluation_labels = [labels[index] for index in evaluation_indices]
+    evaluation_categories = sorted(set(evaluation_labels))
+    cv_splits = []
+    if len(evaluation_categories) >= 2:
+        # Las clases de 3-4 ejemplos permanecen siempre en train y no puntúan como test.
+        splitter = StratifiedKFold(n_splits=folds, shuffle=True, random_state=42)
+        for train_positions, test_positions in splitter.split(
+            evaluation_indices, evaluation_labels
+        ):
+            train_indices = [
+                evaluation_indices[position] for position in train_positions
+            ]
+            train_indices.extend(excluded_indices)
+            test_indices = [
+                evaluation_indices[position] for position in test_positions
+            ]
+            cv_splits.append((train_indices, test_indices))
 
-    print("Entrenando modelo...")
-    print()
-    evaluation_vectorizer = _massive_vectorizer()
-    train_features = evaluation_vectorizer.fit_transform(train_texts)
-    test_features = evaluation_vectorizer.transform(test_texts)
-    evaluation_model = LogisticRegression(
-        C=1.0, max_iter=1000, class_weight="balanced", random_state=42
+    pipeline = Pipeline(
+        [
+            ("vectorizer", _massive_vectorizer()),
+            (
+                "classifier",
+                LogisticRegression(
+                    C=1.0, max_iter=1000, class_weight="balanced", random_state=42
+                ),
+            ),
+        ]
     )
-    evaluation_model.fit(train_features, train_labels)
-    predictions = evaluation_model.predict(test_features)
+    parameter_grid = [
+        {
+            "vectorizer": [TfidfVectorizer(max_features=5000)],
+            "vectorizer__ngram_range": [(1, 1), (1, 2)],
+            "vectorizer__min_df": [1, 2],
+            "vectorizer__max_df": [0.75, 1.0],
+            "classifier__C": [0.1, 1.0, 10.0],
+        },
+        {
+            "vectorizer": [
+                TfidfVectorizer(
+                    analyzer="char_wb", max_features=30000, sublinear_tf=True
+                )
+            ],
+            "vectorizer__ngram_range": [(2, 4), (2, 5), (3, 5)],
+            "vectorizer__min_df": [1, 2],
+            "classifier__C": [0.1, 1.0, 10.0],
+        },
+        {
+            "vectorizer": [_massive_vectorizer()],
+            "vectorizer__palabras__ngram_range": [(1, 1), (1, 2)],
+            "vectorizer__palabras__min_df": [1, 2],
+            "vectorizer__palabras__max_df": [0.75, 1.0],
+            "classifier__C": [0.1, 1.0, 10.0],
+        },
+    ]
+
+    if cv_splits:
+        f1_scorer = make_scorer(
+            f1_score,
+            average="macro",
+            labels=evaluation_categories,
+            zero_division=0,
+        )
+        search = GridSearchCV(
+            estimator=pipeline,
+            param_grid=parameter_grid,
+            scoring={"accuracy": "accuracy", "f1_macro": f1_scorer},
+            refit="accuracy",
+            cv=cv_splits,
+            n_jobs=1,
+            error_score="raise",
+        )
+        search.fit(texts, labels)
+        model = search.best_estimator_.named_steps["classifier"]
+        vectorizer = search.best_estimator_.named_steps["vectorizer"]
+        best_index = search.best_index_
+        accuracies = [
+            float(search.cv_results_[f"split{index}_test_accuracy"][best_index])
+            for index in range(folds)
+        ]
+        f1_scores = [
+            float(search.cv_results_[f"split{index}_test_f1_macro"][best_index])
+            for index in range(folds)
+        ]
+        mean_accuracy = float(search.cv_results_["mean_test_accuracy"][best_index])
+        std_accuracy = float(search.cv_results_["std_test_accuracy"][best_index])
+        mean_f1 = float(search.cv_results_["mean_test_f1_macro"][best_index])
+        best_params = {
+            key: value
+            for key, value in search.best_params_.items()
+            if key != "vectorizer"
+        }
+        selected_vectorizer = search.best_params_["vectorizer"]
+        if isinstance(selected_vectorizer, FeatureUnion):
+            best_params["vectorizer"] = "palabras_y_caracteres"
+        elif selected_vectorizer.get_params(deep=False).get("analyzer") == "char_wb":
+            best_params["vectorizer"] = "caracteres"
+        else:
+            best_params["vectorizer"] = "palabras"
+    else:
+        logger.warning(
+            "No hay suficientes categorías con cinco ejemplos para validación cruzada; "
+            "se entrenará con parámetros predeterminados y métricas CV no disponibles."
+        )
+        vectorizer = pipeline.named_steps["vectorizer"]
+        features = vectorizer.fit_transform(texts)
+        if len(set(labels)) < 2:
+            model = DummyClassifier(strategy="most_frequent")
+            best_params = {
+                "classifier": "DummyClassifier(strategy='most_frequent')",
+                "vectorizer": "palabras_y_caracteres",
+            }
+        else:
+            model = pipeline.named_steps["classifier"]
+            best_params = {
+                "vectorizer": "palabras_y_caracteres",
+                "classifier__C": 1.0,
+            }
+        model.fit(features, labels)
+        accuracies = []
+        f1_scores = []
+        mean_accuracy = None
+        std_accuracy = None
+        mean_f1 = None
     metrics = {
-        "accuracy": round(accuracy_score(test_labels, predictions), 4),
-        "precision_macro": round(
-            precision_score(test_labels, predictions, average="macro", zero_division=0), 4
+        "accuracy": round(mean_accuracy, 4) if mean_accuracy is not None else None,
+        "accuracy_std": round(std_accuracy, 4) if std_accuracy is not None else None,
+        "accuracy_by_fold": [round(score, 4) for score in accuracies],
+        "f1_macro": round(mean_f1, 4) if mean_f1 is not None else None,
+        "f1_macro_std": round(float(np.std(f1_scores, ddof=0)), 4)
+        if f1_scores else None,
+        "f1_macro_by_fold": [round(score, 4) for score in f1_scores],
+        "total_examples": len(training_dataset),
+        "total_examples_original": total_original,
+        "total_examples_cleaned": total_clean,
+        "excluded_minor_categories": excluded_categories,
+        "excluded_minor_examples": excluded_minor_examples,
+        "cleaning_fallback": fallback,
+        "best_params": best_params,
+        "train_examples_by_fold": [len(train) for train, _ in cv_splits],
+        "test_examples_by_fold": [len(test) for _, test in cv_splits],
+        "evaluation_examples": len(evaluation_indices),
+        "excluded_rare_examples": len(excluded_indices),
+        "excluded_rare_categories": sorted(
+            label for label, count in category_counts.items() if count < folds
         ),
-        "recall_macro": round(
-            recall_score(test_labels, predictions, average="macro", zero_division=0), 4
-        ),
-        "f1_macro": round(
-            f1_score(test_labels, predictions, average="macro", zero_division=0), 4
-        ),
-        "total_examples": total,
-        "train_examples": len(train_indices),
-        "test_examples": len(test_indices),
+        "evaluated_categories": evaluation_categories,
+        "cross_validation_folds": folds if cv_splits else 0,
         "validated_examples": len(equipos_validados),
         "approved_corrections": len(correcciones),
-        "evaluation": "stratified_holdout",
+        "evaluation": "stratified_5_fold_grid_search" if cv_splits else "fallback_no_cv",
     }
 
-    vectorizer = _massive_vectorizer()
-    features = vectorizer.fit_transform(texts)
-    model = LogisticRegression(
-        C=1.0, max_iter=1000, class_weight="balanced", random_state=42
-    )
-    model.fit(features, labels)
+    if cv_splits:
+        print("=" * 60)
+        print("OPTIMIZACIÓN FINAL DEL MODELO NLP")
+        print("=" * 60)
+        print(f"Dataset original: {total_original} ejemplos")
+        print(f"Dataset limpio (clases >= 3 ejemplos): {total_clean} ejemplos")
+        print(
+            "Se excluyeron "
+            f"{len(excluded_categories)} categorías minoritarias con menos de "
+            "3 ejemplos para mejorar la robustez del modelo"
+        )
+        print(f"Mejores parámetros encontrados: {best_params}")
+        print()
+        print("MÉTRICAS FINALES (5-Fold Cross-Validation):")
+        print(f"  Accuracy Promedio: {mean_accuracy:.4f} (± {std_accuracy:.4f})")
+        print(f"  F1-Score (macro):  {mean_f1:.4f}")
+        print("=" * 60)
+    else:
+        print("=" * 60)
+        print("OPTIMIZACIÓN FINAL DEL MODELO NLP")
+        print("=" * 60)
+        print(f"Dataset original: {total_original} ejemplos")
+        print(f"Dataset limpio (clases >= 3 ejemplos): {total_clean} ejemplos")
+        print(
+            "Se excluyeron "
+            f"{len(excluded_categories)} categorías minoritarias con menos de "
+            "3 ejemplos para mejorar la robustez del modelo"
+        )
+        print(
+            "AVISO: no hay suficientes ejemplos por clase para validación "
+            "cruzada de 5 pliegues; se usaron parámetros predeterminados."
+        )
+        print("MÉTRICAS FINALES (5-Fold Cross-Validation): no disponibles")
+        print("=" * 60)
 
     models_dir = Config.MODELS_DIR
     models_dir.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, models_dir / "nlp_model_optimizado.pkl")
+    joblib.dump(vectorizer, models_dir / "vectorizer_optimizado.pkl")
+    joblib.dump(model, models_dir / "nlp_model_final.pkl")
+    joblib.dump(vectorizer, models_dir / "vectorizer_final.pkl")
     joblib.dump(model, models_dir / "nlp_model_masivo.pkl")
     joblib.dump(vectorizer, models_dir / "vectorizer_masivo.pkl")
-    with (models_dir / "metrics_masivo.json").open("w", encoding="utf-8") as file:
-        json.dump(metrics, file, ensure_ascii=False, indent=2)
+    for metrics_path in (
+        models_dir / "metrics_final.json",
+        models_dir / "metrics_masivo.json",
+    ):
+        with metrics_path.open("w", encoding="utf-8") as file:
+            json.dump(metrics, file, ensure_ascii=False, indent=2)
 
-    accuracy = metrics["accuracy"]
-    precision = metrics["precision_macro"]
-    recall = metrics["recall_macro"]
-    f1 = metrics["f1_macro"]
-    print("MÉTRICAS:")
-    print(f"  Accuracy: {accuracy:.4f}")
-    print(f"  Precision (macro): {precision:.4f}")
-    print(f"  Recall (macro): {recall:.4f}")
-    print(f"  F1-score (macro): {f1:.4f}")
-    print()
-    print("Modelo guardado en: data/models/nlp_model_masivo.pkl")
-    print("Métricas guardadas en: data/models/metrics_masivo.json")
+    print("Modelo optimizado guardado en: data/models/nlp_model_optimizado.pkl")
+    print("Modelo final guardado en: data/models/nlp_model_final.pkl")
+    print("Métricas guardadas en: data/models/metrics_final.json")
     print("=" * 60)
     return {"model": model, "vectorizer": vectorizer, "metrics": metrics}
 

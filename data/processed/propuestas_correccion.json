@@ -1,0 +1,372 @@
+[
+  {
+    "nombre_equipo": "Balón de contrapulsación intraaórtico",
+    "categoria_actual_sugerida": "CAR-01",
+    "emdn_propuesto": "Z12059004",
+    "descripcion_emdn": "AORTIC PUMPS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "La contrapulsación intraaórtica utiliza un balón sincronizado para apoyar temporalmente la función circulatoria. El término EMDN AORTIC PUMPS identifica esta familia; el Excel confirma el código como terminal.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Mesa de operaciones para neurocirugía",
+    "categoria_actual_sugerida": "NEO-01",
+    "emdn_propuesto": "Z12011202",
+    "descripcion_emdn": "OPERATING TABLES",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "Es una mesa diseñada para posicionar al paciente durante una intervención quirúrgica. La especialidad de neurocirugía no crea una subcategoría EMDN distinta en el nombre disponible.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Calentador de mantas quirúrgicas",
+    "categoria_actual_sugerida": "MON-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado tras revisión exhaustiva de EMDN v.2026: no existe código para gabinetes calentadores de textiles/mantas (T0303 cubre únicamente mantas térmicas de flujo de aire o cobertores activos sobre el paciente). Clasificar como mobiliario/equipo auxiliar hospitalario no EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Lámpara de exploración móvil",
+    "categoria_actual_sugerida": "CIR-01",
+    "emdn_propuesto": "Z129004",
+    "descripcion_emdn": "LIGHT SOURCES",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "Corrección manual basada en reglas maestras. Lámpara de exploración no quirúrgica.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Generador de plasma de argón",
+    "categoria_actual_sugerida": "IMG-03",
+    "emdn_propuesto": "Z12010901",
+    "descripcion_emdn": "DIATHERMOCOAGULATORS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "La coagulación con plasma de argón aplica energía de alta frecuencia para hemostasia. Por su función terapéutica corresponde a DIATHERMOCOAGULATORS, no a equipos de diagnóstico por imagen.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Escáner intraoral odontológico",
+    "categoria_actual_sugerida": "DEN-01",
+    "emdn_propuesto": "Q010207",
+    "descripcion_emdn": "DENTAL IMPRESSION DEVICES FOR PROSTHETIC DENTISTRY",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "En EMDN v.2026 los dispositivos destinados a la toma de impresiones dentales (incluidos los sistemas de impresión óptica/digital intraoral para prótesis) se clasifican en la hoja terminal Q010207.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Autoclave de vapor de mesa",
+    "categoria_actual_sugerida": "EST-01",
+    "emdn_propuesto": "Z12011305",
+    "descripcion_emdn": "SMALL LOAD AUTOCLAVES WITH A CHAMBER SMALLER THAN 1 STANDARD STERILISATION UNIT",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "La esterilización por vapor y el formato de mesa identifican un autoclave de carga pequeña. El término corresponde a una hoja terminal EMDN; se debe confirmar el volumen de cámara con la ficha técnica antes de cerrar la clasificación.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Esterilizador de baja temperatura con peróxido de hidrógeno",
+    "categoria_actual_sugerida": "EST-01",
+    "emdn_propuesto": "Z120113",
+    "descripcion_emdn": "CLEANING, DISINFECTION AND STERILISATION INSTRUMENTS",
+    "es_terminal": false,
+    "requiere_desambiguacion": true,
+    "justificacion": "El proceso de baja temperatura con peróxido de hidrógeno puede corresponder a tecnologías EMDN distintas según utilice plasma u otro proceso químico. Se propone el nodo común CLEANING, DISINFECTION AND STERILISATION INSTRUMENTS hasta conocer el ciclo y la tecnología exactos del fabricante.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Incubadora de indicadores biológicos",
+    "categoria_actual_sugerida": "MON-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: no existe categoría para incubadoras de control de esterilización (las incubadoras listadas en W02039002 y Z12080403 son de cultivo CO2 IVD y neonatales). Equipo auxiliar de central de esterilización fuera de alcance EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Sistema robotizado de preparación de dosis",
+    "categoria_actual_sugerida": "INF-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: los sistemas robotizados catalogados (W020601, Z120201) son para muestras IVD o cirugía. La automatización logística de farmacia hospitalaria no posee código EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Refrigerador de farmacia con puerta de vidrio",
+    "categoria_actual_sugerida": "FRM-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: el único refrigerador clasificado como dispositivo médico es Z121701 (BLOOD BANKS REFRIGERATORS). Los refrigeradores de medicamentos de farmacia no son dispositivos médicos EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Empacadora de dosis unitarias",
+    "categoria_actual_sugerida": "EST-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: no existe categoría para maquinaria de reenvasado farmacéutico en dosis unitarias (W02029010 corresponde exclusivamente a selladoras de bolsas de sangre). Equipo auxiliar de farmacia no EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Manifold automático para cilindros de oxígeno",
+    "categoria_actual_sugerida": "GAS-01",
+    "emdn_propuesto": "Z120309",
+    "descripcion_emdn": "MEDICAL/MEDICINAL GAS PIPELINE SYSTEMS AND RELATED ACCESSORIES",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El manifold conmuta y suministra oxígeno desde cilindros a la red de gases medicinales. El término EMDN cubre los sistemas de distribución de gases y sus accesorios.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Regulador de presión para cilindro de oxígeno",
+    "categoria_actual_sugerida": "GAS-01",
+    "emdn_propuesto": "A030104",
+    "descripcion_emdn": "FLOW REGULATORS",
+    "es_terminal": true,
+    "requiere_desambiguacion": true,
+    "justificacion": "Si el dispositivo regula el flujo de oxígeno administrado directamente al paciente desde el cilindro, corresponde a la hoja terminal A030104 (FLOW REGULATORS); si es un manorreductor de alta presión acoplado a red de gases, pertenece a Z120309. Requiere confirmar si integra flujómetro clínico.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Arco en C móvil para fluoroscopia",
+    "categoria_actual_sugerida": "IMG-03",
+    "emdn_propuesto": "Z11039009",
+    "descripcion_emdn": "FLUOROSCOPY DEVICES",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El arco en C obtiene imágenes dinámicas mediante rayos X durante procedimientos. La función principal es fluoroscopia; la movilidad no cambia el término EMDN identificado.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Mastógrafo digital",
+    "categoria_actual_sugerida": "IMG-03",
+    "emdn_propuesto": "Z11030202",
+    "descripcion_emdn": "DIGITAL MAMMOGRAPHY SYSTEMS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El nombre especifica mamografía digital, lo que permite seleccionar la hoja terminal digital y distinguirla de los sistemas convencionales.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Fluoroscopio digital para procedimientos",
+    "categoria_actual_sugerida": "IMG-03",
+    "emdn_propuesto": "Z11039009",
+    "descripcion_emdn": "FLUOROSCOPY DEVICES",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El equipo produce imágenes fluoroscópicas en tiempo real para guiar procedimientos. El nombre no aporta un subtipo EMDN adicional respecto de los dispositivos de fluoroscopia.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Congelador para plasma sanguíneo",
+    "categoria_actual_sugerida": "LAB-01",
+    "emdn_propuesto": "Z121702",
+    "descripcion_emdn": "BLOOD AND BLOOD COMPONENTS FREEZERS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El equipo conserva plasma sanguíneo congelado; el término EMDN distingue los congeladores para sangre y sus componentes de los refrigeradores de banco de sangre.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Centrífuga refrigerada para bolsas de sangre",
+    "categoria_actual_sugerida": "LAB-01",
+    "emdn_propuesto": "W02069003",
+    "descripcion_emdn": "CENTRIFUGES",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "La función principal es separar componentes sanguíneos por centrifugación. El catálogo ofrece CENTRIFUGES como hoja terminal general; la refrigeración y el uso de bolsas describen características técnicas, no una hoja específica encontrada.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Agitador de plaquetas con incubadora",
+    "categoria_actual_sugerida": "LAB-01",
+    "emdn_propuesto": "Z121799",
+    "descripcion_emdn": "BLOOD TRANSFUSION INSTRUMENTS - OTHER",
+    "es_terminal": true,
+    "requiere_desambiguacion": true,
+    "justificacion": "En EMDN v.2026 existe W02070404 (BLOOD BAG MIXERS) para mezcladores simples, pero al integrar cámara incubadora térmica dedicada a la conservación de concentrados plaquetarios en banco de sangre corresponde a la familia Z1217 (hoja terminal Z121799). Confirmar si se adquiere el agitador solo o el sistema combinado.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Sistema de aféresis terapéutica",
+    "categoria_actual_sugerida": "OTR-01",
+    "emdn_propuesto": "Z12170402",
+    "descripcion_emdn": "THERAPEUTIC APHERESIS EQUIPMENT",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El nombre especifica aféresis terapéutica, que se diferencia de la aféresis para donación. El término EMDN coincide con el propósito clínico indicado.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Bilirrubinómetro transcutáneo neonatal",
+    "categoria_actual_sugerida": "INF-01",
+    "emdn_propuesto": "Z12080410",
+    "descripcion_emdn": "TRANSCUTANEOUS BILIRUBINOMETERS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "Mide bilirrubina neonatal de forma transcutánea y no invasiva. El catálogo contiene una hoja terminal específica para bilirrubinómetros transcutáneos.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Báscula electrónica para recién nacido",
+    "categoria_actual_sugerida": "NEO-01",
+    "emdn_propuesto": "Z12080402",
+    "descripcion_emdn": "NEONATAL SCALES",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "Es una báscula destinada a pesar recién nacidos. La aplicación neonatal determina la hoja terminal específica; el mecanismo electrónico no modifica esa clasificación.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Computadora todo en uno para consultorio",
+    "categoria_actual_sugerida": "OFI-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: el hardware informático de propósito general no tiene clasificación EMDN (los códigos -80 corresponden únicamente a accesorios hardware dedicados de un dispositivo médico específico).",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Impresora láser para expediente clínico",
+    "categoria_actual_sugerida": "OFI-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: periférico de oficina sin finalidad médica; no aplica código EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Impresora de etiquetas para laboratorio",
+    "categoria_actual_sugerida": "OFI-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: solo existen impresoras especializadas de casetes/portaobjetos de histología (W0202059017). Una impresora térmica de etiquetas adhesivas es equipamiento TI general no EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Lector de código de barras para identificación clínica",
+    "categoria_actual_sugerida": "OFI-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: periférico de captura de datos administrativos/trazabilidad no clasificado como dispositivo médico ni IVD.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Impresora de brazaletes de identificación hospitalaria",
+    "categoria_actual_sugerida": "OFI-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: periférico de admisión hospitalaria sin finalidad diagnóstica ni terapéutica; no posee código EMDN.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Equipo CPAP para apnea del sueño",
+    "categoria_actual_sugerida": "RES-01",
+    "emdn_propuesto": "Z12030102",
+    "descripcion_emdn": "CONTINUOUS POSITIVE PRESSURE EQUIPMENT",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "En EMDN v.2026 los generadores de presión positiva continua en la vía aérea (CPAP) se clasifican en la hoja terminal Z12030102 dentro de equipos de soporte ventilatorio.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Aspirador de secreciones portátil",
+    "categoria_actual_sugerida": "RES-01",
+    "emdn_propuesto": "R050103",
+    "descripcion_emdn": "MUCOUS ASPIRATORS",
+    "es_terminal": false,
+    "requiere_desambiguacion": true,
+    "justificacion": "La aspiración de secreciones respiratorias corresponde a la familia EMDN de aspiradores de mucosidad. Como el catálogo divide las hojas por configuración de cámara y el nombre no la especifica, se propone MUCOUS ASPIRATORS como nodo padre hasta verificar el diseño del recipiente.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Espirómetro diagnóstico de consultorio",
+    "categoria_actual_sugerida": "RES-01",
+    "emdn_propuesto": "Z12150101",
+    "descripcion_emdn": "CLINICAL/DIAGNOSTIC SPIROMETERS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El equipo mide parámetros ventilatorios para evaluación clínica. El uso diagnóstico indicado coincide con la hoja terminal de espirómetros clínico-diagnósticos.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Unidad de tracción cervical y lumbar",
+    "categoria_actual_sugerida": "OTR-01",
+    "emdn_propuesto": "Z12130202",
+    "descripcion_emdn": "TRACTION SYSTEMS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El equipo aplica tracción terapéutica musculoesquelética. El catálogo incluye TRACTION SYSTEMS como hoja terminal general; la región anatómica especificada no requiere elegir otro subtipo.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Paralelas para entrenamiento de marcha",
+    "categoria_actual_sugerida": "TER-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: las barras paralelas fijas de gimnasio terapéutico no poseen hoja específica en Y0502/Y1206 (que cubren andadores móviles y entrenadores de marcha con soporte) ni en Z1206. Validar si se cataloga como mobiliario de rehabilitación no EMDN o bajo Z12069099.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Carro rojo para reanimación cardiopulmonar",
+    "categoria_actual_sugerida": "TER-01",
+    "emdn_propuesto": null,
+    "descripcion_emdn": null,
+    "es_terminal": false,
+    "requiere_desambiguacion": false,
+    "justificacion": "Confirmado en EMDN v.2026: en V08 no existe categoría para carros de paro/curaciones (solo carros de transporte de endoscopios Z12029003 y andadores Y120612). Al ser mobiliario contenedor, cada dispositivo médico contenido (desfibrilador, laringoscopio, etc.) debe inventariarse por separado.",
+    "accion_recomendada": "EXCLUIR_NO_MD"
+  },
+  {
+    "nombre_equipo": "Camilla de emergencia hidráulica",
+    "categoria_actual_sugerida": "MOB-01",
+    "emdn_propuesto": "V08050103",
+    "descripcion_emdn": "EMERGENCY AND TRAUMATOLOGY STRETCHERS",
+    "es_terminal": true,
+    "requiere_desambiguacion": false,
+    "justificacion": "El uso para atención de emergencia identifica la hoja terminal EMERGENCY AND TRAUMATOLOGY STRETCHERS. El accionamiento hidráulico es una característica mecánica, no un subtipo EMDN.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Camilla de transporte para ambulancia",
+    "categoria_actual_sugerida": "MOB-01",
+    "emdn_propuesto": "V080501",
+    "descripcion_emdn": "PATIENT TRANSFER STRETCHERS",
+    "es_terminal": false,
+    "requiere_desambiguacion": true,
+    "justificacion": "El término identifica una camilla para traslado de pacientes, pero no especifica si es auto-cargable, de emergencia u otra variante. Se asigna PATIENT TRANSFER STRETCHERS como nodo padre hasta confirmar el mecanismo y uso previsto.",
+    "accion_recomendada": "APROBAR"
+  },
+  {
+    "nombre_equipo": "Aspirador portátil para emergencias",
+    "categoria_actual_sugerida": "URG-01",
+    "emdn_propuesto": "R050103",
+    "descripcion_emdn": "MUCOUS ASPIRATORS",
+    "es_terminal": false,
+    "requiere_desambiguacion": true,
+    "justificacion": "En atención de urgencias prehospitalarias/emergencias suele emplearse para aspiración de secreciones de vía aérea (R050103, nodo no terminal según cámara simple/doble), pero si es de uso quirúrgico/trauma de alto vacío corresponde a Z120105 (SURGICAL MEDICAL ASPIRATORS, terminal). Requiere confirmar uso previsto.",
+    "accion_recomendada": "REVISAR MANUALMENTE"
+  }
+]

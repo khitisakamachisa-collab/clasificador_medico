@@ -23,6 +23,30 @@ logger = logging.getLogger(__name__)
 
 @lru_cache(maxsize=1)
 def load_model_assets():
+    optimized_classifier_path = Config.MODELS_DIR / "nlp_model_optimizado.pkl"
+    optimized_vectorizer_path = Config.MODELS_DIR / "vectorizer_optimizado.pkl"
+    if optimized_classifier_path.exists():
+        if not optimized_vectorizer_path.exists():
+            raise FileNotFoundError(
+                "Existe nlp_model_optimizado.pkl, pero falta vectorizer_optimizado.pkl."
+            )
+        return (
+            joblib.load(optimized_classifier_path),
+            joblib.load(optimized_vectorizer_path),
+        )
+
+    final_classifier_path = Config.MODELS_DIR / "nlp_model_final.pkl"
+    final_vectorizer_path = Config.MODELS_DIR / "vectorizer_final.pkl"
+    if final_classifier_path.exists():
+        if not final_vectorizer_path.exists():
+            raise FileNotFoundError(
+                "Existe nlp_model_final.pkl, pero falta vectorizer_final.pkl."
+            )
+        return (
+            joblib.load(final_classifier_path),
+            joblib.load(final_vectorizer_path),
+        )
+
     massive_classifier_path = Config.MODELS_DIR / "nlp_model_masivo.pkl"
     massive_vectorizer_path = Config.MODELS_DIR / "vectorizer_masivo.pkl"
     if massive_classifier_path.exists():

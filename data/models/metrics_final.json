@@ -1,0 +1,85 @@
+{
+  "accuracy": 0.7527,
+  "accuracy_std": 0.0633,
+  "accuracy_by_fold": [
+    0.7838,
+    0.7297,
+    0.8056,
+    0.6389,
+    0.8056
+  ],
+  "f1_macro": 0.7369,
+  "f1_macro_std": 0.0724,
+  "f1_macro_by_fold": [
+    0.7837,
+    0.7754,
+    0.789,
+    0.5962,
+    0.7404
+  ],
+  "total_examples": 195,
+  "total_examples_original": 198,
+  "total_examples_cleaned": 195,
+  "excluded_minor_categories": [
+    "FRM-01",
+    "LAB-02"
+  ],
+  "excluded_minor_examples": 3,
+  "cleaning_fallback": false,
+  "best_params": {
+    "classifier__C": 1.0,
+    "vectorizer__min_df": 1,
+    "vectorizer__ngram_range": [
+      2,
+      4
+    ],
+    "vectorizer": "caracteres"
+  },
+  "train_examples_by_fold": [
+    158,
+    158,
+    159,
+    159,
+    159
+  ],
+  "test_examples_by_fold": [
+    37,
+    37,
+    36,
+    36,
+    36
+  ],
+  "evaluation_examples": 182,
+  "excluded_rare_examples": 13,
+  "excluded_rare_categories": [
+    "INF-01",
+    "MOB-01",
+    "OFI-01",
+    "OTR-01"
+  ],
+  "evaluated_categories": [
+    "ANE-01",
+    "CAR-01",
+    "CAR-02",
+    "CIR-01",
+    "CIR-02",
+    "DEN-01",
+    "DIA-01",
+    "END-01",
+    "EST-01",
+    "GAS-01",
+    "IMG-01",
+    "IMG-02",
+    "IMG-03",
+    "LAB-01",
+    "MON-01",
+    "NEO-01",
+    "RES-01",
+    "TER-01",
+    "URG-01"
+  ],
+  "cross_validation_folds": 5,
+  "validated_examples": 187,
+  "approved_corrections": 12,
+  "evaluation": "stratified_5_fold_grid_search"
+}
